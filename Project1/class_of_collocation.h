@@ -14,6 +14,12 @@ public:
 
 	//operators
 	my_double& operator[](long int i);
+	class_of_collocation operator +(class_of_collocation& summed_class);
+	class_of_collocation operator -(class_of_collocation& _class);
+	class_of_collocation& operator -=(class_of_collocation& _class);
+	class_of_collocation& operator +=(class_of_collocation& summed_class);
+	class_of_collocation operator *(my_double _number);
+	class_of_collocation operator /(my_double _number);
 private:
 	int k;
 	vector<my_double> vect_of_collocation;
