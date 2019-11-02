@@ -84,12 +84,10 @@ int main(int argc, char* argv[])
 			_analyzer.give_space();
 			_analyzer.analyze_vec_of_tokens();
 
-			/*ofstream dict("dictionary.txt");
-			for (auto it : _analyzer.get_map_of_tokens()) {
-				dict << it.first << " " << it.second << endl;
-			}*/
 			Singleton::initialization().set_container_class(_analyzer.get_container_class());
 			auto some_scary_thing = Singleton::initialization().get_container_class();
+
+			some_scary_thing[1][2][3];
 
 			for (int i = 0; i < _analyzer.get_counter_of_tokenizer(); ++i)
 				for (int j = 0; j < _analyzer.get_counter_of_tokenizer(); ++j)
@@ -97,13 +95,12 @@ int main(int argc, char* argv[])
 					if (i != 0 && j != 0) {
 						cout << endl << endl << i << " " << j << endl;
 						for (int l = 0; l < GAP * 2 + 2; ++l)
-							cout << some_scary_thing.get_count_of_concret_collocation(i, j, l) << " ";
+							cout << some_scary_thing[i][j][l] << " ";
 					}
 				}
 		}
 
 		cout << endl;
-
 
 		if (error_count == 0)
 		{

@@ -21,3 +21,8 @@ my_double container_class::get_count_of_concret_collocation(int first_dimension,
 {
 	return this->vector_of_length[first_dimension][second_dimension].get_count_of_concret_collocation(third_dimension);
 }
+
+class_of_first_bracket& container_class::operator[](long int i)
+{
+	return this->vector_of_length[i];
+}

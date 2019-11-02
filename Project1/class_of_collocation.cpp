@@ -15,3 +15,8 @@ my_double class_of_collocation::get_count_of_concret_collocation(int third_demen
 {
 	return this->vect_of_collocation[third_demention];
 }
+
+my_double& class_of_collocation::operator[](long int i)
+{
+	return this->vect_of_collocation[i];													////todo////
+}

@@ -9,8 +9,10 @@ void analyzer::analyze_vec_of_tokens()
 
 			for (int i = j - 1; i >= j - this->k; --i) {
 
-				if (this->is_index_valid(i) && this->vec_of_tokens[i] != STOP_WORD)
+				if (this->is_index_valid(i)
+					&& this->vec_of_tokens[i] != STOP_WORD) {
 					this->_container_class.increment(vec_of_tokens[j], vec_of_tokens[i], this->k - (j - i));
+				}
 			}
 
 			for (int l = j + 1; l <= j + k && l < this->vec_of_tokens.size(); ++l) {

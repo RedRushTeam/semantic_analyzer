@@ -33,6 +33,9 @@
     <ClCompile Include="class_of_collocation.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="class_of_first_bracket.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list_of_types.h">
@@ -51,6 +54,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="class_of_collocation.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="class_of_first_bracket.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
