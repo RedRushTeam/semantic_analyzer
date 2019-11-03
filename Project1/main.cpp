@@ -1,5 +1,6 @@
 //#define LEMADR "C:\\Program Files (x86)\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
-#define LEMADR "G:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
+//#define LEMADR "G:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
+#define LEMADR "A:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "parser.h"
@@ -87,14 +88,12 @@ int main(int argc, char* argv[])
 			Singleton::initialization().set_container_class(_analyzer.get_container_class());
 			auto some_scary_thing = Singleton::initialization().get_container_class();
 
-			some_scary_thing[1][2][3];
-
 			for (int i = 0; i < _analyzer.get_counter_of_tokenizer(); ++i)
 				for (int j = 0; j < _analyzer.get_counter_of_tokenizer(); ++j)
 				{
 					if (i != 0 && j != 0) {
 						cout << endl << endl << i << " " << j << endl;
-						for (int l = 0; l < GAP * 2 + 2; ++l)
+						for (int l = -GAP-1; l <= GAP; ++l)
 							cout << some_scary_thing[i][j][l] << " ";
 					}
 				}
