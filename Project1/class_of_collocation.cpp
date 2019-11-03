@@ -19,7 +19,8 @@ my_double class_of_collocation::get_count_of_concret_collocation(int third_demen
 
 my_double& class_of_collocation::operator[](long int i)
 {
-	return this->vect_of_collocation[i];													////todo magic indexer////
+
+	return this->vect_of_collocation[i + (this->k + 1)];
 }
 
 class_of_collocation class_of_collocation::operator+(class_of_collocation& summed_class)
@@ -85,7 +86,7 @@ class_of_collocation class_of_collocation::operator*(my_double _number)
 	class_of_collocation cl_for_return(k);
 
 	for (int i = 0; i < this->vect_of_collocation.size(); ++i) {
-			cl_for_return[i] = this->vect_of_collocation[i] * _number;
+		cl_for_return[i] = this->vect_of_collocation[i] * _number;
 	}
 
 	return cl_for_return;
