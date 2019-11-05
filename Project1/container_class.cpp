@@ -30,6 +30,7 @@ class_of_first_bracket& container_class::operator[](long int i)
 container_class container_class::operator+(container_class summed_class)
 {
 	container_class ret;
+	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < vector_of_length.size(); ++i)
 		for (auto j = 0; j < vector_of_length.size(); ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
@@ -40,6 +41,7 @@ container_class container_class::operator+(container_class summed_class)
 container_class container_class::operator-(container_class _class)
 {
 	container_class ret;
+	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < vector_of_length.size(); ++i)
 		for (auto j = 0; j < vector_of_length.size(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
@@ -50,6 +52,7 @@ container_class container_class::operator-(container_class _class)
 container_class container_class::operator*(my_double _koef)
 {
 	container_class ret;
+	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < vector_of_length.size(); ++i)
 		for (auto j = 0; j < vector_of_length.size(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
@@ -60,6 +63,7 @@ container_class container_class::operator*(my_double _koef)
 container_class container_class::operator/(my_double _koef)
 {
 	container_class ret;
+	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < vector_of_length.size(); ++i)
 		for (auto j = 0; j < vector_of_length.size(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
@@ -70,6 +74,7 @@ container_class container_class::operator/(my_double _koef)
 container_class& container_class::operator+=(container_class summed_class)
 {
 	container_class ret;
+	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < vector_of_length.size(); ++i)
 		for (auto j = 0; j < vector_of_length.size(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
@@ -80,6 +85,7 @@ container_class& container_class::operator+=(container_class summed_class)
 container_class& container_class::operator-=(container_class summed_class)
 {
 	container_class ret;
+	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < vector_of_length.size(); ++i)
 		for (auto j = 0; j < vector_of_length.size(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
