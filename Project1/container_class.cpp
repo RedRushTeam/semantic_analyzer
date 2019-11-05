@@ -3,6 +3,8 @@
 void container_class::give_space(int counter_of_tokenizer, int k)
 {
 	vector_of_length.resize(counter_of_tokenizer);
+	this->counter_of_tokenizer = counter_of_tokenizer;
+	this->k = k;
 
 	for (int i = 0; i < counter_of_tokenizer; ++i) {
 		vector_of_length[i].resize(counter_of_tokenizer);
