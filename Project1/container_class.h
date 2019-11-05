@@ -13,8 +13,15 @@ public:
 	void increment(int first_dimension, int second_dimension, int third_dimension);
 	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension);
 
+
 	//operators
 	class_of_first_bracket& operator[] (long int i);
+	container_class operator+(container_class summed_class);
+	container_class operator-(container_class summed_class);
+	container_class& operator+=(container_class summed_class);
+	container_class& operator-=(container_class summed_class);
+	container_class operator*(my_double _koef);
+	container_class operator/(my_double _koef);
 private:
 	int counter_of_tokenizer;
 	int k;

@@ -94,13 +94,15 @@ int main(int argc, char* argv[])
 				{
 					if (i != 0 && j != 0) {
 						cout << endl << endl << i << " " << j << endl;
-						for (int l = -GAP-1; l <= GAP; ++l)
+						for (int l = -GAP - 1; l <= GAP; ++l)
 							cout << some_scary_thing[i][j][l] << " ";
 					}
 				}
+		
 		}
 
 		cout << endl;
+
 
 		if (error_count == 0)
 		{

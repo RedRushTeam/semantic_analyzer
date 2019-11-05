@@ -26,3 +26,63 @@ class_of_first_bracket& container_class::operator[](long int i)
 {
 	return this->vector_of_length[i];
 }
+
+container_class container_class::operator+(container_class summed_class)
+{
+	container_class ret;
+	for (auto i = 0; i < vector_of_length.size(); ++i)
+		for (auto j = 0; j < vector_of_length.size(); ++j)
+				for (auto p = -GAP - 1; p <= GAP; ++p)
+					ret[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
+	return ret;
+}
+
+container_class container_class::operator-(container_class _class)
+{
+	container_class ret;
+	for (auto i = 0; i < vector_of_length.size(); ++i)
+		for (auto j = 0; j < vector_of_length.size(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				ret[i][j][p] = (*this)[i][j][p] - _class[i][j][p];
+	return ret;
+}
+
+container_class container_class::operator*(my_double _koef)
+{
+	container_class ret;
+	for (auto i = 0; i < vector_of_length.size(); ++i)
+		for (auto j = 0; j < vector_of_length.size(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				ret[i][j][p] = (*this)[i][j][p] * _koef;
+	return ret;
+}
+
+container_class container_class::operator/(my_double _koef)
+{
+	container_class ret;
+	for (auto i = 0; i < vector_of_length.size(); ++i)
+		for (auto j = 0; j < vector_of_length.size(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				ret[i][j][p] = (*this)[i][j][p] / _koef;
+	return ret;
+}
+
+container_class& container_class::operator+=(container_class summed_class)
+{
+	container_class ret;
+	for (auto i = 0; i < vector_of_length.size(); ++i)
+		for (auto j = 0; j < vector_of_length.size(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				(*this)[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
+	return *this;
+}
+
+container_class& container_class::operator-=(container_class summed_class)
+{
+	container_class ret;
+	for (auto i = 0; i < vector_of_length.size(); ++i)
+		for (auto j = 0; j < vector_of_length.size(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				(*this)[i][j][p] = (*this)[i][j][p] - summed_class[i][j][p];
+	return *this;
+}
