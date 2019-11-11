@@ -1,6 +1,6 @@
 //#define LEMADR "C:\\Program Files (x86)\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 //#define LEMADR "G:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
-#define LEMADR "A:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
+#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 //#define LEMADR "C:\\Users\\fortunati\\Documents\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -85,12 +85,11 @@ int main(int argc, char* argv[])
 			_analyzer.shape_vec_tokens_of_text();
 			_analyzer.give_space();
 			_analyzer.analyze_vec_of_tokens();
-			container_class* shh = &_analyzer.get_container_class();
-			Singleton::initialization().push_container(shh);
+			Singleton::initialization().push_container(_analyzer.get_container_class());
 
 			auto _list_of_container_class = Singleton::initialization().get_list_of_container_class();
 			for (auto pointer_of_some_scary_thing : _list_of_container_class) {
-				auto some_scary_thing = *pointer_of_some_scary_thing;
+				auto some_scary_thing = pointer_of_some_scary_thing;
 
 				for (int i = 0; i < _analyzer.get_counter_of_tokenizer(); ++i)
 					for (int j = 0; j < _analyzer.get_counter_of_tokenizer(); ++j)
