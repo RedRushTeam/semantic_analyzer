@@ -11,7 +11,7 @@ public:
 
 	void analyze_vec_of_tokens();
 
-	container_class get_container_class() const;
+	container_class get_container_class();
 
 	void shape_vec_of_tokens();
 
