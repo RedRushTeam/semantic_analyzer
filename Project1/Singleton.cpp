@@ -92,6 +92,11 @@ my_double Singleton::get_mat_ozidanie() const
 	return this->mat_ozidanie;
 }
 
+my_double Singleton::get_mat_disperse() const
+{
+	return this->mat_ozidanie;
+}
+
 /*bool Singleton::remove_container_class(container_class _container_class)
 {
 	//auto tmp = find(this->list_of_container_class.begin(), this->list_of_container_class.end(), _container_class);

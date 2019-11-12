@@ -15,6 +15,7 @@ public:
 	my_double get_sredne_kv_otklonenie() const;
 	my_double get_sredne_kv_otklonenie_fixed() const;
 	my_double get_mat_ozidanie() const;
+	my_double get_mat_disperse() const;
 
 	//bool remove_container_class(container_class _container_class);
 private:
