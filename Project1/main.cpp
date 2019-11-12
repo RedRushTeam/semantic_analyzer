@@ -86,17 +86,21 @@ int main(int argc, char* argv[])
 			_analyzer.give_space();
 			_analyzer.analyze_vec_of_tokens();
 			Singleton::initialization().push_container(_analyzer.get_container_class());
+			Singleton::initialization().calculate_mat_ozidanie();
 
+			cout << endl << "*******" << Singleton::initialization().get_mat_ozidanie() << "*************";
+
+			ofstream matrix("matrix.txt");
 			auto _list_of_container_class = Singleton::initialization().get_list_of_container_class();
 			for (auto some_scary_thing : _list_of_container_class) {
 
 				for (int i = 0; i < _analyzer.get_counter_of_tokenizer(); ++i)
 					for (int j = 0; j < _analyzer.get_counter_of_tokenizer(); ++j)
 					{
-						if (i != 0 && j != 0) {
-							cout << endl << endl << i << " " << j << endl;
+						if (i != 0 && j != 0 && i<=j) {
+							matrix << endl << endl << i << " " << j << endl;
 							for (int l = -GAP - 1; l <= GAP; ++l)
-								cout << some_scary_thing[i][j][l] << " ";
+								matrix << some_scary_thing[i][j][l] << " ";
 						}
 					}
 			}

@@ -9,6 +9,7 @@ public:
 	void push_container(container_class _container_class);
 	list<container_class> get_list_of_container_class() const;
 	void calculate_mat_ozidanie();
+	my_double get_mat_ozidanie() const;
 
 	//bool remove_container_class(container_class _container_class);
 private:

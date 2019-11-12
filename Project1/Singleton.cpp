@@ -30,7 +30,7 @@ void Singleton::calculate_mat_ozidanie()
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
 			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
-				for (auto third_index = 0; third_index < obj_of_cont_class.get_counter_of_tokenizer(); ++third_index)
+				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
 					if (first_index <= second_index) {
 						summ_of_all_collocations = summ_of_all_collocations + obj_of_cont_class[first_index][second_index][third_index];
 						counter_of_tokenizer = obj_of_cont_class.get_counter_of_tokenizer();
@@ -47,3 +47,7 @@ void Singleton::calculate_mat_ozidanie()
 	//this->list_of_container_class.erase(tmp);
 	return true;
 }*/
+
+my_double Singleton::get_mat_ozidanie() const {
+	return mat_ozidanie;
+}
