@@ -22,6 +22,8 @@ void analyzer::analyze_vec_of_tokens()
 			}
 		}
 	}
+
+
 }
 
 container_class analyzer::get_container_class() const

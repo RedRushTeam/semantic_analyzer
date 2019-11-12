@@ -89,6 +89,8 @@ int main(int argc, char* argv[])
 			Singleton::initialization().set_container_class(_analyzer.get_container_class());
 			auto some_scary_thing = Singleton::initialization().get_container_class();
 
+			some_scary_thing = some_scary_thing * 3;
+
 			for (int i = 0; i < _analyzer.get_counter_of_tokenizer(); ++i)
 				for (int j = 0; j < _analyzer.get_counter_of_tokenizer(); ++j)
 				{
