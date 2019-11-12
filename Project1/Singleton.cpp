@@ -57,6 +57,36 @@ void Singleton::calculate_mat_disperse()
 	this->mat_disperse = mat_ozidanie_square - pow(this->mat_ozidanie, 2);
 }
 
+void Singleton::calculate_sredne_kv_otklonenie()
+{
+	this->sredne_kv_otklonenie = pow(this->mat_disperse, 2);
+}
+
+void Singleton::calculate_sredne_kv_otklonenie_fixed()
+{
+	int counter_of_all_elems = 0;
+	for (auto obj_of_cont_class : this->list_of_container_class)
+		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
+			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
+				for (auto third_index = 0; third_index < obj_of_cont_class.get_counter_of_tokenizer(); ++third_index)
+					if (first_index <= second_index)
+						++counter_of_all_elems;
+
+	my_double dispersion_fixed_2 = (counter_of_all_elems / (counter_of_all_elems - 1)) * this->mat_disperse;
+
+	this->sredne_kv_otklonenie_fixed = sqrt(dispersion_fixed_2);
+}
+
+my_double Singleton::get_sredne_kv_otklonenie() const
+{
+	return this->sredne_kv_otklonenie;
+}
+
+my_double Singleton::get_sredne_kv_otklonenie_fixed() const
+{
+	return this->sredne_kv_otklonenie_fixed;
+}
+
 my_double Singleton::get_mat_ozidanie() const
 {
 	return this->mat_ozidanie;
