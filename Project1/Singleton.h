@@ -12,6 +12,7 @@ public:
 	void calculate_mat_disperse();
 	void calculate_sredne_kv_otklonenie();
 	void calculate_sredne_kv_otklonenie_fixed();
+	void calculate_koef_assim();
 	my_double get_sredne_kv_otklonenie() const;
 	my_double get_sredne_kv_otklonenie_fixed() const;
 	my_double get_mat_ozidanie() const;
@@ -20,6 +21,7 @@ public:
 private:
 	my_double divider(int size);
 
+	my_double koef_assim;
 	my_double sredne_kv_otklonenie_fixed;
 	my_double sredne_kv_otklonenie;
 	container_class _container_class;
