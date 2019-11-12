@@ -55,6 +55,7 @@ void Singleton::calculate_mat_disperse()
 	my_double mat_ozidanie_square = summ_of_all_collocations_2 / (this->divider(counter_of_tokenizer) * (2 + 2 * GAP));
 
 	this->mat_disperse = mat_ozidanie_square - pow(this->mat_ozidanie, 2);
+	int n = 0;
 }
 
 void Singleton::calculate_sredne_kv_otklonenie()
@@ -94,7 +95,7 @@ my_double Singleton::get_mat_ozidanie() const
 
 my_double Singleton::get_mat_disperse() const
 {
-	return this->mat_ozidanie;
+	return this->mat_disperse;
 }
 
 /*bool Singleton::remove_container_class(container_class _container_class)
