@@ -70,7 +70,3 @@ my_double Singleton::get_mat_ozidanie() const
 	//this->list_of_container_class.erase(tmp);
 	return true;
 }*/
-
-my_double Singleton::get_mat_ozidanie() const {
-	return mat_ozidanie;
-}
