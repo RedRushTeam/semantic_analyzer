@@ -12,7 +12,7 @@ public:
 	void give_space(int counter_of_tokenizer, int k);
 	void increment(int first_dimension, int second_dimension, int third_dimension);
 	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension);
-
+	int get_counter_of_tokenizer() const;
 
 	//operators
 	class_of_first_bracket& operator[] (long int i);
