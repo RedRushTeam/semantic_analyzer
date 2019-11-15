@@ -11,6 +11,8 @@ public:
 	void give_space(int k);
 	void increment(int third_demention);
 	my_double get_count_of_concret_collocation(int third_demention);
+	class_of_collocation pow_all(int stepen);
+	class_of_collocation sqrt_all();
 
 	//operators
 	my_double& operator[](long int i);

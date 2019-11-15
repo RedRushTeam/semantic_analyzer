@@ -29,6 +29,28 @@ int container_class::get_counter_of_tokenizer() const
 	return this->counter_of_tokenizer;
 }
 
+container_class container_class::pow_all(int stepen)
+{
+	container_class cl_for_return(counter_of_tokenizer, k);
+	cl_for_return.give_space(counter_of_tokenizer, k);
+
+	for (int i = 0; i < this->vector_of_length.size(); ++i)
+		cl_for_return[i] = this->vector_of_length[i].pow_all(stepen);
+	
+	return cl_for_return;
+}
+
+container_class container_class::sqrt_all()
+{
+	container_class cl_for_return(counter_of_tokenizer, k);
+	cl_for_return.give_space(counter_of_tokenizer, k);
+
+	for (int i = 0; i < this->vector_of_length.size(); ++i)
+		cl_for_return[i] = this->vector_of_length[i].sqrt_all();
+
+	return cl_for_return;
+}
+
 class_of_first_bracket& container_class::operator[](long int i)
 {
 	return this->vector_of_length[i];

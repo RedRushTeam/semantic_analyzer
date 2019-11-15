@@ -17,9 +17,31 @@ my_double class_of_collocation::get_count_of_concret_collocation(int third_demen
 	return this->vect_of_collocation[third_demention];
 }
 
+class_of_collocation class_of_collocation::pow_all(int stepen)
+{
+	class_of_collocation cl_for_return(k);
+
+	for (int i = -GAP - 1; i <= GAP; ++i) {
+		cl_for_return[i] = 
+			pow(this->vect_of_collocation[i + (this->k + 1)], stepen);
+	}
+
+	return cl_for_return;
+}
+
+class_of_collocation class_of_collocation::sqrt_all()
+{
+	class_of_collocation cl_for_return(k);
+
+	for (int i = -GAP-1; i <= GAP; ++i) {
+		cl_for_return[i] = sqrt(this->vect_of_collocation[i + (this->k + 1)]);
+	}
+
+	return cl_for_return;
+}
+
 my_double& class_of_collocation::operator[](long int i)
 {
-
 	return this->vect_of_collocation[i + (this->k + 1)];
 }
 

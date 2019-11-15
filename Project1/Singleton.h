@@ -18,28 +18,27 @@ public:
 	void calculate_excess_ratio();
 
 	//getters
-	my_double get_sredne_kv_otklonenie() const;
-	my_double get_sredne_kv_otklonenie_fixed() const;
-	my_double get_mat_ozidanie() const;
-	my_double get_mat_disperse() const;
-	my_double get_asymmetry_coefficient() const;
-	my_double get_excess_ratio() const;
+	container_class get_sredne_kv_otklonenie() const;
+	container_class get_sredne_kv_otklonenie_fixed() const;
+	container_class get_mat_ozidanie() const;
+	container_class get_mat_disperse() const;
+	container_class get_asymmetry_coefficient() const;
+	container_class get_excess_ratio() const;
 	int get_length_of_all_container_class() const;
 
 	//bool remove_container_class(container_class _container_class);	//fix this!
 private:
 	//private methods
 	my_double divider(int size);
-	my_double calculate_sample_mean();
+	container_class calculate_sample_mean();
 
 	//private elems
-	my_double excess_ratio;
-	my_double asymmetry_coefficient;
-	my_double sredne_kv_otklonenie_fixed;
-	my_double sredne_kv_otklonenie;
-	container_class _container_class;
-	my_double mat_disperse;
-	my_double mat_ozidanie;
+	container_class excess_ratio;
+	container_class asymmetry_coefficient;
+	container_class sredne_kv_otklonenie_fixed;
+	container_class sredne_kv_otklonenie;
+	container_class mat_disperse;
+	container_class mat_ozidanie;
 	list<container_class> list_of_container_class;
 
 	//private methods for create

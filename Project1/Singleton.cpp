@@ -35,135 +35,111 @@ my_double Singleton::divider(int size) {
 	return sum;
 }
 
-my_double Singleton::calculate_sample_mean()
+container_class Singleton::calculate_sample_mean()
 {
-	my_double summ_of_all_collocations = 0;
-	for (auto obj_of_cont_class : this->list_of_container_class)
-		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
-			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
-				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
-					if (first_index <= second_index)
-						summ_of_all_collocations = summ_of_all_collocations + obj_of_cont_class[first_index][second_index][third_index];
+	container_class sample_mean_all;
+	sample_mean_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 
-	my_double sample_mean = summ_of_all_collocations / this->get_length_of_all_container_class();
-	return sample_mean;
+	for (auto obj_of_cont_class : this->list_of_container_class)
+		sample_mean_all += obj_of_cont_class;
+
+	sample_mean_all = sample_mean_all / this->list_of_container_class.size();
+	return sample_mean_all;
 }
 
 void Singleton::calculate_mat_ozidanie()
 {
-	my_double summ_of_all_collocations = 0;
-	int counter_of_tokenizer;
+	container_class mat_ozidanie_all;
+	mat_ozidanie_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
-			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
-				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
-					if (first_index <= second_index) {
-						summ_of_all_collocations = summ_of_all_collocations + obj_of_cont_class[first_index][second_index][third_index];
-						counter_of_tokenizer = obj_of_cont_class.get_counter_of_tokenizer();
-					}
+		mat_ozidanie_all += obj_of_cont_class;
 
-	this->mat_ozidanie = summ_of_all_collocations / (this->divider(counter_of_tokenizer) * (2 + 2 * GAP));
+
+	this->mat_ozidanie = mat_ozidanie_all / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));		////??????????
 }
 
-void Singleton::calculate_mat_disperse()
+void Singleton::calculate_mat_disperse()												//////todo//////
 {
-	my_double summ_of_all_collocations_2 = 0;
-	int counter_of_tokenizer;
+	container_class mat_disperse_all;
+	mat_disperse_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
-			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
-				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
-					if (first_index <= second_index){
-						summ_of_all_collocations_2 = summ_of_all_collocations_2 + pow(obj_of_cont_class[first_index][second_index][third_index], 2);
-						counter_of_tokenizer = obj_of_cont_class.get_counter_of_tokenizer();
-					}
+		mat_disperse_all += obj_of_cont_class.pow_all(2);
 
-	my_double mat_ozidanie_square = summ_of_all_collocations_2 / (this->divider(counter_of_tokenizer) * (2 + 2 * GAP));
+	container_class mat_ozidanie_square;
+	mat_ozidanie_square.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 
-	this->mat_disperse = mat_ozidanie_square - pow(this->mat_ozidanie, 2);
+	mat_ozidanie_square = mat_disperse_all / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));		///////????????????
+
+	this->mat_disperse = mat_ozidanie_square - this->mat_ozidanie.pow_all(2);
 }
 
 void Singleton::calculate_sredne_kv_otklonenie()
 {
-	this->sredne_kv_otklonenie = pow(this->mat_disperse, 2);
+	this->sredne_kv_otklonenie = this->mat_disperse.pow_all(2);
 }
 
 void Singleton::calculate_sredne_kv_otklonenie_fixed()
 {
-	int counter_of_all_elems = this->get_length_of_all_container_class();
+	container_class dispersion_fixed_2;
+	dispersion_fixed_2.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 
-	my_double dispersion_fixed_2 = (counter_of_all_elems / (counter_of_all_elems - 1)) * this->mat_disperse;
+	//dispersion_fixed_2 = this->mat_disperse * (this->list_of_container_class.size() / (this->list_of_container_class.size() - 1)); 
+	//////ÎÏÀÑÍÎÅ ÄÅËÅÍÈÅ ÍÀ 0!!!!! ÒÅÊÑÒ ÍÅ ÄÎËÆÅÍ ÁÛÒÜ ÎÄÈÍ!!!
 
-	this->sredne_kv_otklonenie_fixed = sqrt(dispersion_fixed_2);
+	this->sredne_kv_otklonenie_fixed = dispersion_fixed_2.sqrt_all();
 }
 
-void Singleton::calculate_asymmetry_coefficient()
+void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 {
-	my_double summ_of_m3 = 0;
+	container_class summ_of_m3;
+	summ_of_m3.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
-			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
-				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
-					if (first_index <= second_index) {
-						summ_of_m3 = summ_of_m3 + pow((obj_of_cont_class[first_index][second_index][third_index] - this->calculate_sample_mean()), 3);
-					}
+			summ_of_m3 +=(obj_of_cont_class - this->calculate_sample_mean()).pow_all(3);
 
-	this->asymmetry_coefficient= (summ_of_m3 / this->get_length_of_all_container_class())/pow(this->get_sredne_kv_otklonenie_fixed(), 3);				/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
+
+	//this->asymmetry_coefficient = (summ_of_m3 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(3);
+	/////ÍÓÆÍÎ ÍÀÏÈÑÀÒÜ ÎÏÅÐÀÒÎÐ ÄÅËÅÍÈß ÊÎÍÒÅÉÍÅÐÎÃÎ ÊËÀÑÑÀ ÍÀ ÊÎÍÒÅÉÍÅÐÍÛÉ ÊËÀÑÑ, À ÇÀÒÅÌ ÐÀÑÊÎÌÌÅÍÒÈÒÜ ÑÒÐÎÊÓ ÂÛØÅ
+	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
-void Singleton::calculate_excess_ratio()
+void Singleton::calculate_excess_ratio()								//////todo//////
 {
-	my_double summ_of_m4 = 0;
+	container_class summ_of_m4;
+	summ_of_m4.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
-			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
-				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
-					if (first_index <= second_index) {
-						summ_of_m4 = summ_of_m4 + pow((obj_of_cont_class[first_index][second_index][third_index] - this->calculate_sample_mean()), 4);
-					}
+		summ_of_m4 += summ_of_m4 + (obj_of_cont_class - this->calculate_sample_mean()).pow_all(4);
 
-	this->excess_ratio = (summ_of_m4 / this->get_length_of_all_container_class()) / pow(this->get_sredne_kv_otklonenie_fixed(), 4) - 3;				/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
+	//this->excess_ratio = (summ_of_m4 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(4) - 3;
+	/////ÍÓÆÍÎ ÍÀÏÈÑÀÒÜ ÎÏÅÐÀÒÎÐ ÄÅËÅÍÈß ÊÎÍÒÅÉÍÅÐÎÃÎ ÊËÀÑÑÀ ÍÀ ÊÎÍÒÅÉÍÅÐÍÛÉ ÊËÀÑÑ, À ÇÀÒÅÌ ÐÀÑÊÎÌÌÅÍÒÈÒÜ ÑÒÐÎÊÓ ÂÛØÅ
+	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
-void Singleton::calculate_koef_assim()
-{
-	int counter_of_all_elems = 0;
-	for (auto obj_of_cont_class : this->list_of_container_class)
-		for (auto first_index = 0; first_index < obj_of_cont_class.get_counter_of_tokenizer(); ++first_index)
-			for (auto second_index = 0; second_index < obj_of_cont_class.get_counter_of_tokenizer(); ++second_index)
-				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
-					if (first_index <= second_index)
-						++counter_of_all_elems;
-
-
-}
-
-my_double Singleton::get_sredne_kv_otklonenie() const
+container_class Singleton::get_sredne_kv_otklonenie() const
 {
 	return this->sredne_kv_otklonenie;
 }
 
-my_double Singleton::get_sredne_kv_otklonenie_fixed() const
+container_class Singleton::get_sredne_kv_otklonenie_fixed() const
 {
 	return this->sredne_kv_otklonenie_fixed;
 }
 
-my_double Singleton::get_mat_ozidanie() const
+container_class Singleton::get_mat_ozidanie() const
 {
 	return this->mat_ozidanie;
 }
 
-my_double Singleton::get_mat_disperse() const
+container_class Singleton::get_mat_disperse() const
 {
 	return this->mat_disperse;
 }
 
-my_double Singleton::get_asymmetry_coefficient() const
+container_class Singleton::get_asymmetry_coefficient() const
 {
 	return this->asymmetry_coefficient;
 }
 
-my_double Singleton::get_excess_ratio() const
+container_class Singleton::get_excess_ratio() const
 {
 	return this->excess_ratio;
 }
