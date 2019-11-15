@@ -87,8 +87,18 @@ int main(int argc, char* argv[])
 			_analyzer.analyze_vec_of_tokens();
 			Singleton::initialization().push_container(_analyzer.get_container_class());
 			Singleton::initialization().calculate_mat_ozidanie();
+			Singleton::initialization().calculate_mat_disperse();
+			Singleton::initialization().calculate_sredne_kv_otklonenie();
+			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
+			Singleton::initialization().calculate_asymmetry_coefficient();
+			Singleton::initialization().calculate_excess_ratio();
 
-			cout << endl << "*******" << Singleton::initialization().get_mat_ozidanie() << "*************";
+			cout << endl << " M = " << Singleton::initialization().get_mat_ozidanie() << " //мат ожидание";
+			cout << endl << " D = " << Singleton::initialization().get_mat_disperse() << " //дисперсия";
+			cout << endl << " S = " << Singleton::initialization().get_sredne_kv_otklonenie() << " //среднее квадратичное отклонение";
+			cout << endl << " S' = " << Singleton::initialization().get_sredne_kv_otklonenie_fixed() << " //среднее квадратичное отклонение исправленное ";
+			cout << endl << " A3 = " << Singleton::initialization().get_asymmetry_coefficient() << " //коэффициент асимметрии ";
+			cout << endl << " A4 = " << Singleton::initialization().get_excess_ratio() << " //коэффициент эксцесса ";
 
 			ofstream matrix("matrix.txt");
 			auto _list_of_container_class = Singleton::initialization().get_list_of_container_class();
