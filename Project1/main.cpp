@@ -92,6 +92,7 @@ int main(int argc, char* argv[])
 			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
 			Singleton::initialization().calculate_asymmetry_coefficient();
 			Singleton::initialization().calculate_excess_ratio();
+			Singleton::initialization().out_for_chart();
 
 			/*cout << endl << " M = " << Singleton::initialization().get_mat_ozidanie() << " //мат ожидание";
 			cout << endl << " D = " << Singleton::initialization().get_mat_disperse() << " //дисперсия";

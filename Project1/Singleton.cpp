@@ -156,15 +156,15 @@ container_class Singleton::get_excess_ratio() const
 void Singleton::out_for_chart()
 {
 	container_class chart;
-	chart.give_space(list_of_container_class.front.get_counter_of_tokenizer(), list_of_container_class.front.get_k());
+	chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
 	for (auto i : this->list_of_container_class)
 	{
-		for (auto q = 0; q < i.get_vector_of_length.size(); ++q)
-			for (auto j = 0; j < i.get_vector_of_length.size(); ++j)
+		for (auto q = 0; q < i.get_vector_of_length().size(); ++q)
+			for (auto j = 0; j < i.get_vector_of_length().size(); ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
 					chart[q][j][p] += i[q][j][p];
 	}
-	chart = chart / (this->list_of_container_class.size());
+	chart = chart / (list_of_container_class.size());
 	ofstream to_chart("chart");
 	
 		for (int i = 0; i < chart.get_counter_of_tokenizer(); ++i)
