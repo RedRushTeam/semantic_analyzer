@@ -29,13 +29,11 @@ public:
 
 	void set_map_of_tokens(string dictionary_file);
 
+	void update_dictionary();
+
 	~analyzer() {
 		vec_of_tokens.~vector();
-
-		ofstream dict("dictionary.txt");
-		for (auto it : this->get_map_of_tokens()) {
-			dict << endl << it.first << " " << it.second;
-		}
+		this->update_dictionary();
 	}
 
 private:

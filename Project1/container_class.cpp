@@ -29,6 +29,11 @@ int container_class::get_counter_of_tokenizer() const
 	return this->counter_of_tokenizer;
 }
 
+int container_class::get_k() const
+{
+	return this->k;
+}
+
 container_class container_class::pow_all(int stepen)
 {
 	container_class cl_for_return(counter_of_tokenizer, k);
@@ -120,4 +125,20 @@ container_class& container_class::operator-=(container_class summed_class)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				(*this)[i][j][p] = (*this)[i][j][p] - summed_class[i][j][p];
 	return *this;
+}
+
+container_class container_class::operator/(container_class dividor_class)
+{
+	container_class ret;
+	ret.give_space(this->counter_of_tokenizer, this->k);
+	for (auto i = 0; i < vector_of_length.size(); ++i)
+		for (auto j = 0; j < vector_of_length.size(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				ret[i][j][p] = (*this)[i][j][p] / dividor_class[i][j][p];
+	return ret;
+}
+
+vector<class_of_first_bracket> container_class::get_vector_of_length() const
+{
+	return this->vector_of_length;
 }

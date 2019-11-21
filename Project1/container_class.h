@@ -13,8 +13,10 @@ public:
 	void increment(int first_dimension, int second_dimension, int third_dimension);
 	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension);
 	int get_counter_of_tokenizer() const;
+	int get_k() const;
 	container_class pow_all(int stepen);
 	container_class sqrt_all();
+	vector<class_of_first_bracket> get_vector_of_length() const;
 
 	//operators
 	class_of_first_bracket& operator[] (long int i);
@@ -24,6 +26,8 @@ public:
 	container_class& operator-=(container_class summed_class);
 	container_class operator*(my_double _koef);
 	container_class operator/(my_double _koef);
+	container_class operator/(container_class dividor_class);
+
 private:
 	int counter_of_tokenizer;
 	int k;

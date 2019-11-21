@@ -102,3 +102,11 @@ void analyzer::set_map_of_tokens(string dictoinary_file) {
 		}
 	}
 }
+
+void analyzer::update_dictionary()
+{
+	ofstream dict("dictionary.txt");
+	for (auto it : this->get_map_of_tokens()) {
+		dict << endl << it.first << " " << it.second;
+	}
+}

@@ -16,6 +16,7 @@ public:
 	void calculate_sredne_kv_otklonenie_fixed();
 	void calculate_asymmetry_coefficient();
 	void calculate_excess_ratio();
+	void out_for_chart();
 
 	//getters
 	container_class get_sredne_kv_otklonenie() const;
