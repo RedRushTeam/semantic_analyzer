@@ -27,6 +27,7 @@ public:
 	container_class operator*(my_double _koef);
 	container_class operator/(my_double _koef);
 	container_class operator/(container_class dividor_class);
+	container_class operator-(my_double _num);
 
 private:
 	int counter_of_tokenizer;

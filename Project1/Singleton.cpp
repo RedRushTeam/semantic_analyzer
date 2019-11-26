@@ -97,7 +97,7 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 			summ_of_m3 +=(obj_of_cont_class - this->calculate_sample_mean()).pow_all(3);
 
 
-	//this->asymmetry_coefficient = (summ_of_m3 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(3);
+	this->asymmetry_coefficient = (summ_of_m3 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(3);
 	/////мсфмн мюохяюрэ ноепюрнп декемхъ йнмреимепнцн йкюяяю мю йнмреимепмши йкюяя, ю гюрел пюяйнллемрхрэ ярпнйс бшье
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
@@ -109,7 +109,7 @@ void Singleton::calculate_excess_ratio()								//////todo//////
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		summ_of_m4 += summ_of_m4 + (obj_of_cont_class - this->calculate_sample_mean()).pow_all(4);
 
-	//this->excess_ratio = (summ_of_m4 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(4) - 3;
+	this->excess_ratio = (summ_of_m4 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(4) - 3;
 	/////мсфмн мюохяюрэ ноепюрнп декемхъ йнмреимепнцн йкюяяю мю йнмреимепмши йкюяя, ю гюрел пюяйнллемрхрэ ярпнйс бшье
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
@@ -162,19 +162,47 @@ void Singleton::out_for_chart()
 		for (auto q = 0; q < i.get_vector_of_length().size(); ++q)
 			for (auto j = 0; j < i.get_vector_of_length().size(); ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					chart[q][j][p] += i[q][j][p];
+					chart[q][q][p] += i[q][j][p];
 	}
 	chart = chart / (list_of_container_class.size());
-	ofstream to_chart("chart");
-	
-		for (int i = 0; i < chart.get_counter_of_tokenizer(); ++i)
-			for (int j = 0; j < chart.get_counter_of_tokenizer(); ++j)
+
+	ofstream to_chart("chart.txt");
+	auto sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+	auto razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+		for (int i = 1; i < chart.get_counter_of_tokenizer(); ++i)
 			{
-				if (i != 0 && j != 0 && i <= j) {
-					to_chart << endl << endl << i << " " << j << endl;
+					to_chart << endl << endl << "term " << i << endl;
+					for (int l = -GAP - 1; l <= GAP; ++l) 
+						if(l==-GAP-1)
+						to_chart << "really: " << chart[i][i][l] << " ";
+						else to_chart << chart[i][i][l] << " ";
+					to_chart << endl;
 					for (int l = -GAP - 1; l <= GAP; ++l)
-						to_chart << chart[i][j][l] << " ";
-				}
+						if (l == -GAP - 1)
+						to_chart << "mat_ozhidanie: " << this->calculate_parametr_to_one_term(this->mat_ozidanie)[i][i][l] << " ";
+						else to_chart << this->calculate_parametr_to_one_term(this->mat_ozidanie)[i][i][l] << " ";
+					to_chart << endl;
+					for (int l = -GAP - 1; l <= GAP; ++l)
+						if (l == -GAP - 1)
+						to_chart << "mat_ozhidanie+otkl: " << sum[i][i][l] << " ";
+						else to_chart << sum[i][i][l] << " ";
+					to_chart << endl;
+					for (int l = -GAP - 1; l <= GAP; ++l)
+						if (l == -GAP - 1)
+						to_chart << "mat_ozhidanie-otkl: " << razn[i][i][l] << " ";
+						else to_chart << razn[i][i][l] << " ";
+
+					
 			}
+			
+}
+
+container_class Singleton::calculate_parametr_to_one_term(container_class _parametr)
+{
+	for (auto q = 0; q < _parametr.get_counter_of_tokenizer(); ++q)
+		for (auto j = 0; j < _parametr.get_counter_of_tokenizer(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				_parametr[q][q][p] += _parametr[q][j][p];
+	return _parametr;
 }
 

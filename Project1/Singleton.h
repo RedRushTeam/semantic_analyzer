@@ -26,6 +26,7 @@ public:
 	container_class get_asymmetry_coefficient() const;
 	container_class get_excess_ratio() const;
 	int get_length_of_all_container_class() const;
+	container_class calculate_parametr_to_one_term(container_class _parametr);
 
 	//bool remove_container_class(container_class _container_class);	//fix this!
 private:
