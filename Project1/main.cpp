@@ -54,15 +54,21 @@ int main(int argc, char* argv[])
 		if (strcmp(language, "russian") == 0)
 		{
 			string input_txt = "Readme.txt";
+			string input_txt2 = "0101.txt";
 
 			parser _parser(input_txt);
+			parser _parser2(input_txt2);
 
 			auto list_of_parsed_symbols = _parser.parse();
+			auto list_of_parsed_symbols2 = _parser2.parse();
 
 			for (auto obj1 : list_of_parsed_symbols)
 				cout << " " << obj1;
+			for (auto obj1 : list_of_parsed_symbols2)
+				cout << " " << obj1;
 
 			list<string> list_of_lemmatized_words;
+			list<string> list_of_lemmatized_words2;
 
 			char utf9[512];
 
@@ -72,9 +78,15 @@ int main(int argc, char* argv[])
 				auto is_lemmas_if_good = sol_GetLemmaA(hEngine, obj.c_str(), utf9, sizeof(utf9));
 				list_of_lemmatized_words.push_back(utf9);
 			}
+			for (string obj : list_of_parsed_symbols2) {
+				auto is_lemmas_if_good = sol_GetLemmaA(hEngine, obj.c_str(), utf9, sizeof(utf9));
+				list_of_lemmatized_words2.push_back(utf9);
+			}
 
 			cout << endl << endl;
 			for (string obj : list_of_lemmatized_words)
+				cout << " " << obj;
+			for (string obj : list_of_lemmatized_words2)
 				cout << " " << obj;
 
 			sol_DeleteLemmatizator(hEngine);
@@ -85,7 +97,14 @@ int main(int argc, char* argv[])
 			_analyzer.shape_vec_tokens_of_text();
 			_analyzer.give_space();
 			_analyzer.analyze_vec_of_tokens();
+			analyzer _analyzer2(&list_of_lemmatized_words2);
+			_analyzer2.set_k(GAP);
+			_analyzer2.shape_vec_of_tokens();
+			_analyzer2.shape_vec_tokens_of_text();
+			_analyzer2.give_space();
+			_analyzer2.analyze_vec_of_tokens();
 			Singleton::initialization().push_container(_analyzer.get_container_class());
+			Singleton::initialization().push_container(_analyzer2.get_container_class());
 			Singleton::initialization().calculate_mat_ozidanie();
 			Singleton::initialization().calculate_mat_disperse();
 			Singleton::initialization().calculate_sredne_kv_otklonenie();

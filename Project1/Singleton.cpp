@@ -83,7 +83,7 @@ void Singleton::calculate_sredne_kv_otklonenie_fixed()
 	container_class dispersion_fixed_2;
 	dispersion_fixed_2.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 
-	//dispersion_fixed_2 = this->mat_disperse * (this->list_of_container_class.size() / (this->list_of_container_class.size() - 1)); 
+	dispersion_fixed_2 = this->mat_disperse * (this->list_of_container_class.size() / (this->list_of_container_class.size() - 1)); 
 	//////ÎÏÀÑÍÎÅ ÄÅËÅÍÈÅ ÍÀ 0!!!!! ÒÅÊÑÒ ÍÅ ÄÎËÆÅÍ ÁÛÒÜ ÎÄÈÍ!!!
 
 	this->sredne_kv_otklonenie_fixed = dispersion_fixed_2.sqrt_all();
