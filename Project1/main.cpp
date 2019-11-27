@@ -6,6 +6,7 @@
 
 #include "parser.h"
 #include "Singleton.h"
+#include <ctime>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	auto start = clock();
 	setlocale(LC_ALL, "Russian");
 
 	int error_count = 0;
@@ -126,7 +128,7 @@ int main(int argc, char* argv[])
 				for (int i = 0; i < _analyzer.get_counter_of_tokenizer(); ++i)
 					for (int j = 0; j < _analyzer.get_counter_of_tokenizer(); ++j)
 					{
-						if (i != 0 && j != 0 && i<=j) {
+						if (i != 0 && j != 0 && i <= j) {
 							matrix << endl << endl << i << " " << j << endl;
 							for (int l = -GAP - 1; l <= GAP; ++l)
 								matrix << some_scary_thing[i][j][l] << " ";
@@ -151,6 +153,9 @@ int main(int argc, char* argv[])
 		}
 
 		fclose(out);
+
+		auto finish = clock();
+		cout << endl << ">>> " << finish - start << " <<<";
 
 		return 0;
 	}
