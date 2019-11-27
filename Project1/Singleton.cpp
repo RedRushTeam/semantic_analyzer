@@ -156,11 +156,12 @@ bool Singleton::remove_container_class(container_class _container_class)
 void Singleton::out_for_chart()
 {
 	container_class chart;
+	auto keks = list_of_container_class.front().get_vector_of_length().size();
 	chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
 	for (auto i : this->list_of_container_class)
 	{
-		for (auto q = 0; q < i.get_vector_of_length().size(); ++q)
-			for (auto j = 0; j < i.get_vector_of_length().size(); ++j)
+		for (auto q = 0; q < keks; ++q)
+			for (auto j = 0; j < keks; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
 					chart[q][q][p] += i[q][j][p];
 	}
@@ -190,9 +191,7 @@ void Singleton::out_for_chart()
 					for (int l = -GAP - 1; l <= GAP; ++l)
 						if (l == -GAP - 1)
 						to_chart << "mat_ozhidanie-otkl: " << razn[i][i][l] << " ";
-						else to_chart << razn[i][i][l] << " ";
-
-					
+						else to_chart << razn[i][i][l] << " ";	
 			}
 			
 }
