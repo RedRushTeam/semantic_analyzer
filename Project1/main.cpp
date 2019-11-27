@@ -56,15 +56,18 @@ int main(int argc, char* argv[])
 		if (strcmp(language, "russian") == 0)
 		{
 			string input_txt = "Readme.txt";
-
+			string input_txt1 = "0101.txt";
 			parser _parser(input_txt);
+			parser _parser1(input_txt1);
 
 			auto list_of_parsed_symbols = _parser.parse();
-
+			auto list_of_parsed_symbols1 = _parser1.parse();
 			for (auto obj1 : list_of_parsed_symbols)
 				cout << " " << obj1;
 
 			list<string> list_of_lemmatized_words;
+			list<string> list_of_lemmatized_words1;
+
 
 			char utf9[512];
 
@@ -74,6 +77,10 @@ int main(int argc, char* argv[])
 				auto is_lemmas_if_good = sol_GetLemmaA(hEngine, obj.c_str(), utf9, sizeof(utf9));
 				list_of_lemmatized_words.push_back(utf9);
 			}
+			for (string obj : list_of_parsed_symbols1) {
+				auto is_lemmas_if_good = sol_GetLemmaA(hEngine, obj.c_str(), utf9, sizeof(utf9));
+				list_of_lemmatized_words1.push_back(utf9);
+			}
 
 			cout << endl << endl;
 			for (string obj : list_of_lemmatized_words)
@@ -81,7 +88,7 @@ int main(int argc, char* argv[])
 
 			sol_DeleteLemmatizator(hEngine);
 
-			analyzer _analyzer1(&list_of_lemmatized_words);
+			analyzer _analyzer1(&list_of_lemmatized_words1);
 			_analyzer1.set_k(GAP);
 			_analyzer1.shape_vec_of_tokens();
 			_analyzer1.shape_vec_tokens_of_text();
