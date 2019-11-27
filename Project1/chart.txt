@@ -526,4 +526,3 @@ term 88
 really: 0 0.5 0 0 0 0 0 0 
 mat_ozhidanie: 0 0.0833333 0 0 0 0 0 0 
 mat_ozhidanie+otkl: 0 0.648527 0 0 0 0 0 0 
-mat_ozhidanie-otkl: 0 -0.481861 0 0 0 0 0 0 
