@@ -144,14 +144,14 @@ container_class Singleton::get_excess_ratio() const
 	return this->excess_ratio;
 }
 
-/*bool Singleton::remove_container_class(container_class _container_class)
+bool Singleton::remove_container_class(container_class _container_class)
 {
-	//auto tmp = find(this->list_of_container_class.begin(), this->list_of_container_class.end(), _container_class);
-	//if (tmp == this->list_of_container_class.end())
-		//return false;
-	//this->list_of_container_class.erase(tmp);
+	list<container_class>::iterator tmp = find(this->list_of_container_class.begin(), this->list_of_container_class.end(), _container_class);
+	if (tmp == this->list_of_container_class.end())
+		return false;
+	this->list_of_container_class.erase(tmp);
 	return true;
-}*/
+}
 
 void Singleton::out_for_chart()
 {
@@ -195,6 +195,22 @@ void Singleton::out_for_chart()
 					
 			}
 			
+}
+
+void Singleton::sinchronize_terms()
+{
+	int max_size = this->list_of_container_class.back().get_length();
+	list<container_class> new_list;
+	for (auto obj : this->list_of_container_class) {
+		container_class new_cont_class(max_size, obj.get_k());
+		for (auto q = 0; q < obj.get_counter_of_tokenizer(); ++q)
+			for (auto j = 0; j < obj.get_counter_of_tokenizer(); ++j)
+				for (auto p = -GAP - 1; p <= GAP; ++p)
+					new_cont_class[q][j][p] = obj[q][j][p];
+
+		new_list.push_back(new_cont_class);
+	}
+	this->list_of_container_class = new_list;
 }
 
 container_class Singleton::calculate_parametr_to_one_term(container_class _parametr)

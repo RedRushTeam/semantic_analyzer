@@ -27,6 +27,11 @@ class_of_first_bracket class_of_first_bracket::sqrt_all()
 	return cl_for_return;
 }
 
+void class_of_first_bracket::push_back(class_of_collocation coc)
+{
+	this->vector_of_length.push_back(coc);
+}
+
 class_of_collocation& class_of_first_bracket::operator[](long int i)
 {
 	return vector_of_length[i];

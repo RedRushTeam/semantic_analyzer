@@ -127,6 +127,16 @@ container_class& container_class::operator-=(container_class summed_class)
 	return *this;
 }
 
+bool container_class::operator==(container_class summed_class)
+{
+	for (auto q = 0; q < this->get_length(); ++q)
+		for (auto j = 0; j < this->get_length(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				if(this->vector_of_length[q][q][p] != summed_class[q][q][p])
+					return false;
+	return true;
+}
+
 container_class container_class::operator/(container_class dividor_class)
 {
 	container_class ret;
@@ -142,6 +152,25 @@ vector<class_of_first_bracket> container_class::get_vector_of_length() const
 {
 	return this->vector_of_length;
 }
+
+int container_class::get_length() const
+{
+	return this->vector_of_length.size();
+}
+
+/*bool container_class::resize(int new_size)		////////todo////////
+{
+	if(this->vector_of_length.size() >= new_size)
+		return false;
+	else {
+		
+		for (auto obj : this->vector_of_length) {
+			class_of_collocation cl_for_push;
+			cl_for_push.give_space(GAP);
+			obj.push_back(cl_for_push);
+		}
+	}
+}*/
 
 container_class container_class::operator-(my_double _num)
 {
