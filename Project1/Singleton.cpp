@@ -159,8 +159,9 @@ void Singleton::out_for_chart()
 	chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
 	for (auto i : this->list_of_container_class)
 	{
-		for (auto q = 0; q < i.get_vector_of_length().size(); ++q)
-			for (auto j = 0; j < i.get_vector_of_length().size(); ++j)
+		auto shhh = i.get_vector_of_length().size();
+		for (auto q = 0; q < shhh; ++q)
+			for (auto j = 0; j < shhh; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
 					chart[q][q][p] += i[q][j][p];
 	}
@@ -169,6 +170,7 @@ void Singleton::out_for_chart()
 	ofstream to_chart("chart.txt");
 	auto sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 	auto razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+	int nmap2 = 0;
 		for (int i = 1; i < chart.get_counter_of_tokenizer(); ++i)
 			{
 					to_chart << endl << endl << "term " << i << endl;
@@ -194,7 +196,7 @@ void Singleton::out_for_chart()
 
 					
 			}
-			
+		int nmap= 0;
 }
 
 void Singleton::sinchronize_terms()

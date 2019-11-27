@@ -77,3 +77,33 @@ really: 0 1 1 0 0 0 0 0
 mat_ozhidanie: 0 0.166667 0.166667 0 0 0 0 0 
 mat_ozhidanie+otkl: 0 0.948403 0.948403 0 0 0 0 0 
 mat_ozhidanie-otkl: 0 -0.615069 -0.615069 0 0 0 0 0 
+
+term 14
+really: 0 0 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 0 0 
+
+term 15
+really: 0 0 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 0 0 
+
+term 16
+really: 0 0 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 0 0 
+
+term 17
+really: 0 0 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 0 0 
+
+term 18
+really: 0 0 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 0 0 
