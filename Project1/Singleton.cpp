@@ -83,7 +83,7 @@ void Singleton::calculate_sredne_kv_otklonenie_fixed()
 	container_class dispersion_fixed_2;
 	dispersion_fixed_2.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 
-	//dispersion_fixed_2 = this->mat_disperse * (this->list_of_container_class.size() / (this->list_of_container_class.size() - 1)); 
+	dispersion_fixed_2 = this->mat_disperse * (this->list_of_container_class.size() / (this->list_of_container_class.size() - 1)); 
 	//////ÎÏÀÑÍÎÅ ÄÅËÅÍÈÅ ÍÀ 0!!!!! ÒÅÊÑÒ ÍÅ ÄÎËÆÅÍ ÁÛÒÜ ÎÄÈÍ!!!
 
 	this->sredne_kv_otklonenie_fixed = dispersion_fixed_2.sqrt_all();
@@ -144,14 +144,14 @@ container_class Singleton::get_excess_ratio() const
 	return this->excess_ratio;
 }
 
-/*bool Singleton::remove_container_class(container_class _container_class)
+bool Singleton::remove_container_class(container_class _container_class)
 {
-	//auto tmp = find(this->list_of_container_class.begin(), this->list_of_container_class.end(), _container_class);
-	//if (tmp == this->list_of_container_class.end())
-		//return false;
-	//this->list_of_container_class.erase(tmp);
+	auto tmp = find(this->list_of_container_class.begin(), this->list_of_container_class.end(), _container_class);
+	if (tmp == this->list_of_container_class.end())
+		return false;
+	this->list_of_container_class.erase(tmp);
 	return true;
-}*/
+}
 
 void Singleton::out_for_chart()
 {
@@ -195,6 +195,22 @@ void Singleton::out_for_chart()
 					
 			}
 			
+}
+
+void Singleton::sinchronize_terms()
+{
+	int max_size = this->list_of_container_class.back().get_length();
+
+	for (auto obj : this->list_of_container_class) {
+		container_class new_cont_class(max_size, obj.get_k());
+		for (auto q = 0; q < obj.get_counter_of_tokenizer(); ++q)
+			for (auto j = 0; j < obj.get_counter_of_tokenizer(); ++j)
+				for (auto p = -GAP - 1; p <= GAP; ++p)
+					new_cont_class[q][j][p] = obj[q][j][p];
+
+		this->remove_container_class(obj);
+		this->push_container(new_cont_class);
+	}
 }
 
 container_class Singleton::calculate_parametr_to_one_term(container_class _parametr)

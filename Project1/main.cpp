@@ -9,6 +9,8 @@
 
 using namespace std;
 
+//void push_text()
+
 int main(int argc, char* argv[])
 {
 	setlocale(LC_ALL, "Russian");
@@ -79,6 +81,14 @@ int main(int argc, char* argv[])
 
 			sol_DeleteLemmatizator(hEngine);
 
+			analyzer _analyzer1(&list_of_lemmatized_words);
+			_analyzer1.set_k(GAP);
+			_analyzer1.shape_vec_of_tokens();
+			_analyzer1.shape_vec_tokens_of_text();
+			_analyzer1.give_space();
+			_analyzer1.analyze_vec_of_tokens();
+			Singleton::initialization().push_container(_analyzer1.get_container_class());
+			_analyzer1.update_dictionary();
 			analyzer _analyzer(&list_of_lemmatized_words);
 			_analyzer.set_k(GAP);
 			_analyzer.shape_vec_of_tokens();
@@ -86,6 +96,7 @@ int main(int argc, char* argv[])
 			_analyzer.give_space();
 			_analyzer.analyze_vec_of_tokens();
 			Singleton::initialization().push_container(_analyzer.get_container_class());
+			//Singleton::initialization().sinchronize_terms();
 			Singleton::initialization().calculate_mat_ozidanie();
 			Singleton::initialization().calculate_mat_disperse();
 			Singleton::initialization().calculate_sredne_kv_otklonenie();

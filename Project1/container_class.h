@@ -6,7 +6,8 @@ class container_class
 public:
 	//constr
 	container_class() {}
-	container_class(int counter_of_tokenizer, int k) : counter_of_tokenizer(counter_of_tokenizer), k(k) {}
+	container_class(int counter_of_tokenizer, int k) : counter_of_tokenizer(counter_of_tokenizer), k(k) 
+	{ this->give_space(counter_of_tokenizer, k); }
 
 	//methods
 	void give_space(int counter_of_tokenizer, int k);
@@ -17,6 +18,8 @@ public:
 	container_class pow_all(int stepen);
 	container_class sqrt_all();
 	vector<class_of_first_bracket> get_vector_of_length() const;
+	int get_length() const;
+	bool resize(int new_size);
 
 	//operators
 	class_of_first_bracket& operator[] (long int i);

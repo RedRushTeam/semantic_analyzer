@@ -17,6 +17,7 @@ public:
 	void calculate_asymmetry_coefficient();
 	void calculate_excess_ratio();
 	void out_for_chart();
+	void sinchronize_terms();
 
 	//getters
 	container_class get_sredne_kv_otklonenie() const;
@@ -28,7 +29,7 @@ public:
 	int get_length_of_all_container_class() const;
 	container_class calculate_parametr_to_one_term(container_class _parametr);
 
-	//bool remove_container_class(container_class _container_class);	//fix this!
+	bool remove_container_class(container_class _container_class);	//fix this!
 private:
 	//private methods
 	my_double divider(int size);

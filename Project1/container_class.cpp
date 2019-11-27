@@ -143,6 +143,25 @@ vector<class_of_first_bracket> container_class::get_vector_of_length() const
 	return this->vector_of_length;
 }
 
+int container_class::get_length() const
+{
+	return this->vector_of_length.size();
+}
+
+/*bool container_class::resize(int new_size)		////////todo////////
+{
+	if(this->vector_of_length.size() >= new_size)
+		return false;
+	else {
+		
+		for (auto obj : this->vector_of_length) {
+			class_of_collocation cl_for_push;
+			cl_for_push.give_space(GAP);
+			obj.push_back(cl_for_push);
+		}
+	}
+}*/
+
 container_class container_class::operator-(my_double _num)
 {
 	container_class ret;
