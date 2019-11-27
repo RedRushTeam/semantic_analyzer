@@ -170,30 +170,43 @@ void Singleton::out_for_chart()
 	ofstream to_chart("chart.txt");
 	auto sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 	auto razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+
+	auto shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
+
 		for (int i = 1; i < chart.get_counter_of_tokenizer(); ++i)
 			{
 					to_chart << endl << endl << "term " << i << endl;
 					for (int l = -GAP - 1; l <= GAP; ++l) 
 						if(l==-GAP-1)
-						to_chart << "really: " << chart[i][i][l] << " ";
-						else to_chart << chart[i][i][l] << " ";
+							to_chart << "really: " << chart[i][i][l] << " ";
+						else 
+							to_chart << chart[i][i][l] << " ";
+
 					to_chart << endl;
+
 					for (int l = -GAP - 1; l <= GAP; ++l)
 						if (l == -GAP - 1)
-						to_chart << "mat_ozhidanie: " << this->calculate_parametr_to_one_term(this->mat_ozidanie)[i][i][l] << " ";
-						else to_chart << this->calculate_parametr_to_one_term(this->mat_ozidanie)[i][i][l] << " ";
+							to_chart << "mat_ozhidanie: " << shhh[i][i][l] << " ";
+						else 
+							to_chart << shhh[i][i][l] << " ";
+
 					to_chart << endl;
+
 					for (int l = -GAP - 1; l <= GAP; ++l)
 						if (l == -GAP - 1)
-						to_chart << "mat_ozhidanie+otkl: " << sum[i][i][l] << " ";
-						else to_chart << sum[i][i][l] << " ";
+							to_chart << "mat_ozhidanie+otkl: " << sum[i][i][l] << " ";
+						else 
+							to_chart << sum[i][i][l] << " ";
+
 					to_chart << endl;
+
 					for (int l = -GAP - 1; l <= GAP; ++l)
 						if (l == -GAP - 1)
-						to_chart << "mat_ozhidanie-otkl: " << razn[i][i][l] << " ";
-						else to_chart << razn[i][i][l] << " ";	
-			}
-			
+							to_chart << "mat_ozhidanie-otkl: " << razn[i][i][l] << " ";
+						else 
+							to_chart << razn[i][i][l] << " ";	
+		}
+		to_chart.close();
 }
 
 void Singleton::sinchronize_terms()

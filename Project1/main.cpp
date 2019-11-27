@@ -104,7 +104,12 @@ int main(int argc, char* argv[])
 			_analyzer.shape_vec_tokens_of_text();
 			_analyzer.give_space();
 			_analyzer.analyze_vec_of_tokens();
+			
 			Singleton::initialization().push_container(_analyzer.get_container_class());
+
+			//_analyzer.~analyzer();
+			//_analyzer1.~analyzer();
+
 			Singleton::initialization().sinchronize_terms();
 			Singleton::initialization().calculate_mat_ozidanie();
 			Singleton::initialization().calculate_mat_disperse();
