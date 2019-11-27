@@ -127,6 +127,16 @@ container_class& container_class::operator-=(container_class summed_class)
 	return *this;
 }
 
+bool container_class::operator==(container_class summed_class)
+{
+	for (auto q = 0; q < this->get_length(); ++q)
+		for (auto j = 0; j < this->get_length(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				if(this->vector_of_length[q][q][p] != summed_class[q][q][p])
+					return false;
+	return true;
+}
+
 container_class container_class::operator/(container_class dividor_class)
 {
 	container_class ret;

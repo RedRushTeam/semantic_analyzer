@@ -27,6 +27,7 @@ public:
 	container_class operator-(container_class summed_class);
 	container_class& operator+=(container_class summed_class);
 	container_class& operator-=(container_class summed_class);
+	bool operator==(container_class summed_class);
 	container_class operator*(my_double _koef);
 	container_class operator/(my_double _koef);
 	container_class operator/(container_class dividor_class);

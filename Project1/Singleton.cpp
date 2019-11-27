@@ -146,7 +146,7 @@ container_class Singleton::get_excess_ratio() const
 
 bool Singleton::remove_container_class(container_class _container_class)
 {
-	auto tmp = find(this->list_of_container_class.begin(), this->list_of_container_class.end(), _container_class);
+	list<container_class>::iterator tmp = find(this->list_of_container_class.begin(), this->list_of_container_class.end(), _container_class);
 	if (tmp == this->list_of_container_class.end())
 		return false;
 	this->list_of_container_class.erase(tmp);
