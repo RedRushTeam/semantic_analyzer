@@ -98,7 +98,6 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 
 
 	this->asymmetry_coefficient = (summ_of_m3 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(3);
-	/////мсфмн мюохяюрэ ноепюрнп декемхъ йнмреимепнцн йкюяяю мю йнмреимепмши йкюяя, ю гюрел пюяйнллемрхрэ ярпнйс бшье
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 

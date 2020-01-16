@@ -18,7 +18,7 @@
 
 using namespace std;
 
-using my_double = double;
+using my_double = float;
 
-#define GAP 3
+#define GAP 2
 #define STOP_WORD 0 

@@ -10,14 +10,10 @@
 
 using namespace std;
 
-//void push_text()
-
 int main(int argc, char* argv[])
 {
 	auto start = clock();
 	setlocale(LC_ALL, "Russian");
-
-	int error_count = 0;
 
 	FILE* out = fopen("errors.txt", "wt");
 	if (out == NULL)
@@ -36,14 +32,9 @@ int main(int argc, char* argv[])
 	if (dict_path == NULL)
 		dict_path = LEMADR;
 
-	for (int pass = 0; pass < 2 && error_count == 0; pass++)
-	{
 		int flags = 0;
-		switch (pass)
-		{
-		case 0: flags = LEME_DEFAULT; break;
-		case 1: flags = LEME_FASTEST; break;
-		}
+
+		flags = LEME_DEFAULT;
 
 		printf("Loading the lemmatizator from %s\n", dict_path);
 
@@ -107,24 +98,19 @@ int main(int argc, char* argv[])
 			
 			Singleton::initialization().push_container(_analyzer.get_container_class());
 
-			//_analyzer.~analyzer();
-			//_analyzer1.~analyzer();
+			_analyzer.~analyzer();
+			_analyzer1.~analyzer();
 
 			Singleton::initialization().sinchronize_terms();
-			Singleton::initialization().calculate_mat_ozidanie();
-			Singleton::initialization().calculate_mat_disperse();
-			Singleton::initialization().calculate_sredne_kv_otklonenie();
-			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
-			Singleton::initialization().calculate_asymmetry_coefficient();
-			Singleton::initialization().calculate_excess_ratio();
-			Singleton::initialization().out_for_chart();
+			Singleton::initialization().calculate_mat_ozidanie();				//достаточно быстро
+			Singleton::initialization().calculate_mat_disperse();				//долго, 50c, тут можно юзать потоки
+			Singleton::initialization().calculate_sredne_kv_otklonenie();		//быстро 
+			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed(); //быстро
+			//Singleton::initialization().calculate_asymmetry_coefficient();	//эти два процессорно страшных действия можно пустить параллельно
+			//Singleton::initialization().calculate_excess_ratio();
+			Singleton::initialization().out_for_chart();							//очень долго =50+с		//2,26 до сюда при GAP = 3	//при GAP=2 ровно 2 минуты
 
-			/*cout << endl << " M = " << Singleton::initialization().get_mat_ozidanie() << " //мат ожидание";
-			cout << endl << " D = " << Singleton::initialization().get_mat_disperse() << " //дисперсия";
-			cout << endl << " S = " << Singleton::initialization().get_sredne_kv_otklonenie() << " //среднее квадратичное отклонение";
-			cout << endl << " S' = " << Singleton::initialization().get_sredne_kv_otklonenie_fixed() << " //среднее квадратичное отклонение исправленное ";
-			cout << endl << " A3 = " << Singleton::initialization().get_asymmetry_coefficient() << " //коэффициент асимметрии ";
-			cout << endl << " A4 = " << Singleton::initialization().get_excess_ratio() << " //коэффициент эксцесса ";*/
+			//стоит подумать об дополнительном использовании reserve во всех методах
 
 			ofstream matrix("matrix.txt");
 			auto _list_of_container_class = Singleton::initialization().get_list_of_container_class();
@@ -144,24 +130,10 @@ int main(int argc, char* argv[])
 
 		cout << endl;
 
-
-		if (error_count == 0)
-		{
-			printf("No errors detected\n");
-		}
-		else
-		{
-			if (error_count == 1)
-				printf("There is 1 error\n");
-			else
-				printf("There are %d errors\n", error_count);
-		}
-
 		fclose(out);
 
 		auto finish = clock();
 		cout << endl << ">>> " << finish - start << " <<<";
 
 		return 0;
-	}
 }
