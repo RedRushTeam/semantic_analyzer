@@ -18,6 +18,7 @@ public:
 	void calculate_excess_ratio();
 	void out_for_chart();
 	void sinchronize_terms();
+	void give_space();
 
 	//getters
 	container_class get_sredne_kv_otklonenie() const;

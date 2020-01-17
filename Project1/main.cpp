@@ -46,8 +46,6 @@ int main(int argc, char* argv[])
 			exit(1);
 		}
 
-		if (strcmp(language, "russian") == 0)
-		{
 			string input_txt = "Readme.txt";
 			string input_txt1 = "0101.txt";
 			parser _parser(input_txt);
@@ -101,16 +99,17 @@ int main(int argc, char* argv[])
 			_analyzer.~analyzer();
 			_analyzer1.~analyzer();
 
+			Singleton::initialization().give_space();
 			Singleton::initialization().sinchronize_terms();
 			Singleton::initialization().calculate_mat_ozidanie();				//достаточно быстро
-			Singleton::initialization().calculate_mat_disperse();				//долго, 50c, тут можно юзать потоки
+			Singleton::initialization().calculate_mat_disperse();			//долго, 50c, тут можно юзать потоки
 			Singleton::initialization().calculate_sredne_kv_otklonenie();		//быстро 
 			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed(); //быстро
 			//Singleton::initialization().calculate_asymmetry_coefficient();	//эти два процессорно страшных действия можно пустить параллельно
 			//Singleton::initialization().calculate_excess_ratio();
-			Singleton::initialization().out_for_chart();							//очень долго =50+с		//2,26 до сюда при GAP = 3	//при GAP=2 ровно 2 минуты
+			Singleton::initialization().out_for_chart();			//очень долго =50+с		//2,26 до сюда при GAP = 3	//при GAP=2 ровно 2 минуты
 
-			//стоит подумать об дополнительном использовании reserve во всех методах
+			//стоит подумать об дополнительном использовании reserve во всех методах	//нужен единый метод выделения памяти
 
 			ofstream matrix("matrix.txt");
 			auto _list_of_container_class = Singleton::initialization().get_list_of_container_class();
@@ -126,7 +125,6 @@ int main(int argc, char* argv[])
 						}
 					}
 			}
-		}
 
 		cout << endl;
 

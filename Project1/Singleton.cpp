@@ -49,28 +49,22 @@ container_class Singleton::calculate_sample_mean()
 
 void Singleton::calculate_mat_ozidanie()
 {
-	container_class mat_ozidanie_all;
-	mat_ozidanie_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	//container_class mat_ozidanie_all;
+	//mat_ozidanie_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		mat_ozidanie_all += obj_of_cont_class;
+		this->mat_ozidanie += obj_of_cont_class;
 
-
-	this->mat_ozidanie = mat_ozidanie_all / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));		////??????????
+	this->mat_ozidanie = this->mat_ozidanie / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));
 }
 
 void Singleton::calculate_mat_disperse()												//////todo//////
 {
-	container_class mat_disperse_all;
-	mat_disperse_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		mat_disperse_all += obj_of_cont_class.pow_all(2);
+		this->mat_disperse += obj_of_cont_class.pow_all(2);
 
-	container_class mat_ozidanie_square;
-	mat_ozidanie_square.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	this->mat_disperse = this->mat_disperse / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));
 
-	mat_ozidanie_square = mat_disperse_all / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));		///////????????????
-
-	this->mat_disperse = mat_ozidanie_square - this->mat_ozidanie.pow_all(2);
+	this->mat_disperse = this->mat_disperse - this->mat_ozidanie.pow_all(2);
 }
 
 void Singleton::calculate_sredne_kv_otklonenie()
@@ -80,35 +74,28 @@ void Singleton::calculate_sredne_kv_otklonenie()
 
 void Singleton::calculate_sredne_kv_otklonenie_fixed()
 {
-	container_class dispersion_fixed_2;
-	dispersion_fixed_2.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
-
-	dispersion_fixed_2 = this->mat_disperse * (this->list_of_container_class.size() / (this->list_of_container_class.size() - 1)); 
+	this->sredne_kv_otklonenie_fixed = this->mat_disperse * (this->list_of_container_class.size() / (this->list_of_container_class.size() - 1));
 	//////ÎÏÀÑÍÎÅ ÄÅËÅÍÈÅ ÍÀ 0!!!!! ÒÅÊÑÒ ÍÅ ÄÎËÆÅÍ ÁÛÒÜ ÎÄÈÍ!!!
 
-	this->sredne_kv_otklonenie_fixed = dispersion_fixed_2.sqrt_all();
+	this->sredne_kv_otklonenie_fixed = this->sredne_kv_otklonenie_fixed.sqrt_all();
 }
 
 void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 {
-	container_class summ_of_m3;
-	summ_of_m3.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-			summ_of_m3 +=(obj_of_cont_class - this->calculate_sample_mean()).pow_all(3);
+		this->asymmetry_coefficient += (obj_of_cont_class - this->calculate_sample_mean()).pow_all(3);
 
 
-	this->asymmetry_coefficient = (summ_of_m3 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(3);
+	this->asymmetry_coefficient = (this->asymmetry_coefficient / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(3);
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
 void Singleton::calculate_excess_ratio()								//////todo//////
 {
-	container_class summ_of_m4;
-	summ_of_m4.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		summ_of_m4 += summ_of_m4 + (obj_of_cont_class - this->calculate_sample_mean()).pow_all(4);
+		this->excess_ratio += (obj_of_cont_class - this->calculate_sample_mean()).pow_all(4);
 
-	this->excess_ratio = (summ_of_m4 / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(4) - 3;
+	this->excess_ratio = (this->excess_ratio / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(4) - 3;
 	/////ÍÓÆÍÎ ÍÀÏÈÑÀÒÜ ÎÏÅÐÀÒÎÐ ÄÅËÅÍÈß ÊÎÍÒÅÉÍÅÐÎÃÎ ÊËÀÑÑÀ ÍÀ ÊÎÍÒÅÉÍÅÐÍÛÉ ÊËÀÑÑ, À ÇÀÒÅÌ ÐÀÑÊÎÌÌÅÍÒÈÒÜ ÑÒÐÎÊÓ ÂÛØÅ
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
@@ -222,6 +209,16 @@ void Singleton::sinchronize_terms()
 		new_list.push_back(new_cont_class);
 	}
 	this->list_of_container_class = new_list;
+}
+
+void Singleton::give_space()
+{
+	this->excess_ratio.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	this->asymmetry_coefficient.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	this->sredne_kv_otklonenie_fixed.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	this->sredne_kv_otklonenie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	this->mat_disperse.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	this->mat_ozidanie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 }
 
 container_class Singleton::calculate_parametr_to_one_term(container_class _parametr)
