@@ -10,6 +10,7 @@ public:
 	//public methods
 	void push_container(container_class _container_class);
 	list<container_class> get_list_of_container_class() const;
+	void calculate_sample_mean();
 	void calculate_mat_ozidanie();
 	void calculate_mat_disperse();
 	void calculate_sredne_kv_otklonenie();
@@ -27,6 +28,7 @@ public:
 	container_class get_mat_disperse() const;
 	container_class get_asymmetry_coefficient() const;
 	container_class get_excess_ratio() const;
+	container_class get_sample_mean_all() const;
 	int get_length_of_all_container_class() const;
 	container_class calculate_parametr_to_one_term(container_class _parametr);
 
@@ -34,9 +36,9 @@ public:
 private:
 	//private methods
 	my_double divider(int size);
-	container_class calculate_sample_mean();
 
 	//private elems
+	container_class sample_mean_all;
 	container_class excess_ratio;
 	container_class asymmetry_coefficient;
 	container_class sredne_kv_otklonenie_fixed;

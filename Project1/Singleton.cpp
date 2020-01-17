@@ -35,7 +35,7 @@ my_double Singleton::divider(int size) {
 	return sum;
 }
 
-container_class Singleton::calculate_sample_mean()
+void Singleton::calculate_sample_mean()
 {
 	container_class sample_mean_all;
 	sample_mean_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
@@ -44,13 +44,11 @@ container_class Singleton::calculate_sample_mean()
 		sample_mean_all += obj_of_cont_class;
 
 	sample_mean_all = sample_mean_all / this->list_of_container_class.size();
-	return sample_mean_all;
+	this->sample_mean_all = sample_mean_all;
 }
 
 void Singleton::calculate_mat_ozidanie()
 {
-	//container_class mat_ozidanie_all;
-	//mat_ozidanie_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		this->mat_ozidanie += obj_of_cont_class;
 
@@ -83,7 +81,7 @@ void Singleton::calculate_sredne_kv_otklonenie_fixed()
 void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 {
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		this->asymmetry_coefficient += (obj_of_cont_class - this->calculate_sample_mean()).pow_all(3);
+		this->asymmetry_coefficient += (obj_of_cont_class - this->get_sample_mean_all()).pow_all(3);
 
 
 	this->asymmetry_coefficient = (this->asymmetry_coefficient / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(3);
@@ -93,7 +91,7 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 void Singleton::calculate_excess_ratio()								//////todo//////
 {
 	for (auto obj_of_cont_class : this->list_of_container_class)
-		this->excess_ratio += (obj_of_cont_class - this->calculate_sample_mean()).pow_all(4);
+		this->excess_ratio += (obj_of_cont_class - this->get_sample_mean_all()).pow_all(4);
 
 	this->excess_ratio = (this->excess_ratio / this->list_of_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(4) - 3;
 	/////ÍÓÆÍÎ ÍÀÏÈÑÀÒÜ ÎÏÅÐÀÒÎÐ ÄÅËÅÍÈß ÊÎÍÒÅÉÍÅÐÎÃÎ ÊËÀÑÑÀ ÍÀ ÊÎÍÒÅÉÍÅÐÍÛÉ ÊËÀÑÑ, À ÇÀÒÅÌ ÐÀÑÊÎÌÌÅÍÒÈÒÜ ÑÒÐÎÊÓ ÂÛØÅ
@@ -128,6 +126,11 @@ container_class Singleton::get_asymmetry_coefficient() const
 container_class Singleton::get_excess_ratio() const
 {
 	return this->excess_ratio;
+}
+
+container_class Singleton::get_sample_mean_all() const
+{
+	return this->sample_mean_all;
 }
 
 bool Singleton::remove_container_class(container_class _container_class)

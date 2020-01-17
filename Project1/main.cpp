@@ -6,9 +6,21 @@
 
 #include "parser.h"
 #include "Singleton.h"
-#include <ctime>
+
 
 using namespace std;
+
+void foo_for_sample_meal_thread() {
+	Singleton::initialization().calculate_sample_mean();
+}
+
+void foo_for_asymmetry_coefficient_thread() {
+	Singleton::initialization().calculate_asymmetry_coefficient();
+}
+
+void foo_for_for_excess_ratio_thread() {
+	Singleton::initialization().calculate_excess_ratio();
+}
 
 int main(int argc, char* argv[])
 {
@@ -101,15 +113,28 @@ int main(int argc, char* argv[])
 
 			Singleton::initialization().give_space();
 			Singleton::initialization().sinchronize_terms();
-			Singleton::initialization().calculate_mat_ozidanie();				//достаточно быстро
-			Singleton::initialization().calculate_mat_disperse();			//долго, 50c, тут можно юзать потоки
+
+			thread tr_for_sample_mean(foo_for_sample_meal_thread);
+
+			Singleton::initialization().calculate_mat_ozidanie();
+			Singleton::initialization().calculate_mat_disperse();
+
 			Singleton::initialization().calculate_sredne_kv_otklonenie();		//быстро 
 			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed(); //быстро
-			//Singleton::initialization().calculate_asymmetry_coefficient();	//эти два процессорно страшных действия можно пустить параллельно
-			//Singleton::initialization().calculate_excess_ratio();
-			Singleton::initialization().out_for_chart();			//очень долго =50+с		//2,26 до сюда при GAP = 3	//при GAP=2 ровно 2 минуты
 
-			//стоит подумать об дополнительном использовании reserve во всех методах	//нужен единый метод выделения памяти
+			tr_for_sample_mean.join();
+
+			thread tr_for_asymmetry_coefficient(foo_for_asymmetry_coefficient_thread);
+			thread tr_for_excess_ratio(foo_for_for_excess_ratio_thread);
+			tr_for_asymmetry_coefficient.join();
+			tr_for_excess_ratio.join();
+
+			tr_for_asymmetry_coefficient.~thread();
+			tr_for_excess_ratio.~thread();
+			tr_for_sample_mean.~thread();
+
+			//1.53 на вычисление всего и с потоками	//2.40 без
+			Singleton::initialization().out_for_chart();			//очень долго =50+с		
 
 			ofstream matrix("matrix.txt");
 			auto _list_of_container_class = Singleton::initialization().get_list_of_container_class();

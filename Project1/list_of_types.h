@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -15,6 +14,8 @@
 #include <list>
 #include <map>
 #include <math.h>
+#include <ctime>
+#include <thread>
 
 using namespace std;
 
