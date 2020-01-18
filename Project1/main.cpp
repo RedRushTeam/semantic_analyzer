@@ -111,8 +111,8 @@ int main(int argc, char* argv[])
 			_analyzer.~analyzer();
 			_analyzer1.~analyzer();
 
-			Singleton::initialization().give_space();
 			Singleton::initialization().sinchronize_terms();
+			Singleton::initialization().give_space();
 
 			thread tr_for_sample_mean(foo_for_sample_meal_thread);
 
