@@ -6,18 +6,26 @@
 
 #include "parser.h"
 #include "Singleton.h"
-#include <ctime>
+
 
 using namespace std;
 
-//void push_text()
+void foo_for_sample_meal_thread() {
+	Singleton::initialization().calculate_sample_mean();
+}
+
+void foo_for_asymmetry_coefficient_thread() {
+	Singleton::initialization().calculate_asymmetry_coefficient();
+}
+
+void foo_for_for_excess_ratio_thread() {
+	Singleton::initialization().calculate_excess_ratio();
+}
 
 int main(int argc, char* argv[])
 {
 	auto start = clock();
 	setlocale(LC_ALL, "Russian");
-
-	int error_count = 0;
 
 	FILE* out = fopen("errors.txt", "wt");
 	if (out == NULL)
@@ -36,14 +44,9 @@ int main(int argc, char* argv[])
 	if (dict_path == NULL)
 		dict_path = LEMADR;
 
-	for (int pass = 0; pass < 2 && error_count == 0; pass++)
-	{
 		int flags = 0;
-		switch (pass)
-		{
-		case 0: flags = LEME_DEFAULT; break;
-		case 1: flags = LEME_FASTEST; break;
-		}
+
+		flags = LEME_DEFAULT;
 
 		printf("Loading the lemmatizator from %s\n", dict_path);
 
@@ -55,8 +58,6 @@ int main(int argc, char* argv[])
 			exit(1);
 		}
 
-		if (strcmp(language, "russian") == 0)
-		{
 			string input_txt = "Readme.txt";
 			string input_txt1 = "0101.txt";
 			parser _parser(input_txt);
@@ -107,24 +108,33 @@ int main(int argc, char* argv[])
 			
 			Singleton::initialization().push_container(_analyzer.get_container_class());
 
-			//_analyzer.~analyzer();
-			//_analyzer1.~analyzer();
+			_analyzer.~analyzer();
+			_analyzer1.~analyzer();
 
 			Singleton::initialization().sinchronize_terms();
+			Singleton::initialization().give_space();
+
+			thread tr_for_sample_mean(foo_for_sample_meal_thread);
+
 			Singleton::initialization().calculate_mat_ozidanie();
 			Singleton::initialization().calculate_mat_disperse();
-			Singleton::initialization().calculate_sredne_kv_otklonenie();
-			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
-			//Singleton::initialization().calculate_asymmetry_coefficient();
-			//Singleton::initialization().calculate_excess_ratio();
-			Singleton::initialization().out_for_chart();
 
-			/*cout << endl << " M = " << Singleton::initialization().get_mat_ozidanie() << " //мат ожидание";
-			cout << endl << " D = " << Singleton::initialization().get_mat_disperse() << " //дисперсия";
-			cout << endl << " S = " << Singleton::initialization().get_sredne_kv_otklonenie() << " //среднее квадратичное отклонение";
-			cout << endl << " S' = " << Singleton::initialization().get_sredne_kv_otklonenie_fixed() << " //среднее квадратичное отклонение исправленное ";
-			cout << endl << " A3 = " << Singleton::initialization().get_asymmetry_coefficient() << " //коэффициент асимметрии ";
-			cout << endl << " A4 = " << Singleton::initialization().get_excess_ratio() << " //коэффициент эксцесса ";*/
+			Singleton::initialization().calculate_sredne_kv_otklonenie();		//быстро 
+			Singleton::initialization().calculate_sredne_kv_otklonenie_fixed(); //быстро
+
+			tr_for_sample_mean.join();
+
+			thread tr_for_asymmetry_coefficient(foo_for_asymmetry_coefficient_thread);
+			thread tr_for_excess_ratio(foo_for_for_excess_ratio_thread);
+			tr_for_asymmetry_coefficient.join();
+			tr_for_excess_ratio.join();
+
+			tr_for_asymmetry_coefficient.~thread();
+			tr_for_excess_ratio.~thread();
+			tr_for_sample_mean.~thread();
+
+			//1.53 на вычисление всего и с потоками	//2.40 без
+			Singleton::initialization().out_for_chart();			//очень долго =50+с		
 
 			ofstream matrix("matrix.txt");
 			auto _list_of_container_class = Singleton::initialization().get_list_of_container_class();
@@ -140,22 +150,8 @@ int main(int argc, char* argv[])
 						}
 					}
 			}
-		}
 
 		cout << endl;
-
-
-		if (error_count == 0)
-		{
-			printf("No errors detected\n");
-		}
-		else
-		{
-			if (error_count == 1)
-				printf("There is 1 error\n");
-			else
-				printf("There are %d errors\n", error_count);
-		}
 
 		fclose(out);
 
@@ -163,5 +159,4 @@ int main(int argc, char* argv[])
 		cout << endl << ">>> " << finish - start << " <<<";
 
 		return 0;
-	}
 }
