@@ -49,15 +49,15 @@ void Singleton::calculate_sample_mean()
 
 void Singleton::calculate_mat_ozidanie()
 {
-	for (auto obj_of_cont_class : this->list_of_container_class)
+	for (auto obj_of_cont_class : this->list_of_container_class)	//большую часть времени занимает именно это действие, возможно, его можно сделать "заранее"
 		this->mat_ozidanie += obj_of_cont_class;
 
 	this->mat_ozidanie = this->mat_ozidanie / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));
 }
 
-void Singleton::calculate_mat_disperse()												//////todo//////
+void Singleton::calculate_mat_disperse()
 {
-	for (auto obj_of_cont_class : this->list_of_container_class)
+	for (auto obj_of_cont_class : this->list_of_container_class)	//2/3 времени уходит на это действие
 		this->mat_disperse += obj_of_cont_class.pow_all(2);
 
 	this->mat_disperse = this->mat_disperse / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));
