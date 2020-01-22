@@ -144,7 +144,7 @@ bool Singleton::remove_container_class(container_class _container_class)
 
 void Singleton::out_for_chart()
 {
-	container_class chart;
+	container_class chart; 
 	auto keks = list_of_container_class.front().get_vector_of_length().size();
 	chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
 	for (auto i : this->list_of_container_class)
