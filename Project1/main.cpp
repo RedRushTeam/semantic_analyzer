@@ -29,6 +29,14 @@ void foo_for_calculate_sredne_kv_otklonenie_fixed() {
 	Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
 }
 
+void foo_for_prepare_data_for_mat_ozid() {
+	Singleton::initialization().prepare_data_for_mat_ozid();
+}
+
+void foo_for_prepare_data_for_mat_disperse() {
+	Singleton::initialization().prepare_data_for_mat_disperse();
+}
+
 list<string> parse_text(string input_txt) {
 
 	parser _parser(input_txt);
@@ -152,16 +160,22 @@ int main(int argc, char* argv[])
 
 	thread tr_for_out(out_matrix, counter_of_tokenizer);
 	tr_for_out.detach();
-
-														//6c
+							//6c
 
 	Singleton::initialization().sinchronize_terms();	//10c
 	Singleton::initialization().give_space();			//8c
 
 	thread tr_for_sample_mean(foo_for_sample_meal_thread);
+	thread tr_for_prepare_data_for_mat_ozid(foo_for_prepare_data_for_mat_ozid);
+	thread tr_for_prepare_data_for_mat_disperse(foo_for_prepare_data_for_mat_disperse);
 
+	tr_for_prepare_data_for_mat_ozid.join();
 	Singleton::initialization().calculate_mat_ozidanie();	//16c		//оптимизация этих двух методов невозможна без
+	tr_for_prepare_data_for_mat_ozid.~thread();
+
+	tr_for_prepare_data_for_mat_disperse.join();
 	Singleton::initialization().calculate_mat_disperse();	//26c		//семафора/мьютекса работа "в лоб" может вызвать непредвиденное поведение
+	tr_for_prepare_data_for_mat_disperse.~thread();
 
 	thread tr_for_sredne_kv_otklonenie(foo_for_calculate_sredne_kv_otklonenie);
 	thread tr_for_sredne_kv_otklonenie_fixed(foo_for_calculate_sredne_kv_otklonenie_fixed);
