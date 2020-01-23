@@ -144,6 +144,16 @@ bool Singleton::remove_container_class(container_class _container_class)
 
 void Singleton::out_for_chart()
 {
+	container_class sum;
+	container_class razn;
+	container_class shhh;
+
+	thread tr([&]() {
+		sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+		razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+		shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
+		});
+
 	container_class chart; 
 	auto keks = list_of_container_class.front().get_vector_of_length().size();
 	chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
@@ -157,10 +167,8 @@ void Singleton::out_for_chart()
 	chart = chart / (list_of_container_class.size());
 
 	ofstream to_chart("chart.txt");
-	auto sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-	auto razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 
-	auto shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
+	tr.join();
 
 		for (int i = 1; i < chart.get_counter_of_tokenizer(); ++i)
 			{
