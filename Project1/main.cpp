@@ -181,9 +181,9 @@ int main(int argc, char* argv[])
 	tr_for_sample_mean.~thread();
 	tr_for_out.~thread();
 
-	Singleton::initialization().out_for_chart();			//20c
+	Singleton::initialization().out_for_chart();
 
-	auto finish = clock();							//2.53	//2.30	//2.10
+	auto finish = clock();							//2.53	//2.30	//2.10	//2.0
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
 
 	return 0;
