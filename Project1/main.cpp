@@ -164,10 +164,15 @@ int main(int argc, char* argv[])
 
 	thread tr_for_sredne_kv_otklonenie(foo_for_calculate_sredne_kv_otklonenie);
 	thread tr_for_sredne_kv_otklonenie_fixed(foo_for_calculate_sredne_kv_otklonenie_fixed);
-	
+
 	tr_for_sredne_kv_otklonenie.detach();
 	tr_for_sample_mean.join();
 	tr_for_sredne_kv_otklonenie_fixed.join();
+
+	thread tr_for_params_for_charts([&]() {
+		Singleton::initialization().calculate_params_for_charts();
+		Singleton::initialization().find_fluctuations();
+		});
 
 	thread tr_for_asymmetry_coefficient(foo_for_asymmetry_coefficient_thread);
 	thread tr_for_excess_ratio(foo_for_for_excess_ratio_thread);
@@ -181,10 +186,12 @@ int main(int argc, char* argv[])
 	tr_for_sample_mean.~thread();
 	tr_for_out.~thread();
 
-	Singleton::initialization().out_for_chart();			//20c
-	Singleton::initialization().find_fluctuations();
+	tr_for_params_for_charts.join();
+	tr_for_params_for_charts.~thread();
 
-	auto finish = clock();							//2.53	//2.30	//2.10
+	Singleton::initialization().out_for_chart();
+
+	auto finish = clock();							//2.53	//2.30	//2.10	//2.20
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
 
 	return 0;

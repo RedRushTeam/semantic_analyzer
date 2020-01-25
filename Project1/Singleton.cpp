@@ -168,46 +168,20 @@ void Singleton::find_fluctuations()
 	helper.set_map_of_tokens("dictionary.txt");
 	ofstream ff("fluctuation.txt");
 	for (int i = 1; i < chart.get_counter_of_tokenizer(); i++)
-	{
 		for (int l = -GAP - 1; l <= GAP; ++l)
 			if ((chart[i][i][l] > sum[i][i][l]) || (chart[i][i][l] < razn[i][i][l]))
 				for (auto q : helper.get_map_of_tokens())
 					if (q.second == i) {
-						ff << q.first << endl;
+						ff << q.first << " ";
 						i++;
 					}
-
-	}
 }
 
 void Singleton::out_for_chart()
 {
-	/*container_class sum;
-	container_class razn;
-	container_class shhh;*/
-
-	thread tr([&]() {
-		/*sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-		razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-		shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);*/
-		this->calculate_params_for_charts();
-		});
-
-	//container_class chart; 
 	auto keks = list_of_container_class.front().get_vector_of_length().size();
-	/*chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
-	for (auto i : this->list_of_container_class)
-	{
-		for (auto q = 0; q < keks; ++q)
-			for (auto j = 0; j < keks; ++j)
-				for (auto p = -GAP - 1; p <= GAP; ++p)
-					chart[q][q][p] += i[q][j][p];
-	}
-	chart = chart / (list_of_container_class.size());*/
 
 	ofstream to_chart("chart.txt");
-
-	tr.join();
 
 		for (int i = 1; i < chart.get_counter_of_tokenizer(); ++i)
 			{
