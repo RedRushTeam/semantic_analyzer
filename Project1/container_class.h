@@ -20,6 +20,7 @@ public:
 	vector<class_of_first_bracket> get_vector_of_length() const;
 	int get_length() const;
 	bool resize(int new_size);
+	void clear();
 
 	//operators
 	class_of_first_bracket& operator[] (long int i);

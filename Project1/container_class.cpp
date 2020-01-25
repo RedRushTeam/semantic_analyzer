@@ -182,3 +182,16 @@ container_class container_class::operator-(my_double _num)
 				ret[i][j][p] = (*this)[i][j][p] - _num;
 	return ret;
 }
+
+void container_class::clear()
+{
+	for (auto i : this->vector_of_length) {
+		auto tmp = i.get_vector_of_length();
+		for (auto j : tmp) {
+			auto tmp1 = j.get_vect_of_collocation();
+			tmp1.clear();
+		}
+		tmp.clear();
+	}
+	this->vector_of_length.clear();
+}

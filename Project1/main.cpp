@@ -107,8 +107,8 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	auto list_of_parsed_symbols = parse_text("Readme.txt");
-	auto list_of_parsed_symbols1 = parse_text("0101.txt");
+	auto list_of_parsed_symbols = parse_text("input_text.txt");
+	auto list_of_parsed_symbols1 = parse_text("input_text1.txt");
 
 	cout << endl << endl << "\t\t\t\t***** Распарсеный текст номер 1 *****" << endl << endl;
 
