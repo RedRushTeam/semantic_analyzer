@@ -64,14 +64,14 @@ int analyze_text(list<string> &list_of_lemmatized_words) {
 	return _analyzer.get_counter_of_tokenizer();
 }
 
-void out_matrix(int counter_of_tokenizer) {
+void out_matrix() {
 
 	ofstream matrix("matrix.txt");
 
 	for (auto some_scary_thing : Singleton::initialization().get_list_of_container_class()) {
 
-		for (int i = 0; i < counter_of_tokenizer; ++i)
-			for (int j = 0; j < counter_of_tokenizer; ++j)
+		for (int i = 0; i < some_scary_thing.get_counter_of_tokenizer(); ++i)
+			for (int j = 0; j < some_scary_thing.get_counter_of_tokenizer(); ++j)
 			{
 				if (i != 0 && j != 0 && i <= j) {
 					matrix << endl << endl << i << " " << j << endl;
@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
 	list_of_lemmatized_words.clear();
 	list_of_lemmatized_words1.clear();
 
-	thread tr_for_out(out_matrix, counter_of_tokenizer);
+	thread tr_for_out(out_matrix);
 	tr_for_out.detach();
 							//6c
 
