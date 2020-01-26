@@ -142,33 +142,77 @@ bool Singleton::remove_container_class(container_class _container_class)
 	return true;
 }
 
-void Singleton::out_for_chart()
+void Singleton::calculate_params_for_charts()
 {
-	container_class sum;
-	container_class razn;
-	container_class shhh;
+	this->sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+	this->razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+	this->shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
-	thread tr([&]() {
-		sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-		razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-		shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
-		});
-
-	container_class chart; 
+	container_class chart1;
 	auto keks = list_of_container_class.front().get_vector_of_length().size();
-	chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
+	chart1.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
 	for (auto i : this->list_of_container_class)
 	{
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					chart[q][q][p] += i[q][j][p];
+					chart1[q][q][p] += i[q][j][p];
 	}
-	chart = chart / (list_of_container_class.size());
+	chart1 = chart1 / (list_of_container_class.size());
+	this->chart = chart1;
+}
+
+void Singleton::find_fluctuations()
+{
+	analyzer helper;
+	helper.set_map_of_tokens("dictionary.txt");
+	ofstream ff("fluctuation.txt");
+	for (int i = 1; i < chart.get_counter_of_tokenizer(); i++)
+		for (int l = -GAP - 1; l <= GAP; ++l)
+			if ((chart[i][i][l] > sum[i][i][l]) || (chart[i][i][l] < razn[i][i][l]))
+				for (auto q : helper.get_map_of_tokens())
+					if (q.second == i) {
+						ff << q.first << " ";
+						i++;
+					}
+}
+
+void Singleton::clear(type_of_cont_class _type_of_cont_class)
+{
+	switch (_type_of_cont_class)
+	{
+	case mat_ozid_:
+		this->mat_ozidanie.clear();
+		break;
+	case mat_disperse_:
+		this->mat_disperse.clear();
+		break;
+	case mat_otkl_:
+		this->sredne_kv_otklonenie.clear();
+		break;
+	case mat_otkl_fixed_:
+		this->sredne_kv_otklonenie_fixed.clear();
+		break;
+	case excess_ratio_:
+		this->excess_ratio.clear();
+		break;
+	case asymmetry_coefficient_:
+		this->asymmetry_coefficient.clear();
+		break;
+	case sample_mean_all_:
+		this->sample_mean_all.clear();
+		break;
+	default:
+		nullptr;
+		break;
+	}
+}
+
+void Singleton::out_for_chart()
+{
+	auto keks = list_of_container_class.front().get_vector_of_length().size();
 
 	ofstream to_chart("chart.txt");
-
-	tr.join();
 
 		for (int i = 1; i < chart.get_counter_of_tokenizer(); ++i)
 			{

@@ -64,14 +64,14 @@ int analyze_text(list<string> &list_of_lemmatized_words) {
 	return _analyzer.get_counter_of_tokenizer();
 }
 
-void out_matrix(int counter_of_tokenizer) {
+void out_matrix() {
 
 	ofstream matrix("matrix.txt");
 
 	for (auto some_scary_thing : Singleton::initialization().get_list_of_container_class()) {
 
-		for (int i = 0; i < counter_of_tokenizer; ++i)
-			for (int j = 0; j < counter_of_tokenizer; ++j)
+		for (int i = 0; i < some_scary_thing.get_counter_of_tokenizer(); ++i)
+			for (int j = 0; j < some_scary_thing.get_counter_of_tokenizer(); ++j)
 			{
 				if (i != 0 && j != 0 && i <= j) {
 					matrix << endl << endl << i << " " << j << endl;
@@ -107,8 +107,8 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	auto list_of_parsed_symbols = parse_text("Readme.txt");
-	auto list_of_parsed_symbols1 = parse_text("0101.txt");
+	auto list_of_parsed_symbols = parse_text("input_text.txt");
+	auto list_of_parsed_symbols1 = parse_text("input_text1.txt");
 
 	cout << endl << endl << "\t\t\t\t***** Распарсеный текст номер 1 *****" << endl << endl;
 
@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
 	list_of_lemmatized_words.clear();
 	list_of_lemmatized_words1.clear();
 
-	thread tr_for_out(out_matrix, counter_of_tokenizer);
+	thread tr_for_out(out_matrix);
 	tr_for_out.detach();
 							//6c
 
@@ -159,15 +159,23 @@ int main(int argc, char* argv[])
 
 	thread tr_for_sample_mean(foo_for_sample_meal_thread);
 
-	Singleton::initialization().calculate_mat_ozidanie();	//16c		//оптимизация этих двух методов невозможна без
-	Singleton::initialization().calculate_mat_disperse();	//26c		//семафора/мьютекса работа "в лоб" может вызвать непредвиденное поведение
+	Singleton::initialization().calculate_mat_ozidanie();	//16c
+	Singleton::initialization().calculate_mat_disperse();	//26c
 
 	thread tr_for_sredne_kv_otklonenie(foo_for_calculate_sredne_kv_otklonenie);
 	thread tr_for_sredne_kv_otklonenie_fixed(foo_for_calculate_sredne_kv_otklonenie_fixed);
-	
+
 	tr_for_sredne_kv_otklonenie.detach();
 	tr_for_sample_mean.join();
 	tr_for_sredne_kv_otklonenie_fixed.join();
+
+	thread tr_for_params_for_charts([&]() {
+		Singleton::initialization().clear(mat_otkl_);
+		Singleton::initialization().calculate_params_for_charts();
+		//Singleton::initialization().find_fluctuations();
+		Singleton::initialization().clear(mat_ozid_);
+		Singleton::initialization().clear(mat_disperse_);
+		});
 
 	thread tr_for_asymmetry_coefficient(foo_for_asymmetry_coefficient_thread);
 	thread tr_for_excess_ratio(foo_for_for_excess_ratio_thread);
@@ -181,9 +189,12 @@ int main(int argc, char* argv[])
 	tr_for_sample_mean.~thread();
 	tr_for_out.~thread();
 
-	Singleton::initialization().out_for_chart();			//20c
+	tr_for_params_for_charts.join();
+	tr_for_params_for_charts.~thread();
 
-	auto finish = clock();							//2.53	//2.30	//2.10
+	Singleton::initialization().out_for_chart();
+
+	auto finish = clock();							//2.53	//2.30	//2.10	//2.0
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
 
 	return 0;

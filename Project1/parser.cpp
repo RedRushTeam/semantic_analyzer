@@ -61,9 +61,13 @@ void parser::delete_trash()
 
 		for (int i = 0; i < text.size(); i++) {
 			helper = 0;
-			if (text.find('/n') != text.npos) {//перенос сука не работает
+			if (text.find('\n') != text.npos) {
 				helper++;
-				text[text.find('/n')] = ' ';
+				text[text.find('\n')] = ' ';
+			}
+			if (text.find('\0') != text.npos) {
+				helper++;
+				text[text.find('\0')] = ' ';
 			}
 		}
 	}

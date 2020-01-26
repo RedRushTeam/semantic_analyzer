@@ -17,9 +17,12 @@ public:
 	void calculate_sredne_kv_otklonenie_fixed();
 	void calculate_asymmetry_coefficient();
 	void calculate_excess_ratio();
+	void calculate_params_for_charts();
 	void out_for_chart();
 	void sinchronize_terms();
 	void give_space();
+	void find_fluctuations();
+	void clear(type_of_cont_class _type_of_cont_class);
 
 	//getters
 	container_class get_sredne_kv_otklonenie() const;
@@ -46,6 +49,11 @@ private:
 	container_class mat_disperse;
 	container_class mat_ozidanie;
 	list<container_class> list_of_container_class;
+	container_class sum;
+	container_class razn;
+	container_class shhh; //shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
+	container_class chart;
+
 
 	//private methods for create
 	Singleton() {}
