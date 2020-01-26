@@ -1,10 +1,10 @@
 
 
 term 1
-really: 1 1 0 0 1 1 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772 
+really: 0.5 1 0 0 1 1 
+mat_ozhidanie: 0.0555556 0.111111 0 0 0.111111 0.111111 
+mat_ozhidanie+otkl: 0.379497 0.758995 0 0 0.758995 0.758995 
+mat_ozhidanie-otkl: -0.268386 -0.536772 0 0 -0.536772 -0.536772 
 
 term 2
 really: 0.5 1 0 0 1 1 
@@ -151,28 +151,28 @@ mat_ozhidanie+otkl: 0.758995 0 0 0 0.379497 0.379497
 mat_ozhidanie-otkl: -0.536772 0 0 0 -0.268386 -0.268386 
 
 term 26
-really: 0 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0 0.111111 0 0 0.0555556 0.0555556 
-mat_ozhidanie+otkl: 0 0.758995 0 0 0.379497 0.379497 
-mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.268386 -0.268386 
+really: 0 0.5 0 0 0.5 0 
+mat_ozhidanie: 0 0.111111 0 0 0.0555556 0 
+mat_ozhidanie+otkl: 0 0.758995 0 0 0.379497 0 
+mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.268386 0 
 
 term 27
-really: 0.5 0.5 0 0 0.5 0 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 0 
+really: 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 
 
 term 28
-really: 0.5 0.5 0 0 0 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0 0.0555556 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0 0.379497 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 0 -0.268386 
+really: 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 
 
 term 29
-really: 21 19.5 0 0 19 21.5 
-mat_ozhidanie: 2.55556 2.22222 0 0 2.11111 2.66667 
-mat_ozhidanie+otkl: 16.5206 14.773 0 0 14.4209 17.6864 
-mat_ozhidanie-otkl: -11.4095 -10.3286 0 0 -10.1987 -12.3531 
+really: 20.5 19.5 0 0 19 21.5 
+mat_ozhidanie: 2.44445 2.22222 0 0 2.11111 2.66667 
+mat_ozhidanie+otkl: 15.7616 14.773 0 0 14.4209 17.6864 
+mat_ozhidanie-otkl: -10.8727 -10.3286 0 0 -10.1987 -12.3531 
 
 term 30
 really: 0 0.5 0 0 0.5 0.5 
@@ -283,16 +283,16 @@ mat_ozhidanie+otkl: 0.758995 2.27698 0 0 0.758995 1.13849
 mat_ozhidanie-otkl: -0.536772 -1.61032 0 0 -0.536772 -0.805159 
 
 term 48
-really: 1 0 0 0 1 1 
-mat_ozhidanie: 0.222222 0 0 0 0.166667 0.166667 
-mat_ozhidanie+otkl: 1.51799 0 0 0 1.13849 1.13849 
-mat_ozhidanie-otkl: -1.07354 0 0 0 -0.805159 -0.805159 
+really: 1 0 0 0 1 0.5 
+mat_ozhidanie: 0.222222 0 0 0 0.222222 0.0555556 
+mat_ozhidanie+otkl: 1.51799 0 0 0 1.51799 0.379497 
+mat_ozhidanie-otkl: -1.07354 0 0 0 -1.07354 -0.268386 
 
 term 49
-really: 17 21 0 0 16.5 17 
-mat_ozhidanie: 2 2.38889 0 0 2 2.38889 
-mat_ozhidanie+otkl: 13.6619 15.9115 0 0 13.6619 16.3184 
-mat_ozhidanie-otkl: -9.66191 -11.1337 0 0 -9.66191 -11.5406 
+really: 0 0 0 0 0 0 
+mat_ozhidanie: 0 0 0 0 0 0 
+mat_ozhidanie+otkl: 0 0 0 0 0 0 
+mat_ozhidanie-otkl: 0 0 0 0 0 0 
 
 term 50
 really: 0 0.5 0 0 0.5 0.5 
@@ -314,15 +314,15 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386
 
 term 53
 really: 0.5 1 0 0 1 1 
-mat_ozhidanie: 0.111111 0.166667 0 0 0.111111 0.166667 
-mat_ozhidanie+otkl: 0.758995 1.13849 0 0 0.758995 1.13849 
-mat_ozhidanie-otkl: -0.536772 -0.805159 0 0 -0.536772 -0.805159 
+mat_ozhidanie: 0.111111 0.166667 0 0 0.111111 0.111111 
+mat_ozhidanie+otkl: 0.758995 1.13849 0 0 0.758995 0.758995 
+mat_ozhidanie-otkl: -0.536772 -0.805159 0 0 -0.536772 -0.536772 
 
 term 54
 really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0.0555556 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.379497 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.268386 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.111111 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.758995 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.536772 
 
 term 55
 really: 0.5 0.5 0 0 0.5 0 
@@ -362,9 +362,9 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.268386
 
 term 61
 really: 3 4 0 0 4 3.5 
-mat_ozhidanie: 0.444444 0.666667 0 0 0.444444 0.388889 
-mat_ozhidanie+otkl: 3.03598 4.55397 0 0 3.03598 2.65648 
-mat_ozhidanie-otkl: -2.14709 -3.22063 0 0 -2.14709 -1.8787 
+mat_ozhidanie: 0.444444 0.611111 0 0 0.444444 0.388889 
+mat_ozhidanie+otkl: 3.03598 4.17447 0 0 3.03598 2.65648 
+mat_ozhidanie-otkl: -2.14709 -2.95225 0 0 -2.14709 -1.8787 
 
 term 62
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -380,9 +380,9 @@ mat_ozhidanie-otkl: -2.14709 -2.95225 0 0 -1.34193 -1.8787
 
 term 64
 really: 1.5 2.5 0 0 2 1.5 
-mat_ozhidanie: 0.222222 0.388889 0 0 0.222222 0.222222 
-mat_ozhidanie+otkl: 1.51799 2.65648 0 0 1.51799 1.51799 
-mat_ozhidanie-otkl: -1.07354 -1.8787 0 0 -1.07354 -1.07354 
+mat_ozhidanie: 0.222222 0.333333 0 0 0.222222 0.222222 
+mat_ozhidanie+otkl: 1.51799 2.27698 0 0 1.51799 1.51799 
+mat_ozhidanie-otkl: -1.07354 -1.61032 0 0 -1.07354 -1.07354 
 
 term 65
 really: 2 1.5 0 0 2 2 
@@ -464,9 +464,9 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 0
 
 term 78
 really: 6.5 3.5 0 0 6 5 
-mat_ozhidanie: 0.888889 0.444444 0 0 0.722222 0.722222 
-mat_ozhidanie+otkl: 6.07196 3.03598 0 0 4.93347 4.93347 
-mat_ozhidanie-otkl: -4.29418 -2.14709 0 0 -3.48902 -3.48902 
+mat_ozhidanie: 0.888889 0.444444 0 0 0.722222 0.666667 
+mat_ozhidanie+otkl: 6.07196 3.03598 0 0 4.93347 4.55397 
+mat_ozhidanie-otkl: -4.29418 -2.14709 0 0 -3.48902 -3.22063 
 
 term 79
 really: 0 0 0 0 0.5 0 
@@ -476,15 +476,15 @@ mat_ozhidanie-otkl: 0 0 0 0 -0.268386 0
 
 term 80
 really: 4 4.5 0 0 0.5 4.5 
-mat_ozhidanie: 0.555556 0.611111 0 0 0.0555556 0.5 
-mat_ozhidanie+otkl: 3.79497 4.17447 0 0 0.379497 3.41548 
-mat_ozhidanie-otkl: -2.68386 -2.95225 0 0 -0.268386 -2.41548 
+mat_ozhidanie: 0.555556 0.555556 0 0 0.0555556 0.5 
+mat_ozhidanie+otkl: 3.79497 3.79497 0 0 0.379497 3.41548 
+mat_ozhidanie-otkl: -2.68386 -2.68386 0 0 -0.268386 -2.41548 
 
 term 81
-really: 6 4 0 0 4.5 5.5 
-mat_ozhidanie: 0.777778 0.555556 0 0 0.666667 0.833333 
-mat_ozhidanie+otkl: 5.31296 3.79497 0 0 4.55397 5.28558 
-mat_ozhidanie-otkl: -3.75741 -2.68386 0 0 -3.22063 -3.61891 
+really: 5.5 4 0 0 4.5 5 
+mat_ozhidanie: 0.722222 0.5 0 0 0.611111 0.722222 
+mat_ozhidanie+otkl: 4.93347 3.41548 0 0 4.17447 4.52659 
+mat_ozhidanie-otkl: -3.48902 -2.41548 0 0 -2.95225 -3.08214 
 
 term 82
 really: 0 0 0 0 0.5 0.5 
@@ -512,15 +512,15 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 0
 
 term 86
 really: 1.5 2 0 0 1 1 
-mat_ozhidanie: 0.222222 0.333333 0 0 0.166667 0.111111 
-mat_ozhidanie+otkl: 1.51799 2.27698 0 0 1.13849 0.758995 
-mat_ozhidanie-otkl: -1.07354 -1.61032 0 0 -0.805159 -0.536772 
+mat_ozhidanie: 0.222222 0.277778 0 0 0.166667 0.111111 
+mat_ozhidanie+otkl: 1.51799 1.89749 0 0 1.13849 0.758995 
+mat_ozhidanie-otkl: -1.07354 -1.34193 0 0 -0.805159 -0.536772 
 
 term 87
 really: 0.5 0.5 0 0 1 1 
-mat_ozhidanie: 0.111111 0.0555556 0 0 0.166667 0.166667 
-mat_ozhidanie+otkl: 0.758995 0.379497 0 0 1.13849 1.13849 
-mat_ozhidanie-otkl: -0.536772 -0.268386 0 0 -0.805159 -0.805159 
+mat_ozhidanie: 0.111111 0.0555556 0 0 0.166667 0.111111 
+mat_ozhidanie+otkl: 0.758995 0.379497 0 0 1.13849 0.758995 
+mat_ozhidanie-otkl: -0.536772 -0.268386 0 0 -0.805159 -0.536772 
 
 term 88
 really: 1.5 1 0 0 1 0.5 
@@ -566,21 +566,21 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386
 
 term 95
 really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.536772 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386 
 
 term 96
 really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0.0555556 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.379497 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.268386 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386 
 
 term 97
 really: 1 1 0 0 1 1 
-mat_ozhidanie: 0.166667 0.222222 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 1.13849 1.51799 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.805159 -1.07354 0 0 -0.536772 -0.536772 
+mat_ozhidanie: 0.166667 0.166667 0 0 0.111111 0.111111 
+mat_ozhidanie+otkl: 1.13849 1.13849 0 0 0.758995 0.758995 
+mat_ozhidanie-otkl: -0.805159 -0.805159 0 0 -0.536772 -0.536772 
 
 term 98
 really: 1.5 1 0 0 1 1.5 
@@ -602,21 +602,21 @@ mat_ozhidanie-otkl: -0.805159 -0.805159 0 0 -0.536772 -0.268386
 
 term 101
 really: 0.5 0 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 -0.536772 
+mat_ozhidanie: 0.111111 0 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 -0.268386 
 
 term 102
 really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.536772 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386 
 
 term 103
 really: 1.5 2 0 0 1.5 2 
-mat_ozhidanie: 0.222222 0.277778 0 0 0.222222 0.222222 
-mat_ozhidanie+otkl: 1.51799 1.89749 0 0 1.51799 1.51799 
-mat_ozhidanie-otkl: -1.07354 -1.34193 0 0 -1.07354 -1.07354 
+mat_ozhidanie: 0.222222 0.277778 0 0 0.166667 0.277778 
+mat_ozhidanie+otkl: 1.51799 1.89749 0 0 1.13849 1.89749 
+mat_ozhidanie-otkl: -1.07354 -1.34193 0 0 -0.805159 -1.34193 
 
 term 104
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -679,10 +679,10 @@ mat_ozhidanie+otkl: 1.51799 1.13849 0 0 1.13849 0.758995
 mat_ozhidanie-otkl: -1.07354 -0.805159 0 0 -0.805159 -0.536772 
 
 term 114
-really: 0.5 1 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.222222 0 0 0.0555556 0.0555556 
-mat_ozhidanie+otkl: 0.758995 1.51799 0 0 0.379497 0.379497 
-mat_ozhidanie-otkl: -0.536772 -1.07354 0 0 -0.268386 -0.268386 
+really: 1 0.5 0 0 0.5 0.5 
+mat_ozhidanie: 0.166667 0.111111 0 0 0.0555556 0.0555556 
+mat_ozhidanie+otkl: 1.13849 0.758995 0 0 0.379497 0.379497 
+mat_ozhidanie-otkl: -0.805159 -0.536772 0 0 -0.268386 -0.268386 
 
 term 115
 really: 1 0.5 0 0 1 0 
@@ -697,10 +697,10 @@ mat_ozhidanie+otkl: 1.13849 0.379497 0 0 0.379497 0.758995
 mat_ozhidanie-otkl: -0.805159 -0.268386 0 0 -0.268386 -0.536772 
 
 term 117
-really: 1 1.5 0 0 2 1.5 
-mat_ozhidanie: 0.166667 0.277778 0 0 0.277778 0.277778 
-mat_ozhidanie+otkl: 1.13849 1.89749 0 0 1.89749 1.89749 
-mat_ozhidanie-otkl: -0.805159 -1.34193 0 0 -1.34193 -1.34193 
+really: 1 1.5 0 0 2 1 
+mat_ozhidanie: 0.166667 0.277778 0 0 0.277778 0.166667 
+mat_ozhidanie+otkl: 1.13849 1.89749 0 0 1.89749 1.13849 
+mat_ozhidanie-otkl: -0.805159 -1.34193 0 0 -1.34193 -0.805159 
 
 term 118
 really: 0.5 1.5 0 0 1.5 1.5 
@@ -746,15 +746,15 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386
 
 term 125
 really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.536772 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386 
 
 term 126
-really: 1 0.5 0 0 1 0.5 
-mat_ozhidanie: 0.222222 0.111111 0 0 0.166667 0.0555556 
-mat_ozhidanie+otkl: 1.51799 0.758995 0 0 1.13849 0.379497 
-mat_ozhidanie-otkl: -1.07354 -0.536772 0 0 -0.805159 -0.268386 
+really: 1 0.5 0 0 1 0 
+mat_ozhidanie: 0.222222 0.111111 0 0 0.111111 0 
+mat_ozhidanie+otkl: 1.51799 0.758995 0 0 0.758995 0 
+mat_ozhidanie-otkl: -1.07354 -0.536772 0 0 -0.536772 0 
 
 term 127
 really: 0.5 0.5 0 0 0 0.5 
@@ -787,16 +787,16 @@ mat_ozhidanie+otkl: 1.51799 1.51799 0 0 0.758995 0.758995
 mat_ozhidanie-otkl: -1.07354 -1.07354 0 0 -0.536772 -0.536772 
 
 term 132
-really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.536772 
+really: 0.5 0.5 0 0 0.5 0 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 0 
 
 term 133
-really: 0.5 0.5 0 0 0.5 0 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 0 
+really: 0.5 0.5 0 0 0 0 
+mat_ozhidanie: 0.111111 0.111111 0 0 0 0 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0 0 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 0 0 
 
 term 134
 really: 1 1.5 0 0 2 2 
@@ -830,9 +830,9 @@ mat_ozhidanie-otkl: -0.536772 0 0 0 -0.268386 -0.268386
 
 term 139
 really: 1 1.5 0 0 1.5 1.5 
-mat_ozhidanie: 0.111111 0.277778 0 0 0.277778 0.277778 
-mat_ozhidanie+otkl: 0.758995 1.89749 0 0 1.89749 1.89749 
-mat_ozhidanie-otkl: -0.536772 -1.34193 0 0 -1.34193 -1.34193 
+mat_ozhidanie: 0.111111 0.222222 0 0 0.277778 0.277778 
+mat_ozhidanie+otkl: 0.758995 1.51799 0 0 1.89749 1.89749 
+mat_ozhidanie-otkl: -0.536772 -1.07354 0 0 -1.34193 -1.34193 
 
 term 140
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -853,10 +853,10 @@ mat_ozhidanie+otkl: 0.758995 1.13849 0 0 1.13849 0.758995
 mat_ozhidanie-otkl: -0.536772 -0.805159 0 0 -0.805159 -0.536772 
 
 term 143
-really: 2 2 0 0 2.5 2 
-mat_ozhidanie: 0.333333 0.333333 0 0 0.333333 0.388889 
-mat_ozhidanie+otkl: 2.27698 2.27698 0 0 2.27698 2.65648 
-mat_ozhidanie-otkl: -1.61032 -1.61032 0 0 -1.61032 -1.8787 
+really: 2 2 0 0 2 2.5 
+mat_ozhidanie: 0.333333 0.333333 0 0 0.222222 0.444444 
+mat_ozhidanie+otkl: 2.27698 2.27698 0 0 1.51799 3.03598 
+mat_ozhidanie-otkl: -1.61032 -1.61032 0 0 -1.07354 -2.14709 
 
 term 144
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -896,9 +896,9 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.268386
 
 term 150
 really: 3 2 0 0 2.5 3 
-mat_ozhidanie: 0.5 0.277778 0 0 0.388889 0.5 
-mat_ozhidanie+otkl: 3.41548 1.89749 0 0 2.65648 3.41548 
-mat_ozhidanie-otkl: -2.41548 -1.34193 0 0 -1.8787 -2.41548 
+mat_ozhidanie: 0.444444 0.277778 0 0 0.388889 0.5 
+mat_ozhidanie+otkl: 3.03598 1.89749 0 0 2.65648 3.41548 
+mat_ozhidanie-otkl: -2.14709 -1.34193 0 0 -1.8787 -2.41548 
 
 term 151
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -944,9 +944,9 @@ mat_ozhidanie-otkl: 0 -0.536772 0 0 0 -0.268386
 
 term 158
 really: 1 0.5 0 0 1.5 1 
-mat_ozhidanie: 0.166667 0.0555556 0 0 0.222222 0.166667 
-mat_ozhidanie+otkl: 1.13849 0.379497 0 0 1.51799 1.13849 
-mat_ozhidanie-otkl: -0.805159 -0.268386 0 0 -1.07354 -0.805159 
+mat_ozhidanie: 0.166667 0.0555556 0 0 0.222222 0.111111 
+mat_ozhidanie+otkl: 1.13849 0.379497 0 0 1.51799 0.758995 
+mat_ozhidanie-otkl: -0.805159 -0.268386 0 0 -1.07354 -0.536772 
 
 term 159
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -956,9 +956,9 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772
 
 term 160
 really: 1 1 0 0 1 0.5 
-mat_ozhidanie: 0.166667 0.222222 0 0 0.166667 0.0555556 
-mat_ozhidanie+otkl: 1.13849 1.51799 0 0 1.13849 0.379497 
-mat_ozhidanie-otkl: -0.805159 -1.07354 0 0 -0.805159 -0.268386 
+mat_ozhidanie: 0.222222 0.166667 0 0 0.111111 0.111111 
+mat_ozhidanie+otkl: 1.51799 1.13849 0 0 0.758995 0.758995 
+mat_ozhidanie-otkl: -1.07354 -0.805159 0 0 -0.536772 -0.536772 
 
 term 161
 really: 0.5 0.5 0 0 0.5 0 
@@ -1105,16 +1105,16 @@ mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0
 mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 0 
 
 term 185
-really: 1.5 1.5 0 0 2 1.5 
-mat_ozhidanie: 0.277778 0.222222 0 0 0.333333 0.333333 
-mat_ozhidanie+otkl: 1.89749 1.51799 0 0 2.27698 2.27698 
-mat_ozhidanie-otkl: -1.34193 -1.07354 0 0 -1.61032 -1.61032 
+really: 1.5 1.5 0 0 2 1 
+mat_ozhidanie: 0.277778 0.222222 0 0 0.333333 0.222222 
+mat_ozhidanie+otkl: 1.89749 1.51799 0 0 2.27698 1.51799 
+mat_ozhidanie-otkl: -1.34193 -1.07354 0 0 -1.61032 -1.07354 
 
 term 186
-really: 0.5 0.5 0 0 0.5 0 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 0 
+really: 0.5 0.5 0 0 0 0.5 
+mat_ozhidanie: 0.111111 0.111111 0 0 0 0.111111 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0 0.758995 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 0 -0.536772 
 
 term 187
 really: 1 1 0 0 1 1 
@@ -1124,9 +1124,9 @@ mat_ozhidanie-otkl: -1.07354 -1.07354 0 0 -0.805159 -0.805159
 
 term 188
 really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.268386 
 
 term 189
 really: 0.5 0.5 0 0 0 0.5 
@@ -1196,9 +1196,9 @@ mat_ozhidanie-otkl: -0.536772 0 0 0 0 -0.536772
 
 term 200
 really: 0 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0 0.111111 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 -0.536772 
+mat_ozhidanie: 0 0.111111 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 -0.268386 
 
 term 201
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -1219,16 +1219,16 @@ mat_ozhidanie+otkl: 1.51799 0.758995 0 0 0.758995 1.13849
 mat_ozhidanie-otkl: -1.07354 -0.536772 0 0 -0.536772 -0.805159 
 
 term 204
-really: 2.5 1.5 0 0 1.5 1 
-mat_ozhidanie: 0.388889 0.166667 0 0 0.277778 0.111111 
-mat_ozhidanie+otkl: 2.65648 1.13849 0 0 1.49061 0.758995 
-mat_ozhidanie-otkl: -1.8787 -0.805159 0 0 -0.935053 -0.536772 
+really: 2.5 1.5 0 0 1 1.5 
+mat_ozhidanie: 0.388889 0.166667 0 0 0.111111 0.222222 
+mat_ozhidanie+otkl: 2.65648 1.13849 0 0 0.758995 1.51799 
+mat_ozhidanie-otkl: -1.8787 -0.805159 0 0 -0.536772 -1.07354 
 
 term 205
-really: 0.5 1 0 0 1 0.5 
-mat_ozhidanie: 0.111111 0.166667 0 0 0.222222 0.0555556 
-mat_ozhidanie+otkl: 0.758995 1.13849 0 0 1.11111 0.379497 
-mat_ozhidanie-otkl: -0.536772 -0.805159 0 0 -0.666667 -0.268386 
+really: 0 1 0 0 1 0.5 
+mat_ozhidanie: 0 0.166667 0 0 0.222222 0.0555556 
+mat_ozhidanie+otkl: 0 1.13849 0 0 1.11111 0.379497 
+mat_ozhidanie-otkl: 0 -0.805159 0 0 -0.666667 -0.268386 
 
 term 206
 really: 3 2.5 0 0 2.5 3.5 
@@ -1274,15 +1274,15 @@ mat_ozhidanie-otkl: -0.268386 -0.536772 0 0 -0.805159 -0.268386
 
 term 213
 really: 1 0 0 0 1 1 
-mat_ozhidanie: 0.222222 0 0 0 0.222222 0.111111 
-mat_ozhidanie+otkl: 1.51799 0 0 0 1.11111 0.758995 
-mat_ozhidanie-otkl: -1.07354 0 0 0 -0.666667 -0.536772 
+mat_ozhidanie: 0.222222 0 0 0 0.111111 0.111111 
+mat_ozhidanie+otkl: 1.51799 0 0 0 0.758995 0.758995 
+mat_ozhidanie-otkl: -1.07354 0 0 0 -0.536772 -0.536772 
 
 term 214
-really: 4 4.5 0 0 4.5 3.5 
-mat_ozhidanie: 0.611111 0.611111 0 0 0.5 0.5 
-mat_ozhidanie+otkl: 4.17447 4.17447 0 0 3.41548 3.0086 
-mat_ozhidanie-otkl: -2.95225 -2.95225 0 0 -2.41548 -2.0086 
+really: 3.5 4.5 0 0 4.5 3.5 
+mat_ozhidanie: 0.5 0.611111 0 0 0.5 0.5 
+mat_ozhidanie+otkl: 3.41548 4.17447 0 0 3.41548 3.0086 
+mat_ozhidanie-otkl: -2.41548 -2.95225 0 0 -2.41548 -2.0086 
 
 term 215
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -1435,10 +1435,10 @@ mat_ozhidanie+otkl: 1.13849 1.51799 0 0 1.51799 1.13849
 mat_ozhidanie-otkl: -0.805159 -1.07354 0 0 -1.07354 -0.805159 
 
 term 240
-really: 1 1 0 0 0.5 0.5 
-mat_ozhidanie: 0.166667 0.166667 0 0 0.111111 0.0555556 
-mat_ozhidanie+otkl: 1.13849 1.13849 0 0 0.758995 0.379497 
-mat_ozhidanie-otkl: -0.805159 -0.805159 0 0 -0.536772 -0.268386 
+really: 0.5 1 0 0 0.5 0.5 
+mat_ozhidanie: 0.0555556 0.166667 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 0.379497 1.13849 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: -0.268386 -0.805159 0 0 -0.536772 -0.268386 
 
 term 241
 really: 0.5 1 0 0 1 0.5 
@@ -1526,21 +1526,21 @@ mat_ozhidanie-otkl: -1.07354 -1.07354 0 0 -0.805159 -0.805159
 
 term 255
 really: 4 6 0 0 4.5 5 
-mat_ozhidanie: 0.722222 0.833333 0 0 0.666667 0.666667 
-mat_ozhidanie+otkl: 4.93347 5.69246 0 0 4.55397 4.55397 
-mat_ozhidanie-otkl: -3.48902 -4.02579 0 0 -3.22063 -3.22063 
+mat_ozhidanie: 0.722222 0.833333 0 0 0.611111 0.666667 
+mat_ozhidanie+otkl: 4.93347 5.69246 0 0 4.17447 4.55397 
+mat_ozhidanie-otkl: -3.48902 -4.02579 0 0 -2.95225 -3.22063 
 
 term 256
-really: 1.5 1 0 0 0 2 
-mat_ozhidanie: 0.277778 0.222222 0 0 0 0.277778 
-mat_ozhidanie+otkl: 1.89749 1.51799 0 0 0 1.89749 
-mat_ozhidanie-otkl: -1.34193 -1.07354 0 0 0 -1.34193 
+really: 2 0.5 0 0 0 2 
+mat_ozhidanie: 0.333333 0.111111 0 0 0 0.277778 
+mat_ozhidanie+otkl: 2.27698 0.758995 0 0 0 1.89749 
+mat_ozhidanie-otkl: -1.61032 -0.536772 0 0 0 -1.34193 
 
 term 257
-really: 2 2 0 0 2 2 
-mat_ozhidanie: 0.333333 0.222222 0 0 0.333333 0.388889 
-mat_ozhidanie+otkl: 2.27698 1.51799 0 0 2.27698 2.65648 
-mat_ozhidanie-otkl: -1.61032 -1.07354 0 0 -1.61032 -1.8787 
+really: 2 2 0 0 1.5 2.5 
+mat_ozhidanie: 0.333333 0.222222 0 0 0.166667 0.5 
+mat_ozhidanie+otkl: 2.27698 1.51799 0 0 1.13849 3.41548 
+mat_ozhidanie-otkl: -1.61032 -1.07354 0 0 -0.805159 -2.41548 
 
 term 258
 really: 0.5 1 0 0 1 1 
@@ -1568,9 +1568,9 @@ mat_ozhidanie-otkl: -1.07354 -1.07354 0 0 -0.536772 -0.268386
 
 term 262
 really: 4 3.5 0 0 4 4.5 
-mat_ozhidanie: 0.611111 0.5 0 0 0.555556 0.722222 
-mat_ozhidanie+otkl: 4.17447 3.41548 0 0 3.79497 4.93347 
-mat_ozhidanie-otkl: -2.95225 -2.41548 0 0 -2.68386 -3.48902 
+mat_ozhidanie: 0.611111 0.444444 0 0 0.555556 0.722222 
+mat_ozhidanie+otkl: 4.17447 3.03598 0 0 3.79497 4.93347 
+mat_ozhidanie-otkl: -2.95225 -2.14709 0 0 -2.68386 -3.48902 
 
 term 263
 really: 0.5 0.5 0 0 0.5 0 
@@ -1591,10 +1591,10 @@ mat_ozhidanie+otkl: 2.27698 0.379497 0 0 1.89749 0.758995
 mat_ozhidanie-otkl: -1.61032 -0.268386 0 0 -1.34193 -0.536772 
 
 term 266
-really: 1 1.5 0 0 1 1.5 
-mat_ozhidanie: 0.111111 0.277778 0 0 0.111111 0.277778 
-mat_ozhidanie+otkl: 0.758995 1.89749 0 0 0.758995 1.89749 
-mat_ozhidanie-otkl: -0.536772 -1.34193 0 0 -0.536772 -1.34193 
+really: 1 1.5 0 0 1 1 
+mat_ozhidanie: 0.111111 0.277778 0 0 0.111111 0.166667 
+mat_ozhidanie+otkl: 0.758995 1.89749 0 0 0.758995 1.13849 
+mat_ozhidanie-otkl: -0.536772 -1.34193 0 0 -0.536772 -0.805159 
 
 term 267
 really: 1 2 0 0 1 1 
@@ -1651,10 +1651,10 @@ mat_ozhidanie+otkl: 0 0 0 0 0.379497 0
 mat_ozhidanie-otkl: 0 0 0 0 -0.268386 0 
 
 term 276
-really: 1.5 3 0 0 1.5 3 
-mat_ozhidanie: 0.333333 0.5 0 0 0.277778 0.444444 
-mat_ozhidanie+otkl: 2.27698 3.41548 0 0 1.89749 3.03598 
-mat_ozhidanie-otkl: -1.61032 -2.41548 0 0 -1.34193 -2.14709 
+really: 1.5 3 0 0 1 3.5 
+mat_ozhidanie: 0.333333 0.5 0 0 0.111111 0.5 
+mat_ozhidanie+otkl: 2.27698 3.41548 0 0 0.758995 3.41548 
+mat_ozhidanie-otkl: -1.61032 -2.41548 0 0 -0.536772 -2.41548 
 
 term 277
 really: 0.5 0 0 0 0.5 0.5 
@@ -1729,10 +1729,10 @@ mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.379497
 mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.268386 
 
 term 289
-really: 0.5 0.5 0 0 0.5 0 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 0 
+really: 0.5 0.5 0 0 0 0.5 
+mat_ozhidanie: 0.111111 0.111111 0 0 0 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 0 -0.268386 
 
 term 290
 really: 0.5 0 0 0 0 0 
@@ -1825,10 +1825,10 @@ mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0
 mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 0 
 
 term 305
-really: 4 6 0 0 4 5.5 
-mat_ozhidanie: 0.722222 0.833333 0 0 0.611111 0.777778 
-mat_ozhidanie+otkl: 4.93347 5.69246 0 0 4.17447 5.31296 
-mat_ozhidanie-otkl: -3.48902 -4.02579 0 0 -2.95225 -3.75741 
+really: 4 6 0 0 3.5 6 
+mat_ozhidanie: 0.722222 0.833333 0 0 0.444444 0.833333 
+mat_ozhidanie+otkl: 4.93347 5.69246 0 0 3.03598 5.69246 
+mat_ozhidanie-otkl: -3.48902 -4.02579 0 0 -2.14709 -4.02579 
 
 term 306
 really: 0.5 0 0 0 0.5 0.5 
@@ -1837,10 +1837,10 @@ mat_ozhidanie+otkl: 0.758995 0 0 0 0.379497 0.758995
 mat_ozhidanie-otkl: -0.536772 0 0 0 -0.268386 -0.536772 
 
 term 307
-really: 1 2.5 0 0 2 3 
-mat_ozhidanie: 0.111111 0.388889 0 0 0.388889 0.444444 
-mat_ozhidanie+otkl: 0.758995 2.65648 0 0 2.65648 3.03598 
-mat_ozhidanie-otkl: -0.536772 -1.8787 0 0 -1.8787 -2.14709 
+really: 1 2.5 0 0 2 2.5 
+mat_ozhidanie: 0.111111 0.388889 0 0 0.277778 0.388889 
+mat_ozhidanie+otkl: 0.758995 2.65648 0 0 1.89749 2.65648 
+mat_ozhidanie-otkl: -0.536772 -1.8787 0 0 -1.34193 -1.8787 
 
 term 308
 really: 0 0.5 0 0 0 0.5 
@@ -1891,16 +1891,16 @@ mat_ozhidanie+otkl: 0.379497 0.758995 0 0 0 1.13849
 mat_ozhidanie-otkl: -0.268386 -0.536772 0 0 0 -0.805159 
 
 term 316
-really: 2 1.5 0 0 1 2.5 
-mat_ozhidanie: 0.333333 0.277778 0 0 0.222222 0.388889 
-mat_ozhidanie+otkl: 2.27698 1.89749 0 0 1.51799 2.65648 
-mat_ozhidanie-otkl: -1.61032 -1.34193 0 0 -1.07354 -1.8787 
+really: 2 1.5 0 0 1 2 
+mat_ozhidanie: 0.277778 0.277778 0 0 0.222222 0.222222 
+mat_ozhidanie+otkl: 1.89749 1.89749 0 0 1.51799 1.51799 
+mat_ozhidanie-otkl: -1.34193 -1.34193 0 0 -1.07354 -1.07354 
 
 term 317
 really: 1 1 0 0 0.5 0.5 
-mat_ozhidanie: 0.222222 0.222222 0 0 0.0555556 0.111111 
-mat_ozhidanie+otkl: 1.51799 1.51799 0 0 0.379497 0.758995 
-mat_ozhidanie-otkl: -1.07354 -1.07354 0 0 -0.268386 -0.536772 
+mat_ozhidanie: 0.166667 0.222222 0 0 0.0555556 0.111111 
+mat_ozhidanie+otkl: 1.13849 1.51799 0 0 0.379497 0.758995 
+mat_ozhidanie-otkl: -0.805159 -1.07354 0 0 -0.268386 -0.536772 
 
 term 318
 really: 0.5 0 0 0 0.5 0.5 
@@ -2042,9 +2042,9 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 0 -0.268386
 
 term 341
 really: 1 0.5 0 0 1 1 
-mat_ozhidanie: 0.222222 0.111111 0 0 0.222222 0.166667 
-mat_ozhidanie+otkl: 1.51799 0.758995 0 0 1.51799 1.13849 
-mat_ozhidanie-otkl: -1.07354 -0.536772 0 0 -1.07354 -0.805159 
+mat_ozhidanie: 0.166667 0.111111 0 0 0.222222 0.166667 
+mat_ozhidanie+otkl: 1.13849 0.758995 0 0 1.51799 1.13849 
+mat_ozhidanie-otkl: -0.805159 -0.536772 0 0 -1.07354 -0.805159 
 
 term 342
 really: 0 0.5 0 0 0.5 0 
@@ -2096,15 +2096,15 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.805159
 
 term 350
 really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.536772 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.0555556 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.379497 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.268386 -0.268386 
 
 term 351
 really: 1 1 0 0 1 0.5 
-mat_ozhidanie: 0.222222 0.222222 0 0 0.166667 0.0555556 
-mat_ozhidanie+otkl: 1.51799 1.51799 0 0 1.13849 0.379497 
-mat_ozhidanie-otkl: -1.07354 -1.07354 0 0 -0.805159 -0.268386 
+mat_ozhidanie: 0.222222 0.222222 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 1.51799 1.51799 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: -1.07354 -1.07354 0 0 -0.536772 -0.268386 
 
 term 352
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -2120,21 +2120,21 @@ mat_ozhidanie-otkl: -1.07354 -0.536772 0 0 -1.07354 -0.536772
 
 term 354
 really: 1 1 0 0 1 1 
-mat_ozhidanie: 0.222222 0.166667 0 0 0.111111 0.222222 
-mat_ozhidanie+otkl: 1.51799 1.13849 0 0 0.758995 1.51799 
-mat_ozhidanie-otkl: -1.07354 -0.805159 0 0 -0.536772 -1.07354 
+mat_ozhidanie: 0.222222 0.166667 0 0 0.111111 0.166667 
+mat_ozhidanie+otkl: 1.51799 1.13849 0 0 0.758995 1.13849 
+mat_ozhidanie-otkl: -1.07354 -0.805159 0 0 -0.536772 -0.805159 
 
 term 355
-really: 1.5 1.5 0 0 1.5 1.5 
-mat_ozhidanie: 0.277778 0.277778 0 0 0.333333 0.277778 
-mat_ozhidanie+otkl: 1.89749 1.89749 0 0 2.27698 1.89749 
-mat_ozhidanie-otkl: -1.34193 -1.34193 0 0 -1.61032 -1.34193 
+really: 1.5 1.5 0 0 1.5 1 
+mat_ozhidanie: 0.277778 0.277778 0 0 0.277778 0.166667 
+mat_ozhidanie+otkl: 1.89749 1.89749 0 0 1.89749 1.13849 
+mat_ozhidanie-otkl: -1.34193 -1.34193 0 0 -1.34193 -0.805159 
 
 term 356
-really: 0.5 0 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 -0.536772 
+really: 0.5 0 0 0 0.5 0 
+mat_ozhidanie: 0.111111 0 0 0 0.111111 0 
+mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0 
+mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 0 
 
 term 357
 really: 0.5 0 0 0 0.5 0.5 
@@ -2179,10 +2179,10 @@ mat_ozhidanie+otkl: 1.51799 0 0 0 1.13849 0.758995
 mat_ozhidanie-otkl: -1.07354 0 0 0 -0.805159 -0.536772 
 
 term 364
-really: 1 1 0 0 0.5 0.5 
-mat_ozhidanie: 0.222222 0.166667 0 0 0.111111 0.0555556 
-mat_ozhidanie+otkl: 1.51799 1.13849 0 0 0.758995 0.379497 
-mat_ozhidanie-otkl: -1.07354 -0.805159 0 0 -0.536772 -0.268386 
+really: 0.5 1 0 0 0.5 0.5 
+mat_ozhidanie: 0.111111 0.166667 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 0.758995 1.13849 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.805159 0 0 -0.536772 -0.268386 
 
 term 365
 really: 0.5 0 0 0 0.5 0.5 
@@ -2245,16 +2245,16 @@ mat_ozhidanie+otkl: 3.03598 0.758995 0 0 3.79497 2.27698
 mat_ozhidanie-otkl: -2.14709 -0.536772 0 0 -2.68386 -1.61032 
 
 term 375
-really: 0.5 1 0 0 1 0.5 
-mat_ozhidanie: 0.0555556 0.166667 0 0 0.166667 0.111111 
-mat_ozhidanie+otkl: 0.379497 1.13849 0 0 1.13849 0.758995 
-mat_ozhidanie-otkl: -0.268386 -0.805159 0 0 -0.805159 -0.536772 
+really: 0.5 0.5 0 0 1 0.5 
+mat_ozhidanie: 0.0555556 0.0555556 0 0 0.166667 0.111111 
+mat_ozhidanie+otkl: 0.379497 0.379497 0 0 1.13849 0.758995 
+mat_ozhidanie-otkl: -0.268386 -0.268386 0 0 -0.805159 -0.536772 
 
 term 376
-really: 1.5 1.5 0 0 2 2 
-mat_ozhidanie: 0.222222 0.277778 0 0 0.333333 0.388889 
-mat_ozhidanie+otkl: 1.51799 1.89749 0 0 2.27698 2.65648 
-mat_ozhidanie-otkl: -1.07354 -1.34193 0 0 -1.61032 -1.8787 
+really: 1.5 1.5 0 0 2 1.5 
+mat_ozhidanie: 0.222222 0.277778 0 0 0.333333 0.277778 
+mat_ozhidanie+otkl: 1.51799 1.89749 0 0 2.27698 1.89749 
+mat_ozhidanie-otkl: -1.07354 -1.34193 0 0 -1.61032 -1.34193 
 
 term 377
 really: 0.5 1 0 0 1 0.5 
@@ -2359,10 +2359,10 @@ mat_ozhidanie+otkl: 2.27698 2.65648 0 0 0.758995 2.65648
 mat_ozhidanie-otkl: -1.61032 -1.8787 0 0 -0.536772 -1.8787 
 
 term 394
-really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.0555556 0 0 0.111111 0.0555556 
-mat_ozhidanie+otkl: 0.758995 0.379497 0 0 0.758995 0.379497 
-mat_ozhidanie-otkl: -0.536772 -0.268386 0 0 -0.536772 -0.268386 
+really: 0.5 0.5 0 0 0 0.5 
+mat_ozhidanie: 0.111111 0.0555556 0 0 0 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0.379497 0 0 0 0.379497 
+mat_ozhidanie-otkl: -0.536772 -0.268386 0 0 0 -0.268386 
 
 term 395
 really: 0.5 0 0 0 0.5 0.5 
@@ -2383,10 +2383,10 @@ mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.758995
 mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772 
 
 term 398
-really: 0.5 0 0 0 0.5 0 
-mat_ozhidanie: 0.111111 0 0 0 0.111111 0 
-mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0 
-mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 0 
+really: 0.5 0 0 0 0 0.5 
+mat_ozhidanie: 0.111111 0 0 0 0 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0 0 0 0 0.379497 
+mat_ozhidanie-otkl: -0.536772 0 0 0 0 -0.268386 
 
 term 399
 really: 0.5 0 0 0 0.5 0.5 
@@ -2743,16 +2743,16 @@ mat_ozhidanie+otkl: 0.758995 0 0 0 0.379497 0.758995
 mat_ozhidanie-otkl: -0.536772 0 0 0 -0.268386 -0.536772 
 
 term 458
-really: 0 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0 0.111111 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 -0.536772 
+really: 0 0.5 0 0 0.5 0 
+mat_ozhidanie: 0 0.111111 0 0 0.111111 0 
+mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0 
+mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 0 
 
 term 459
 really: 1 0 0 0 1.5 1 
-mat_ozhidanie: 0.166667 0 0 0 0.277778 0.111111 
-mat_ozhidanie+otkl: 1.13849 0 0 0 1.89749 0.758995 
-mat_ozhidanie-otkl: -0.805159 0 0 0 -1.34193 -0.536772 
+mat_ozhidanie: 0.111111 0 0 0 0.277778 0.111111 
+mat_ozhidanie+otkl: 0.758995 0 0 0 1.89749 0.758995 
+mat_ozhidanie-otkl: -0.536772 0 0 0 -1.34193 -0.536772 
 
 term 460
 really: 0.5 0 0 0 0.5 0 
@@ -2840,9 +2840,9 @@ mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.268386 0
 
 term 474
 really: 1 1 0 0 0.5 1 
-mat_ozhidanie: 0.222222 0.166667 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 1.51799 1.13849 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -1.07354 -0.805159 0 0 -0.536772 -0.536772 
+mat_ozhidanie: 0.166667 0.166667 0 0 0.111111 0.111111 
+mat_ozhidanie+otkl: 1.13849 1.13849 0 0 0.758995 0.758995 
+mat_ozhidanie-otkl: -0.805159 -0.805159 0 0 -0.536772 -0.536772 
 
 term 475
 really: 0.5 0 0 0 0.5 0.5 
@@ -2851,10 +2851,10 @@ mat_ozhidanie+otkl: 0.758995 0 0 0 0.379497 0.379497
 mat_ozhidanie-otkl: -0.536772 0 0 0 -0.268386 -0.268386 
 
 term 476
-really: 0.5 1 0 0 1 0.5 
-mat_ozhidanie: 0.111111 0.222222 0 0 0.166667 0.111111 
-mat_ozhidanie+otkl: 0.758995 1.51799 0 0 1.13849 0.758995 
-mat_ozhidanie-otkl: -0.536772 -1.07354 0 0 -0.805159 -0.536772 
+really: 0.5 1 0 0 0.5 1 
+mat_ozhidanie: 0.111111 0.222222 0 0 0.0555556 0.222222 
+mat_ozhidanie+otkl: 0.758995 1.51799 0 0 0.379497 1.51799 
+mat_ozhidanie-otkl: -0.536772 -1.07354 0 0 -0.268386 -1.07354 
 
 term 477
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -2923,10 +2923,10 @@ mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0
 mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 0 
 
 term 488
-really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772 
+really: 0 0.5 0 0 0.5 0.5 
+mat_ozhidanie: 0 0.111111 0 0 0.111111 0.111111 
+mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0.758995 
+mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 -0.536772 
 
 term 489
 really: 0.5 0.5 0 0 0 0.5 
@@ -3013,10 +3013,10 @@ mat_ozhidanie+otkl: 0 0 0 0 0.379497 0.758995
 mat_ozhidanie-otkl: 0 0 0 0 -0.268386 -0.536772 
 
 term 503
-really: 0.5 1.5 0 0 1 1.5 
-mat_ozhidanie: 0.0555556 0.277778 0 0 0.222222 0.277778 
-mat_ozhidanie+otkl: 0.379497 1.89749 0 0 1.51799 1.89749 
-mat_ozhidanie-otkl: -0.268386 -1.34193 0 0 -1.07354 -1.34193 
+really: 0.5 1.5 0 0 1 1 
+mat_ozhidanie: 0.0555556 0.277778 0 0 0.222222 0.166667 
+mat_ozhidanie+otkl: 0.379497 1.89749 0 0 1.51799 1.13849 
+mat_ozhidanie-otkl: -0.268386 -1.34193 0 0 -1.07354 -0.805159 
 
 term 504
 really: 0.5 0 0 0 0.5 0.5 
@@ -3073,10 +3073,10 @@ mat_ozhidanie+otkl: 0 0.758995 0 0 0 0.758995
 mat_ozhidanie-otkl: 0 -0.536772 0 0 0 -0.536772 
 
 term 513
-really: 0.5 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772 
+really: 0.5 0.5 0 0 0.5 0 
+mat_ozhidanie: 0.111111 0.111111 0 0 0.111111 0 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0.758995 0 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 0 
 
 term 514
 really: 0 0.5 0 0 0 0 
@@ -3085,10 +3085,10 @@ mat_ozhidanie+otkl: 0 0.758995 0 0 0 0
 mat_ozhidanie-otkl: 0 -0.536772 0 0 0 0 
 
 term 515
-really: 1 0.5 0 0 1 1 
-mat_ozhidanie: 0.222222 0.111111 0 0 0.222222 0.166667 
-mat_ozhidanie+otkl: 1.51799 0.758995 0 0 1.51799 1.13849 
-mat_ozhidanie-otkl: -1.07354 -0.536772 0 0 -1.07354 -0.805159 
+really: 1 0.5 0 0 0.5 1.5 
+mat_ozhidanie: 0.222222 0.111111 0 0 0.111111 0.277778 
+mat_ozhidanie+otkl: 1.51799 0.758995 0 0 0.758995 1.89749 
+mat_ozhidanie-otkl: -1.07354 -0.536772 0 0 -0.536772 -1.34193 
 
 term 516
 really: 0.5 0.5 0 0 0 0.5 
@@ -3175,10 +3175,10 @@ mat_ozhidanie+otkl: 0 0 0 0 0.758995 0
 mat_ozhidanie-otkl: 0 0 0 0 -0.536772 0 
 
 term 530
-really: 0.5 0 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 -0.536772 
+really: 0.5 0 0 0 0.5 0 
+mat_ozhidanie: 0.111111 0 0 0 0.111111 0 
+mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0 
+mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 0 
 
 term 531
 really: 0 0.5 0 0 0.5 0.5 
@@ -3248,9 +3248,9 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772
 
 term 542
 really: 0.5 1 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0.222222 0 0 0.111111 0.0555556 
-mat_ozhidanie+otkl: 0.758995 1.51799 0 0 0.758995 0.379497 
-mat_ozhidanie-otkl: -0.536772 -1.07354 0 0 -0.536772 -0.268386 
+mat_ozhidanie: 0.111111 0.222222 0 0 0.0555556 0.111111 
+mat_ozhidanie+otkl: 0.758995 1.51799 0 0 0.379497 0.758995 
+mat_ozhidanie-otkl: -0.536772 -1.07354 0 0 -0.268386 -0.536772 
 
 term 543
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -3260,9 +3260,9 @@ mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 -0.536772 -0.536772
 
 term 544
 really: 0 0.5 0 0 0.5 0.5 
-mat_ozhidanie: 0 0.111111 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 -0.536772 
+mat_ozhidanie: 0 0.111111 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 0 0.758995 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: 0 -0.536772 0 0 -0.536772 -0.268386 
 
 term 545
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -3548,9 +3548,9 @@ mat_ozhidanie-otkl: -0.536772 0 0 0 0 -0.268386
 
 term 592
 really: 0.5 0 0 0 0.5 0.5 
-mat_ozhidanie: 0.111111 0 0 0 0.111111 0.111111 
-mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0.758995 
-mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 -0.536772 
+mat_ozhidanie: 0.111111 0 0 0 0.111111 0.0555556 
+mat_ozhidanie+otkl: 0.758995 0 0 0 0.758995 0.379497 
+mat_ozhidanie-otkl: -0.536772 0 0 0 -0.536772 -0.268386 
 
 term 593
 really: 0.5 0.5 0 0 0.5 0.5 
@@ -3641,3 +3641,9 @@ really: 0.5 0 0 0 0 0.5
 mat_ozhidanie: 0.111111 0 0 0 0 0.111111 
 mat_ozhidanie+otkl: 0.758995 0 0 0 0 0.758995 
 mat_ozhidanie-otkl: -0.536772 0 0 0 0 -0.536772 
+
+term 608
+really: 0.5 0.5 0 0 0 0.5 
+mat_ozhidanie: 0.111111 0.111111 0 0 0 0.111111 
+mat_ozhidanie+otkl: 0.758995 0.758995 0 0 0 0.758995 
+mat_ozhidanie-otkl: -0.536772 -0.536772 0 0 0 -0.536772 
