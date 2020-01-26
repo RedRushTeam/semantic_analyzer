@@ -177,6 +177,37 @@ void Singleton::find_fluctuations()
 					}
 }
 
+void Singleton::clear(type_of_cont_class _type_of_cont_class)
+{
+	switch (_type_of_cont_class)
+	{
+	case mat_ozid_:
+		this->mat_ozidanie.clear();
+		break;
+	case mat_disperse_:
+		this->mat_disperse.clear();
+		break;
+	case mat_otkl_:
+		this->sredne_kv_otklonenie.clear();
+		break;
+	case mat_otkl_fixed_:
+		this->sredne_kv_otklonenie_fixed.clear();
+		break;
+	case excess_ratio_:
+		this->excess_ratio.clear();
+		break;
+	case asymmetry_coefficient_:
+		this->asymmetry_coefficient.clear();
+		break;
+	case sample_mean_all_:
+		this->sample_mean_all.clear();
+		break;
+	default:
+		nullptr;
+		break;
+	}
+}
+
 void Singleton::out_for_chart()
 {
 	auto keks = list_of_container_class.front().get_vector_of_length().size();

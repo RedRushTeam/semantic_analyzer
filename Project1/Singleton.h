@@ -22,6 +22,7 @@ public:
 	void sinchronize_terms();
 	void give_space();
 	void find_fluctuations();
+	void clear(type_of_cont_class _type_of_cont_class);
 
 	//getters
 	container_class get_sredne_kv_otklonenie() const;

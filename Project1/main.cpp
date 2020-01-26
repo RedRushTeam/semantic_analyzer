@@ -159,8 +159,8 @@ int main(int argc, char* argv[])
 
 	thread tr_for_sample_mean(foo_for_sample_meal_thread);
 
-	Singleton::initialization().calculate_mat_ozidanie();	//16c		//оптимизация этих двух методов невозможна без
-	Singleton::initialization().calculate_mat_disperse();	//26c		//семафора/мьютекса работа "в лоб" может вызвать непредвиденное поведение
+	Singleton::initialization().calculate_mat_ozidanie();	//16c
+	Singleton::initialization().calculate_mat_disperse();	//26c
 
 	thread tr_for_sredne_kv_otklonenie(foo_for_calculate_sredne_kv_otklonenie);
 	thread tr_for_sredne_kv_otklonenie_fixed(foo_for_calculate_sredne_kv_otklonenie_fixed);
@@ -170,8 +170,11 @@ int main(int argc, char* argv[])
 	tr_for_sredne_kv_otklonenie_fixed.join();
 
 	thread tr_for_params_for_charts([&]() {
+		Singleton::initialization().clear(mat_otkl_);
 		Singleton::initialization().calculate_params_for_charts();
-		Singleton::initialization().find_fluctuations();
+		//Singleton::initialization().find_fluctuations();
+		Singleton::initialization().clear(mat_ozid_);
+		Singleton::initialization().clear(mat_disperse_);
 		});
 
 	thread tr_for_asymmetry_coefficient(foo_for_asymmetry_coefficient_thread);
@@ -191,7 +194,7 @@ int main(int argc, char* argv[])
 
 	Singleton::initialization().out_for_chart();
 
-	auto finish = clock();							//2.53	//2.30	//2.10	//2.20
+	auto finish = clock();							//2.53	//2.30	//2.10	//2.0
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
 
 	return 0;
