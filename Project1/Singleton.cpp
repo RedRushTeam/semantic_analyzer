@@ -49,11 +49,17 @@ void Singleton::calculate_sample_mean()
 
 void Singleton::calculate_mat_ozidanie()
 {
+	for (auto obj_of_cont_class : this->list_of_container_class)
+		this->mat_ozidanie += obj_of_cont_class;
+
 	this->mat_ozidanie = this->mat_ozidanie / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));
 }
 
 void Singleton::calculate_mat_disperse()
 {
+	for (auto obj_of_cont_class : this->list_of_container_class)
+		this->mat_disperse += obj_of_cont_class.pow_all(2);
+
 	this->mat_disperse = this->mat_disperse / (this->divider(this->list_of_container_class.size()) * (2 + 2 * GAP));
 
 	this->mat_disperse = this->mat_disperse - this->mat_ozidanie.pow_all(2);
@@ -138,6 +144,16 @@ bool Singleton::remove_container_class(container_class _container_class)
 
 void Singleton::out_for_chart()
 {
+	container_class sum;
+	container_class razn;
+	container_class shhh;
+
+	thread tr([&]() {
+		sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+		razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
+		shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
+		});
+
 	container_class chart; 
 	auto keks = list_of_container_class.front().get_vector_of_length().size();
 	chart.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
@@ -151,10 +167,8 @@ void Singleton::out_for_chart()
 	chart = chart / (list_of_container_class.size());
 
 	ofstream to_chart("chart.txt");
-	auto sum = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-	auto razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 
-	auto shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
+	tr.join();
 
 		for (int i = 1; i < chart.get_counter_of_tokenizer(); ++i)
 			{
@@ -216,18 +230,6 @@ void Singleton::give_space()
 	this->sredne_kv_otklonenie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	this->mat_disperse.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 	this->mat_ozidanie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
-}
-
-void Singleton::prepare_data_for_mat_ozid()
-{
-	for (auto obj_of_cont_class : this->list_of_container_class)
-		this->mat_ozidanie += obj_of_cont_class;
-}
-
-void Singleton::prepare_data_for_mat_disperse()
-{
-	for (auto obj_of_cont_class : this->list_of_container_class)
-		this->mat_disperse += obj_of_cont_class.pow_all(2);
 }
 
 container_class Singleton::calculate_parametr_to_one_term(container_class _parametr)

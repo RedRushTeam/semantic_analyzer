@@ -20,8 +20,6 @@ public:
 	void out_for_chart();
 	void sinchronize_terms();
 	void give_space();
-	void prepare_data_for_mat_ozid();
-	void prepare_data_for_mat_disperse();
 
 	//getters
 	container_class get_sredne_kv_otklonenie() const;
