@@ -65,8 +65,8 @@ container_class container_class::operator+(container_class summed_class)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (int i = 0; i < vector_of_length.size(); ++i)
+		for (int j = 0; j < vector_of_length.size(); ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
 					ret[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
 	return ret;

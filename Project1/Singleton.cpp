@@ -40,6 +40,7 @@ void Singleton::calculate_sample_mean()
 	container_class sample_mean_all;
 	sample_mean_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
 
+	#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		sample_mean_all += obj_of_cont_class;
 
@@ -49,6 +50,7 @@ void Singleton::calculate_sample_mean()
 
 void Singleton::calculate_mat_ozidanie()
 {
+	//#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		this->mat_ozidanie += obj_of_cont_class;
 
@@ -57,6 +59,7 @@ void Singleton::calculate_mat_ozidanie()
 
 void Singleton::calculate_mat_disperse()
 {
+	//#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		this->mat_disperse += obj_of_cont_class.pow_all(2);
 
@@ -80,6 +83,7 @@ void Singleton::calculate_sredne_kv_otklonenie_fixed()
 
 void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 {
+	//#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		this->asymmetry_coefficient += (obj_of_cont_class - this->get_sample_mean_all()).pow_all(3);
 
@@ -90,6 +94,7 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 
 void Singleton::calculate_excess_ratio()								//////todo//////
 {
+	//#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		this->excess_ratio += (obj_of_cont_class - this->get_sample_mean_all()).pow_all(4);
 

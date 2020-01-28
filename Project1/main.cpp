@@ -4,6 +4,7 @@
 //#define LEMADR "C:\\Users\\fortunati\\Documents\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 #define _CRT_SECURE_NO_WARNINGS
 
+
 #include "parser.h"
 #include "Singleton.h"
 
@@ -194,7 +195,7 @@ int main(int argc, char* argv[])
 
 	Singleton::initialization().out_for_chart();
 
-	auto finish = clock();							//2.53	//2.30	//2.10	//2.0
+	auto finish = clock();							//2.53	//2.30	//2.10	//2.0	//1.02 flag /Ox
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
 
 	return 0;
