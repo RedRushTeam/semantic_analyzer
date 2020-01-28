@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
 	thread tr_for_params_for_charts([&]() {
 		Singleton::initialization().clear(mat_otkl_);
 		Singleton::initialization().calculate_params_for_charts();
-		//Singleton::initialization().find_fluctuations();
+		Singleton::initialization().find_fluctuations();
 		Singleton::initialization().clear(mat_ozid_);
 		Singleton::initialization().clear(mat_disperse_);
 		});
