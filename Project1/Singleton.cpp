@@ -169,12 +169,15 @@ void Singleton::find_fluctuations()
 	ofstream ff("fluctuation.txt");
 	for (int i = 1; i < chart.get_counter_of_tokenizer(); i++)
 		for (int l = -GAP - 1; l <= GAP; ++l)
-			if ((chart[i][i][l] > sum[i][i][l]) || (chart[i][i][l] < razn[i][i][l]))
+			if ((chart[i][i][l] > sum[i][i][l]) || (chart[i][i][l] < razn[i][i][l])) {
 				for (auto q : helper.get_map_of_tokens())
 					if (q.second == i) {
 						ff << q.first << " ";
-						i++;
+						//i++;
+						break;
 					}
+				break;
+			}
 }
 
 void Singleton::out_for_chart()
