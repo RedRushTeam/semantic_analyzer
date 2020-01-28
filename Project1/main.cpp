@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
 
 	Singleton::initialization().out_for_chart();
 
-	auto finish = clock();							//2.53	//2.30	//2.10	//2.0
+	auto finish = clock();							//2.53	//2.30	//2.10	//2.0	//3.30 на ноуте
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
 
 	return 0;
