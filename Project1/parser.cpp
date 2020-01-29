@@ -8,7 +8,7 @@ list<string> parser::parse()
 	//this->check_all_words(text_all);
 	list<string> terms;
 	char tmp;
-	ifstream file("parced_"+this->_filename);
+	ifstream file("parced_"+ this->_filename);
 	if (file.is_open()) {
 		while (!file.eof()) {
 			tmp = file.get();
