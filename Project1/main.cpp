@@ -12,7 +12,7 @@ namespace fs = std::experimental::filesystem;
 #include "parser.h"
 #include "Singleton.h"
 
-/*vector<fs::path> get_input_texts() {
+vector<fs::path> get_input_texts() {
 	auto input_path = fs::current_path()/"inputfiles";
 	fs::recursive_directory_iterator begin(input_path);
 	fs::recursive_directory_iterator end;
@@ -20,7 +20,7 @@ namespace fs = std::experimental::filesystem;
 	std::copy_if(begin, end, std::back_inserter(txtFiles), [](const fs::path& path) {
 		return fs::is_regular_file(path) && (path.extension() == ".txt"); });
 	return txtFiles;
-}*/
+}
 
 void foo_for_sample_meal_thread() {
 	Singleton::initialization().calculate_sample_mean();
@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
 		printf("Could not load the lemmatizator from %s\n", dict_path);
 		exit(1);
 	}
-	//auto test = get_input_texts();
+	auto test = get_input_texts();
 
 	auto list_of_parsed_symbols = parse_text("input_text.txt");
 	auto list_of_parsed_symbols1 = parse_text("input_text1.txt");
