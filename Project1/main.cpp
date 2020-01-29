@@ -2,13 +2,15 @@
 //#define LEMADR "G:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 //#define LEMADR "C:\\Users\\fortunati\\Documents\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
+#pragma once
 
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 
 #include "parser.h"
 #include "Singleton.h"
-
-using namespace std;
 
 /*vector<fs::path> get_input_texts() {
 	auto input_path = fs::current_path()/"inputfiles";
