@@ -57,6 +57,8 @@ void parser::delete_trash()
 	else
 		cout << "it doesn't work";
 
+	transform(text.begin(), text.end(), text.begin(), tolower);;
+
 	while (helper) {
 
 		for (int i = 0; i < text.size(); i++) {

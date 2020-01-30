@@ -2,12 +2,12 @@
 //#define LEMADR "G:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 //#define LEMADR "C:\\Users\\fortunati\\Documents\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+//define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 #pragma once
 
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+//#include <experimental/filesystem>
+//namespace fs = std::experimental::filesystem;
 
 #include "parser.h"
 #include "Singleton.h"
@@ -165,7 +165,7 @@ int main(int argc, char* argv[])
 	list_of_lemmatized_words1.clear();
 
 	thread tr_for_out(out_matrix);
-	tr_for_out.detach();
+	
 							//6c
 
 	Singleton::initialization().sinchronize_terms();	//10c
@@ -201,10 +201,12 @@ int main(int argc, char* argv[])
 	tr_for_asymmetry_coefficient.~thread();
 	tr_for_excess_ratio.~thread();
 	tr_for_sample_mean.~thread();
-	tr_for_out.~thread();
 
 	tr_for_params_for_charts.join();
 	tr_for_params_for_charts.~thread();
+
+	tr_for_out.join();
+	tr_for_out.~thread();
 
 	Singleton::initialization().out_for_chart();
 

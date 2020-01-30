@@ -38,7 +38,7 @@ my_double Singleton::divider(int size) {
 void Singleton::calculate_sample_mean()
 {
 	container_class sample_mean_all;
-	sample_mean_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	sample_mean_all.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP));
 
 	#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
@@ -50,7 +50,6 @@ void Singleton::calculate_sample_mean()
 
 void Singleton::calculate_mat_ozidanie()
 {
-	//#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		this->mat_ozidanie += obj_of_cont_class;
 
@@ -59,7 +58,6 @@ void Singleton::calculate_mat_ozidanie()
 
 void Singleton::calculate_mat_disperse()
 {
-	//#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_container_class)
 		this->mat_disperse += obj_of_cont_class.pow_all(2);
 
@@ -276,12 +274,12 @@ void Singleton::sinchronize_terms()
 
 void Singleton::give_space()
 {
-	this->excess_ratio.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
-	this->asymmetry_coefficient.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
-	this->sredne_kv_otklonenie_fixed.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
-	this->sredne_kv_otklonenie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
-	this->mat_disperse.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
-	this->mat_ozidanie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP * 2 + 2));
+	this->excess_ratio.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP));
+	this->asymmetry_coefficient.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP));
+	this->sredne_kv_otklonenie_fixed.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP));
+	this->sredne_kv_otklonenie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP));
+	this->mat_disperse.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP));
+	this->mat_ozidanie.give_space(this->list_of_container_class.begin()->get_counter_of_tokenizer(), (GAP));
 }
 
 container_class Singleton::calculate_parametr_to_one_term(container_class _parametr)
