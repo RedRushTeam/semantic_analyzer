@@ -1,10 +1,7 @@
-//#define LEMADR "C:\\Program Files (x86)\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
-//#define LEMADR "G:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
-//#define LEMADR "C:\\Users\\fortunati\\Documents\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
-//#include <experimental/filesystem>
+
 #pragma once
 #include "parser.h"
 #include "Singleton.h"
@@ -17,26 +14,6 @@ vector<fs::path> get_input_texts() {
 	std::copy_if(begin, end, std::back_inserter(txtFiles), [](const fs::path& path) {
 		return fs::is_regular_file(path) && (path.extension() == ".txt"); });
 	return txtFiles;
-}
-
-void foo_for_sample_meal_thread() {
-	Singleton::initialization().calculate_sample_mean();
-}
-
-void foo_for_asymmetry_coefficient_thread() {
-	Singleton::initialization().calculate_asymmetry_coefficient();
-}
-
-void foo_for_for_excess_ratio_thread() {
-	Singleton::initialization().calculate_excess_ratio();
-}
-
-void foo_for_calculate_sredne_kv_otklonenie() {
-	Singleton::initialization().calculate_sredne_kv_otklonenie();
-}
-
-void foo_for_calculate_sredne_kv_otklonenie_fixed() {
-	Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
 }
 
 list<string> parse_text(fs::path input_txt) {
@@ -94,6 +71,14 @@ void out_matrix() {
 	matrix.close();
 }
 
+void withdraw_list_of_string(list<string>& _list, string& _label) {
+	cout << endl << endl << _label << endl << endl;
+
+	for (auto obj : _list)
+		cout << " " << obj;
+
+}
+
 int main(int argc, char* argv[])
 {
 	auto start = clock();
@@ -118,71 +103,40 @@ int main(int argc, char* argv[])
 	}
 	auto vector_of_texts = get_input_texts();
 
-	int counter_of_tokenizer = 0;
+	int counter_of_text = 1;
 
 	for (auto i : vector_of_texts) {
-		auto list_of_parsed_symbols = parse_text(i);
+
+		string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
+		string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
+		list<string> list_of_parsed_symbols = parse_text(i);
+		withdraw_list_of_string(list_of_parsed_symbols, _str_label_parse);
 		list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
+		withdraw_list_of_string(list_of_lemmatized_words, _str_label_lemmas);
 		list_of_parsed_symbols.clear();
-		counter_of_tokenizer = analyze_text(list_of_lemmatized_words);
+		analyze_text(list_of_lemmatized_words);
 		list_of_lemmatized_words.clear();
+		++counter_of_text;
 	}
-	//auto list_of_parsed_symbols1 = parse_text("input_text1.txt");
-
-	/*cout << endl << endl << "\t\t\t\t***** Распарсеный текст номер 1 *****" << endl << endl;
-
-	for (auto obj1 : list_of_parsed_symbols)
-		cout << " " << obj1;
-
-	cout << endl << "\t\t\t\t***** Распарсеный текст номер 2 *****" << endl << endl;
-
-	for (auto obj1 : list_of_parsed_symbols1)
-		cout << " " << obj1;*/
-
-	//list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
-	//list<string> list_of_lemmatized_words1 = lemmatize_text(list_of_parsed_symbols1, hEngine);
-
-	//list_of_parsed_symbols.clear();
-	//list_of_parsed_symbols1.clear();
-
-	/*cout << endl << "\t\t\t\t***** Лемматизированный текст номер 1 *****" << endl << endl;
-
-	for (string obj : list_of_lemmatized_words)
-		cout << " " << obj;
-
-	cout << endl << "\t\t\t\t***** Лемматизированный текст номер 2 *****" << endl << endl;
-
-	for (string obj : list_of_lemmatized_words1)
-		cout << " " << obj;*/
-
-	//int counter_of_tokenizer = 0;
-
-	/*thread tr_for_analyze([&]() {counter_of_tokenizer = analyze_text(list_of_lemmatized_words); });
-	thread tr_for_analyze1([&]() {counter_of_tokenizer = analyze_text(list_of_lemmatized_words1); });
-
-	tr_for_analyze.join();
-	tr_for_analyze1.join();
-
-	tr_for_analyze.~thread();
-	tr_for_analyze1.~thread();
-
-	list_of_lemmatized_words.clear();
-	list_of_lemmatized_words1.clear();*/
 
 	thread tr_for_out(out_matrix);
-	
-							//6c
 
-	Singleton::initialization().sinchronize_terms();	//10c
-	Singleton::initialization().give_space();			//8c
+	Singleton::initialization().sinchronize_terms();
+	Singleton::initialization().give_space();
 
-	thread tr_for_sample_mean(foo_for_sample_meal_thread);
+	thread tr_for_sample_mean([]() {
+		Singleton::initialization().calculate_sample_mean();
+		});
 
-	Singleton::initialization().calculate_mat_ozidanie();	//16c
-	Singleton::initialization().calculate_mat_disperse();	//26c
+	Singleton::initialization().calculate_mat_ozidanie();
+	Singleton::initialization().calculate_mat_disperse();
 
-	thread tr_for_sredne_kv_otklonenie(foo_for_calculate_sredne_kv_otklonenie);
-	thread tr_for_sredne_kv_otklonenie_fixed(foo_for_calculate_sredne_kv_otklonenie_fixed);
+	thread tr_for_sredne_kv_otklonenie([]() {
+		Singleton::initialization().calculate_sredne_kv_otklonenie();
+		});
+	thread tr_for_sredne_kv_otklonenie_fixed([]() {
+		Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
+		});
 
 	tr_for_sredne_kv_otklonenie.detach();
 	tr_for_sample_mean.join();
@@ -192,12 +146,15 @@ int main(int argc, char* argv[])
 		Singleton::initialization().clear(mat_otkl_);
 		Singleton::initialization().calculate_params_for_charts();
 		Singleton::initialization().find_fluctuations();
-		Singleton::initialization().clear(mat_ozid_);
 		Singleton::initialization().clear(mat_disperse_);
 		});
 
-	thread tr_for_asymmetry_coefficient(foo_for_asymmetry_coefficient_thread);
-	thread tr_for_excess_ratio(foo_for_for_excess_ratio_thread);
+	thread tr_for_asymmetry_coefficient([]() {
+		Singleton::initialization().calculate_asymmetry_coefficient();
+		});
+	thread tr_for_excess_ratio([]() {
+		Singleton::initialization().calculate_excess_ratio();
+		});
 	tr_for_asymmetry_coefficient.join();
 	tr_for_excess_ratio.join();
 
@@ -215,7 +172,7 @@ int main(int argc, char* argv[])
 
 	Singleton::initialization().out_for_chart();
 
-	auto finish = clock();							//2.53	//2.30	//2.10	//2.0	//1.02 flag /Ox
+	auto finish = clock();							//2.53	//2.30	//2.10	//2.0	//1.02 flag /Ox	//strange 12sec
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
 
 	return 0;
