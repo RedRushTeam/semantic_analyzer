@@ -8,7 +8,7 @@ list<string> parser::parse()
 	//this->check_all_words(text_all);
 	list<string> terms;
 	char tmp;
-	ifstream file("parced_"+ this->_filename);
+	ifstream file("parsed.txt");
 	if (file.is_open()) {
 		while (!file.eof()) {
 			tmp = file.get();
@@ -41,7 +41,7 @@ void parser::check_all_words(string text)
 void parser::delete_trash()
 {
 	std::ifstream _input(_filename);
-	std::ofstream _output("parced_" + this->_filename);
+	std::ofstream _output("parsed.txt");
 	int count = 1;
 	int helper = 1;
 	int size = 0;

@@ -17,7 +17,9 @@
 #include <math.h>
 #include <ctime>
 #include <thread>
+#include <filesystem>
 
+namespace fs = std::filesystem;
 using namespace std;
 
 using my_double = float;
