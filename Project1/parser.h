@@ -7,7 +7,7 @@ class parser
 {
 public:
 	parser() {}
-	parser(string filename) : _filename(filename) {}
+	parser(fs::path filename) : _filename(filename) {}
 	list<string> parse();
 	void check_all_words(string text);
 	void delete_trash();
@@ -17,7 +17,7 @@ public:
 	}
 
 private:
-	string _filename;
+	fs::path _filename;
 	set<string> stop_symbols = {
 	"’", "'", "  ", "[",  "]",  "(",  ")",  "{",  "}",  "⟨", "⟩",  ":",  "‒ ", "– ", "— ", "― ", "!", "?", ".",  "‘", "’", "“", "”", "«", "»",  ";",  "*", "|", ">", "<", "©", "#", ",", "\"", "\\", "·", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "=", "+", "_", "   ", "/"
 
