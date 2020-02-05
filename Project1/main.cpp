@@ -1,7 +1,8 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
-#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
+#define TEXTS_PATH "A:\\rasp_puhl"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
+#define IMAGE_FILE_LARGE_ADDRESS_AWARE
 
 #pragma once
 #include "parser.h"
@@ -13,7 +14,7 @@ vector<fs::path> get_input_texts() {
 	fs::recursive_directory_iterator end;
 	std::vector<fs::path> txtFiles;
 	std::copy_if(begin, end, std::back_inserter(txtFiles), [](const fs::path& path) {
-		return fs::is_regular_file(path) && (path.extension() == ".txt"); });
+		return fs::is_regular_file(path) && (path.extension() == ".txt" || path.extension() == ".TXT"); });
 	return txtFiles;
 }
 
@@ -37,19 +38,20 @@ list<string> lemmatize_text(list<string> &list_of_parsed_symbols, HLEM &hEngine)
 	return list_of_lemmatized_words;
 }
 
-int analyze_text(list<string> &list_of_lemmatized_words) {
+int analyze_text(list<string> *list_of_lemmatized_words) 
+{
+	int shhhet = 0;
+	analyzer *_analyzer = new analyzer(list_of_lemmatized_words);
+	_analyzer->set_k(GAP);
+	_analyzer->shape_vec_of_tokens();
+	_analyzer->shape_vec_tokens_of_text();
+	_analyzer->give_space();
+	_analyzer->analyze_vec_of_tokens();
+	_analyzer->update_dictionary();
 
-	analyzer _analyzer(&list_of_lemmatized_words);
-	_analyzer.set_k(GAP);
-	_analyzer.shape_vec_of_tokens();
-	_analyzer.shape_vec_tokens_of_text();
-	_analyzer.give_space();
-	_analyzer.analyze_vec_of_tokens();
-	_analyzer.update_dictionary();
+	Singleton::initialization().push_container(_analyzer->get_container_class());
 
-	Singleton::initialization().push_container(_analyzer.get_container_class());
-
-	return _analyzer.get_counter_of_tokenizer();
+	return _analyzer->get_counter_of_tokenizer();
 }
 
 void out_matrix() {
@@ -109,20 +111,33 @@ int main(int argc, char* argv[])
 	cout << endl << "Найдено текстов: " << vector_of_texts.size() << endl;
 
 
-	for (auto i : vector_of_texts)
-		std::cout << i << std::endl;
+	/*for (auto i : vector_of_texts)
+		std::cout << i << std::endl;*/
 
-	for (auto i : vector_of_texts) {
+	for (auto i = 0; i < vector_of_texts.size(); ++i) {
+
 
 
 		//string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
 		//string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
-		list<string> list_of_parsed_symbols = parse_text(i);
+		list<string> list_of_parsed_symbols = parse_text(vector_of_texts[i]);
 		//(list_of_parsed_symbols, _str_label_parse);
 		list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
 		//withdraw_list_of_string(list_of_lemmatized_words, _str_label_lemmas);
 		list_of_parsed_symbols.clear();
-		analyze_text(list_of_lemmatized_words);
+		//analyze_text(&list_of_lemmatized_words);
+
+		int shhhet = 0;
+		analyzer* _analyzer = new analyzer(&list_of_lemmatized_words);
+		_analyzer->set_k(GAP);
+		_analyzer->shape_vec_of_tokens();
+		_analyzer->shape_vec_tokens_of_text();
+		_analyzer->give_space();
+		_analyzer->analyze_vec_of_tokens();
+		_analyzer->update_dictionary();
+
+		Singleton::initialization().push_container(_analyzer->get_container_class());
+
 		list_of_lemmatized_words.clear();
 		++counter_of_text;
 	}
