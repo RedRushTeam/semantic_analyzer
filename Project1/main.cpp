@@ -1,4 +1,5 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
+#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -7,7 +8,7 @@
 #include "Singleton.h"
 
 vector<fs::path> get_input_texts() {
-	auto input_path = fs::current_path()/"inputfiles";
+	auto input_path = TEXTS_PATH/*fs::current_path()/"inputfiles"*/;
 	fs::recursive_directory_iterator begin(input_path);
 	fs::recursive_directory_iterator end;
 	std::vector<fs::path> txtFiles;
@@ -105,14 +106,21 @@ int main(int argc, char* argv[])
 
 	int counter_of_text = 1;
 
+	cout << endl << "Найдено текстов: " << vector_of_texts.size() << endl;
+
+
+	for (auto i : vector_of_texts)
+		std::cout << i << std::endl;
+
 	for (auto i : vector_of_texts) {
 
-		string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
-		string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
+
+		//string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
+		//string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
 		list<string> list_of_parsed_symbols = parse_text(i);
-		withdraw_list_of_string(list_of_parsed_symbols, _str_label_parse);
+		//(list_of_parsed_symbols, _str_label_parse);
 		list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
-		withdraw_list_of_string(list_of_lemmatized_words, _str_label_lemmas);
+		//withdraw_list_of_string(list_of_lemmatized_words, _str_label_lemmas);
 		list_of_parsed_symbols.clear();
 		analyze_text(list_of_lemmatized_words);
 		list_of_lemmatized_words.clear();
