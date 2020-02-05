@@ -1,4 +1,4 @@
-#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows\\lemmatizer.db"
+#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
 #define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
@@ -6,6 +6,7 @@
 #pragma once
 #include "parser.h"
 #include "Singleton.h"
+#include <lemmatizator_engine.h>
 
 vector<fs::path> get_input_texts() {
 	auto input_path = TEXTS_PATH/*fs::current_path()/"inputfiles"*/;
