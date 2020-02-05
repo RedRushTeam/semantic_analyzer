@@ -10,7 +10,7 @@ public:
 	parser(fs::path filename) : _filename(filename) {}
 	list<string> parse();
 	void check_all_words(string text);
-	void delete_trash();
+	list<string> delete_trash();
 	~parser() {
 		stop_symbols.clear();
 		stop_words.clear();

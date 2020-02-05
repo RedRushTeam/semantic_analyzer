@@ -13,14 +13,14 @@ vector<fs::path> get_input_texts() {
 	fs::recursive_directory_iterator end;
 	std::vector<fs::path> txtFiles;
 	std::copy_if(begin, end, std::back_inserter(txtFiles), [](const fs::path& path) {
-		return fs::is_regular_file(path) && (path.extension() == ".txt"); });
+		return fs::is_regular_file(path) && (path.extension() == ".TXT"); });
 	return txtFiles;
 }
 
 list<string> parse_text(fs::path input_txt) {
 
 	parser _parser(input_txt);
-	return _parser.parse();
+	return _parser.delete_trash();
 }
 
 list<string> lemmatize_text(list<string> &list_of_parsed_symbols, HLEM &hEngine) {
@@ -109,8 +109,8 @@ int main(int argc, char* argv[])
 	cout << endl << "Найдено текстов: " << vector_of_texts.size() << endl;
 
 
-	for (auto i : vector_of_texts)
-		std::cout << i << std::endl;
+	/*for (auto i : vector_of_texts)
+		std::cout << i << std::endl;*/
 
 	for (auto i : vector_of_texts) {
 
@@ -121,9 +121,9 @@ int main(int argc, char* argv[])
 		//(list_of_parsed_symbols, _str_label_parse);
 		list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
 		//withdraw_list_of_string(list_of_lemmatized_words, _str_label_lemmas);
-		list_of_parsed_symbols.clear();
+		//list_of_parsed_symbols.clear();
 		analyze_text(list_of_lemmatized_words);
-		list_of_lemmatized_words.clear();
+		//list_of_lemmatized_words.clear();
 		++counter_of_text;
 	}
 
