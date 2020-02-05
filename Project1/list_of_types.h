@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <stdlib.h>
-#include <lemmatizator_engine.h>
+
 #include <string>
 #include <vector>
 #include <windows.h>
