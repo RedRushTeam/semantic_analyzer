@@ -1,5 +1,6 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
+//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
+#define TEXTS_PATH "A:\\rasp_puhl"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -14,7 +15,7 @@ vector<fs::path> get_input_texts() {
 	fs::recursive_directory_iterator end;
 	std::vector<fs::path> txtFiles;
 	std::copy_if(begin, end, std::back_inserter(txtFiles), [](const fs::path& path) {
-		return fs::is_regular_file(path) && (path.extension() == ".txt"); });
+		return fs::is_regular_file(path) && (path.extension() == ".txt" || path.extension() == ".TXT"); });
 	return txtFiles;
 }
 
@@ -110,12 +111,10 @@ int main(int argc, char* argv[])
 	cout << endl << "Найдено текстов: " << vector_of_texts.size() << endl;
 
 
-	for (auto i : vector_of_texts)
-		std::cout << i << std::endl;
+	/*for (auto i : vector_of_texts)
+		std::cout << i << std::endl;*/
 
 	for (auto i : vector_of_texts) {
-
-
 		//string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
 		//string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
 		list<string> list_of_parsed_symbols = parse_text(i);
