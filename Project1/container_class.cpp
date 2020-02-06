@@ -5,13 +5,30 @@ void container_class::give_space(int counter_of_tokenizer, int k)
 	vector_of_length.resize(counter_of_tokenizer);
 	this->counter_of_tokenizer = counter_of_tokenizer;
 	this->k = k;
+	
+	size_t size = 0;
+	for (vector<class_of_first_bracket>::const_iterator cit = vector_of_length.begin(); cit != vector_of_length.end(); ++cit) {
+		size += sizeof(*cit);
+	}
 
-	for (int i = 0; i < counter_of_tokenizer; ++i) {
+	cout << endl << size << endl;
+
+	for (int i = 0; i < counter_of_tokenizer; ++i)
 		vector_of_length[i].resize(counter_of_tokenizer);
 
-		for (int j = 0; j < counter_of_tokenizer; ++j)
-			vector_of_length[i][j].give_space(k);
+	/*auto sheet = vector_of_length[i].get_vector_of_length();
+
+	size_t size = 0;
+	for (vector<class_of_collocation>::const_iterator cit = sheet.begin(); cit != sheet.end(); ++cit) {
+		size += sizeof(*cit);
 	}
+
+	cout << endl << size << endl;
+	*/
+
+	for (int i = 0; i < counter_of_tokenizer; ++i)
+		for(int j = 0; j < counter_of_tokenizer; ++j)
+			vector_of_length[i][j].give_space(k);
 }
 
 void container_class::increment(int first_dimension, int second_dimension, int third_dimension)
