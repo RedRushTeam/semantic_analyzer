@@ -5,6 +5,11 @@ void class_of_first_bracket::resize(long int i)
 	this->vector_of_length.resize(i);
 }
 
+void class_of_first_bracket::assign(long int i, class_of_collocation _class_of_collocation)
+{
+	this->vector_of_length.assign(i, _class_of_collocation);
+}
+
 class_of_first_bracket class_of_first_bracket::pow_all(int stepen)
 {
 	class_of_first_bracket cl_for_return;
