@@ -99,7 +99,7 @@ list<string> parser::delete_trash()
 		else
 			terms.push_back("а");
 	}
-	terms.back().pop_back();
+	//terms.back().pop_back();
 	return terms;
 	//_output << text;
 }

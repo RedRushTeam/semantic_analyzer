@@ -1,6 +1,6 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
-#define TEXTS_PATH "A:\\rasp_puhl"
+#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
+//#define TEXTS_PATH "A:\\rasp_puhl"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -22,7 +22,7 @@ vector<fs::path> get_input_texts() {
 list<string> parse_text(fs::path input_txt) {
 
 	parser _parser(input_txt);
-	return _parser.parse();
+	return _parser.delete_trash();
 }
 
 list<string> lemmatize_text(list<string> &list_of_parsed_symbols, HLEM &hEngine) {
