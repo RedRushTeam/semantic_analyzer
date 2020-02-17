@@ -1,6 +1,6 @@
-//#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-#define LEMADR "D:\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
+#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
+//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
+#define TEXTS_PATH "A:\\rasp_puhl"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -15,14 +15,14 @@ vector<fs::path> get_input_texts() {
 	fs::recursive_directory_iterator end;
 	std::vector<fs::path> txtFiles;
 	std::copy_if(begin, end, std::back_inserter(txtFiles), [](const fs::path& path) {
-		return fs::is_regular_file(path) && (path.extension() == ".TXT"); });
+		return fs::is_regular_file(path) && (path.extension() == ".txt" || path.extension() == ".TXT"); });
 	return txtFiles;
 }
 
 list<string> parse_text(fs::path input_txt) {
 
 	parser _parser(input_txt);
-	return _parser.delete_trash();
+	return _parser.parse();
 }
 
 list<string> lemmatize_text(list<string> &list_of_parsed_symbols, HLEM &hEngine) {
@@ -115,17 +115,15 @@ int main(int argc, char* argv[])
 		std::cout << i << std::endl;*/
 
 	for (auto i : vector_of_texts) {
-
-
 		//string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
 		//string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
 		list<string> list_of_parsed_symbols = parse_text(i);
 		//(list_of_parsed_symbols, _str_label_parse);
 		list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
 		//withdraw_list_of_string(list_of_lemmatized_words, _str_label_lemmas);
-		//list_of_parsed_symbols.clear();
+		list_of_parsed_symbols.clear();
 		analyze_text(list_of_lemmatized_words);
-		//list_of_lemmatized_words.clear();
+		list_of_lemmatized_words.clear();
 		++counter_of_text;
 	}
 

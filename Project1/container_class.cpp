@@ -6,12 +6,13 @@ void container_class::give_space(int counter_of_tokenizer, int k)
 	this->counter_of_tokenizer = counter_of_tokenizer;
 	this->k = k;
 
-	for (int i = 0; i < counter_of_tokenizer; ++i) {
+	for (int i = 0; i < counter_of_tokenizer; ++i)
 		vector_of_length[i].resize(counter_of_tokenizer);
 
+
+	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
 			vector_of_length[i][j].give_space(k);
-	}
 }
 
 void container_class::increment(int first_dimension, int second_dimension, int third_dimension)

@@ -3,7 +3,7 @@
 void class_of_collocation::give_space(int k)
 {
 	this->k = k;
-	vect_of_collocation.resize(2 * k + 2);
+	vect_of_collocation.resize(2 * k + 2, 0);
 	fill(vect_of_collocation.begin(), vect_of_collocation.end(), 0);
 }
 

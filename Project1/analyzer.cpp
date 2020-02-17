@@ -67,7 +67,8 @@ void analyzer::shape_vec_tokens_of_text()
 	this->vec_of_tokens = vec_tokens_of_text;
 }
 
-void analyzer::give_space() {
+void analyzer::give_space() 
+{
 	_container_class.give_space(counter_of_tokenizer, k);
 }
 
