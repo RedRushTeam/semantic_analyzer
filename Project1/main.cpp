@@ -1,6 +1,5 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (2)"
-#define TEXTS_PATH "A:\\rasp_puhl"
+#define TEXTS_PATH "E:\\Новая папка (2)"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -115,6 +114,8 @@ int main(int argc, char* argv[])
 		std::cout << i << std::endl;*/
 
 	for (auto i : vector_of_texts) {
+
+
 		//string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
 		//string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
 		list<string> list_of_parsed_symbols = parse_text(i);

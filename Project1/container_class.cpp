@@ -5,17 +5,61 @@ void container_class::give_space(int counter_of_tokenizer, int k)
 	vector_of_length.resize(counter_of_tokenizer);
 	this->counter_of_tokenizer = counter_of_tokenizer;
 	this->k = k;
+	
+	/////////////////////////////////////////////
 
-	/*for (int i = 0; i < counter_of_tokenizer; ++i)
+	size_t size = 0;
+	for (vector<class_of_first_bracket>::const_iterator cit = vector_of_length.begin(); cit != vector_of_length.end(); ++cit) {
+		size += sizeof(*cit);
+	}
+
+	//ves vneshnego vectora po 32 bita 
+
+	cout << endl << size << endl;
+
+	//////////////////////////////////////////
+
+	for (int i = 0; i < counter_of_tokenizer; ++i)
 		vector_of_length[i].resize(counter_of_tokenizer);
 
+	////////////////////////////////////////
+
+	auto sheet = vector_of_length[0].get_vector_of_length();
+
+	size_t _size = 0;
+	for (vector<class_of_collocation>::const_iterator cit = sheet.begin(); cit != sheet.end(); ++cit) {
+		_size += sizeof(*cit);
+	}
+
+	cout << endl << _size << endl;
+
+	//ves vnutrennego vectora po 32 bita 
+
+	/////////////////////////////////////////
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
-			vector_of_length[i][j].give_space(k);*/
+			vector_of_length[i][j].give_space(k);
 
-	for (int i = 0; i < counter_of_tokenizer; ++i)
-		vector_of_length[i].assign(counter_of_tokenizer, class_of_collocation(k));
+	///////////////////////////////////////////
+
+	auto sheet__ = vector_of_length[0][0].get_vect_of_collocation();
+
+	size_t _size_ = 0;
+
+	for (vector<float>::const_iterator cit = sheet__.begin(); cit != sheet__.end(); ++cit) {
+		_size_ += sizeof(*cit);
+	}
+
+	cout << endl << _size_ << endl;
+
+	//ves vnutrennego_vnutrennego vectora po 32 bita dlya GAP == 3
+
+	//obsh 32*32*32* counter of tokenizer
+
+	int i = 0;
+
+	//////////////////////////////////////////////
 }
 
 void container_class::increment(int first_dimension, int second_dimension, int third_dimension)
