@@ -23,6 +23,7 @@ void analyzer::analyze_vec_of_tokens()
 		}
 	}
 
+	_container_class.counter_of_tokenizer = this->counter_of_tokenizer;
 
 }
 

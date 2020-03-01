@@ -1,5 +1,7 @@
 #include "container_class.h"
 
+int container_class::counter_of_tokenizer = 0;
+
 void container_class::give_space(int counter_of_tokenizer, int k)
 {
 	//vector_of_length.resize(counter_of_tokenizer);
