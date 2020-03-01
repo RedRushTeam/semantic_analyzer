@@ -2,36 +2,36 @@
 
 void container_class::give_space(int counter_of_tokenizer, int k)
 {
-	vector_of_length.resize(counter_of_tokenizer);
-	this->counter_of_tokenizer = counter_of_tokenizer;
+	//vector_of_length.resize(counter_of_tokenizer);
+	//this->counter_of_tokenizer = counter_of_tokenizer;
 	this->k = k;
 	
 	/////////////////////////////////////////////
 
-	size_t size = 0;
+	/*size_t size = 0;
 	for (vector<class_of_first_bracket>::const_iterator cit = vector_of_length.begin(); cit != vector_of_length.end(); ++cit) {
 		size += sizeof(*cit);
-	}
+	}*/
 
 	//ves vneshnego vectora po 32 bita 
 
-	cout << endl << size << endl;
+	//cout << endl << size << endl;
 
 	//////////////////////////////////////////
 
-	for (int i = 0; i < counter_of_tokenizer; ++i)
-		vector_of_length[i].resize(counter_of_tokenizer);
+	/*for (int i = 0; i < counter_of_tokenizer; ++i)
+		vector_of_length[i].resize(counter_of_tokenizer);// ÂÅÐÍÓÒÜÑß ÑÞÄÀ ÏÎÑËÅ ÊËÀÑÑÀ ÑÊÎÁÎÊ */
 
 	////////////////////////////////////////
 
-	auto sheet = vector_of_length[0].get_vector_of_length();
+	/*auto sheet = vector_of_length[0].get_vector_of_length();
 
 	size_t _size = 0;
 	for (vector<class_of_collocation>::const_iterator cit = sheet.begin(); cit != sheet.end(); ++cit) {
 		_size += sizeof(*cit);
 	}
 
-	cout << endl << _size << endl;
+	cout << endl << _size << endl;*/
 
 	//ves vnutrennego vectora po 32 bita 
 
@@ -43,7 +43,7 @@ void container_class::give_space(int counter_of_tokenizer, int k)
 
 	///////////////////////////////////////////
 
-	auto sheet__ = vector_of_length[0][0].get_vect_of_collocation();
+	/*auto sheet__ = vector_of_length[0][0].get_vect_of_collocation();
 
 	size_t _size_ = 0;
 
@@ -51,7 +51,7 @@ void container_class::give_space(int counter_of_tokenizer, int k)
 		_size_ += sizeof(*cit);
 	}
 
-	cout << endl << _size_ << endl;
+	cout << endl << _size_ << endl;*/
 
 	//ves vnutrennego_vnutrennego vectora po 32 bita dlya GAP == 3
 
@@ -87,7 +87,7 @@ container_class container_class::pow_all(int stepen)
 	container_class cl_for_return(counter_of_tokenizer, k);
 	cl_for_return.give_space(counter_of_tokenizer, k);
 
-	for (int i = 0; i < this->vector_of_length.size(); ++i)
+	for (int i = 0; i < this->counter_of_tokenizer/*this->vector_of_length.size()*/; ++i) //èñïîëüçîâàíèå counter_of_tokenizer
 		cl_for_return[i] = this->vector_of_length[i].pow_all(stepen);
 	
 	return cl_for_return;
@@ -98,7 +98,7 @@ container_class container_class::sqrt_all()
 	container_class cl_for_return(counter_of_tokenizer, k);
 	cl_for_return.give_space(counter_of_tokenizer, k);
 
-	for (int i = 0; i < this->vector_of_length.size(); ++i)
+	for (int i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
 		cl_for_return[i] = this->vector_of_length[i].sqrt_all();
 
 	return cl_for_return;
@@ -113,8 +113,8 @@ container_class container_class::operator+(container_class summed_class)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (int i = 0; i < vector_of_length.size(); ++i)
-		for (int j = 0; j < vector_of_length.size(); ++j)
+	for (int i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (int j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
 					ret[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
 	return ret;
@@ -124,8 +124,8 @@ container_class container_class::operator-(container_class _class)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (auto j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] - _class[i][j][p];
 	return ret;
@@ -135,8 +135,8 @@ container_class container_class::operator*(my_double _koef)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (auto j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] * _koef;
 	return ret;
@@ -146,8 +146,8 @@ container_class container_class::operator/(my_double _koef)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (auto j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] / _koef;
 	return ret;
@@ -157,8 +157,8 @@ container_class& container_class::operator+=(container_class summed_class)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (auto j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				(*this)[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
 	return *this;
@@ -168,8 +168,8 @@ container_class& container_class::operator-=(container_class summed_class)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (auto j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				(*this)[i][j][p] = (*this)[i][j][p] - summed_class[i][j][p];
 	return *this;
@@ -189,21 +189,21 @@ container_class container_class::operator/(container_class dividor_class)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (auto j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] / dividor_class[i][j][p];
 	return ret;
 }
 
-vector<class_of_first_bracket> container_class::get_vector_of_length() const
+/*vector<class_of_first_bracket>*/class_of_first_bracket* container_class::get_vector_of_length() const
 {
 	return this->vector_of_length;
 }
 
 int container_class::get_length() const
 {
-	return this->vector_of_length.size();
+	return this->counter_of_tokenizer/*this->vector_of_length.size()*/;
 }
 
 /*bool container_class::resize(int new_size)		////////todo////////
@@ -224,8 +224,8 @@ container_class container_class::operator-(my_double _num)
 {
 	container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
-	for (auto i = 0; i < vector_of_length.size(); ++i)
-		for (auto j = 0; j < vector_of_length.size(); ++j)
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i)
+		for (auto j = 0; j < counter_of_tokenizer/*this->vector_of_length.size()*/; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] - _num;
 	return ret;
@@ -233,13 +233,14 @@ container_class container_class::operator-(my_double _num)
 
 void container_class::clear()
 {
-	for (auto i : this->vector_of_length) {
-		auto tmp = i.get_vector_of_length();
-		for (auto j : tmp) {
-			auto tmp1 = j.get_vect_of_collocation();
-			tmp1.clear();
+	for (auto i = 0; i < counter_of_tokenizer/*this->vector_of_length.size()*/; ++i) {
+		auto tmp = vector_of_length[i].get_vector_of_length();
+		for (auto j = 0; j < counter_of_tokenizer; j++) {
+			auto tmp1 = tmp[j].get_vect_of_collocation();
+			delete[] tmp1;
 		}
-		tmp.clear();
+		delete[] tmp;
 	}
-	this->vector_of_length.clear();
+	//this->vector_of_length.clear();
+	delete[] vector_of_length;
 }
