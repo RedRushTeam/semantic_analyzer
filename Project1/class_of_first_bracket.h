@@ -5,6 +5,7 @@ class class_of_first_bracket
 public:
 	//methods
 	void resize(long int i);
+	void assign(long int i, class_of_collocation _class_of_collocation);
 	class_of_first_bracket pow_all(int stepen);
 	class_of_first_bracket sqrt_all();
 	void push_back(class_of_collocation coc);
