@@ -11,6 +11,7 @@ void class_of_collocation::give_space(int k)
 
 void class_of_collocation::increment(int third_demention)
 {
+	int sheet = 0;
 	vect_of_collocation[third_demention]++;
 }
 

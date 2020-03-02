@@ -8,8 +8,8 @@ public:
 	container_class() {}
 	container_class(int counter_of_tokenizer, int k) :  k(k) 
 	{ 
-		this->vector_of_length = new class_of_first_bracket[counter_of_tokenizer]; 
-		//this->give_space(counter_of_tokenizer, k);
+		//this->vector_of_length = new class_of_first_bracket[counter_of_tokenizer]; 
+		this->give_space(counter_of_tokenizer, k);
 	}
 
 	//methods
