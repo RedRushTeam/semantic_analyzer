@@ -3,7 +3,7 @@
 void class_of_collocation::give_space(int k)
 {
 	
-	//vect_of_collocation.resize(2 * k + 2);
+	this->vect_of_collocation = new my_double[2 * k + 2];
 	//fill(vect_of_collocation.begin(), vect_of_collocation.end(), 0);
 	for (auto i = 0; i < (2 * k + 2); ++i)
 		vect_of_collocation[i] = 0;
