@@ -1,6 +1,6 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
 #define TEXTS_PATH "E:\\Новая папка (2)"
-#define TEXTS_PATH "A:\\rasp_puhl"
+//#define TEXTS_PATH "A:\\rasp_puhl"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
 			break;
 
 		SQLCHAR retConString[1024]; // Conection string
-		switch (SQLDriverConnect(SQLConnectionHandle, NULL, (SQLCHAR*)"DRIVER={SQL Server Native Client 11.0}; SERVER=DESKTOP-TE8LNSI; DATABASE=SQL_BD_lemmas; Trusted_Connection=yes;", SQL_NTS, retConString, 1024, NULL, SQL_DRIVER_NOPROMPT)) {
+		switch (SQLDriverConnect(SQLConnectionHandle, NULL, (SQLCHAR*)"DRIVER={SQL Server Native Client 11.0}; SERVER=STRELKOV-I5; DATABASE=SQL_BD_lemmas; Trusted_Connection=yes;", SQL_NTS, retConString, 1024, NULL, SQL_DRIVER_NOPROMPT)) {
 			// Establishes connections to a driver and a data source
 		case SQL_SUCCESS:
 			break;
