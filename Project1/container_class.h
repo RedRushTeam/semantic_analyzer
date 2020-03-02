@@ -37,8 +37,9 @@ public:
 	container_class operator/(container_class dividor_class);
 	container_class operator-(my_double _num);
 
+	static int counter_of_tokenizer;	
+
 private:
-	static const int counter_of_tokenizer=8138;
 	int k;
 	//vector<class_of_first_bracket> vector_of_length;
 	class_of_first_bracket* vector_of_length;
