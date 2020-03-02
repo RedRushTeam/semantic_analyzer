@@ -1,7 +1,9 @@
 #include "container_class.h"
 
+
 void container_class::give_space(int counter_of_tokenizer, int k)
 {
+
 	//vector_of_length.resize(counter_of_tokenizer);
 	//this->counter_of_tokenizer = counter_of_tokenizer;
 	this->k = k;
@@ -208,11 +210,11 @@ int container_class::get_length() const
 
 /*bool container_class::resize(int new_size)		////////todo////////
 {
-	if(this->vector_of_length.size() >= new_size)
+	if(this->counter_of_tokenizer>=new_size)
 		return false;
 	else {
-		
-		for (auto obj : this->vector_of_length) {
+		auto tmp = new class_of_first_bracket* [counter_of_tokenizer];
+		for (auto obj = 0;) {
 			class_of_collocation cl_for_push;
 			cl_for_push.give_space(GAP);
 			obj.push_back(cl_for_push);
