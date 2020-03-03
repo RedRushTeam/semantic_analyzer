@@ -1,17 +1,17 @@
 #pragma once
-#include "container_class.h"
+#include "hard_container_class.h"
 
 class analyzer
 {
 public:
 	analyzer() {}
-	analyzer(std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) { _container_class.give_space(this->counter_of_tokenizer, GAP); }
+	analyzer(std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) { _hard_container_class.give_space(this->counter_of_tokenizer, GAP); }
 
 	bool is_index_valid(int ind) const;
 
 	void analyze_vec_of_tokens();
 
-	container_class get_container_class();
+	hard_container_class get_hard_container_class();
 
 	void shape_vec_of_tokens();
 
@@ -38,7 +38,7 @@ public:
 
 private:
 	vector<int> vec_of_tokens;
-	container_class _container_class;
+	hard_container_class _hard_container_class;
 	int k;
 	int counter_of_tokenizer;
 	std::list<std::string>* list_of_all_parsed_text;

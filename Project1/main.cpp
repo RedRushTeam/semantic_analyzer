@@ -54,7 +54,7 @@ int analyze_text(list<string> &list_of_lemmatized_words) {
 	_analyzer.analyze_vec_of_tokens(); //trouble
 	_analyzer.update_dictionary();
 
-	Singleton::initialization().push_container(_analyzer.get_container_class());
+	Singleton::initialization().push_container(_analyzer.get_hard_container_class());
 
 	return _analyzer.get_counter_of_tokenizer();
 }
@@ -63,7 +63,7 @@ void out_matrix() {
 
 	ofstream matrix("matrix.txt");
 
-	for (auto some_scary_thing : Singleton::initialization().get_list_of_container_class()) {
+	for (auto some_scary_thing : Singleton::initialization().get_list_of_hard_container_class()) {
 
 		for (int i = 0; i < some_scary_thing.get_counter_of_tokenizer(); ++i)
 			for (int j = 0; j < some_scary_thing.get_counter_of_tokenizer(); ++j)
