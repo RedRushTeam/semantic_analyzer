@@ -7,8 +7,7 @@ public:
 	//constr
 	container_class() {}
 	container_class(int counter_of_tokenizer, int k) :  k(k) 
-	{ 
-		//this->vector_of_length = new class_of_first_bracket[counter_of_tokenizer]; 
+	{  
 		this->give_space(counter_of_tokenizer, k);
 	}
 
@@ -20,7 +19,7 @@ public:
 	int get_k() const;
 	container_class pow_all(int stepen);
 	container_class sqrt_all();
-	/*vector<class_of_first_bracket>*/class_of_first_bracket* get_vector_of_length() const;
+	class_of_first_bracket* get_vector_of_length() const;
 	int get_length() const;
 	bool resize(int new_size);
 	void clear();
@@ -41,6 +40,5 @@ public:
 
 private:
 	int k;
-	//vector<class_of_first_bracket> vector_of_length;
 	class_of_first_bracket* vector_of_length;
 };
