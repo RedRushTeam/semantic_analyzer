@@ -1,45 +1,34 @@
 #pragma once
+#include "container_class_.h"
 
-#include "container_class.h"
-
-class hard_container_class : public container_class
+class hard_container_class : virtual public container_class_
 {
-public:
+public: 
 	//constr
 	hard_container_class() {}
-	hard_container_class(int counter_of_tokenizer, int k) :  k(k) 
-	{  
-		this->give_space(counter_of_tokenizer, k);
-	}
+	hard_container_class(int counter_of_tokenizer, int k, type_of_cont_class _type_of_cont_class) : container_class_(counter_of_tokenizer, k, _type_of_cont_class) { this->give_space(counter_of_tokenizer, k); }
 
 	//methods
-	void give_space(int counter_of_tokenizer, int k);
-	void increment(int first_dimension, int second_dimension, int third_dimension);
-	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension);
-	int get_counter_of_tokenizer() const;
-	int get_k() const;
-	hard_container_class pow_all(int stepen);
-	hard_container_class sqrt_all();
-	class_of_first_bracket* get_vector_of_length() const;
-	int get_length() const;
-	//bool resize(int new_size);
-	void clear();
+	void give_space(int counter_of_tokenizer, int k) override;
+	void increment(int first_dimension, int second_dimension, int third_dimension) override;
+	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) override;
+	container_class_ pow_all(int stepen) override;
+	container_class_ sqrt_all() override;
+	class_of_first_bracket* get_vector_of_length() const override;
+	void clear() override;
 
 	//operators
-	class_of_first_bracket& operator[] (long int i);
-	hard_container_class operator+(hard_container_class summed_class);
-	hard_container_class operator-(hard_container_class summed_class);
-	hard_container_class& operator+=(hard_container_class summed_class);
-	hard_container_class& operator-=(hard_container_class summed_class);
-	bool operator==(hard_container_class summed_class);
-	hard_container_class operator*(my_double _koef);
-	hard_container_class operator/(my_double _koef);
-	hard_container_class operator/(hard_container_class dividor_class);
-	hard_container_class operator-(my_double _num);
-
-	static int counter_of_tokenizer;	
+	class_of_first_bracket& operator[] (long int i) override;
+	container_class_ operator+(container_class_ summed_class) override;
+	container_class_ operator-(container_class_ summed_class) override;
+	container_class_& operator+=(container_class_ summed_class) override;
+	container_class_& operator-=(container_class_ summed_class) override;
+	bool operator==(container_class_ summed_class) override;
+	container_class_ operator*(my_double _koef) override;
+	container_class_ operator/(my_double _koef) override;
+	container_class_ operator/(container_class_ dividor_class) override;
+	container_class_ operator-(my_double _num) override;
 
 private:
-	int k;
 	class_of_first_bracket* vector_of_length;
 };

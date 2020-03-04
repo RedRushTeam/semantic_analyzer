@@ -1,7 +1,7 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
 //#define TEXTS_PATH "E:\\Новая папка (2)"
-//#define TEXTS_PATH "A:\\rasp_puhl"
-#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
+#define TEXTS_PATH "A:\\rasp_puhl"
+//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -98,7 +98,6 @@ void showSQLError(unsigned int handleType, const SQLHANDLE& handle)
 
 int main(int argc, char* argv[])
 {
-
 	SQLHANDLE SQLEnvHandle = NULL;
 	SQLHANDLE SQLConnectionHandle = NULL;
 	SQLHANDLE SQLStatementHandle = NULL;

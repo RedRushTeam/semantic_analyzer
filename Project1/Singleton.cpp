@@ -6,12 +6,12 @@ Singleton& Singleton::initialization()
 	return _singleton;
 }
 
-void Singleton::push_container(hard_container_class _hard_container_class)
+void Singleton::push_container(container_class_ _container_class)
 {
-	this->list_of_hard_container_class.push_back(_hard_container_class);
+	this->list_of_hard_container_class.push_back(_container_class);
 }
 
-list<hard_container_class> Singleton::get_list_of_hard_container_class() const
+list<container_class_> Singleton::get_list_of_hard_container_class() const
 {
 	return this->list_of_hard_container_class;
 }
@@ -37,15 +37,14 @@ my_double Singleton::divider(int size) {
 
 void Singleton::calculate_sample_mean()
 {
-	hard_container_class sample_mean_all;
-	sample_mean_all.give_space(this->list_of_hard_container_class.begin()->get_counter_of_tokenizer(), (GAP));
+	container_class_* sample_mean_all =  new hard_container_class(this->list_of_hard_container_class.begin()->get_counter_of_tokenizer(), GAP, hard_container_class_);
 
 	#pragma (hint_parallel ( 4 ))
 	for (auto obj_of_cont_class : this->list_of_hard_container_class)
-		sample_mean_all += obj_of_cont_class;
+		*sample_mean_all += obj_of_cont_class;
 
-	sample_mean_all = sample_mean_all / this->list_of_hard_container_class.size();
-	this->sample_mean_all = sample_mean_all;
+	*sample_mean_all = *sample_mean_all / this->list_of_hard_container_class.size();
+	this->sample_mean_all = *sample_mean_all;
 }
 
 void Singleton::calculate_mat_ozidanie()
@@ -101,44 +100,44 @@ void Singleton::calculate_excess_ratio()								//////todo//////
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
-hard_container_class Singleton::get_sredne_kv_otklonenie() const
+container_class_ Singleton::get_sredne_kv_otklonenie() const
 {
 	return this->sredne_kv_otklonenie;
 }
 
-hard_container_class Singleton::get_sredne_kv_otklonenie_fixed() const
+container_class_ Singleton::get_sredne_kv_otklonenie_fixed() const
 {
 	return this->sredne_kv_otklonenie_fixed;
 }
 
-hard_container_class Singleton::get_mat_ozidanie() const
+container_class_ Singleton::get_mat_ozidanie() const
 {
 	return this->mat_ozidanie;
 }
 
-hard_container_class Singleton::get_mat_disperse() const
+container_class_ Singleton::get_mat_disperse() const
 {
 	return this->mat_disperse;
 }
 
-hard_container_class Singleton::get_asymmetry_coefficient() const
+container_class_ Singleton::get_asymmetry_coefficient() const
 {
 	return this->asymmetry_coefficient;
 }
 
-hard_container_class Singleton::get_excess_ratio() const
+container_class_ Singleton::get_excess_ratio() const
 {
 	return this->excess_ratio;
 }
 
-hard_container_class Singleton::get_sample_mean_all() const
+container_class_ Singleton::get_sample_mean_all() const
 {
 	return this->sample_mean_all;
 }
 
-bool Singleton::remove_hard_container_class(hard_container_class _hard_container_class)
+bool Singleton::remove_hard_container_class(container_class_ _hard_container_class)
 {
-	list<hard_container_class>::iterator tmp = find(this->list_of_hard_container_class.begin(), this->list_of_hard_container_class.end(), _hard_container_class);
+	list<container_class_>::iterator tmp = find(this->list_of_hard_container_class.begin(), this->list_of_hard_container_class.end(), _hard_container_class);
 	if (tmp == this->list_of_hard_container_class.end())
 		return false;
 	this->list_of_hard_container_class.erase(tmp);
@@ -151,18 +150,18 @@ void Singleton::calculate_params_for_charts()
 	this->razn = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 	this->shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
-	hard_container_class chart1;
+	container_class_* chart1 = new hard_container_class(this->list_of_hard_container_class.begin()->get_counter_of_tokenizer(), list_of_hard_container_class.front().get_k(), hard_container_class_);
 	auto keks = list_of_hard_container_class.front().get_counter_of_tokenizer();//get_vector_of_length().size();
-	chart1.give_space(list_of_hard_container_class.front().get_counter_of_tokenizer(), list_of_hard_container_class.front().get_k());
 	for (auto i : this->list_of_hard_container_class)
 	{
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					chart1[q][q][p] += i[q][j][p];
+					(*chart1)[q][q][p] = (*chart1)[q][q][p] + i[q][j][p];
 	}
-	chart1 = chart1 / (list_of_hard_container_class.size());
-	this->chart = chart1;
+
+	*chart1 = *chart1 / (list_of_hard_container_class.size());
+	this->chart = *chart1;
 }
 
 void Singleton::find_fluctuations()
@@ -183,7 +182,7 @@ void Singleton::find_fluctuations()
 			}
 }
 
-void Singleton::clear(type_of_cont_class _type_of_cont_class)
+void Singleton::clear(type_of_purpose_of_cont_class _type_of_cont_class)
 {
 	switch (_type_of_cont_class)
 	{
@@ -258,16 +257,16 @@ void Singleton::out_for_chart()
 
 void Singleton::sinchronize_terms()
 {
-	int max_size = this->list_of_hard_container_class.back().get_length();
-	list<hard_container_class> new_list;
+	int max_size = this->list_of_hard_container_class.back().get_counter_of_tokenizer();
+	list<container_class_> new_list;
 	for (auto obj : this->list_of_hard_container_class) {
-		hard_container_class new_cont_class(max_size, obj.get_k());
+		container_class_* new_cont_class = new hard_container_class(max_size, obj.get_k(), hard_container_class_);
 		for (auto q = 0; q < obj.get_counter_of_tokenizer(); ++q)
 			for (auto j = 0; j < obj.get_counter_of_tokenizer(); ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					new_cont_class[q][j][p] = obj[q][j][p];
+					(*new_cont_class)[q][j][p] = obj[q][j][p];
 
-		new_list.push_back(new_cont_class);
+		new_list.push_back(*new_cont_class);
 	}
 	this->list_of_hard_container_class = new_list;
 }
@@ -282,7 +281,7 @@ void Singleton::give_space()
 	this->mat_ozidanie.give_space(this->list_of_hard_container_class.begin()->get_counter_of_tokenizer(), (GAP));
 }
 
-hard_container_class Singleton::calculate_parametr_to_one_term(hard_container_class _parametr)
+container_class_ Singleton::calculate_parametr_to_one_term(container_class_ _parametr)
 {
 	for (auto q = 0; q < _parametr.get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < _parametr.get_counter_of_tokenizer(); ++j)
