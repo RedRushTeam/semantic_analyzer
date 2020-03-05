@@ -17,7 +17,7 @@ void hard_container_class::increment(int first_dimension, int second_dimension, 
 	vector_of_length[first_dimension][second_dimension].increment(third_dimension);
 }
 
-container_class_ hard_container_class::pow_all(int stepen)
+container_class_interface& hard_container_class::pow_all(int stepen)
 {
 	hard_container_class cl_for_return(counter_of_tokenizer, k, hard_container_class_);
 	cl_for_return.give_space(counter_of_tokenizer, k);
@@ -28,7 +28,7 @@ container_class_ hard_container_class::pow_all(int stepen)
 	return cl_for_return;
 }
 
-container_class_ hard_container_class::sqrt_all()
+container_class_interface& hard_container_class::sqrt_all()
 {
 	hard_container_class cl_for_return(counter_of_tokenizer, k, hard_container_class_);
 	cl_for_return.give_space(counter_of_tokenizer, k);
@@ -44,7 +44,7 @@ class_of_first_bracket& hard_container_class::operator[](long int i)
 	return this->vector_of_length[i];
 }
 
-container_class_ hard_container_class::operator+(container_class_ summed_class)
+container_class_interface& hard_container_class::operator+(container_class_interface& summed_class)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -55,7 +55,7 @@ container_class_ hard_container_class::operator+(container_class_ summed_class)
 	return ret;
 }
 
-container_class_ hard_container_class::operator-(container_class_ _class)
+container_class_interface& hard_container_class::operator-(container_class_interface& _class)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -66,7 +66,7 @@ container_class_ hard_container_class::operator-(container_class_ _class)
 	return ret;
 }
 
-container_class_ hard_container_class::operator*(my_double _koef)
+container_class_interface& hard_container_class::operator*(my_double _koef)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -77,7 +77,7 @@ container_class_ hard_container_class::operator*(my_double _koef)
 	return ret;
 }
 
-container_class_ hard_container_class::operator/(my_double _koef)
+container_class_interface& hard_container_class::operator/(my_double _koef)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -88,7 +88,7 @@ container_class_ hard_container_class::operator/(my_double _koef)
 	return ret;
 }
 
-container_class_& hard_container_class::operator+=(container_class_ summed_class)
+container_class_interface& hard_container_class::operator+=(container_class_interface& summed_class)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -99,7 +99,7 @@ container_class_& hard_container_class::operator+=(container_class_ summed_class
 	return *this;
 }
 
-container_class_& hard_container_class::operator-=(container_class_ summed_class)
+container_class_interface& hard_container_class::operator-=(container_class_interface& summed_class)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -110,7 +110,7 @@ container_class_& hard_container_class::operator-=(container_class_ summed_class
 	return *this;
 }
 
-bool hard_container_class::operator==(container_class_ summed_class)
+bool hard_container_class::operator==(container_class_interface& summed_class)
 {
 	for (auto q = 0; q < this->get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < this->get_counter_of_tokenizer(); ++j)
@@ -120,7 +120,7 @@ bool hard_container_class::operator==(container_class_ summed_class)
 	return true;
 }
 
-container_class_ hard_container_class::operator/(container_class_ dividor_class)
+container_class_interface& hard_container_class::operator/(container_class_interface& dividor_class)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -136,7 +136,7 @@ class_of_first_bracket* hard_container_class::get_vector_of_length() const
 	return this->vector_of_length;
 }
 
-container_class_ hard_container_class::operator-(my_double _num)
+container_class_interface& hard_container_class::operator-(my_double _num)
 {
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);

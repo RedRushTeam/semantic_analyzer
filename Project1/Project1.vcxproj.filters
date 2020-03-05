@@ -42,9 +42,6 @@
     <ClCompile Include="container_class_interface.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="container_class_.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="analyzer.h">
@@ -54,9 +51,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="class_of_first_bracket.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="container_class_.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="container_class_interface.h">

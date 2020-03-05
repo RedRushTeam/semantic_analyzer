@@ -6,13 +6,15 @@ class container_class_interface
 public:
 	//constr
 	container_class_interface() {}
-	container_class_interface(int counter_of_tokenizer, int k, type_of_cont_class _type_of_cont_class) : k(k), _type_of_cont_class(_type_of_cont_class) {}
+	container_class_interface(int counter_of_tokenizer, int k, type_of_cont_class _type_of_cont_class) : k(k), _type_of_cont_class(_type_of_cont_class) {  }
 
 	//methods
-	//virtual void somphing_sheet(container_class_interface* _sheet);
 	virtual void give_space(int counter_of_tokenizer, int k) = 0;
 	virtual void increment(int first_dimension, int second_dimension, int third_dimension) = 0;
 	virtual my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) = 0;
+
+	virtual container_class_interface& pow_all(int stepen) = 0;
+	virtual container_class_interface& sqrt_all() = 0;
 
 	int get_counter_of_tokenizer() const;
 	int get_k() const;
@@ -22,6 +24,15 @@ public:
 
 	//operators 
 	virtual class_of_first_bracket& operator[] (long int i) = 0;
+	virtual container_class_interface& operator+(container_class_interface& summed_class) = 0;
+	virtual container_class_interface& operator-(container_class_interface& summed_class) = 0;
+	virtual container_class_interface& operator+=(container_class_interface& summed_class) = 0;
+	virtual container_class_interface& operator-=(container_class_interface& summed_class) = 0;
+	virtual bool operator==(container_class_interface& summed_class) = 0;
+	virtual container_class_interface& operator*(my_double _koef) = 0;
+	virtual container_class_interface& operator/(my_double _koef) = 0;
+	virtual container_class_interface& operator/(container_class_interface& dividor_class) = 0;
+	virtual container_class_interface& operator-(my_double _num) = 0;
 
 	static int counter_of_tokenizer;
 
