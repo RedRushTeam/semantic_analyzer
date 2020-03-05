@@ -178,6 +178,16 @@ int main(int argc, char* argv[])
 	auto start = clock();
 	setlocale(LC_ALL, "Russian");
 
+	MEMORYSTATUSEX statex;
+
+	statex.dwLength = sizeof(statex);
+
+	GlobalMemoryStatusEx(&statex);
+
+	cout << "There are " << statex.ullTotalPhys / 1024 << " total KB of physical memory." << endl << endl;
+
+	cout << "There are " << statex.ullTotalPageFile / 1024 << " total KB of paging file." << endl << endl;
+
 	const char* dict_path = NULL;
 	const char* language = "russian";
 
