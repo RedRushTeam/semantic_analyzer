@@ -26,5 +26,5 @@ using my_double = float;
 #define STOP_WORD 0 
 
 
-
-enum type_of_cont_class{	mat_ozid_, mat_disperse_, mat_otkl_, mat_otkl_fixed_, excess_ratio_, asymmetry_coefficient_, sample_mean_all_	};
+enum type_of_purpose_of_cont_class {	mat_ozid_, mat_disperse_, mat_otkl_, mat_otkl_fixed_, excess_ratio_, asymmetry_coefficient_, sample_mean_all_	};
+enum type_of_cont_class {	hard_container_class_, sql_container_class_};

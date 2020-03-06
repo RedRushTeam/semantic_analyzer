@@ -12,7 +12,6 @@ public:
 	
 
 	//getter
-	//vector<class_of_collocation> get_vector_of_length() { return this->vector_of_length; };
 	class_of_collocation* get_vector_of_length() { return this->vector_of_length; };
 
 	//operators
@@ -21,7 +20,6 @@ public:
 
 	static int counter_of_tokenizer;
 private:
-	//vector<class_of_collocation> vector_of_length;
 	class_of_collocation* vector_of_length;
 	
 };

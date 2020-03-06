@@ -5,7 +5,7 @@ class class_of_collocation
 public:
 	//constr
 	class_of_collocation() {}
-	class_of_collocation(int k) { /*vect_of_collocation = new my_double[2 * k + 2];*/ }
+	class_of_collocation(int k) { }
 
 	//methods
 	void give_space(int k);
@@ -24,7 +24,5 @@ public:
 	class_of_collocation operator *(my_double _number);
 	class_of_collocation operator /(my_double _number);
 private:
-	//int k;
-	//vector<my_double> vect_of_collocation;
 	my_double* vect_of_collocation;
 };

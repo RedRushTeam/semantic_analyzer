@@ -145,7 +145,8 @@
     <ClCompile Include="analyzer.cpp" />
     <ClCompile Include="class_of_collocation.cpp" />
     <ClCompile Include="class_of_first_bracket.cpp" />
-    <ClCompile Include="container_class.cpp" />
+    <ClCompile Include="container_class_interface.cpp" />
+    <ClCompile Include="hard_container_class.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="Singleton.cpp" />
@@ -154,10 +155,14 @@
     <ClInclude Include="analyzer.h" />
     <ClInclude Include="class_of_collocation.h" />
     <ClInclude Include="class_of_first_bracket.h" />
-    <ClInclude Include="container_class.h" />
+    <ClInclude Include="container_class_interface.h" />
+    <ClInclude Include="hard_container_class.h" />
     <ClInclude Include="list_of_types.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="Singleton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
