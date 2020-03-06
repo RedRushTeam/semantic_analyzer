@@ -5,7 +5,7 @@ class analyzer
 {
 public:
 	analyzer() {}
-	analyzer(std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) {}
+	analyzer(std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) { _container_class.give_space(this->counter_of_tokenizer, GAP); }
 
 	bool is_index_valid(int ind) const;
 

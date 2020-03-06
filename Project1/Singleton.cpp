@@ -152,7 +152,7 @@ void Singleton::calculate_params_for_charts()
 	this->shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
 	container_class chart1;
-	auto keks = list_of_container_class.front().get_vector_of_length().size();
+	auto keks = list_of_container_class.front().get_counter_of_tokenizer();//get_vector_of_length().size();
 	chart1.give_space(list_of_container_class.front().get_counter_of_tokenizer(), list_of_container_class.front().get_k());
 	for (auto i : this->list_of_container_class)
 	{
@@ -216,7 +216,7 @@ void Singleton::clear(type_of_cont_class _type_of_cont_class)
 
 void Singleton::out_for_chart()
 {
-	auto keks = list_of_container_class.front().get_vector_of_length().size();
+	auto keks = list_of_container_class.front().get_counter_of_tokenizer();//get_vector_of_length().size();
 
 	ofstream to_chart("chart.txt");
 

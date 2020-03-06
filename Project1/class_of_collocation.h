@@ -5,13 +5,13 @@ class class_of_collocation
 public:
 	//constr
 	class_of_collocation() {}
-	class_of_collocation(int k) { vect_of_collocation.resize(2 * k + 2); }
+	class_of_collocation(int k) { /*vect_of_collocation = new my_double[2 * k + 2];*/ }
 
 	//methods
 	void give_space(int k);
 	void increment(int third_demention);
 	my_double get_count_of_concret_collocation(int third_demention);
-	vector<my_double> get_vect_of_collocation() { return vect_of_collocation; };
+	my_double* get_vect_of_collocation() { return vect_of_collocation; };
 	class_of_collocation pow_all(int stepen);
 	class_of_collocation sqrt_all();
 
@@ -25,5 +25,6 @@ public:
 	class_of_collocation operator /(my_double _number);
 private:
 	//int k;
-	vector<my_double> vect_of_collocation;
+	//vector<my_double> vect_of_collocation;
+	my_double* vect_of_collocation;
 };

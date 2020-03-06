@@ -38,10 +38,10 @@ void parser::check_all_words(string text)
 	cout << endl << text << endl;
 }
 
-void parser::delete_trash()
+list<string> parser::delete_trash()
 {
 	std::ifstream _input(_filename);
-	std::ofstream _output("parsed.txt");
+	//std::ofstream _output("parsed.txt");
 	int count = 1;
 	int helper = 1;
 	int size = 0;
@@ -86,6 +86,20 @@ void parser::delete_trash()
 			}
 		}
 	}
-	text.pop_back();//êîñòûëü
-	_output << text;
+	text.pop_back();
+	text.push_back(' ');
+	string substring_word;
+	list<string> terms;
+	while (!text.empty())
+	{
+		substring_word = text.substr(0, text.find(' '));
+		text = text.substr(text.find(' ') + 1, text.size());
+		if (stop_words.find(substring_word) == stop_words.end())
+			terms.push_back(substring_word);
+		else
+			terms.push_back("а");
+	}
+	//terms.back().pop_back();
+	return terms;
+	//_output << text;
 }
