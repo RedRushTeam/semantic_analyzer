@@ -100,15 +100,15 @@
       <Optimization>Full</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\RGD\RussianGrammaticalDictionary\include\lem\solarix\pro;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\HDF_Group\HDF5\1.12.0\include;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix\pro;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\RGD\RussianGrammaticalDictionary\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lemmatizator.lib;Solarix_Grammar_Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\HDF_Group\HDF5\1.12.0\lib;C:\RGD\RussianGrammaticalDictionary\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lemmatizator.lib;Solarix_Grammar_Engine.lib;szip.lib;zlib.lib;hdf5.lib;hdf5_cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

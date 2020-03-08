@@ -1,7 +1,10 @@
 #include "hard_container_class.h"
 
+#define OUT_PATH "A:\\text_output"
 
-void hard_container_class::give_space(int counter_of_tokenizer, int k)
+unsigned short int hard_container_class::counter_of_linked_container_class = 0;
+
+void hard_container_class::give_space(unsigned short int counter_of_tokenizer, char k)
 {
 	this->vector_of_length = new class_of_first_bracket [counter_of_tokenizer];
 	
@@ -163,4 +166,44 @@ void hard_container_class::clear()
 my_double hard_container_class::get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension)
 {
 	return this->vector_of_length[first_dimension][second_dimension].get_count_of_concret_collocation(third_dimension);
+}
+
+fs::path hard_container_class::get_path() const
+{
+	auto input_path = fs::current_path() / "text_data";
+	return input_path;
+}
+
+void hard_container_class::download()
+{
+	this->give_space(this->counter_of_tokenizer, this->get_k());
+
+	ifstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//заменить это на std::filesystem
+
+	while (!matrix.eof()) {
+		string line;
+		auto np = line.npos;
+		std::getline(matrix, line);
+		for (int i = GAP - 1; i <= GAP; ++i)
+			if((line.find("i") != np) && (line.find("j") != np) && (line.find("k" + to_string(i)) != np) && (line.find("k" + to_string(GAP - 1)) != np) && (line.find("k" + to_string(i + 1))))
+				(*this)[stoi(line.substr(line.find("i"), line.find("j")))][stoi(line.substr(line.find("j"), line.find("k" + to_string(GAP - 1))))][i] = stof(line.substr(line.find("k" + to_string(i)), line.find("k" + to_string(i + 1))));
+	}
+}
+
+void hard_container_class::upload()
+{
+	ofstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//заменить это на std::filesystem
+
+	matrix.clear();
+
+	for(int i = 0; i < this->counter_of_tokenizer; ++i)
+		for (int j = 0; j < this->counter_of_tokenizer; ++j) {
+			matrix << "i" << i << "j" << j;
+			for (int k = -GAP - 1; k <= GAP; ++k)
+				matrix << "k" + to_string(k) << (*this)[i][j][k];
+			matrix << "k" + to_string(GAP + 1);
+			matrix << endl;
+		}
+
+	this->clear();
 }

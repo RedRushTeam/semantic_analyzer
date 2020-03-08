@@ -23,7 +23,7 @@ void analyzer::analyze_vec_of_tokens()
 		}
 	}
 
-	_hard_container_class.counter_of_tokenizer = this->counter_of_tokenizer;
+	//_hard_container_class.counter_of_tokenizer = this->counter_of_tokenizer;
 
 }
 
@@ -77,7 +77,7 @@ int analyzer::get_counter_of_tokenizer() {
 	return this->counter_of_tokenizer;
 }
 
-void analyzer::set_k(int _k) {
+void analyzer::set_k(char _k) {
 	k = _k;
 }
 

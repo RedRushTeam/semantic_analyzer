@@ -21,7 +21,7 @@ public:
 
 	int get_counter_of_tokenizer();
 
-	void set_k(int _k);
+	void set_k(char _k);
 
 	void give_space();
 
@@ -39,7 +39,7 @@ public:
 private:
 	vector<int> vec_of_tokens;
 	hard_container_class _hard_container_class;
-	int k;
+	char k;
 	int counter_of_tokenizer;
 	std::list<std::string>* list_of_all_parsed_text;
 	std::map<std::string, int> map_of_tokens;
