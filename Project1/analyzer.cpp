@@ -11,14 +11,14 @@ void analyzer::analyze_vec_of_tokens()
 
 				if (this->is_index_valid(i)
 					&& this->vec_of_tokens[i] != STOP_WORD) {
-					this->_hard_container_class.increment(vec_of_tokens[j], vec_of_tokens[i], this->k - (j - i));
+					this->_container_class->increment(vec_of_tokens[j], vec_of_tokens[i], this->k - (j - i));
 				}
 			}
 
 			for (int l = j + 1; l <= j + k && l < this->vec_of_tokens.size(); ++l) {
 
 				if (this->is_index_valid(l) && this->vec_of_tokens[l] != STOP_WORD)
-					this->_hard_container_class.increment(vec_of_tokens[j], vec_of_tokens[l], (this->k + 1) - (j - l));
+					this->_container_class->increment(vec_of_tokens[j], vec_of_tokens[l], (this->k + 1) - (j - l));
 			}
 		}
 	}
@@ -27,9 +27,9 @@ void analyzer::analyze_vec_of_tokens()
 
 }
 
-hard_container_class analyzer::get_hard_container_class()
+container_class_interface* analyzer::get_container_class()
 {
-	return _hard_container_class;
+	return _container_class;
 }
 
 bool analyzer::is_index_valid(int ind) const
@@ -70,7 +70,7 @@ void analyzer::shape_vec_tokens_of_text()
 
 void analyzer::give_space() 
 {
-	_hard_container_class.give_space(counter_of_tokenizer, k);
+	_container_class->give_space(counter_of_tokenizer, k);
 }
 
 int analyzer::get_counter_of_tokenizer() {
@@ -111,4 +111,9 @@ void analyzer::update_dictionary()
 	for (auto it : this->get_map_of_tokens()) {
 		dict << endl << it.first << " " << it.second;
 	}
+}
+
+void analyzer::upload()
+{
+	this->_container_class->upload();
 }

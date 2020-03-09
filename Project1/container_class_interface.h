@@ -21,7 +21,7 @@ public:
 	unsigned short int get_counter_of_tokenizer() const;
 	char get_k() const;
 
-	virtual class_of_first_bracket* get_vector_of_length() const = 0;
+	virtual class_of_first_bracket* get_vector_of_length() = 0;
 	virtual void clear() = 0;
 
 	//operators 

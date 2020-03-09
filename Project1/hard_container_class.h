@@ -1,5 +1,6 @@
 #pragma once
 #include "container_class_interface.h"
+#define OUT_PATH "A:\\text_output"
 
 class hard_container_class : public container_class_interface
 {
@@ -9,6 +10,11 @@ public:
 	hard_container_class(unsigned short int counter_of_tokenizer, char k, type_of_cont_class _type_of_cont_class) : container_class_interface(counter_of_tokenizer, k, _type_of_cont_class) { 
 		this->_path = this->get_path() / (to_string(counter_of_linked_container_class) + ".txt");
 		this->give_space(counter_of_tokenizer, k); 
+		++counter_of_linked_container_class;
+	}
+
+	~hard_container_class() {
+		ofstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt", ios::trunc);
 	}
 
 	// Унаследовано через container_class_interface
@@ -18,7 +24,7 @@ public:
 	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) override;
 	container_class_interface& pow_all(int stepen) override;
 	container_class_interface& sqrt_all() override;
-	class_of_first_bracket* get_vector_of_length() const override;
+	class_of_first_bracket* get_vector_of_length() override;
 	void clear() override;
 	virtual void download() override;
 	virtual void upload() override;
@@ -40,6 +46,7 @@ public:
 
 private:
 	class_of_first_bracket* vector_of_length;
+	bool is_downloaded = 1;
 
 	fs::path get_path() const;
 	
