@@ -52,9 +52,10 @@ int analyze_text(list<string> &list_of_lemmatized_words) {
 	_analyzer.shape_vec_tokens_of_text();
 	_analyzer.give_space();
 	_analyzer.analyze_vec_of_tokens();
-	_analyzer.update_dictionary();
+	_analyzer.upload();
+	//_analyzer.update_dictionary();
 
-	Singleton::initialization().push_container(&_analyzer.get_hard_container_class());
+	Singleton::initialization().push_container(_analyzer.get_container_class());
 
 	return _analyzer.get_counter_of_tokenizer();
 }
