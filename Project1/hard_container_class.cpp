@@ -1,8 +1,13 @@
 #include "hard_container_class.h"
 
 
-void hard_container_class::give_space(int counter_of_tokenizer, int k)
+
+unsigned short int hard_container_class::counter_of_linked_container_class = 0;
+
+void hard_container_class::give_space(unsigned short int counter_of_tokenizer, char k)
 {
+	this->counter_of_tokenizer = counter_of_tokenizer;
+
 	this->vector_of_length = new class_of_first_bracket [counter_of_tokenizer];
 	
 	class_of_first_bracket::counter_of_tokenizer = counter_of_tokenizer;
@@ -10,140 +15,183 @@ void hard_container_class::give_space(int counter_of_tokenizer, int k)
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		vector_of_length[i].give_space(k);
+
+	int shhhhehehety = 0;
 }
 
-void hard_container_class::increment(int first_dimension, int second_dimension, int third_dimension)
+void hard_container_class::increment(int first_dimension, int second_dimension, int third_dimension)	//fix this
 {
+	//this->download();
 	vector_of_length[first_dimension][second_dimension].increment(third_dimension);
+	//this->upload();
 }
 
 container_class_interface& hard_container_class::pow_all(int stepen)
 {
+	this->download();
 	hard_container_class cl_for_return(counter_of_tokenizer, k, hard_container_class_);
 	cl_for_return.give_space(counter_of_tokenizer, k);
 
 	for (int i = 0; i < this->counter_of_tokenizer; ++i) 
 		cl_for_return[i] = this->vector_of_length[i].pow_all(stepen);
 	
+	this->upload();
 	return cl_for_return;
 }
 
 container_class_interface& hard_container_class::sqrt_all()
 {
+	this->download();
 	hard_container_class cl_for_return(counter_of_tokenizer, k, hard_container_class_);
 	cl_for_return.give_space(counter_of_tokenizer, k);
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		cl_for_return[i] = this->vector_of_length[i].sqrt_all();
 
+	this->upload();
 	return cl_for_return;
 }
 
-class_of_first_bracket& hard_container_class::operator[](long int i)
+class_of_first_bracket& hard_container_class::operator[](long int i)	//fix this
 {
-	return this->vector_of_length[i];
+	//this->download();
+	auto tmp = this->vector_of_length[i];
+	//this->upload();
+	return tmp;
 }
 
 container_class_interface& hard_container_class::operator+(container_class_interface& summed_class)
 {
+	this->download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
 					ret[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
+	this->upload();
 	return ret;
 }
 
 container_class_interface& hard_container_class::operator-(container_class_interface& _class)
 {
+	this->download();
+	_class.download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] - _class[i][j][p];
+	_class.upload();
+	this->upload();
 	return ret;
 }
 
 container_class_interface& hard_container_class::operator*(my_double _koef)
 {
+	this->download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] * _koef;
+	this->upload();
 	return ret;
 }
 
 container_class_interface& hard_container_class::operator/(my_double _koef)
 {
+	this->download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] / _koef;
+	this->upload();
 	return ret;
 }
 
 container_class_interface& hard_container_class::operator+=(container_class_interface& summed_class)
 {
+	this->download();
+	summed_class.download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				(*this)[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
+	this->upload();
+	summed_class.upload();
 	return *this;
 }
 
 container_class_interface& hard_container_class::operator-=(container_class_interface& summed_class)
 {
+	this->download();
+	summed_class.download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				(*this)[i][j][p] = (*this)[i][j][p] - summed_class[i][j][p];
+	summed_class.upload();
+	this->upload();
 	return *this;
 }
 
 bool hard_container_class::operator==(container_class_interface& summed_class)
 {
+	this->download();
+	summed_class.download();
 	for (auto q = 0; q < this->get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < this->get_counter_of_tokenizer(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				if(this->vector_of_length[q][q][p] != summed_class[q][q][p])
 					return false;
+	this->upload();
+	summed_class.upload();
 	return true;
 }
 
 container_class_interface& hard_container_class::operator/(container_class_interface& dividor_class)
 {
+	this->download();
+	dividor_class.download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] / dividor_class[i][j][p];
+	this->upload();
+	dividor_class.upload();
 	return ret;
 }
 
-class_of_first_bracket* hard_container_class::get_vector_of_length() const
+class_of_first_bracket* hard_container_class::get_vector_of_length()
 {
-	return this->vector_of_length;
+	this->download();
+	auto tmp = this->vector_of_length;
+	this->upload();
+	return tmp;
 }
 
 container_class_interface& hard_container_class::operator-(my_double _num)
 {
+	this->download();
 	hard_container_class ret;
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				ret[i][j][p] = (*this)[i][j][p] - _num;
+
+	this->upload();
 	return ret;
 }
 
@@ -162,5 +210,60 @@ void hard_container_class::clear()
 
 my_double hard_container_class::get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension)
 {
-	return this->vector_of_length[first_dimension][second_dimension].get_count_of_concret_collocation(third_dimension);
+	this->download();
+	auto tmp = this->vector_of_length[first_dimension][second_dimension].get_count_of_concret_collocation(third_dimension);
+	this->upload();
+	return tmp;
+}
+
+fs::path hard_container_class::get_path() const
+{
+	auto input_path = fs::current_path() / "text_data";
+	return input_path;
+}
+
+void hard_container_class::download()
+{
+	if (!this->is_downloaded) {
+		this->give_space(this->counter_of_tokenizer, this->get_k());
+
+		ifstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//заменить это на std::filesystem
+
+		while (!matrix.eof()) {
+			string line;
+			auto np = line.npos;
+			std::getline(matrix, line);
+			for (int i = GAP - 1; i <= GAP; ++i)
+				if ((line.find("i") != np) && (line.find("j") != np) && (line.find("k" + to_string(i)) != np) && (line.find("k" + to_string(GAP - 1)) != np) && (line.find("k" + to_string(i + 1))))
+					(*this)[stoi(line.substr(line.find("i"), line.find("j")))][stoi(line.substr(line.find("j"), line.find("k" + to_string(GAP - 1))))][i] = stof(line.substr(line.find("k" + to_string(i)), line.find("k" + to_string(i + 1))));
+		}
+
+		matrix.close();
+
+		this->is_downloaded = !this->is_downloaded;
+	}
+}
+
+void hard_container_class::upload()
+{
+	if (this->is_downloaded) {
+		ofstream m(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt", ios::trunc);
+		m.close();
+
+		ofstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//заменить это на std::filesystem
+
+		for (int i = 0; i < this->counter_of_tokenizer; ++i)
+			for (int j = 0; j < this->counter_of_tokenizer; ++j) {
+				matrix << "i" << i << "j" << j;
+				for (int k = -GAP - 1; k <= GAP; ++k)
+					matrix << "k" + to_string(k) << (*this)[i][j][k];
+				matrix << "k" + to_string(GAP + 1);
+				matrix << endl;
+			}
+
+		this->clear();
+		matrix.close();
+
+		this->is_downloaded = !this->is_downloaded;
+	}
 }
