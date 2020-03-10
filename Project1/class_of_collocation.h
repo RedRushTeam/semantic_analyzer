@@ -8,7 +8,7 @@ public:
 	class_of_collocation(int k) { }
 
 	//methods
-	void give_space(int k);
+	void give_space(char k);
 	void increment(int third_demention);
 	my_double get_count_of_concret_collocation(int third_demention);
 	my_double* get_vect_of_collocation() { return vect_of_collocation; };

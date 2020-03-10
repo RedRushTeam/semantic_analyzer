@@ -16,7 +16,10 @@ void hard_container_class::give_space(unsigned short int counter_of_tokenizer, c
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		vector_of_length[i].give_space(k);
 
-	int shhhhehehety = 0;
+	for (int i = 0; i < counter_of_tokenizer; ++i)
+		for (int j = 0; j < counter_of_tokenizer; ++j)
+			vector_of_length[i].get_vector_of_length()[j].give_space(this->k);
+
 }
 
 void hard_container_class::increment(int first_dimension, int second_dimension, int third_dimension)	//fix this
