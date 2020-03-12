@@ -2,17 +2,22 @@
 #define TEXTS_PATH "E:\\Новая папка (2)"
 //#define TEXTS_PATH "A:\\rasp_puhl"
 //#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-#define _CRT_SECURE_NO_WARNINGS
 
 #pragma once
 #include "parser.h"
 #include "Singleton.h"
-#include <lemmatizator_engine.h>
-#include <windows.h>
-#include <sqlext.h>
-#include <sqltypes.h>
-#include <sql.h>
+
+
+//////FIX HDF5 LINK
+const H5std_string FILE_NAME("SDSextendible.h5");
+const H5std_string DATASET_NAME("ExtendibleArray");
+
+void hdf5_test() {
+	H5File file(FILE_NAME, H5F_ACC_RDONLY);
+	DataSet dataset = file.openDataSet(DATASET_NAME);
+}
+//////FIX HDF5 LINK
+
 
 vector<fs::path> get_input_texts() {
 	auto input_path = TEXTS_PATH/*fs::current_path()/"inputfiles"*/;
