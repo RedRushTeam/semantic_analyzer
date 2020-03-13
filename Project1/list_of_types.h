@@ -12,7 +12,7 @@
 #include <sqlext.h>
 #include <sqltypes.h>
 #include <sql.h>
-
+#include "SparseMatrix.cpp"
 #include <string>
 #include <vector>
 #include <windows.h>

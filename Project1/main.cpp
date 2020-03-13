@@ -1,11 +1,19 @@
-#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-#define TEXTS_PATH "E:\\Новая папка (2)"
+п»ї#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
+#define TEXTS_PATH "E:\\РќРѕРІР°СЏ РїР°РїРєР° (2)"
 //#define TEXTS_PATH "A:\\rasp_puhl"
-//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
+//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\РќРѕРІР°СЏ РїР°РїРєР° (3)"
 
 #pragma once
 #include "parser.h"
 #include "Singleton.h"
+
+
+//////FIX SPARCE MATRIX LINK
+
+void SPARCE_test() {
+	SparseMatrix<int> matrix2(1, 5); // 4Г—5 matrix - 4 rows, 5 columns
+}
+//////FIX SPARCE MATRIX LINK
 
 
 //////FIX HDF5 LINK
@@ -104,6 +112,9 @@ void showSQLError(unsigned int handleType, const SQLHANDLE& handle)
 
 int main(int argc, char* argv[])
 {
+	SPARCE_test();
+
+
 	SQLHANDLE SQLEnvHandle = NULL;
 	SQLHANDLE SQLConnectionHandle = NULL;
 	SQLHANDLE SQLStatementHandle = NULL;
@@ -215,7 +226,7 @@ int main(int argc, char* argv[])
 
 	int counter_of_text = 1;
 
-	cout << endl << "Найдено текстов: " << vector_of_texts.size() << endl;
+	cout << endl << "РќР°Р№РґРµРЅРѕ С‚РµРєСЃС‚РѕРІ: " << vector_of_texts.size() << endl;
 
 
 	/*for (auto i : vector_of_texts)
@@ -224,8 +235,8 @@ int main(int argc, char* argv[])
 	for (auto i : vector_of_texts) {
 
 
-		//string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
-		//string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
+		//string _str_label_parse = "\t\t\t\t***** Р Р°СЃРїР°СЂСЃРµРЅС‹Р№ С‚РµРєСЃС‚ РЅРѕРјРµСЂ " + to_string(counter_of_text) + " *****";
+		//string _str_label_lemmas = "\t\t\t\t***** Р›РµРјРјР°С‚РёР·РёСЂРѕРІР°РЅРЅС‹Р№ С‚РµРєСЃС‚ РЅРѕРјРµСЂ " + to_string(counter_of_text) + " *****";
 		list<string> list_of_parsed_symbols = parse_text(i);
 		//(list_of_parsed_symbols, _str_label_parse);
 		list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
