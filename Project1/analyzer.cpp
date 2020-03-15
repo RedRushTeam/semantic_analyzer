@@ -77,8 +77,18 @@ int analyzer::get_counter_of_tokenizer() {
 	return this->counter_of_tokenizer;
 }
 
+void analyzer::set_list_of_all_parsed_text(std::list<std::string>* list_of_all_parsed_text)
+{
+	this->list_of_all_parsed_text = list_of_all_parsed_text;
+}
+
 void analyzer::set_k(char _k) {
 	k = _k;
+}
+
+void analyzer::set_container_class(container_class_interface* _container_class)
+{
+	this->_container_class = _container_class;
 }
 
 int analyzer::get_k() {
@@ -116,4 +126,11 @@ void analyzer::update_dictionary()
 void analyzer::upload_data()
 {
 	this->_container_class->upload_data();
+}
+
+void analyzer::clear()
+{
+	vec_of_tokens.clear();
+	list_of_all_parsed_text->clear();
+	delete list_of_all_parsed_text;
 }

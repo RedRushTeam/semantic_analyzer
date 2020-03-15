@@ -33,6 +33,11 @@ list<string> parser::parse()
 	return terms;
 }
 
+void parser::set_filename(fs::path filename)
+{
+	this->_filename = filename;
+}
+
 void parser::check_all_words(string text)
 {
 	cout << endl << text << endl;

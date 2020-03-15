@@ -12,7 +12,6 @@
 #include <sqlext.h>
 #include <sqltypes.h>
 #include <sql.h>
-#include "SparseMatrix.cpp"
 #include <string>
 #include <vector>
 #include <windows.h>
@@ -25,6 +24,7 @@
 #include <thread>
 #include <filesystem>
 
+#include "SparseMatrix.cpp"
 #include "H5Cpp.h"
 using namespace H5;
 
