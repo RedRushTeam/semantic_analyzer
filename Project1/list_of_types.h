@@ -1,10 +1,18 @@
 #pragma once
+#define H5_BUILT_AS_DYNAMIC_LIB
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
 #include <string>
 #include <stdlib.h>
-
+#include <lemmatizator_engine.h>
+#include <windows.h>
+#include <sqlext.h>
+#include <sqltypes.h>
+#include <sql.h>
+#include "SparseMatrix.cpp"
 #include <string>
 #include <vector>
 #include <windows.h>
