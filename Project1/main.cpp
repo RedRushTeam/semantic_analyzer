@@ -1,6 +1,6 @@
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-#define TEXTS_PATH "E:\\Новая папка (2)"
-//#define TEXTS_PATH "A:\\rasp_puhl"
+//#define TEXTS_PATH "E:\\Новая папка (2)"
+#define TEXTS_PATH "A:\\rasp_puhl"
 //#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
@@ -52,7 +52,7 @@ int analyze_text(list<string> &list_of_lemmatized_words) {
 	_analyzer.shape_vec_tokens_of_text();
 	_analyzer.give_space();
 	_analyzer.analyze_vec_of_tokens();
-	_analyzer.upload();
+	_analyzer.upload_data();
 	//_analyzer.update_dictionary();
 
 	Singleton::initialization().push_container(_analyzer.get_container_class());

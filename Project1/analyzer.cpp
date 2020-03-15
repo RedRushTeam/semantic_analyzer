@@ -113,7 +113,7 @@ void analyzer::update_dictionary()
 	}
 }
 
-void analyzer::upload()
+void analyzer::upload_data()
 {
-	this->_container_class->upload();
+	this->_container_class->upload_data();
 }

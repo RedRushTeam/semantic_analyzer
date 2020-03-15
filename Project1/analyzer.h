@@ -34,7 +34,7 @@ public:
 
 	void update_dictionary();
 
-	void upload();
+	void upload_data();
 
 	~analyzer() {
 		vec_of_tokens.~vector();

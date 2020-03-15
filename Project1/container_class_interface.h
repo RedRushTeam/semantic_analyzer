@@ -12,8 +12,8 @@ public:
 	virtual void give_space(unsigned short int counter_of_tokenizer, char k) = 0;
 	virtual void increment(int first_dimension, int second_dimension, int third_dimension) = 0;
 	virtual my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) = 0;
-	virtual void download() = 0;
-	virtual void upload() = 0;
+	virtual void download_data() = 0;
+	virtual void upload_data() = 0;
 
 	virtual container_class_interface& pow_all(int stepen) = 0;
 	virtual container_class_interface& sqrt_all() = 0;

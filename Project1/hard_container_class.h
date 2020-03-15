@@ -1,6 +1,6 @@
 #pragma once
 #include "container_class_interface.h"
-#define OUT_PATH "C:\\text_output\\"
+#define OUT_PATH "A:\\text_output\\"
 
 class hard_container_class : public container_class_interface
 {
@@ -26,8 +26,8 @@ public:
 	container_class_interface& sqrt_all() override;
 	class_of_first_bracket* get_vector_of_length() override;
 	void clear() override;
-	virtual void download() override;
-	virtual void upload() override;
+	virtual void download_data() override;
+	virtual void upload_data() override;
 
 
 	//operators
@@ -46,7 +46,7 @@ public:
 
 private:
 	class_of_first_bracket* vector_of_length;
-	bool is_downloaded = 1;
+	bool is_download_dataed = 1;
 
 	fs::path get_path() const;
 	
