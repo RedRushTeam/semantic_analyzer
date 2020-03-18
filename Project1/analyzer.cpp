@@ -18,7 +18,7 @@ void analyzer::analyze_vec_of_tokens()
 			for (int l = j + 1; l <= j + k && l < this->vec_of_tokens.size(); ++l) {
 
 				if (this->is_index_valid(l) && this->vec_of_tokens[l] != STOP_WORD)
-					this->_container_class->increment(vec_of_tokens[j], vec_of_tokens[l], (this->k + 1) - (j - l));
+					this->_container_class->increment(vec_of_tokens[j], vec_of_tokens[l], (this->k + 1) - (j - l));//kostil'
 			}
 		}
 	}
@@ -54,6 +54,7 @@ void analyzer::shape_vec_of_tokens()
 		}
 
 	this->counter_of_tokenizer = i;
+	this->_container_class->set_counter_of_tokenizer(i);
 }
 
 void analyzer::shape_vec_tokens_of_text()
@@ -62,7 +63,8 @@ void analyzer::shape_vec_tokens_of_text()
 	vec_tokens_of_text.reserve(list_of_all_parsed_text->size());
 	for (auto obj : *this->list_of_all_parsed_text) {
 		auto ptr = map_of_tokens.find(obj);
-		vec_tokens_of_text.push_back(ptr->second);
+		if(ptr != map_of_tokens.end())		//kostil'
+			vec_tokens_of_text.push_back(ptr->second);
 	}
 
 	this->vec_of_tokens = vec_tokens_of_text;
@@ -130,7 +132,8 @@ void analyzer::upload_data()
 
 void analyzer::clear()
 {
+	this->counter_of_tokenizer = 0;
 	vec_of_tokens.clear();
-	list_of_all_parsed_text->clear();
-	delete list_of_all_parsed_text;
+	//list_of_all_parsed_text->clear();
+//	delete list_of_all_parsed_text;
 }

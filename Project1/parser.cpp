@@ -3,12 +3,12 @@
 
 list<string> parser::parse()
 {
-	this->delete_trash();
+	this->delete_trash();					//Попался!
 	string text_all;
 	//this->check_all_words(text_all);
 	list<string> terms;
 	char tmp;
-	ifstream file("parsed.txt");
+	ifstream file(this->_filename);
 	if (file.is_open()) {
 		while (!file.eof()) {
 			tmp = file.get();

@@ -37,11 +37,17 @@ my_double Singleton::divider(int size) {
 
 void Singleton::calculate_sample_mean()
 {
-	this->sample_mean_all =  new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+	this->sample_mean_all = new hard_container_class(0, GAP, hard_container_class_, "NULLLINK");
 	this->sample_mean_all->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 	
 	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
 		this->prepare_data_in_container_class(obj_of_cont_class);
+		cout << endl << "Size of this text: " << obj_of_cont_class->get_counter_of_tokenizer();
+		if (obj_of_cont_class->get_counter_of_tokenizer() > this->max_cont_size) {
+			cout << endl << "Now MAXSIZE: " << this->max_cont_size;
+			this->max_cont_size = obj_of_cont_class->get_counter_of_tokenizer();
+			this->sinchronize_terms(this->sample_mean_all);
+		}
 		*sample_mean_all += *obj_of_cont_class;
 		obj_of_cont_class->clear();
 	}
@@ -320,6 +326,17 @@ void Singleton::sinchronize_terms()
 	this->vec_of_container_class_interface = new_vec;*/
 }
 
+void Singleton::sinchronize_terms(container_class_interface* _container_class)
+{
+	container_class_interface* new_cont_class = new hard_container_class(this->max_cont_size, _container_class->get_k(), hard_container_class_, "NULLLINK");
+	new_cont_class->give_space(this->max_cont_size, _container_class->get_k());
+	for (auto q = 0; q < _container_class->get_counter_of_tokenizer(); ++q)
+		for (auto j = 0; j < _container_class->get_counter_of_tokenizer(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				(*new_cont_class)[q][j][p] = (*_container_class)[q][j][p];
+
+}
+
 container_class_interface* Singleton::calculate_parametr_to_one_term(container_class_interface* _parametr)
 {
 	for (auto q = 0; q < _parametr->get_counter_of_tokenizer(); ++q)
@@ -338,11 +355,15 @@ void Singleton::prepare_data_in_container_class(container_class_interface* _cont
 {
 	this->_parser->set_filename(_container_class_interface->get_path());
 
+	cout << endl << "Now in work: " << _container_class_interface->get_path() << endl;
+
 	char utf9[512];
 
 	list<string> list_of_lemmatized_words;
+	auto parsed_text = this->_parser->parse();
 
-	for (string obj : this->_parser->parse()) {
+
+	for (string obj : parsed_text) {
 		auto is_lemmas_if_good = sol_GetLemmaA(hEngine, obj.c_str(), utf9, sizeof(utf9));
 		list_of_lemmatized_words.push_back(utf9);
 	}
@@ -357,4 +378,6 @@ void Singleton::prepare_data_in_container_class(container_class_interface* _cont
 	this->_analyzer->update_dictionary();
 	this->_analyzer->clear();
 	list_of_lemmatized_words.clear();
+
+	int i = 0000;
 }

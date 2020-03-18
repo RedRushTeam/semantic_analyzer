@@ -253,25 +253,25 @@ int main(int argc, char* argv[])
 
 	//thread tr_for_out(out_matrix);
 
-	Singleton::initialization().sinchronize_terms();
+	//Singleton::initialization().sinchronize_terms();
 
-	thread tr_for_sample_mean([]() {
+	//thread tr_for_sample_mean([]() {
 		Singleton::initialization().calculate_sample_mean();
-		});
+	//	});
 
 	Singleton::initialization().calculate_mat_ozidanie();
 	Singleton::initialization().calculate_mat_disperse();
 
-	thread tr_for_sredne_kv_otklonenie([]() {
+	//thread tr_for_sredne_kv_otklonenie([]() {
 		Singleton::initialization().calculate_sredne_kv_otklonenie();
-		});
-	thread tr_for_sredne_kv_otklonenie_fixed([]() {
+	//	});
+	//thread tr_for_sredne_kv_otklonenie_fixed([]() {
 		Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
-		});
+	//	});
 
-	tr_for_sredne_kv_otklonenie.detach();
-	tr_for_sample_mean.join();
-	tr_for_sredne_kv_otklonenie_fixed.join();
+	//tr_for_sredne_kv_otklonenie.detach();
+	//tr_for_sample_mean.join();
+	//tr_for_sredne_kv_otklonenie_fixed.join();
 
 	thread tr_for_params_for_charts([&]() {
 		Singleton::initialization().clear(mat_otkl_);
@@ -289,11 +289,11 @@ int main(int argc, char* argv[])
 	tr_for_asymmetry_coefficient.join();
 	tr_for_excess_ratio.join();
 
-	tr_for_sredne_kv_otklonenie_fixed.~thread();
-	tr_for_sredne_kv_otklonenie.~thread();
+	//tr_for_sredne_kv_otklonenie_fixed.~thread();
+	//tr_for_sredne_kv_otklonenie.~thread();
 	tr_for_asymmetry_coefficient.~thread();
 	tr_for_excess_ratio.~thread();
-	tr_for_sample_mean.~thread();
+	//tr_for_sample_mean.~thread();
 
 	tr_for_params_for_charts.join();
 	tr_for_params_for_charts.~thread();

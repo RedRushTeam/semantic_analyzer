@@ -20,6 +20,7 @@ public:
 	void calculate_params_for_charts();
 	void out_for_chart();
 	void sinchronize_terms();
+	void sinchronize_terms(container_class_interface* _container_class);
 	void find_fluctuations();
 	void clear(type_of_purpose_of_cont_class _type_of_cont_class);
 	void prepare_data_with_link_for_text(fs::path filename);
@@ -61,6 +62,7 @@ private:
 	parser* _parser;
 	analyzer* _analyzer;
 	HLEM hEngine;
+	unsigned int max_cont_size = 0;
 
 
 	//private methods for create

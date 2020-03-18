@@ -2,8 +2,9 @@
 
 void class_of_collocation::give_space(char k)
 {
-	this->vect_of_collocation = new my_double[2 * k + 2];
-	for (auto i = 0; i < (2 * k + 2); ++i) {
+	int k1 = k;
+	this->vect_of_collocation = new my_double[2 * k1 + 2];
+	for (auto i = 0; i < (2 * k1 + 2); ++i) {
 		int sheet = 0;
 		vect_of_collocation[i] = 0;
 	}
