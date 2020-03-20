@@ -1,37 +1,6 @@
 ﻿#include "parser.h"
 
 
-/*list<string> parser::parse()
-{
-	//this->delete_trash();					//Попался!
-	string text_all;
-	//this->check_all_words(text_all);
-	list<string> terms = this->delete_trash();
-	char tmp;
-	ifstream file(this->_filename);
-	if (file.is_open()) {
-		while (!file.eof()) {
-			tmp = file.get();
-			text_all.push_back(tmp);
-		}
-		text_all.push_back(' ');
-	}
-	else
-		cout << endl << "filename is invalid!" << endl;
-		
-	string substring_word;
-	while (!text_all.empty())
-	{
-		substring_word = text_all.substr(0, text_all.find(' '));
-		text_all = text_all.substr(text_all.find(' ') + 1, text_all.size());
-		if (stop_words.find(substring_word) == stop_words.end())
-			terms.push_back(substring_word);
-		else
-			terms.push_back("а");
-	}
-	terms.back().pop_back();
-	return terms;
-}*/
 
 list<string> parser::parse() {
 	auto terms = this->delete_trash();
@@ -54,7 +23,7 @@ void parser::check_all_words(string text)
 list<string> parser::delete_trash()
 {
 	std::ifstream _input(_filename);
-	std::ofstream _output("RESULTOFPARSE.txt");
+	//std::ofstream _output("RESULTOFPARSE.txt");
 	int count = 1;
 	int helper = 1;
 	int size = 0;
@@ -107,8 +76,7 @@ list<string> parser::delete_trash()
 		if (text[0] == ' ')
 			text.erase(0, 1);
 		text.pop_back();
-		//text.push_back(' ');
-		_output << text;
+		//_output << text;
 		string substring_word;
 		list<string> terms;
 		while (!text.empty())
@@ -117,8 +85,6 @@ list<string> parser::delete_trash()
 			text = text.substr(text.find(' ') + 1, text.size());
 			terms.push_back(substring_word);
 		}
-		//terms.back().pop_back();
-		cout << ">>>>>>>>>" << terms.front() << "<<<<<<<<<<<<<<<<<<<<";
 		temp.clear();
 		temp3.clear();
 
