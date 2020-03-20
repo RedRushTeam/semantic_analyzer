@@ -20,9 +20,14 @@ public:
 	void calculate_params_for_charts();
 	void out_for_chart();
 	void sinchronize_terms();
-	void give_space();
+	void sinchronize_terms(container_class_interface* _container_class);
 	void find_fluctuations();
 	void clear(type_of_purpose_of_cont_class _type_of_cont_class);
+	void prepare_data_with_link_for_text(fs::path filename);
+	void set_parser(parser* _parser);
+	void set_analyzer(analyzer* _analyzer);
+	void set_hEngine(HLEM& hEngine);
+	void prepare_data_in_container_class(container_class_interface* _container_class_interface);
 
 	//getters
 	container_class_interface* get_sredne_kv_otklonenie() const;
@@ -36,6 +41,7 @@ public:
 	container_class_interface* calculate_parametr_to_one_term(container_class_interface* _parametr);
 
 	bool remove_hard_container_class(container_class_interface* _hard_container_class);	//fix this!
+
 private:
 	//private methods
 	my_double divider(int size);
@@ -53,6 +59,10 @@ private:
 	container_class_interface* razn;
 	container_class_interface* shhh;
 	container_class_interface* chart;
+	parser* _parser;
+	analyzer* _analyzer;
+	HLEM hEngine;
+	unsigned int max_cont_size = 0;
 
 
 	//private methods for create

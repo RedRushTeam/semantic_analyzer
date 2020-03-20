@@ -1,15 +1,18 @@
 #pragma once
 #include "container_class_interface.h"
-#define OUT_PATH "A:\\text_output"
+#include "parser.h"
+#define OUT_PATH "A:\\text_output\\"
 
 class hard_container_class : public container_class_interface
 {
 public: 
 	//constr
 	hard_container_class() {}
-	hard_container_class(unsigned short int counter_of_tokenizer, char k, type_of_cont_class _type_of_cont_class) : container_class_interface(counter_of_tokenizer, k, _type_of_cont_class) { 
-		this->_path = this->get_path() / (to_string(counter_of_linked_container_class) + ".txt");
-		this->give_space(counter_of_tokenizer, k); 
+	hard_container_class(unsigned short int counter_of_tokenizer, char k, type_of_cont_class _type_of_cont_class, fs::path filename) : container_class_interface(counter_of_tokenizer, k, _type_of_cont_class, filename) {
+		++counter_of_linked_container_class;
+	}
+	
+	hard_container_class(char k, type_of_cont_class _type_of_cont_class, fs::path filename) : container_class_interface(k, _type_of_cont_class, filename) {
 		++counter_of_linked_container_class;
 	}
 
@@ -26,8 +29,8 @@ public:
 	container_class_interface& sqrt_all() override;
 	class_of_first_bracket* get_vector_of_length() override;
 	void clear() override;
-	virtual void download() override;
-	virtual void upload() override;
+	virtual void download_data() override;
+	virtual void upload_data() override;
 
 
 	//operators
@@ -46,9 +49,5 @@ public:
 
 private:
 	class_of_first_bracket* vector_of_length;
-	bool is_downloaded = 1;
-
-	fs::path get_path() const;
-	
-	fs::path _path;
+	bool is_download_dataed = 0;
 };

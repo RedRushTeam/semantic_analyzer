@@ -1,13 +1,11 @@
-#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-//#define TEXTS_PATH "E:\\Новая папка (2)"
+п»ї#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
+//#define TEXTS_PATH "E:\\РќРѕРІР°СЏ РїР°РїРєР° (2)"
 #define TEXTS_PATH "A:\\rasp_puhl"
-//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-#define _CRT_SECURE_NO_WARNINGS
+//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\РќРѕРІР°СЏ РїР°РїРєР° (3)"
 
 #pragma once
-#include "parser.h"
 #include "Singleton.h"
+<<<<<<< HEAD
 #include <lemmatizator_engine.h>
 #include <windows.h>
 #include <sqlext.h>
@@ -16,6 +14,27 @@
 #include "H5Cpp.h"
 //#include "liblist.h"
 using namespace H5;
+=======
+
+//////FIX SPARCE MATRIX LINK
+
+void SPARCE_test() {
+	SparseMatrix<int> matrix2(1, 5); // 1Г—5 matrix - 1 rows, 5 columns
+}
+//////FIX SPARCE MATRIX LINK
+
+
+//////FIX HDF5 LINK
+const H5std_string FILE_NAME("SDSextendible.h5");
+const H5std_string DATASET_NAME("ExtendibleArray");
+
+void hdf5_test() {
+	H5File file(FILE_NAME, H5F_ACC_RDONLY);
+	DataSet dataset = file.openDataSet(DATASET_NAME);
+}
+//////FIX HDF5 LINK
+
+>>>>>>> a8bcfd3b0235215fd8d2ed4c2e7b0434faee915d
 
 vector<fs::path> get_input_texts() {
 	auto input_path = TEXTS_PATH/*fs::current_path()/"inputfiles"*/;
@@ -27,13 +46,13 @@ vector<fs::path> get_input_texts() {
 	return txtFiles;
 }
 
-list<string> parse_text(fs::path input_txt) {
+/*list<string> parse_text(fs::path input_txt) {
 
 	parser _parser(input_txt);
 	return _parser.parse();
-}
+}*/
 
-list<string> lemmatize_text(list<string> &list_of_parsed_symbols, HLEM &hEngine) {
+/*list<string> lemmatize_text(list<string> &list_of_parsed_symbols, HLEM &hEngine) {
 	
 	char utf9[512];
 
@@ -45,9 +64,9 @@ list<string> lemmatize_text(list<string> &list_of_parsed_symbols, HLEM &hEngine)
 	}
 
 	return list_of_lemmatized_words;
-}
+}*/
 
-int analyze_text(list<string> &list_of_lemmatized_words) {
+/*int analyze_text(list<string> &list_of_lemmatized_words) {
 
 	analyzer _analyzer(&list_of_lemmatized_words);
 	_analyzer.set_k(GAP);
@@ -55,13 +74,13 @@ int analyze_text(list<string> &list_of_lemmatized_words) {
 	_analyzer.shape_vec_tokens_of_text();
 	_analyzer.give_space();
 	_analyzer.analyze_vec_of_tokens();
-	_analyzer.upload();
+	_analyzer.upload_data();
 	//_analyzer.update_dictionary();
 
 	Singleton::initialization().push_container(_analyzer.get_container_class());
 
 	return _analyzer.get_counter_of_tokenizer();
-}
+}*/
 
 void out_matrix() {
 
@@ -100,8 +119,7 @@ void showSQLError(unsigned int handleType, const SQLHANDLE& handle)
 		cout << "SQL driver message: " << message << "\nSQL state: " << SQLState << "." << endl;
 }
 
-int main(int argc, char* argv[])
-{
+void sqlstart() {
 	SQLHANDLE SQLEnvHandle = NULL;
 	SQLHANDLE SQLConnectionHandle = NULL;
 	SQLHANDLE SQLStatementHandle = NULL;
@@ -178,6 +196,11 @@ int main(int argc, char* argv[])
 	SQLFreeHandle(SQL_HANDLE_DBC, SQLConnectionHandle);
 	SQLFreeHandle(SQL_HANDLE_ENV, SQLEnvHandle);
 	// Frees the resources and disconnects
+}
+
+int main(int argc, char* argv[])
+{
+	SPARCE_test();
 
 	auto start = clock();
 	setlocale(LC_ALL, "Russian");
@@ -211,19 +234,24 @@ int main(int argc, char* argv[])
 	}
 	auto vector_of_texts = get_input_texts();
 
-	int counter_of_text = 1;
-
-	cout << endl << "Найдено текстов: " << vector_of_texts.size() << endl;
+	cout << endl << "РќР°Р№РґРµРЅРѕ С‚РµРєСЃС‚РѕРІ: " << vector_of_texts.size() << endl;
 
 
 	/*for (auto i : vector_of_texts)
 		std::cout << i << std::endl;*/
 
+	Singleton::initialization().set_parser(new parser);
+	Singleton::initialization().set_hEngine(hEngine);
+	Singleton::initialization().set_analyzer(new analyzer);
+
+	int counter_of_text = 1;
+
 	for (auto i : vector_of_texts) {
 
+		Singleton::initialization().prepare_data_with_link_for_text(i);
 
-		//string _str_label_parse = "\t\t\t\t***** Распарсеный текст номер " + to_string(counter_of_text) + " *****";
-		//string _str_label_lemmas = "\t\t\t\t***** Лемматизированный текст номер " + to_string(counter_of_text) + " *****";
+		/*//string _str_label_parse = "\t\t\t\t***** Р Р°СЃРїР°СЂСЃРµРЅС‹Р№ С‚РµРєСЃС‚ РЅРѕРјРµСЂ " + to_string(counter_of_text) + " *****";
+		//string _str_label_lemmas = "\t\t\t\t***** Р›РµРјРјР°С‚РёР·РёСЂРѕРІР°РЅРЅС‹Р№ С‚РµРєСЃС‚ РЅРѕРјРµСЂ " + to_string(counter_of_text) + " *****";
 		list<string> list_of_parsed_symbols = parse_text(i);
 		//(list_of_parsed_symbols, _str_label_parse);
 		list<string> list_of_lemmatized_words = lemmatize_text(list_of_parsed_symbols, hEngine);
@@ -231,31 +259,30 @@ int main(int argc, char* argv[])
 		list_of_parsed_symbols.clear();
 		analyze_text(list_of_lemmatized_words);
 		list_of_lemmatized_words.clear();
-		++counter_of_text;
+		++counter_of_text;*/
 	}
 
-	thread tr_for_out(out_matrix);
+	//thread tr_for_out(out_matrix);
 
-	Singleton::initialization().sinchronize_terms();
-	Singleton::initialization().give_space();
+	//Singleton::initialization().sinchronize_terms();
 
-	thread tr_for_sample_mean([]() {
+	//thread tr_for_sample_mean([]() {
 		Singleton::initialization().calculate_sample_mean();
-		});
+	//	});
 
 	Singleton::initialization().calculate_mat_ozidanie();
 	Singleton::initialization().calculate_mat_disperse();
 
-	thread tr_for_sredne_kv_otklonenie([]() {
+	//thread tr_for_sredne_kv_otklonenie([]() {
 		Singleton::initialization().calculate_sredne_kv_otklonenie();
-		});
-	thread tr_for_sredne_kv_otklonenie_fixed([]() {
+	//	});
+	//thread tr_for_sredne_kv_otklonenie_fixed([]() {
 		Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
-		});
+	//	});
 
-	tr_for_sredne_kv_otklonenie.detach();
-	tr_for_sample_mean.join();
-	tr_for_sredne_kv_otklonenie_fixed.join();
+	//tr_for_sredne_kv_otklonenie.detach();
+	//tr_for_sample_mean.join();
+	//tr_for_sredne_kv_otklonenie_fixed.join();
 
 	thread tr_for_params_for_charts([&]() {
 		Singleton::initialization().clear(mat_otkl_);
@@ -273,17 +300,17 @@ int main(int argc, char* argv[])
 	tr_for_asymmetry_coefficient.join();
 	tr_for_excess_ratio.join();
 
-	tr_for_sredne_kv_otklonenie_fixed.~thread();
-	tr_for_sredne_kv_otklonenie.~thread();
+	//tr_for_sredne_kv_otklonenie_fixed.~thread();
+	//tr_for_sredne_kv_otklonenie.~thread();
 	tr_for_asymmetry_coefficient.~thread();
 	tr_for_excess_ratio.~thread();
-	tr_for_sample_mean.~thread();
+	//tr_for_sample_mean.~thread();
 
 	tr_for_params_for_charts.join();
 	tr_for_params_for_charts.~thread();
 
-	tr_for_out.join();
-	tr_for_out.~thread();
+	//tr_for_out.join();
+	//tr_for_out.~thread();
 
 	Singleton::initialization().out_for_chart();
 

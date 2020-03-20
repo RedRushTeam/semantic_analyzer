@@ -7,8 +7,9 @@ public:
 	analyzer() {}
 	analyzer(std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) { 
 		_container_class = new hard_container_class;
-		_container_class->give_space(this->counter_of_tokenizer, GAP); 
 	}
+
+	analyzer(container_class_interface* _container_class_interface, std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text), _container_class(_container_class_interface)	{}
 
 	bool is_index_valid(int ind) const;
 
@@ -24,7 +25,11 @@ public:
 
 	int get_counter_of_tokenizer();
 
+	void set_list_of_all_parsed_text(std::list<std::string>* list_of_all_parsed_text);
+
 	void set_k(char _k);
+
+	void set_container_class(container_class_interface* _container_class);
 
 	void give_space();
 
@@ -34,11 +39,15 @@ public:
 
 	void update_dictionary();
 
-	void upload();
+	void upload_data();
+
+	void clear();
 
 	~analyzer() {
 		vec_of_tokens.~vector();
 		this->update_dictionary();
+		list_of_all_parsed_text->clear();
+		delete list_of_all_parsed_text;
 	}
 
 private:

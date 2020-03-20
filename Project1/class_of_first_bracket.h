@@ -4,7 +4,7 @@ class class_of_first_bracket
 {
 public:
 	//methods
-	void give_space(long int i);
+	void give_space(int counter_of_tokenizer, char k);
 	//void assign(long int i, class_of_collocation _class_of_collocation);
 	class_of_first_bracket pow_all(int stepen);
 	class_of_first_bracket sqrt_all();
@@ -18,7 +18,7 @@ public:
 	class_of_collocation& operator[](long int i);
 
 
-	static int counter_of_tokenizer;
+	int counter_of_tokenizer;
 private:
 	class_of_collocation* vector_of_length;
 	

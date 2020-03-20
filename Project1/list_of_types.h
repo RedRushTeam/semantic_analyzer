@@ -1,10 +1,17 @@
 #pragma once
+#define H5_BUILT_AS_DYNAMIC_LIB
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
 #include <string>
 #include <stdlib.h>
-
+#include <lemmatizator_engine.h>
+#include <windows.h>
+#include <sqlext.h>
+#include <sqltypes.h>
+#include <sql.h>
 #include <string>
 #include <vector>
 #include <windows.h>
@@ -17,8 +24,14 @@
 #include <thread>
 #include <filesystem>
 
+<<<<<<< HEAD
 /*#include "H5Cpp.h"
 using namespace H5;*/
+=======
+#include "SparseMatrix.cpp"
+#include "H5Cpp.h"
+using namespace H5;
+>>>>>>> a8bcfd3b0235215fd8d2ed4c2e7b0434faee915d
 
 namespace fs = std::filesystem;
 using namespace std;
