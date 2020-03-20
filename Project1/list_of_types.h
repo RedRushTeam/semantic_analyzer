@@ -23,6 +23,7 @@
 #include <ctime>
 #include <thread>
 #include <filesystem>
+#include <regex>
 
 <<<<<<< HEAD
 /*#include "H5Cpp.h"

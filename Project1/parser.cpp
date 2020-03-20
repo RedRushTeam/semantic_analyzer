@@ -51,6 +51,9 @@ list<string> parser::delete_trash()
 	int helper = 1;
 	int size = 0;
 	char tmp;
+	regex rx("[^А-Яа-я- ]");
+	regex spaces(" {2,}");
+	string replacement = " ";
 	std::string text;
 	if (_input.is_open()) {
 		while (!_input.eof()) {
@@ -61,6 +64,9 @@ list<string> parser::delete_trash()
 	}
 	else
 		cout << "it doesn't work";
+
+	string temp = regex_replace(text, rx, replacement);
+	text = regex_replace(temp, spaces, replacement);
 
 	transform(text.begin(), text.end(), text.begin(), tolower);;
 
@@ -78,7 +84,7 @@ list<string> parser::delete_trash()
 			}
 		}
 	}
-	while (count) {
+	/*while (count) {
 		count = 0;
 		for (auto i : stop_symbols) {
 			auto searcher = text.find(i);
@@ -90,7 +96,7 @@ list<string> parser::delete_trash()
 				text = tmp1 + tmp2;
 			}
 		}
-	}
+	}*/
 	text.pop_back();
 	text.push_back(' ');
 	string substring_word;
