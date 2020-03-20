@@ -1,20 +1,10 @@
 ﻿#define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
 //#define TEXTS_PATH "E:\\Новая папка (2)"
-#define TEXTS_PATH "A:\\rasp_puhl"
-//#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
+//#define TEXTS_PATH "A:\\rasp_puhl"
+#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
 
 #pragma once
 #include "Singleton.h"
-<<<<<<< HEAD
-#include <lemmatizator_engine.h>
-#include <windows.h>
-#include <sqlext.h>
-#include <sqltypes.h>
-#include <sql.h>
-#include "H5Cpp.h"
-//#include "liblist.h"
-using namespace H5;
-=======
 
 //////FIX SPARCE MATRIX LINK
 
@@ -34,7 +24,6 @@ void hdf5_test() {
 }
 //////FIX HDF5 LINK
 
->>>>>>> a8bcfd3b0235215fd8d2ed4c2e7b0434faee915d
 
 vector<fs::path> get_input_texts() {
 	auto input_path = TEXTS_PATH/*fs::current_path()/"inputfiles"*/;
@@ -316,6 +305,6 @@ int main(int argc, char* argv[])
 
 	auto finish = clock();							//2.53	//2.30	//2.10	//2.0	//1.02 flag /Ox	//strange 12sec
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
-	
+
 	return 0;
 }

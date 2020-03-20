@@ -25,14 +25,9 @@
 #include <filesystem>
 #include <regex>
 
-<<<<<<< HEAD
-/*#include "H5Cpp.h"
-using namespace H5;*/
-=======
 #include "SparseMatrix.cpp"
 #include "H5Cpp.h"
 using namespace H5;
->>>>>>> a8bcfd3b0235215fd8d2ed4c2e7b0434faee915d
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -41,6 +36,8 @@ using my_double = float;
 
 #define GAP 2
 #define STOP_WORD 0 
+
+#define TRASH_DELETE_OPTION 0 //0 - base  1 - extended
 
 
 enum type_of_purpose_of_cont_class {	mat_ozid_, mat_disperse_, mat_otkl_, mat_otkl_fixed_, excess_ratio_, asymmetry_coefficient_, sample_mean_all_	};
