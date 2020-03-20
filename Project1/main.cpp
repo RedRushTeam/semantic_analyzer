@@ -13,6 +13,9 @@
 #include <sqlext.h>
 #include <sqltypes.h>
 #include <sql.h>
+#include "H5Cpp.h"
+//#include "liblist.h"
+using namespace H5;
 
 vector<fs::path> get_input_texts() {
 	auto input_path = TEXTS_PATH/*fs::current_path()/"inputfiles"*/;
@@ -286,6 +289,6 @@ int main(int argc, char* argv[])
 
 	auto finish = clock();							//2.53	//2.30	//2.10	//2.0	//1.02 flag /Ox	//strange 12sec
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
-
+	
 	return 0;
 }
