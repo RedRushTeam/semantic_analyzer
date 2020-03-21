@@ -30,7 +30,7 @@ list<string> parser::delete_trash()
 	char tmp;
 	regex no_letters("[^А-Яа-я -]");
 	regex spaces(" {2,}");
-	regex defis("\-[а-яА-Я]");
+	regex defis("\ -[а-яА-Я]");
 	regex post_defis("\[[а-яА-Я]-");
 	regex un_defis("\- |\ -");
 	string replacement = " ";
@@ -76,7 +76,8 @@ list<string> parser::delete_trash()
 		if (text[0] == ' ')
 			text.erase(0, 1);
 		text.pop_back();
-		text.push_back(' ');
+		if (text[text.size()-1]!=' ')
+			text.push_back(' ');
 		_output << text;
 		string substring_word;
 		list<string> terms;
