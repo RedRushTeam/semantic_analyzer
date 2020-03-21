@@ -117,7 +117,7 @@ int SparseMatrix<T>::getColumnCount(void) const
 // === VALUES ==============================================
 
 template<typename T>
-T SparseMatrix<T>::get(int row, int col) const
+T SparseMatrix<T>::get(int row, int col)
 {
 	this->validateCoordinates(row, col);
 

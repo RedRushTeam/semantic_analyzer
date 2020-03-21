@@ -23,7 +23,7 @@ my_double class_of_collocation::get_count_of_concret_collocation(int third_demen
 class_of_collocation class_of_collocation::pow_all(int stepen)
 {
 	class_of_collocation cl_for_return(GAP);
-
+	cl_for_return.give_space(GAP);
 	for (int i = -GAP - 1; i <= GAP; ++i) {
 		cl_for_return[i] = 
 			pow(this->vect_of_collocation[i + (GAP + 1)], stepen);
@@ -35,7 +35,7 @@ class_of_collocation class_of_collocation::pow_all(int stepen)
 class_of_collocation class_of_collocation::sqrt_all()
 {
 	class_of_collocation cl_for_return(GAP);
-
+	cl_for_return.give_space(GAP);
 	for (int i = -GAP-1; i <= GAP; ++i) {
 		cl_for_return[i] = sqrt(this->vect_of_collocation[i + (GAP + 1)]);
 	}
@@ -51,7 +51,7 @@ my_double& class_of_collocation::operator[](long int i)
 class_of_collocation class_of_collocation::operator+(class_of_collocation& summed_class)
 {
 	class_of_collocation cl_for_return(GAP);
-
+	cl_for_return.give_space(GAP);
 	for (int i = 0; i < (2 * GAP + 2); ++i) {
 		cl_for_return[i] = this->vect_of_collocation[i] + summed_class[i];
 	}
@@ -62,7 +62,7 @@ class_of_collocation class_of_collocation::operator+(class_of_collocation& summe
 class_of_collocation class_of_collocation::operator-(class_of_collocation& _class)
 {
 	class_of_collocation cl_for_return(GAP);
-
+	cl_for_return.give_space(GAP);
 	for (int i = 0; i < (2 * GAP + 2); ++i) {
 		if (this->vect_of_collocation[i] - _class[i] >= 0)
 			cl_for_return[i] = this->vect_of_collocation[i] - _class[i];
@@ -97,7 +97,7 @@ class_of_collocation& class_of_collocation::operator+=(class_of_collocation& sum
 class_of_collocation class_of_collocation::operator*(my_double _number)
 {
 	class_of_collocation cl_for_return(GAP);
-
+	cl_for_return.give_space(GAP);
 	for (int i = 0; i < (2 * GAP + 2); ++i) {
 		cl_for_return[i] = this->vect_of_collocation[i] * _number;
 	}
@@ -108,7 +108,7 @@ class_of_collocation class_of_collocation::operator*(my_double _number)
 class_of_collocation class_of_collocation::operator/(my_double _number)
 {
 	class_of_collocation cl_for_return(GAP);
-
+	cl_for_return.give_space(GAP);
 	for (int i = 0; i < (2 * GAP + 2); ++i) {
 		cl_for_return[i] = this->vect_of_collocation[i] / _number;
 	}

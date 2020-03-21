@@ -134,5 +134,5 @@ void analyzer::clear()
 {
 	vec_of_tokens.clear();
 	list_of_all_parsed_text->clear();
-	delete list_of_all_parsed_text;
+	//delete list_of_all_parsed_text;
 }
