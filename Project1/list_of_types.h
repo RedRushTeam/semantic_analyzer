@@ -27,9 +27,9 @@
 #include <regex>
 //#include <boost/numeric/ublas/matrix_sparse.hpp>
 //#include <boost/numeric/ublas/io.hpp>
-
+/*
 #include "H5Cpp.h"
-using namespace H5;
+using namespace H5;*/
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -41,8 +41,8 @@ using my_double = float;
 
 #define TRASH_DELETE_OPTION 0 //0 - base  1 - extended
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-//#define TEXTS_PATH "E:\\Новая папка (2)"
-#define TEXTS_PATH "A:\\rasp_puhl"
+#define TEXTS_PATH "E:\\Новая папка (2)"
+//#define TEXTS_PATH "A:\\rasp_puhl"
 //#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
 
 

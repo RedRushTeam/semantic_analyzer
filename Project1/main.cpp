@@ -15,13 +15,13 @@ void SPARCE_test() {
 
 
 //////FIX HDF5 LINK
-const H5std_string FILE_NAME("SDSextendible.h5");
+/*const H5std_string FILE_NAME("SDSextendible.h5");
 const H5std_string DATASET_NAME("ExtendibleArray");
 
 void hdf5_test() {
 	H5File file(FILE_NAME, H5F_ACC_RDONLY);
 	DataSet dataset = file.openDataSet(DATASET_NAME);
-}
+}*/
 //////FIX HDF5 LINK
 
 
