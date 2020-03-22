@@ -1,12 +1,14 @@
-#pragma once
+﻿#pragma once
 #include "list_of_types.h"
+//using namespace boost::numeric::ublas;
 class class_of_collocation
 {
 public:
 	//constr
 	class_of_collocation() {}
-	class_of_collocation(int k) { }
-
+	class_of_collocation(int k) {
+		
+	}
 	//methods
 	void give_space(char k);
 	void increment(int third_demention);
@@ -25,4 +27,5 @@ public:
 	class_of_collocation operator /(my_double _number);
 private:
 	my_double* vect_of_collocation;
+	//mapped_matrix<my_double>* vect_of_sparce_collocation;
 };

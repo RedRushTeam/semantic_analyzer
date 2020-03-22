@@ -23,14 +23,14 @@ void parser::check_all_words(string text)
 list<string> parser::delete_trash()
 {
 	std::ifstream _input(_filename);
-	//std::ofstream _output("RESULTOFPARSE.txt");
+	std::ofstream _output("RESULTOFPARSE.txt");
 	int count = 1;
 	int helper = 1;
 	int size = 0;
 	char tmp;
 	regex no_letters("[^А-Яа-я -]");
 	regex spaces(" {2,}");
-	regex defis("\-[а-яА-Я]");
+	regex defis("\ -[а-яА-Я]");
 	regex post_defis("\[[а-яА-Я]-");
 	regex un_defis("\- |\ -");
 	string replacement = " ";
@@ -76,7 +76,9 @@ list<string> parser::delete_trash()
 		if (text[0] == ' ')
 			text.erase(0, 1);
 		text.pop_back();
-		//_output << text;
+		if (text[text.size()-1]!=' ')
+			text.push_back(' ');
+		_output << text;
 		string substring_word;
 		list<string> terms;
 

@@ -177,7 +177,7 @@ bool Singleton::remove_hard_container_class(container_class_interface* _hard_con
 	return true;
 }
 
-void Singleton::calculate_params_for_charts()
+void Singleton::calculate_params_for_charts()	//TODO
 {
 	this->sum = &(*this->calculate_parametr_to_one_term(this->mat_ozidanie) + *this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed));
 	this->razn = &(*this->calculate_parametr_to_one_term(this->mat_ozidanie) - *this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed));
@@ -197,7 +197,7 @@ void Singleton::calculate_params_for_charts()
 	this->chart = chart1;
 }
 
-void Singleton::find_fluctuations()
+void Singleton::find_fluctuations()	//TODO
 {
 	analyzer helper;
 	helper.set_map_of_tokens("dictionary.txt");
@@ -262,7 +262,7 @@ void Singleton::set_hEngine(HLEM& hEngine)
 }
 
 
-void Singleton::out_for_chart()
+void Singleton::out_for_chart()	//TODO
 {
 	auto keks = this->vec_of_container_class_interface[this->vec_of_container_class_interface.size() - 1]->get_counter_of_tokenizer();
 
@@ -378,6 +378,4 @@ void Singleton::prepare_data_in_container_class(container_class_interface* _cont
 	this->_analyzer->update_dictionary();
 	this->_analyzer->clear();
 	list_of_lemmatized_words.clear();
-
-	int i = 0000;
 }

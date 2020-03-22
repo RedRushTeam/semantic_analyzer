@@ -4,7 +4,12 @@
 //////FIX SPARCE MATRIX LINK
 
 void SPARCE_test() {
-	SparseMatrix<int> matrix2(1, 5); // 1×5 matrix - 1 rows, 5 columns
+/*	using namespace boost::numeric::ublas;
+	mapped_matrix<double> m(3, 3);
+	for (unsigned i = 0; i < m.size1(); ++i)
+		for (unsigned j = 0; j < m.size2(); ++j)
+			m(i, j) = 3 * i + j;
+	std::cout << m << std::endl;*/
 }
 //////FIX SPARCE MATRIX LINK
 
@@ -258,7 +263,7 @@ int main(int argc, char* argv[])
 	Singleton::initialization().calculate_mat_disperse();
 
 	//thread tr_for_sredne_kv_otklonenie([]() {
-		Singleton::initialization().calculate_sredne_kv_otklonenie();
+		//Singleton::initialization().calculate_sredne_kv_otklonenie();
 	//	});
 	//thread tr_for_sredne_kv_otklonenie_fixed([]() {
 		Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
@@ -269,7 +274,7 @@ int main(int argc, char* argv[])
 	//tr_for_sredne_kv_otklonenie_fixed.join();
 
 	thread tr_for_params_for_charts([&]() {
-		Singleton::initialization().clear(mat_otkl_);
+		//Singleton::initialization().clear(mat_otkl_);
 		Singleton::initialization().calculate_params_for_charts();
 		Singleton::initialization().find_fluctuations();
 		Singleton::initialization().clear(mat_disperse_);
