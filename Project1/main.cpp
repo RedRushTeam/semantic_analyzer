@@ -4,8 +4,8 @@
 //////FIX SPARCE MATRIX LINK
 
 void SPARCE_test() {
-	/*using namespace boost::numeric::ublas;
-	mapped_matrix<double> m(3, 3, 3 * 3);
+/*	using namespace boost::numeric::ublas;
+	mapped_matrix<double> m(3, 3);
 	for (unsigned i = 0; i < m.size1(); ++i)
 		for (unsigned j = 0; j < m.size2(); ++j)
 			m(i, j) = 3 * i + j;

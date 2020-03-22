@@ -2,6 +2,7 @@
 #define H5_BUILT_AS_DYNAMIC_LIB
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #define _CRT_SECURE_NO_WARNINGS
+#define BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -24,10 +25,9 @@
 #include <thread>
 #include <filesystem>
 #include <regex>
-//#include <boost>
+//#include <boost/numeric/ublas/matrix_sparse.hpp>
+//#include <boost/numeric/ublas/io.hpp>
 
-//#include "matrix_sparse.hpp"
-//#include "io.hpp"
 #include "H5Cpp.h"
 using namespace H5;
 

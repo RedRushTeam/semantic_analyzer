@@ -45,7 +45,7 @@ class_of_collocation class_of_collocation::sqrt_all()
 
 my_double& class_of_collocation::operator[](long int i)
 {
-	return this->vect_of_collocation[i + (GAP + 1)];
+	return this->vect_of_collocation[i];	//not good
 }
 
 class_of_collocation class_of_collocation::operator+(class_of_collocation& summed_class)
