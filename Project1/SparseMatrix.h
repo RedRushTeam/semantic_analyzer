@@ -41,7 +41,7 @@
 
 			// === VALUES ==============================================
 
-			T get(int row, int col) const;
+			T get(int row, int col);
 			SparseMatrix & set(T val, int row, int col);
 
 
