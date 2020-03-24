@@ -81,6 +81,7 @@ list<string> parser::delete_trash()
 		_output << text;
 		string substring_word;
 		list<string> terms;
+
 		while (!text.empty())
 		{
 			substring_word = text.substr(0, text.find(' '));
