@@ -23,7 +23,7 @@ public:
 
 	// Унаследовано через container_class_interface
 	//methods
-	void give_space(unsigned short int counter_of_tokenizer, char k) override;
+	void give_space(unsigned short int counter_of_tokenizer, int k) override;
 	void increment(int first_dimension, int second_dimension, int third_dimension) override;
 	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) override;
 	container_class_interface& pow_all(int stepen) override;

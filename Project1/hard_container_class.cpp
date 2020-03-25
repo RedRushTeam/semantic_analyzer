@@ -4,20 +4,20 @@
 
 unsigned short int hard_container_class::counter_of_linked_container_class = 0;
 
-void hard_container_class::give_space(unsigned short int counter_of_tokenizer, char k)
+void hard_container_class::give_space(unsigned short int counter_of_tokenizer, int k)
 {
 	this->counter_of_tokenizer = counter_of_tokenizer;
 
-	this->vector_of_length = new class_of_first_bracket [counter_of_tokenizer];
+	this->vector_of_length = new class_of_first_bracket [counter_of_tokenizer]();
 
 	this->k = k;
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		vector_of_length[i].give_space(counter_of_tokenizer, k);
 
-	/*for (int i = 0; i < counter_of_tokenizer; ++i)
+	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
-			vector_of_length[i].get_vector_of_length()[j].give_space(this->k);*/
+			vector_of_length[i].get_vector_of_length()[j].give_space(this->k);
 
 }
 
@@ -50,8 +50,7 @@ container_class_interface& hard_container_class::sqrt_all()
 
 class_of_first_bracket& hard_container_class::operator[](long int i)
 {
-	auto tmp = this->vector_of_length[i];
-	return tmp;
+	return this->vector_of_length[i];
 }
 
 container_class_interface& hard_container_class::operator+(container_class_interface& summed_class)

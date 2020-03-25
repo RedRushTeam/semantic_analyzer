@@ -1,12 +1,10 @@
 #include "class_of_first_bracket.h"
 
-void class_of_first_bracket::give_space(int counter_of_tokenizer, char k)
+void class_of_first_bracket::give_space(int counter_of_tokenizer, int k)
 {
 	this->counter_of_tokenizer = counter_of_tokenizer;
 
-	this->vector_of_length = new class_of_collocation[counter_of_tokenizer];
-	for (int j = 0; j < counter_of_tokenizer; ++j)
-		vector_of_length[j].give_space(k);
+	this->vector_of_length = new class_of_collocation[counter_of_tokenizer]();
 }
 
 /*void class_of_first_bracket::assign(long int i, class_of_collocation _class_of_collocation)

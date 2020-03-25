@@ -28,7 +28,7 @@ public:
 	void set_parser(parser* _parser);
 	void set_analyzer(analyzer* _analyzer);
 	void set_hEngine(HLEM& hEngine);
-	void prepare_data_in_container_class(container_class_interface* _container_class_interface);
+	void prepare_data_in_container_class(int _container_class_interface_number);
 
 	//getters
 	container_class_interface* get_sredne_kv_otklonenie() const;

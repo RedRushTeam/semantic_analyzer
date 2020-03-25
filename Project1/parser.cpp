@@ -27,7 +27,7 @@ list<string> parser::delete_trash()
 	int count = 1;
 	int helper = 1;
 	int size = 0;
-	char tmp;
+	int tmp;
 	regex no_letters("[^А-Яа-я -]");
 	regex spaces(" {2,}");
 	regex defis("\ -[а-яА-Я]");

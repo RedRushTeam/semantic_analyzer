@@ -37,20 +37,24 @@ my_double Singleton::divider(int size) {
 
 void Singleton::calculate_sample_mean()
 {
-	this->sample_mean_all = new hard_container_class(0, GAP, hard_container_class_, "NULLLINK");
+	this->sample_mean_all = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
 	this->sample_mean_all->give_space(this->max_cont_size, GAP);
-	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
-		this->prepare_data_in_container_class(obj_of_cont_class);
-		cout << endl << "Size of this text: " << obj_of_cont_class->get_counter_of_tokenizer();
-		for (auto i = 0; i < this->max_cont_size; ++i)
+	(*sample_mean_all)[0][0][-3] = 0;
+
+	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+		this->prepare_data_in_container_class(i);
+		cout << endl << "Size of this text: " << this->vec_of_container_class_interface[i]->get_counter_of_tokenizer();
+		
+		for (auto l = 0; l < this->max_cont_size; ++l)
 			for (auto j = 0; j < this->max_cont_size; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					(*sample_mean_all)[i][j][p] = (*sample_mean_all)[i][j][p] + (*obj_of_cont_class)[i][j][p];		//память в obj_of_cont_class почему-то не выделена! TODO2
+					(*sample_mean_all)[l][j][p] = (*sample_mean_all)[l][j][p] + (*(vec_of_container_class_interface[i]))[l][j][p];		//память в obj_of_cont_class почему-то не выделена! TODO2
 		//(*sample_mean_all) += (*obj_of_cont_class);
-		obj_of_cont_class->clear();
+		this->vec_of_container_class_interface[i]->clear();
 	}
-
-	*sample_mean_all = ((*sample_mean_all) / this->vec_of_container_class_interface.size());
+	auto* tmp_mean = &((*sample_mean_all) / this->vec_of_container_class_interface.size());
+	sample_mean_all = &((*sample_mean_all) / this->vec_of_container_class_interface.size());
+	int sheeet = 0;
 }
 
 void Singleton::calculate_mat_ozidanie()
@@ -59,7 +63,7 @@ void Singleton::calculate_mat_ozidanie()
 	this->mat_ozidanie->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
-		this->prepare_data_in_container_class(obj_of_cont_class);
+		//this->prepare_data_in_container_class(obj_of_cont_class);
 		*(this->mat_ozidanie) += *obj_of_cont_class;
 		obj_of_cont_class->clear();
 	}
@@ -73,7 +77,7 @@ void Singleton::calculate_mat_disperse()
 	this->mat_disperse->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
-		this->prepare_data_in_container_class(obj_of_cont_class);
+		//this->prepare_data_in_container_class(obj_of_cont_class);
 		*this->mat_disperse += (*obj_of_cont_class).pow_all(2);
 		obj_of_cont_class->clear();
 	}
@@ -108,7 +112,7 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 	this->asymmetry_coefficient->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
-		this->prepare_data_in_container_class(obj_of_cont_class);
+		//this->prepare_data_in_container_class(obj_of_cont_class);
 		*this->asymmetry_coefficient += (*obj_of_cont_class - *this->get_sample_mean_all()).pow_all(3);
 		obj_of_cont_class->clear();
 	}
@@ -391,11 +395,11 @@ void Singleton::prepare_data_with_link_for_text(fs::path filename)
 	this->push_container(new hard_container_class(GAP, hard_container_class_, filename));
 }
 
-void Singleton::prepare_data_in_container_class(container_class_interface* _container_class_interface)
+void Singleton::prepare_data_in_container_class(int _container_class_interface_number)
 {
-	this->_parser->set_filename(_container_class_interface->get_path());
+	this->_parser->set_filename(this->vec_of_container_class_interface[_container_class_interface_number]->get_path());
 
-	cout << endl << "Now in work: " << _container_class_interface->get_path() << endl;
+	cout << endl << "Now in work: " << this->vec_of_container_class_interface[_container_class_interface_number]->get_path() << endl;
 
 	char utf9[512];
 
@@ -409,7 +413,7 @@ void Singleton::prepare_data_in_container_class(container_class_interface* _cont
 	}
 
 	this->_analyzer->set_list_of_all_parsed_text(&list_of_lemmatized_words);
-	this->_analyzer->set_container_class(_container_class_interface);
+	this->_analyzer->set_container_class(this->vec_of_container_class_interface[_container_class_interface_number]);
 	this->_analyzer->set_k(GAP);
 	this->_analyzer->shape_vec_of_tokens();
 	this->_analyzer->shape_vec_tokens_of_text();
