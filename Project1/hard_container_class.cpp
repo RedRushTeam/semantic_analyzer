@@ -102,8 +102,8 @@ container_class_interface& hard_container_class::operator/(my_double _koef)
 
 container_class_interface& hard_container_class::operator+=(container_class_interface& summed_class)
 {
-	hard_container_class ret;
-	ret.give_space(this->counter_of_tokenizer, this->k);
+	summed_class[0][1][-3];
+	(*this)[0][1][-3];
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)

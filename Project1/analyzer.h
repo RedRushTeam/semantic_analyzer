@@ -31,7 +31,7 @@ public:
 
 	void set_container_class(container_class_interface* _container_class);
 
-	void give_space();
+	void give_space(int maxsize);
 
 	std::map<std::string, int> get_map_of_tokens();
 

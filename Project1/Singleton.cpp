@@ -38,22 +38,19 @@ my_double Singleton::divider(int size) {
 void Singleton::calculate_sample_mean()
 {
 	this->sample_mean_all = new hard_container_class(0, GAP, hard_container_class_, "NULLLINK");
-	this->sample_mean_all->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
-	
+	this->sample_mean_all->give_space(this->max_cont_size, GAP);
 	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
 		this->prepare_data_in_container_class(obj_of_cont_class);
 		cout << endl << "Size of this text: " << obj_of_cont_class->get_counter_of_tokenizer();
-		if (obj_of_cont_class->get_counter_of_tokenizer() > this->max_cont_size) {
-			cout << endl << "Now MAXSIZE: " << this->max_cont_size;
-			this->max_cont_size = obj_of_cont_class->get_counter_of_tokenizer();
-			this->sinchronize_terms(this->sample_mean_all);
-		}
-		*sample_mean_all += *obj_of_cont_class;
+		for (auto i = 0; i < this->max_cont_size; ++i)
+			for (auto j = 0; j < this->max_cont_size; ++j)
+				for (auto p = -GAP - 1; p <= GAP; ++p)
+					(*sample_mean_all)[i][j][p] = (*sample_mean_all)[i][j][p] + (*obj_of_cont_class)[i][j][p];		//память в obj_of_cont_class почему-то не выделена! TODO2
+		//(*sample_mean_all) += (*obj_of_cont_class);
 		obj_of_cont_class->clear();
 	}
 
-	*sample_mean_all = *sample_mean_all / this->vec_of_container_class_interface.size();
-	this->sample_mean_all = sample_mean_all;
+	*sample_mean_all = ((*sample_mean_all) / this->vec_of_container_class_interface.size());
 }
 
 void Singleton::calculate_mat_ozidanie()
@@ -416,9 +413,41 @@ void Singleton::prepare_data_in_container_class(container_class_interface* _cont
 	this->_analyzer->set_k(GAP);
 	this->_analyzer->shape_vec_of_tokens();
 	this->_analyzer->shape_vec_tokens_of_text();
-	this->_analyzer->give_space();
+	this->_analyzer->give_space(this->max_cont_size);
 	this->_analyzer->analyze_vec_of_tokens();
 	this->_analyzer->update_dictionary();
 	this->_analyzer->clear();
 	list_of_lemmatized_words.clear();
+}
+
+void Singleton::calculate_max_cont_size()
+{
+	for (auto obj : this->vec_of_container_class_interface) {
+		this->_parser->set_filename(obj->get_path());
+		char utf9[512];
+
+		list<string> list_of_lemmatized_words;
+		auto parsed_text = this->_parser->parse();
+
+
+		for (string obj : parsed_text) {
+			auto is_lemmas_if_good = sol_GetLemmaA(hEngine, obj.c_str(), utf9, sizeof(utf9));
+			list_of_lemmatized_words.push_back(utf9);
+		}
+
+		this->_analyzer->set_list_of_all_parsed_text(&list_of_lemmatized_words);
+		this->_analyzer->set_container_class(obj);
+		this->_analyzer->set_k(GAP);
+		this->_analyzer->shape_vec_of_tokens();
+		this->_analyzer->shape_vec_tokens_of_text();
+		this->_analyzer->update_dictionary();
+		this->_analyzer->clear();
+		list_of_lemmatized_words.clear();
+
+		if (obj->counter_of_tokenizer > this->max_cont_size)
+			this->max_cont_size = obj->counter_of_tokenizer;
+	}
+
+	cout << endl << "Max cont. size: " << this->max_cont_size << endl;
+
 }

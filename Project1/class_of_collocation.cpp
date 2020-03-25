@@ -25,7 +25,7 @@ class_of_collocation class_of_collocation::pow_all(int stepen)
 	class_of_collocation cl_for_return(GAP);
 	cl_for_return.give_space(GAP);
 	for (int i = -GAP - 1; i <= GAP; ++i) {
-		cl_for_return[i] = 
+		cl_for_return[i] =
 			pow(this->vect_of_collocation[i + (GAP + 1)], stepen);
 	}
 
@@ -36,24 +36,23 @@ class_of_collocation class_of_collocation::sqrt_all()
 {
 	class_of_collocation cl_for_return(GAP);
 	cl_for_return.give_space(GAP);
-	for (int i = -GAP-1; i <= GAP; ++i) {
+	for (int i = -GAP - 1; i <= GAP; ++i) {
 		cl_for_return[i] = sqrt(this->vect_of_collocation[i + (GAP + 1)]);
 	}
 
 	return cl_for_return;
 }
-
 my_double& class_of_collocation::operator[](long int i)
 {
-	return this->vect_of_collocation[i];	//not good
+	return this->vect_of_collocation[i + GAP + 1];
 }
 
 class_of_collocation class_of_collocation::operator+(class_of_collocation& summed_class)
 {
 	class_of_collocation cl_for_return(GAP);
 	cl_for_return.give_space(GAP);
-	for (int i = 0; i < (2 * GAP + 2); ++i) {
-		cl_for_return[i] = this->vect_of_collocation[i] + summed_class[i];
+	for (int i = -GAP - 1; i <= GAP; ++i) {
+		cl_for_return[i] = (*this)[i] + summed_class[i];
 	}
 
 	return cl_for_return;
@@ -63,9 +62,9 @@ class_of_collocation class_of_collocation::operator-(class_of_collocation& _clas
 {
 	class_of_collocation cl_for_return(GAP);
 	cl_for_return.give_space(GAP);
-	for (int i = 0; i < (2 * GAP + 2); ++i) {
+	for (int i = -GAP - 1; i <= GAP; ++i) {
 		if (this->vect_of_collocation[i] - _class[i] >= 0)
-			cl_for_return[i] = this->vect_of_collocation[i] - _class[i];
+			cl_for_return[i] = (*this)[i] - _class[i];
 		else
 			cl_for_return[i] = 0;
 	}
@@ -75,11 +74,11 @@ class_of_collocation class_of_collocation::operator-(class_of_collocation& _clas
 
 class_of_collocation& class_of_collocation::operator-=(class_of_collocation& _class)
 {
-	for (int i = 0; i < (2 * GAP + 2); ++i) {
-		if (this->vect_of_collocation[i] - _class[i] >= 0)
-			this->vect_of_collocation[i] = this->vect_of_collocation[i] - _class[i];
+	for (int i = -GAP - 1; i <= GAP; ++i) {
+		if ((*this)[i] - _class[i] >= 0)
+			(*this)[i] = (*this)[i] - _class[i];
 		else
-			this->vect_of_collocation[i] = 0;
+			(*this)[i] = 0;
 	}
 
 	return *this;
@@ -87,8 +86,8 @@ class_of_collocation& class_of_collocation::operator-=(class_of_collocation& _cl
 
 class_of_collocation& class_of_collocation::operator+=(class_of_collocation& summed_class)
 {
-	for (int i = 0; i < (2 * GAP + 2); ++i) {
-		this->vect_of_collocation[i] = this->vect_of_collocation[i] + summed_class[i];
+	for (int i = -GAP - 1; i <= GAP; ++i) {
+		(*this)[i] = (*this)[i] + summed_class[i];
 	}
 
 	return *this;
@@ -98,8 +97,8 @@ class_of_collocation class_of_collocation::operator*(my_double _number)
 {
 	class_of_collocation cl_for_return(GAP);
 	cl_for_return.give_space(GAP);
-	for (int i = 0; i < (2 * GAP + 2); ++i) {
-		cl_for_return[i] = this->vect_of_collocation[i] * _number;
+	for (int i = -GAP - 1; i <= GAP; ++i) {
+		cl_for_return[i] = (*this)[i] * _number;
 	}
 
 	return cl_for_return;
@@ -109,8 +108,8 @@ class_of_collocation class_of_collocation::operator/(my_double _number)
 {
 	class_of_collocation cl_for_return(GAP);
 	cl_for_return.give_space(GAP);
-	for (int i = 0; i < (2 * GAP + 2); ++i) {
-		cl_for_return[i] = this->vect_of_collocation[i] / _number;
+	for (int i = -GAP - 1; i <= GAP; ++i) {
+		cl_for_return[i] = (*this)[i] / _number;
 	}
 
 	return cl_for_return;

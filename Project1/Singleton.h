@@ -10,6 +10,7 @@ public:
 	//public methods
 	void push_container(container_class_interface* _hard_container_class);
 	vector<container_class_interface*> get_vec_of_container_class_interface() const;
+	void calculate_max_cont_size();
 	void calculate_sample_mean();
 	void calculate_mat_ozidanie();
 	void calculate_mat_disperse();

@@ -70,9 +70,10 @@ void analyzer::shape_vec_tokens_of_text()
 	this->vec_of_tokens = vec_tokens_of_text;
 }
 
-void analyzer::give_space() 
+void analyzer::give_space(int maxsize) 
 {
-	_container_class->give_space(counter_of_tokenizer, k);
+	this->counter_of_tokenizer = maxsize;
+	_container_class->give_space(maxsize, k);
 }
 
 int analyzer::get_counter_of_tokenizer() {

@@ -251,6 +251,8 @@ int main(int argc, char* argv[])
 		++counter_of_text;*/
 	}
 
+	Singleton::initialization().calculate_max_cont_size();
+
 	//thread tr_for_out(out_matrix);
 
 	//Singleton::initialization().sinchronize_terms();
