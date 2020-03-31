@@ -62,10 +62,10 @@ void Singleton::calculate_mat_ozidanie()
 	this->mat_ozidanie = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
 	this->mat_ozidanie->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
-	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
-		//this->prepare_data_in_container_class(obj_of_cont_class);
-		*(this->mat_ozidanie) += *obj_of_cont_class;
-		obj_of_cont_class->clear();
+	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+		this->prepare_data_in_container_class(i);
+		*(this->mat_ozidanie) += (*(vec_of_container_class_interface[i]));
+		vec_of_container_class_interface[i]->clear();
 	}
 
 	this->mat_ozidanie = &(*(this->mat_ozidanie) / (this->divider(this->vec_of_container_class_interface.size()) * (2 + 2 * GAP)));
@@ -76,10 +76,10 @@ void Singleton::calculate_mat_disperse()
 	this->mat_disperse = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
 	this->mat_disperse->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
-	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
-		//this->prepare_data_in_container_class(obj_of_cont_class);
-		*this->mat_disperse += (*obj_of_cont_class).pow_all(2);
-		obj_of_cont_class->clear();
+	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+		this->prepare_data_in_container_class(i);
+		*this->mat_disperse += (*(vec_of_container_class_interface[i])).pow_all(2);
+		vec_of_container_class_interface[i]->clear();
 	}
 
 	this->mat_disperse = &(*(this->mat_disperse) / (this->divider(this->vec_of_container_class_interface.size()) * (2 + 2 * GAP)));
@@ -111,10 +111,10 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 	this->asymmetry_coefficient = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
 	this->asymmetry_coefficient->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
-	for (auto obj_of_cont_class : this->vec_of_container_class_interface) {
-		//this->prepare_data_in_container_class(obj_of_cont_class);
-		*this->asymmetry_coefficient += (*obj_of_cont_class - *this->get_sample_mean_all()).pow_all(3);
-		obj_of_cont_class->clear();
+	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+		this->prepare_data_in_container_class(i);
+		*this->asymmetry_coefficient += ((*(vec_of_container_class_interface[i])) - *this->get_sample_mean_all()).pow_all(3);
+		vec_of_container_class_interface[i]->clear();
 	}
 
 	this->asymmetry_coefficient = &((*this->asymmetry_coefficient / this->vec_of_container_class_interface.size()) / this->get_sredne_kv_otklonenie_fixed()->pow_all(3));
@@ -126,8 +126,11 @@ void Singleton::calculate_excess_ratio()								//////todo//////
 	this->excess_ratio = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
 	this->excess_ratio->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
-	for (auto obj_of_cont_class : this->vec_of_container_class_interface)
-		*this->excess_ratio += (*obj_of_cont_class - *this->get_sample_mean_all()).pow_all(4);
+	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+		this->prepare_data_in_container_class(i);
+		*this->excess_ratio += ((*(vec_of_container_class_interface[i])) - *this->get_sample_mean_all()).pow_all(4);
+		vec_of_container_class_interface[i]->clear();
+	}
 
 	this->excess_ratio = &((*this->excess_ratio / this->vec_of_container_class_interface.size()) / this->get_sredne_kv_otklonenie_fixed()->pow_all(4) - 3);
 	/////мсфмн мюохяюрэ ноепюрнп декемхъ йнмреимепнцн йкюяяю мю йнмреимепмши йкюяя, ю гюрел пюяйнллемрхрэ ярпнйс бшье
