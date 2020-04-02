@@ -29,15 +29,15 @@ public:
 
 	//operators 
 	virtual class_of_first_bracket& operator[] (long int i) = 0;
-	virtual container_class_interface& operator+(container_class_interface& summed_class) = 0;
-	virtual container_class_interface& operator-(container_class_interface& summed_class) = 0;
-	virtual container_class_interface& operator+=(container_class_interface& summed_class) = 0;
-	virtual container_class_interface& operator-=(container_class_interface& summed_class) = 0;
+	virtual container_class_interface operator+(container_class_interface& summed_class) = 0;
+	virtual container_class_interface operator-(container_class_interface& summed_class) = 0;
+	virtual container_class_interface operator+=(container_class_interface& summed_class) = 0;
+	virtual container_class_interface operator-=(container_class_interface& summed_class) = 0;
 	virtual bool operator==(container_class_interface& summed_class) = 0;
-	virtual container_class_interface& operator*(my_double _koef) = 0;
-	virtual container_class_interface& operator/(my_double _koef) = 0;
-	virtual container_class_interface& operator/(container_class_interface& dividor_class) = 0;
-	virtual container_class_interface& operator-(my_double _num) = 0;
+	virtual container_class_interface operator*(my_double _koef) = 0;
+	virtual container_class_interface operator/(my_double _koef) = 0;
+	virtual container_class_interface operator/(container_class_interface& dividor_class) = 0;
+	virtual container_class_interface operator-(my_double _num) = 0;
 
 	unsigned short int counter_of_tokenizer;
 

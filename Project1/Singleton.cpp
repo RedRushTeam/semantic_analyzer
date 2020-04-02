@@ -6,20 +6,20 @@ Singleton& Singleton::initialization()
 	return _singleton;
 }
 
-void Singleton::push_container(container_class_interface* _container_class)
+void Singleton::push_container(hard_container_class* _container_class)
 {
-	this->vec_of_container_class_interface.push_back(_container_class);
+	this->vec_of_hard_container_class.push_back(_container_class);
 }
 
-vector<container_class_interface*> Singleton::get_vec_of_container_class_interface() const
+vector<hard_container_class*> Singleton::get_vec_of_hard_container_class() const
 {
-	return this->vec_of_container_class_interface;
+	return this->vec_of_hard_container_class;
 }
 
 int Singleton::get_length_of_all_hard_container_class() const
 {
 	int counter_of_all_elems = 0;
-	for (auto obj_of_cont_class : this->vec_of_container_class_interface)
+	for (auto obj_of_cont_class : this->vec_of_hard_container_class)
 		for (auto first_index = 0; first_index < obj_of_cont_class->get_counter_of_tokenizer(); ++first_index)
 			for (auto second_index = 0; second_index < obj_of_cont_class->get_counter_of_tokenizer(); ++second_index)
 				for (auto third_index = -GAP - 1; third_index <= GAP; ++third_index)
@@ -40,47 +40,47 @@ void Singleton::calculate_sample_mean()
 	
 	this->sample_mean_all->give_space(this->max_cont_size, GAP);
 
-	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
-		cout << endl << "Size of this text: " << this->vec_of_container_class_interface[i]->get_counter_of_tokenizer();
+		cout << endl << "Size of this text: " << this->vec_of_hard_container_class[i]->get_counter_of_tokenizer();
 		
 		for (auto l = 0; l < this->max_cont_size; ++l)
 			for (auto j = 0; j < this->max_cont_size; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					(*sample_mean_all)[l][j][p] = (*sample_mean_all)[l][j][p] + (*(vec_of_container_class_interface[i]))[l][j][p];		//ïàìÿòü â obj_of_cont_class ïî÷åìó-òî íå âûäåëåíà! TODO2
+					(*sample_mean_all)[l][j][p] = (*sample_mean_all)[l][j][p] + (*(vec_of_hard_container_class[i]))[l][j][p];		//ïàìÿòü â obj_of_cont_class ïî÷åìó-òî íå âûäåëåíà! TODO2
 		//(*sample_mean_all) += (*obj_of_cont_class);
-		this->vec_of_container_class_interface[i]->clear();
+		this->vec_of_hard_container_class[i]->clear();
 	}
-	sample_mean_all = &((*sample_mean_all) / this->vec_of_container_class_interface.size());
+	sample_mean_all = &((*sample_mean_all) / this->vec_of_hard_container_class.size());
 	int sheeet = 0;
 }
 
 void Singleton::calculate_mat_ozidanie()
 {
 
-	this->mat_ozidanie->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
-
-	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
-		this->prepare_data_in_container_class(i);
-		*(this->mat_ozidanie) += (*(vec_of_container_class_interface[i]));
-		vec_of_container_class_interface[i]->clear();
-	}
-
-	this->mat_ozidanie = &(*(this->mat_ozidanie) / (this->divider(this->vec_of_container_class_interface.size()) * (2 + 2 * GAP)));
 }
 
 void Singleton::calculate_mat_disperse()
 {
 
-	this->mat_disperse->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this->mat_ozidanie->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 
-	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
-		*this->mat_disperse += (*(vec_of_container_class_interface[i])).pow_all(2);
-		vec_of_container_class_interface[i]->clear();
+		*(this->mat_ozidanie) += (*(vec_of_hard_container_class[i]));
+		vec_of_hard_container_class[i]->clear();
 	}
 
-	this->mat_disperse = &(*(this->mat_disperse) / (this->divider(this->vec_of_container_class_interface.size()) * (2 + 2 * GAP)));
+	this->mat_ozidanie = &(*(this->mat_ozidanie) / (this->divider(this->vec_of_hard_container_class.size()) * (2 + 2 * GAP)));
+	this->mat_disperse->give_space(this->max_cont_size, GAP);
+
+	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
+		this->prepare_data_in_container_class(i);
+		*this->mat_disperse += (*(vec_of_hard_container_class[i])).pow_all(2);
+		vec_of_hard_container_class[i]->clear();
+	}
+
+	this->mat_disperse = &(*(this->mat_disperse) / (this->divider(this->vec_of_hard_container_class.size()) * (2 + 2 * GAP)));
 
 	this->mat_disperse = &(*(this->mat_disperse) - (this->mat_ozidanie->pow_all(2)));		//??????
 }
@@ -88,7 +88,7 @@ void Singleton::calculate_mat_disperse()
 void Singleton::calculate_sredne_kv_otklonenie()
 {
 	
-	this->sredne_kv_otklonenie->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this->sredne_kv_otklonenie->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 
 	this->sredne_kv_otklonenie = &(this->mat_disperse->pow_all(2));
 }
@@ -96,9 +96,9 @@ void Singleton::calculate_sredne_kv_otklonenie()
 void Singleton::calculate_sredne_kv_otklonenie_fixed()
 {
 
-	this->sredne_kv_otklonenie_fixed->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this->sredne_kv_otklonenie_fixed->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 
-	this->sredne_kv_otklonenie_fixed = &(*(this->mat_disperse) * (this->vec_of_container_class_interface.size() / (this->vec_of_container_class_interface.size() - 1)));
+	this->sredne_kv_otklonenie_fixed = &(*(this->mat_disperse) * (this->vec_of_hard_container_class.size() / (this->vec_of_hard_container_class.size() - 1)));
 	//////ÎÏÀÑÍÎÅ ÄÅËÅÍÈÅ ÍÀ 0!!!!! ÒÅÊÑÒ ÍÅ ÄÎËÆÅÍ ÁÛÒÜ ÎÄÈÍ!!!
 
 	this->sredne_kv_otklonenie_fixed = &this->sredne_kv_otklonenie_fixed->sqrt_all();
@@ -107,97 +107,97 @@ void Singleton::calculate_sredne_kv_otklonenie_fixed()
 void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 {
 
-	this->asymmetry_coefficient->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this->asymmetry_coefficient->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 
-	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
-		*this->asymmetry_coefficient += ((*(vec_of_container_class_interface[i])) - *this->get_sample_mean_all()).pow_all(3);
-		vec_of_container_class_interface[i]->clear();
+		*this->asymmetry_coefficient += ((*(vec_of_hard_container_class[i])) - *this->get_sample_mean_all()).pow_all(3);
+		vec_of_hard_container_class[i]->clear();
 	}
 
-	this->asymmetry_coefficient = &((*this->asymmetry_coefficient / this->vec_of_container_class_interface.size()) / this->get_sredne_kv_otklonenie_fixed()->pow_all(3));
+	this->asymmetry_coefficient = &((*this->asymmetry_coefficient / this->vec_of_hard_container_class.size()) / this->get_sredne_kv_otklonenie_fixed()->pow_all(3));
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
 void Singleton::calculate_excess_ratio()								//////todo//////
 {
 
-	this->excess_ratio->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this->excess_ratio->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 
-	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
+	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
-		*this->excess_ratio += ((*(vec_of_container_class_interface[i])) - *this->get_sample_mean_all()).pow_all(4);
-		vec_of_container_class_interface[i]->clear();
+		*this->excess_ratio += ((*(vec_of_hard_container_class[i])) - *this->get_sample_mean_all()).pow_all(4);
+		vec_of_hard_container_class[i]->clear();
 	}
 
-	this->excess_ratio = &((*this->excess_ratio / this->vec_of_container_class_interface.size()) / this->get_sredne_kv_otklonenie_fixed()->pow_all(4) - 3);
+	this->excess_ratio = &((*this->excess_ratio / this->vec_of_hard_container_class.size()) / this->get_sredne_kv_otklonenie_fixed()->pow_all(4) - 3);
 	/////ÍÓÆÍÎ ÍÀÏÈÑÀÒÜ ÎÏÅÐÀÒÎÐ ÄÅËÅÍÈß ÊÎÍÒÅÉÍÅÐÎÃÎ ÊËÀÑÑÀ ÍÀ ÊÎÍÒÅÉÍÅÐÍÛÉ ÊËÀÑÑ, À ÇÀÒÅÌ ÐÀÑÊÎÌÌÅÍÒÈÒÜ ÑÒÐÎÊÓ ÂÛØÅ
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
-container_class_interface* Singleton::get_sredne_kv_otklonenie() const
+hard_container_class* Singleton::get_sredne_kv_otklonenie() const
 {
 	return this->sredne_kv_otklonenie;
 }
 
-container_class_interface* Singleton::get_sredne_kv_otklonenie_fixed() const
+hard_container_class* Singleton::get_sredne_kv_otklonenie_fixed() const
 {
 	return this->sredne_kv_otklonenie_fixed;
 }
 
-container_class_interface* Singleton::get_mat_ozidanie() const
+hard_container_class* Singleton::get_mat_ozidanie() const
 {
 	return this->mat_ozidanie;
 }
 
-container_class_interface* Singleton::get_mat_disperse() const
+hard_container_class* Singleton::get_mat_disperse() const
 {
 	return this->mat_disperse;
 }
 
-container_class_interface* Singleton::get_asymmetry_coefficient() const
+hard_container_class* Singleton::get_asymmetry_coefficient() const
 {
 	return this->asymmetry_coefficient;
 }
 
-container_class_interface* Singleton::get_excess_ratio() const
+hard_container_class* Singleton::get_excess_ratio() const
 {
 	return this->excess_ratio;
 }
 
-container_class_interface* Singleton::get_sample_mean_all() const
+hard_container_class* Singleton::get_sample_mean_all() const
 {
 	return this->sample_mean_all;
 }
 
-bool Singleton::remove_hard_container_class(container_class_interface* _hard_container_class)
+bool Singleton::remove_hard_container_class(hard_container_class* _hard_container_class)
 {
-	vector<container_class_interface*>::iterator tmp = find(this->vec_of_container_class_interface.begin(), this->vec_of_container_class_interface.end(), _hard_container_class);
-	if (tmp == this->vec_of_container_class_interface.end())
+	vector<hard_container_class*>::iterator tmp = find(this->vec_of_hard_container_class.begin(), this->vec_of_hard_container_class.end(), _hard_container_class);
+	if (tmp == this->vec_of_hard_container_class.end())
 		return false;
-	this->vec_of_container_class_interface.erase(tmp);
+	this->vec_of_hard_container_class.erase(tmp);
 	return true;
 }
 
 void Singleton::calculate_params_for_charts()	//TODO
 {
 	////
-	this-> sum = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
-	this->sum->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this-> sum = new hard_container_class(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+	this->sum->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 
-	this->razn = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
-	this->razn->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this->razn = new hard_container_class(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+	this->razn->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 
-	this->shhh = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
-	this->shhh->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
+	this->shhh = new hard_container_class(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+	this->shhh->give_space(vec_of_hard_container_class.back()->get_counter_of_tokenizer(), GAP);
 	////
 	this->sum = &(*this->calculate_parametr_to_one_term(this->mat_ozidanie) + *this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed));
 	this->razn = &(*this->calculate_parametr_to_one_term(this->mat_ozidanie) - *this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed));
 	this->shhh = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
-	container_class_interface* chart1 = new hard_container_class(this->vec_of_container_class_interface[0]->get_counter_of_tokenizer(), vec_of_container_class_interface[0]->get_k(), hard_container_class_, "NULLLINK");
-	auto keks = this->vec_of_container_class_interface[this->vec_of_container_class_interface.size() - 1]->get_counter_of_tokenizer();
-	for (auto i : this->vec_of_container_class_interface)
+	hard_container_class* chart1 = new hard_container_class(this->vec_of_hard_container_class[0]->get_counter_of_tokenizer(), vec_of_hard_container_class[0]->get_k(), hard_container_class_, "NULLLINK");
+	auto keks = this->vec_of_hard_container_class[this->vec_of_hard_container_class.size() - 1]->get_counter_of_tokenizer();
+	for (auto i : this->vec_of_hard_container_class)
 	{
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
@@ -205,7 +205,7 @@ void Singleton::calculate_params_for_charts()	//TODO
 					(*chart1)[q][q][p] = (*chart1)[q][q][p] + (*i)[q][j][p];
 	}
 
-	*chart1 = *chart1 / (vec_of_container_class_interface.size());
+	*chart1 = *chart1 / (vec_of_hard_container_class.size());
 	this->chart = chart1;
 }
 
@@ -216,9 +216,9 @@ void Singleton::find_fluctuations()	//TODO
 	auto razn1 = &(*this->calculate_parametr_to_one_term(this->mat_ozidanie) - *this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed));
 	auto shhh1 = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
-	container_class_interface* chart1 = new hard_container_class(this->vec_of_container_class_interface[0]->get_counter_of_tokenizer(), vec_of_container_class_interface[0]->get_k(), hard_container_class_, "NULLLINK");
-	auto keks = this->vec_of_container_class_interface[this->vec_of_container_class_interface.size() - 1]->get_counter_of_tokenizer();
-	for (auto i : this->vec_of_container_class_interface)
+	hard_container_class* chart1 = new hard_container_class(this->vec_of_hard_container_class[0]->get_counter_of_tokenizer(), vec_of_hard_container_class[0]->get_k(), hard_container_class_, "NULLLINK");
+	auto keks = this->vec_of_hard_container_class[this->vec_of_hard_container_class.size() - 1]->get_counter_of_tokenizer();
+	for (auto i : this->vec_of_hard_container_class)
 	{
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
@@ -226,7 +226,7 @@ void Singleton::find_fluctuations()	//TODO
 					(*chart1)[q][q][p] = (*chart1)[q][q][p] + (*i)[q][j][p];
 	}
 
-	*chart1 = *chart1 / (vec_of_container_class_interface.size());
+	*chart1 = *chart1 / (vec_of_hard_container_class.size());
 	analyzer helper;
 	helper.set_map_of_tokens("dictionary.txt");
 	ofstream ff("fluctuation.txt");
@@ -297,9 +297,9 @@ void Singleton::out_for_chart()	//TODO
 	auto razn1 = &(*this->calculate_parametr_to_one_term(this->mat_ozidanie) - *this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed));
 	auto shhh1 = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
-	container_class_interface* chart1 = new hard_container_class(this->vec_of_container_class_interface[0]->get_counter_of_tokenizer(), vec_of_container_class_interface[0]->get_k(), hard_container_class_, "NULLLINK");
-	auto keks = this->vec_of_container_class_interface[this->vec_of_container_class_interface.size() - 1]->get_counter_of_tokenizer();
-	for (auto i : this->vec_of_container_class_interface)
+	hard_container_class* chart1 = new hard_container_class(this->vec_of_hard_container_class[0]->get_counter_of_tokenizer(), vec_of_hard_container_class[0]->get_k(), hard_container_class_, "NULLLINK");
+	auto keks = this->vec_of_hard_container_class[this->vec_of_hard_container_class.size() - 1]->get_counter_of_tokenizer();
+	for (auto i : this->vec_of_hard_container_class)
 	{
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
@@ -307,9 +307,9 @@ void Singleton::out_for_chart()	//TODO
 					(*chart1)[q][q][p] = (*chart1)[q][q][p] + (*i)[q][j][p];
 	}
 
-	*chart1 = *chart1 / (vec_of_container_class_interface.size());
+	*chart1 = *chart1 / (vec_of_hard_container_class.size());
 
-	//auto keks = this->vec_of_container_class_interface[this->vec_of_container_class_interface.size() - 1]->get_counter_of_tokenizer();
+	//auto keks = this->vec_of_hard_container_class[this->vec_of_hard_container_class.size() - 1]->get_counter_of_tokenizer();
 
 	ofstream to_chart("chart.txt");
 
@@ -351,15 +351,15 @@ void Singleton::out_for_chart()	//TODO
 
 void Singleton::sinchronize_terms()
 {
-	int max_size = this->vec_of_container_class_interface.back()->get_counter_of_tokenizer();
+	int max_size = this->vec_of_hard_container_class.back()->get_counter_of_tokenizer();
 
-	for (auto obj : this->vec_of_container_class_interface)
+	for (auto obj : this->vec_of_hard_container_class)
 		obj->set_counter_of_tokenizer(max_size);
 
-	/*	vector<container_class_interface*> new_vec;
-	new_vec.reserve(this->vec_of_container_class_interface.size());
-	for (auto obj : this->vec_of_container_class_interface) {
-		container_class_interface* new_cont_class = new hard_container_class(max_size, obj->get_k(), hard_container_class_, "NULLLINK");
+	/*	vector<hard_container_class*> new_vec;
+	new_vec.reserve(this->vec_of_hard_container_class.size());
+	for (auto obj : this->vec_of_hard_container_class) {
+		hard_container_class* new_cont_class = new hard_container_class(max_size, obj->get_k(), hard_container_class_, "NULLLINK");
 		for (auto q = 0; q < obj->get_counter_of_tokenizer(); ++q)
 			for (auto j = 0; j < obj->get_counter_of_tokenizer(); ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
@@ -368,12 +368,12 @@ void Singleton::sinchronize_terms()
 		new_vec.push_back(new_cont_class);
 	}
 
-	this->vec_of_container_class_interface = new_vec;*/
+	this->vec_of_hard_container_class = new_vec;*/
 }
 
-void Singleton::sinchronize_terms(container_class_interface* _container_class)
+void Singleton::sinchronize_terms(hard_container_class* _container_class)
 {
-	container_class_interface* new_cont_class = new hard_container_class(this->max_cont_size, _container_class->get_k(), hard_container_class_, "NULLLINK");
+	hard_container_class* new_cont_class = new hard_container_class(this->max_cont_size, _container_class->get_k(), hard_container_class_, "NULLLINK");
 	new_cont_class->give_space(this->max_cont_size, _container_class->get_k());
 	for (auto q = 0; q < _container_class->get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < _container_class->get_counter_of_tokenizer(); ++j)
@@ -382,7 +382,7 @@ void Singleton::sinchronize_terms(container_class_interface* _container_class)
 
 }
 
-container_class_interface* Singleton::calculate_parametr_to_one_term(container_class_interface* _parametr)
+hard_container_class* Singleton::calculate_parametr_to_one_term(hard_container_class* _parametr)
 {
 	for (auto q = 0; q < _parametr->get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < _parametr->get_counter_of_tokenizer(); ++j)
@@ -396,11 +396,11 @@ void Singleton::prepare_data_with_link_for_text(fs::path filename)
 	this->push_container(new hard_container_class(GAP, hard_container_class_, filename));
 }
 
-void Singleton::prepare_data_in_container_class(int _container_class_interface_number)
+void Singleton::prepare_data_in_container_class(int _hard_container_class_number)
 {
-	this->_parser->set_filename(this->vec_of_container_class_interface[_container_class_interface_number]->get_path());
+	this->_parser->set_filename(this->vec_of_hard_container_class[_hard_container_class_number]->get_path());
 
-	cout << endl << "Now in work: " << this->vec_of_container_class_interface[_container_class_interface_number]->get_path() << endl;
+	cout << endl << "Now in work: " << this->vec_of_hard_container_class[_hard_container_class_number]->get_path() << endl;
 
 	char utf9[512];
 
@@ -414,7 +414,7 @@ void Singleton::prepare_data_in_container_class(int _container_class_interface_n
 	}
 
 	this->_analyzer->set_list_of_all_parsed_text(&list_of_lemmatized_words);
-	this->_analyzer->set_container_class(this->vec_of_container_class_interface[_container_class_interface_number]);
+	this->_analyzer->set_container_class(this->vec_of_hard_container_class[_hard_container_class_number]);
 	this->_analyzer->set_k(GAP);
 	this->_analyzer->shape_vec_of_tokens();
 	this->_analyzer->shape_vec_tokens_of_text();
@@ -438,7 +438,7 @@ void Singleton::create_pointers()
 
 void Singleton::calculate_max_cont_size()
 {
-	for (auto obj : this->vec_of_container_class_interface) {
+	for (auto obj : this->vec_of_hard_container_class) {
 		this->_parser->set_filename(obj->get_path());
 		char utf9[512];
 

@@ -26,7 +26,7 @@ void hard_container_class::increment(int first_dimension, int second_dimension, 
 	vector_of_length[first_dimension][second_dimension].increment(third_dimension);
 }
 
-container_class_interface& hard_container_class::pow_all(int stepen)
+hard_container_class& hard_container_class::pow_all(int stepen)
 {
 	hard_container_class cl_for_return(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	cl_for_return.give_space(counter_of_tokenizer, k);
@@ -38,7 +38,7 @@ container_class_interface& hard_container_class::pow_all(int stepen)
 	return cl_for_return;
 }
 
-container_class_interface& hard_container_class::sqrt_all()
+hard_container_class& hard_container_class::sqrt_all()
 {
 	hard_container_class cl_for_return(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	cl_for_return.give_space(counter_of_tokenizer, k);
@@ -54,7 +54,7 @@ class_of_first_bracket& hard_container_class::operator[](long int i)
 	return this->vector_of_length[i];
 }
 
-container_class_interface& hard_container_class::operator+(container_class_interface& summed_class)
+hard_container_class hard_container_class::operator+(hard_container_class& summed_class)
 {
 	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -65,7 +65,7 @@ container_class_interface& hard_container_class::operator+(container_class_inter
 	return ret;
 }
 
-container_class_interface& hard_container_class::operator-(container_class_interface& _class)
+hard_container_class hard_container_class::operator-(hard_container_class& _class)
 {
 	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -76,7 +76,7 @@ container_class_interface& hard_container_class::operator-(container_class_inter
 	return ret;
 }
 
-container_class_interface& hard_container_class::operator*(my_double _koef)
+hard_container_class hard_container_class::operator*(my_double _koef)
 {
 	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -88,7 +88,7 @@ container_class_interface& hard_container_class::operator*(my_double _koef)
 	return ret;
 }
 
-container_class_interface& hard_container_class::operator/(my_double _koef)
+hard_container_class hard_container_class::operator/(my_double _koef)
 {
 	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -100,7 +100,7 @@ container_class_interface& hard_container_class::operator/(my_double _koef)
 	return ret;
 }
 
-container_class_interface& hard_container_class::operator+=(container_class_interface& summed_class)
+hard_container_class hard_container_class::operator+=(hard_container_class& summed_class)
 {
 	summed_class[0][1][-3];
 	(*this)[0][1][-3];
@@ -112,7 +112,7 @@ container_class_interface& hard_container_class::operator+=(container_class_inte
 	return *this;
 }
 
-container_class_interface& hard_container_class::operator-=(container_class_interface& summed_class)
+hard_container_class hard_container_class::operator-=(hard_container_class& summed_class)
 {
 	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -124,7 +124,7 @@ container_class_interface& hard_container_class::operator-=(container_class_inte
 	return *this;
 }
 
-bool hard_container_class::operator==(container_class_interface& summed_class)
+bool hard_container_class::operator==(hard_container_class& summed_class)
 {
 	for (auto q = 0; q < this->get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < this->get_counter_of_tokenizer(); ++j)
@@ -135,7 +135,7 @@ bool hard_container_class::operator==(container_class_interface& summed_class)
 	return true;
 }
 
-container_class_interface& hard_container_class::operator/(container_class_interface& dividor_class)
+hard_container_class hard_container_class::operator/(hard_container_class& dividor_class)
 {
 	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -149,11 +149,10 @@ container_class_interface& hard_container_class::operator/(container_class_inter
 
 class_of_first_bracket* hard_container_class::get_vector_of_length()
 {
-	auto tmp = this->vector_of_length;
-	return tmp;
+	return this->vector_of_length;
 }
 
-container_class_interface& hard_container_class::operator-(my_double _num)
+hard_container_class hard_container_class::operator-(my_double _num)
 {
 	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
@@ -231,4 +230,24 @@ void hard_container_class::upload_data()
 
 		this->is_download_dataed = !this->is_download_dataed;
 	}
+}
+
+unsigned short int hard_container_class::get_counter_of_tokenizer() const
+{
+	return this->counter_of_tokenizer;
+}
+
+int hard_container_class::get_k() const
+{
+	return this->k;
+}
+
+fs::path hard_container_class::get_path() const
+{
+	return this->filename;
+}
+
+void hard_container_class::set_counter_of_tokenizer(unsigned short int counter_of_tokenizer)
+{
+	this->counter_of_tokenizer = counter_of_tokenizer;
 }

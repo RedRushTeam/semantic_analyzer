@@ -9,13 +9,13 @@ public:
 		_container_class = new hard_container_class;
 	}
 
-	analyzer(container_class_interface* _container_class_interface, std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text), _container_class(_container_class_interface)	{}
+	analyzer(hard_container_class* _hard_container_class, std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text), _container_class(_hard_container_class)	{}
 
 	bool is_index_valid(int ind) const;
 
 	void analyze_vec_of_tokens();
 
-	container_class_interface* get_container_class();
+	hard_container_class* get_container_class();
 
 	void shape_vec_of_tokens();
 
@@ -29,7 +29,7 @@ public:
 
 	void set_k(char _k);
 
-	void set_container_class(container_class_interface* _container_class);
+	void set_container_class(hard_container_class* _container_class);
 
 	void give_space(int maxsize);
 
@@ -52,7 +52,7 @@ public:
 
 private:
 	vector<int> vec_of_tokens;
-	container_class_interface* _container_class;
+	hard_container_class* _container_class;
 	char k;
 	int counter_of_tokenizer;
 	std::list<std::string>* list_of_all_parsed_text;

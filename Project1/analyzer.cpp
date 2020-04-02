@@ -27,7 +27,7 @@ void analyzer::analyze_vec_of_tokens()
 
 }
 
-container_class_interface* analyzer::get_container_class()
+hard_container_class* analyzer::get_container_class()
 {
 	return _container_class;
 }
@@ -89,7 +89,7 @@ void analyzer::set_k(char _k) {
 	k = _k;
 }
 
-void analyzer::set_container_class(container_class_interface* _container_class)
+void analyzer::set_container_class(hard_container_class* _container_class)
 {
 	this->_container_class = _container_class;
 }

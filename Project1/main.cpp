@@ -75,7 +75,7 @@ void out_matrix() {
 
 	ofstream matrix("matrix.txt");
 
-	for (auto some_scary_thing : Singleton::initialization().get_vec_of_container_class_interface()) {
+	for (auto some_scary_thing : Singleton::initialization().get_vec_of_hard_container_class()) {
 
 		for (int i = 0; i < some_scary_thing->get_counter_of_tokenizer(); ++i)
 			for (int j = 0; j < some_scary_thing->get_counter_of_tokenizer(); ++j)
