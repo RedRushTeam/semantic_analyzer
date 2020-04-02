@@ -29,6 +29,7 @@ public:
 	void set_analyzer(analyzer* _analyzer);
 	void set_hEngine(HLEM& hEngine);
 	void prepare_data_in_container_class(int _container_class_interface_number);
+	void create_pointers();
 
 	//getters
 	container_class_interface* get_sredne_kv_otklonenie() const;

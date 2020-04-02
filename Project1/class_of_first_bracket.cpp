@@ -12,19 +12,10 @@ void class_of_first_bracket::give_space(int counter_of_tokenizer, int k)
 	this->vector_of_length.assign(i, _class_of_collocation);
 }*/
 
-class_of_first_bracket class_of_first_bracket::pow_all(int stepen)
-{
-	class_of_first_bracket cl_for_return;
-
-	for (int i = 0; i < counter_of_tokenizer; ++i)
-		cl_for_return[i] = this->vector_of_length[i].pow_all(stepen);
-
-	return cl_for_return;
-}
-
 class_of_first_bracket class_of_first_bracket::sqrt_all()
 {
 	class_of_first_bracket cl_for_return;
+	cl_for_return.give_space(this->counter_of_tokenizer, GAP);
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		cl_for_return[i] = vector_of_length[i].sqrt_all();

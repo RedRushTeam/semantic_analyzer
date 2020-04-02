@@ -17,7 +17,7 @@ my_double class_of_collocation::get_count_of_concret_collocation(int third_demen
 	return this->vect_of_collocation[third_demention];
 }
 
-class_of_collocation class_of_collocation::pow_all(int stepen)
+class_of_collocation& class_of_collocation::pow_all(int stepen)
 {
 	class_of_collocation cl_for_return(GAP);
 	cl_for_return.give_space(GAP);

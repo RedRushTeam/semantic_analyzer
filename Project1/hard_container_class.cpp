@@ -31,8 +31,9 @@ container_class_interface& hard_container_class::pow_all(int stepen)
 	hard_container_class cl_for_return(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	cl_for_return.give_space(counter_of_tokenizer, k);
 
-	for (int i = 0; i < this->counter_of_tokenizer; ++i) 
-		cl_for_return[i] = this->vector_of_length[i].pow_all(stepen);
+	for (int i = 0; i < counter_of_tokenizer; ++i)
+		for (int j = 0; j < counter_of_tokenizer; ++j)
+			cl_for_return[i][j] = this->vector_of_length[i][j].pow_all(stepen);
 
 	return cl_for_return;
 }
@@ -55,7 +56,7 @@ class_of_first_bracket& hard_container_class::operator[](long int i)
 
 container_class_interface& hard_container_class::operator+(container_class_interface& summed_class)
 {
-	hard_container_class ret;
+	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
@@ -66,7 +67,7 @@ container_class_interface& hard_container_class::operator+(container_class_inter
 
 container_class_interface& hard_container_class::operator-(container_class_interface& _class)
 {
-	hard_container_class ret;
+	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
@@ -77,7 +78,7 @@ container_class_interface& hard_container_class::operator-(container_class_inter
 
 container_class_interface& hard_container_class::operator*(my_double _koef)
 {
-	hard_container_class ret;
+	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
@@ -89,7 +90,7 @@ container_class_interface& hard_container_class::operator*(my_double _koef)
 
 container_class_interface& hard_container_class::operator/(my_double _koef)
 {
-	hard_container_class ret;
+	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
@@ -113,7 +114,7 @@ container_class_interface& hard_container_class::operator+=(container_class_inte
 
 container_class_interface& hard_container_class::operator-=(container_class_interface& summed_class)
 {
-	hard_container_class ret;
+	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
@@ -136,7 +137,7 @@ bool hard_container_class::operator==(container_class_interface& summed_class)
 
 container_class_interface& hard_container_class::operator/(container_class_interface& dividor_class)
 {
-	hard_container_class ret;
+	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
@@ -154,7 +155,7 @@ class_of_first_bracket* hard_container_class::get_vector_of_length()
 
 container_class_interface& hard_container_class::operator-(my_double _num)
 {
-	hard_container_class ret;
+	hard_container_class ret(counter_of_tokenizer, k, hard_container_class_, this->filename);
 	ret.give_space(this->counter_of_tokenizer, this->k);
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)

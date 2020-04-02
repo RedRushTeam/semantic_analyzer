@@ -252,6 +252,7 @@ int main(int argc, char* argv[])
 	}
 
 	Singleton::initialization().calculate_max_cont_size();
+	Singleton::initialization().create_pointers();
 
 	//thread tr_for_out(out_matrix);
 
@@ -268,7 +269,7 @@ int main(int argc, char* argv[])
 		//Singleton::initialization().calculate_sredne_kv_otklonenie();
 	//	});
 	//thread tr_for_sredne_kv_otklonenie_fixed([]() {
-		Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
+	Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
 	//	});
 
 	//tr_for_sredne_kv_otklonenie.detach();

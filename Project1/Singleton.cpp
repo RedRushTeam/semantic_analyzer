@@ -37,9 +37,8 @@ my_double Singleton::divider(int size) {
 
 void Singleton::calculate_sample_mean()
 {
-	this->sample_mean_all = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
+	
 	this->sample_mean_all->give_space(this->max_cont_size, GAP);
-	(*sample_mean_all)[0][0][-3] = 0;
 
 	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
@@ -52,14 +51,13 @@ void Singleton::calculate_sample_mean()
 		//(*sample_mean_all) += (*obj_of_cont_class);
 		this->vec_of_container_class_interface[i]->clear();
 	}
-	auto* tmp_mean = &((*sample_mean_all) / this->vec_of_container_class_interface.size());
 	sample_mean_all = &((*sample_mean_all) / this->vec_of_container_class_interface.size());
 	int sheeet = 0;
 }
 
 void Singleton::calculate_mat_ozidanie()
 {
-	this->mat_ozidanie = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+
 	this->mat_ozidanie->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
@@ -73,7 +71,7 @@ void Singleton::calculate_mat_ozidanie()
 
 void Singleton::calculate_mat_disperse()
 {
-	this->mat_disperse = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+
 	this->mat_disperse->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
@@ -84,12 +82,12 @@ void Singleton::calculate_mat_disperse()
 
 	this->mat_disperse = &(*(this->mat_disperse) / (this->divider(this->vec_of_container_class_interface.size()) * (2 + 2 * GAP)));
 
-	this->mat_disperse = &(*(this->mat_disperse) - (this->mat_ozidanie->pow_all(2)));
+	this->mat_disperse = &(*(this->mat_disperse) - (this->mat_ozidanie->pow_all(2)));		//??????
 }
 
 void Singleton::calculate_sredne_kv_otklonenie()
 {
-	this->sredne_kv_otklonenie = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+	
 	this->sredne_kv_otklonenie->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	this->sredne_kv_otklonenie = &(this->mat_disperse->pow_all(2));
@@ -97,7 +95,7 @@ void Singleton::calculate_sredne_kv_otklonenie()
 
 void Singleton::calculate_sredne_kv_otklonenie_fixed()
 {
-	this->sredne_kv_otklonenie_fixed = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+
 	this->sredne_kv_otklonenie_fixed->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	this->sredne_kv_otklonenie_fixed = &(*(this->mat_disperse) * (this->vec_of_container_class_interface.size() / (this->vec_of_container_class_interface.size() - 1)));
@@ -108,7 +106,7 @@ void Singleton::calculate_sredne_kv_otklonenie_fixed()
 
 void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 {
-	this->asymmetry_coefficient = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+
 	this->asymmetry_coefficient->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
@@ -123,7 +121,7 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 
 void Singleton::calculate_excess_ratio()								//////todo//////
 {
-	this->excess_ratio = new hard_container_class(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP, hard_container_class_, "NULLLINK");
+
 	this->excess_ratio->give_space(vec_of_container_class_interface.back()->get_counter_of_tokenizer(), GAP);
 
 	for (int i = 0; this->vec_of_container_class_interface.size() > i; ++i) {
@@ -425,6 +423,17 @@ void Singleton::prepare_data_in_container_class(int _container_class_interface_n
 	this->_analyzer->update_dictionary();
 	this->_analyzer->clear();
 	list_of_lemmatized_words.clear();
+}
+
+void Singleton::create_pointers()
+{
+	this->sample_mean_all = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
+	this->mat_ozidanie = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
+	this->mat_disperse = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
+	this->sredne_kv_otklonenie = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
+	this->sredne_kv_otklonenie_fixed = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
+	this->asymmetry_coefficient = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
+	this->excess_ratio = new hard_container_class(this->max_cont_size, GAP, hard_container_class_, "NULLLINK");
 }
 
 void Singleton::calculate_max_cont_size()
