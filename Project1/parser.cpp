@@ -23,7 +23,7 @@ void parser::check_all_words(string text)
 list<string> parser::delete_trash()
 {
 	std::ifstream _input(_filename);
-	std::ofstream _output("RESULTOFPARSE.txt");
+	//std::ofstream _output("RESULTOFPARSE.txt");
 	int count = 1;
 	int helper = 1;
 	int size = 0;
@@ -78,7 +78,7 @@ list<string> parser::delete_trash()
 		text.pop_back();
 		if (text[text.size()-1]!=' ')
 			text.push_back(' ');
-		_output << text;
+		//_output << text;
 		string substring_word;
 		list<string> terms;
 

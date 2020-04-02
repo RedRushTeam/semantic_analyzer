@@ -189,6 +189,7 @@ void sqlstart() {
 
 int main(int argc, char* argv[])
 {
+	fs::remove("dictionary.txt");
 	SPARCE_test();
 
 	auto start = clock();
