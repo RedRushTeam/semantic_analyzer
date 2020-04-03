@@ -204,7 +204,6 @@ void Singleton::find_fluctuations()	//TODO
 					}
 				break;
 			}
-	helper.~analyzer();
 }
 
 void Singleton::clear(type_of_purpose_of_cont_class _type_of_cont_class)
@@ -262,6 +261,7 @@ void Singleton::out_for_chart()	//TODO
 	auto shhh1 = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
 	hard_container_class chart1;
+	chart1.give_space(this->max_cont_size, GAP);
 	auto keks = this->max_cont_size;
 	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
