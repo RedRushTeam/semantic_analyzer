@@ -23,6 +23,15 @@ class_of_first_bracket class_of_first_bracket::sqrt_all()
 	return cl_for_return;
 }
 
+void class_of_first_bracket::clear()
+{
+	for (int i = 0; this->counter_of_tokenizer > i; ++i)
+		this->vector_of_length[i].clear();
+
+	delete[] vector_of_length;
+	this->vector_of_length = NULL;
+}
+
 /*void class_of_first_bracket::push_back(class_of_collocation coc)
 {
 	this->vector_of_length.push_back(coc);

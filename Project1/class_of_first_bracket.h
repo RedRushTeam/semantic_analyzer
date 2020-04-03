@@ -8,7 +8,7 @@ public:
 	//void assign(long int i, class_of_collocation _class_of_collocation);
 	class_of_first_bracket sqrt_all();
 	//void push_back(class_of_collocation coc);
-	
+	void clear();
 
 	//getter
 	class_of_collocation* get_vector_of_length() { return this->vector_of_length; };

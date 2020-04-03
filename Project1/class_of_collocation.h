@@ -16,6 +16,7 @@ public:
 	my_double* get_vect_of_collocation() { return vect_of_collocation; };
 	class_of_collocation pow_all(int stepen);
 	class_of_collocation sqrt_all();
+	void clear();
 
 	//operators
 	my_double& operator[](long int i);

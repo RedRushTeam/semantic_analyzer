@@ -39,6 +39,13 @@ class_of_collocation class_of_collocation::sqrt_all()
 
 	return cl_for_return;
 }
+
+void class_of_collocation::clear()
+{
+	delete[] vect_of_collocation;
+	this->vect_of_collocation = NULL;
+}
+
 my_double& class_of_collocation::operator[](long int i)
 {
 	return this->vect_of_collocation[i + GAP + 1];

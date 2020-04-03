@@ -162,9 +162,10 @@ hard_container_class hard_container_class::operator-(my_double _num)
 	return ret;
 }
 
-void hard_container_class::clear()	//
+void hard_container_class::clear()
 {
-	for (auto i = 0; i < counter_of_tokenizer; ++i) {
+
+	/*for (auto i = 0; i < counter_of_tokenizer; ++i) {
 		auto* tmp = vector_of_length[i].get_vector_of_length();
 		for (auto j = 0; j < counter_of_tokenizer; ++j) {
 			auto* tmp1 = tmp[j].get_vect_of_collocation();
@@ -173,7 +174,13 @@ void hard_container_class::clear()	//
 		}
 		delete[] tmp;
 		tmp = NULL;
-	}
+
+		delete[] vector_of_length;
+		vector_of_length = NULL;
+	}*/
+	for (int i = 0; this->counter_of_tokenizer > i; ++i)
+		this->vector_of_length[i].clear();
+
 	delete[] vector_of_length;
 	vector_of_length = NULL;
 }
