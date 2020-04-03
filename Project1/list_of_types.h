@@ -42,8 +42,7 @@ using my_double = float;
 
 #define TRASH_DELETE_OPTION 0 //0 - base  1 - extended
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-#define TEXTS_PATH "E:\\Новая папка (2)"
-//#define TEXTS_PATH "A:\\rasp_puhl1"
+#define TEXTS_PATH "A:\\rasp_puhl1"
 //#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
 
 

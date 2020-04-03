@@ -47,7 +47,7 @@ void analyzer::shape_vec_of_tokens()
 	if (map_of_tokens.empty()) {
 		this->map_of_tokens["À"] = 0;
 	}
-	for (auto obj : *this->list_of_all_parsed_text)
+	for (auto obj : this->list_of_all_parsed_text)
 		if (map_of_tokens.find(obj) == map_of_tokens.end()) {
 			map_of_tokens[obj] = i;
 			i++;
@@ -60,8 +60,8 @@ void analyzer::shape_vec_of_tokens()
 void analyzer::shape_vec_tokens_of_text()
 {
 	std::vector<int> vec_tokens_of_text;
-	vec_tokens_of_text.reserve(list_of_all_parsed_text->size());
-	for (auto obj : *this->list_of_all_parsed_text) {
+	vec_tokens_of_text.reserve(list_of_all_parsed_text.size());
+	for (auto obj : this->list_of_all_parsed_text) {
 		auto ptr = map_of_tokens.find(obj);
 		if(ptr != map_of_tokens.end())		//kostil'
 			vec_tokens_of_text.push_back(ptr->second);
@@ -80,7 +80,7 @@ int analyzer::get_counter_of_tokenizer() {
 	return this->counter_of_tokenizer;
 }
 
-void analyzer::set_list_of_all_parsed_text(std::list<std::string>* list_of_all_parsed_text)
+void analyzer::set_list_of_all_parsed_text(std::list<std::string> list_of_all_parsed_text)
 {
 	this->list_of_all_parsed_text = list_of_all_parsed_text;
 }
@@ -134,6 +134,6 @@ void analyzer::upload_data()
 void analyzer::clear()
 {
 	vec_of_tokens.clear();
-	list_of_all_parsed_text->clear();
+	list_of_all_parsed_text.clear();
 	//delete list_of_all_parsed_text;
 }

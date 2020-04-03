@@ -25,8 +25,8 @@ public:
 	void give_space(unsigned short int counter_of_tokenizer, int k) ;
 	void increment(int first_dimension, int second_dimension, int third_dimension) ;
 	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) ;
-	hard_container_class& pow_all(int stepen) ;
-	hard_container_class& sqrt_all() ;
+	hard_container_class pow_all(int stepen) ;
+	hard_container_class sqrt_all() ;
 	class_of_first_bracket* get_vector_of_length() ;
 	void clear() ;
 	virtual void download_data() ;
@@ -39,15 +39,15 @@ public:
 
 	//operators
 	class_of_first_bracket& operator[] (long int i) ;
-	hard_container_class operator+(hard_container_class& summed_class) ;
-	hard_container_class operator-(hard_container_class& summed_class) ;
-	hard_container_class operator+=(hard_container_class& summed_class) ;
-	hard_container_class operator-=(hard_container_class& summed_class) ;
-	bool operator==(hard_container_class& summed_class) ;
-	hard_container_class operator*(my_double _koef) ;
-	hard_container_class operator/(my_double _koef) ;
-	hard_container_class operator/(hard_container_class& dividor_class) ;
-	hard_container_class operator-(my_double _num) ;
+	hard_container_class operator+(hard_container_class summed_class);
+	hard_container_class operator-(hard_container_class summed_class);
+	hard_container_class operator+=(hard_container_class summed_class);
+	hard_container_class operator-=(hard_container_class summed_class);
+	bool operator==(hard_container_class summed_class);
+	hard_container_class operator*(my_double _koef);
+	hard_container_class operator/(my_double _koef);
+	hard_container_class operator/(hard_container_class dividor_class);
+	hard_container_class operator-(my_double _num);
 
 	static unsigned short int counter_of_linked_container_class;
 	unsigned short int counter_of_tokenizer;

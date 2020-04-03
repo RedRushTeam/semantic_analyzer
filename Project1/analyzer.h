@@ -5,11 +5,11 @@ class analyzer
 {
 public:
 	analyzer() {}
-	analyzer(std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) { 
+	analyzer(std::list<std::string> list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) { 
 		_container_class = new hard_container_class;
 	}
 
-	analyzer(hard_container_class* _hard_container_class, std::list<std::string>* list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text), _container_class(_hard_container_class)	{}
+	analyzer(hard_container_class* _hard_container_class, std::list<std::string> list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text), _container_class(_hard_container_class)	{}
 
 	bool is_index_valid(int ind) const;
 
@@ -25,7 +25,7 @@ public:
 
 	int get_counter_of_tokenizer();
 
-	void set_list_of_all_parsed_text(std::list<std::string>* list_of_all_parsed_text);
+	void set_list_of_all_parsed_text(std::list<std::string> list_of_all_parsed_text);
 
 	void set_k(char _k);
 
@@ -44,10 +44,10 @@ public:
 	void clear();
 
 	~analyzer() {
-		vec_of_tokens.~vector();
 		this->update_dictionary();
-		list_of_all_parsed_text->clear();
-		delete list_of_all_parsed_text;
+		vec_of_tokens.clear();
+		list_of_all_parsed_text.clear();
+		//delete list_of_all_parsed_text;
 	}
 
 private:
@@ -55,6 +55,6 @@ private:
 	hard_container_class* _container_class;
 	char k;
 	int counter_of_tokenizer;
-	std::list<std::string>* list_of_all_parsed_text;
+	std::list<std::string> list_of_all_parsed_text;
 	std::map<std::string, int> map_of_tokens;
 };
