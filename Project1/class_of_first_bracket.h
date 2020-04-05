@@ -12,6 +12,8 @@ public:
 
 	//getter
 	class_of_collocation* get_vector_of_length() { return this->vector_of_length; };
+	//setter
+	void set_vector_of_lenght(class_of_collocation* massiv);
 
 	//operators
 	class_of_collocation& operator[](long int i);

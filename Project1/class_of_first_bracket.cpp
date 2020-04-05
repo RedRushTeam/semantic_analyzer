@@ -41,3 +41,9 @@ class_of_collocation& class_of_first_bracket::operator[](long int i)
 {
 	return vector_of_length[i];
 }
+
+void class_of_first_bracket::set_vector_of_lenght(class_of_collocation* massiv)
+{
+	for (auto i = 0; i < counter_of_tokenizer; ++i)
+		vector_of_length[i] = massiv[i];
+}

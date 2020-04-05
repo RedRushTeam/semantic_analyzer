@@ -256,3 +256,9 @@ void hard_container_class::set_counter_of_tokenizer(unsigned short int counter_o
 {
 	this->counter_of_tokenizer = counter_of_tokenizer;
 }
+
+hard_container_class hard_container_class::operator=(hard_container_class right_class)
+{
+	hard_container_class copy(right_class);
+	return copy;
+}

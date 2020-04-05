@@ -118,3 +118,9 @@ class_of_collocation class_of_collocation::operator/(my_double _number)
 
 	return cl_for_return;
 }
+
+void class_of_collocation::set_vect_of_collocation(my_double* massiv, int k)
+{
+	for (auto i = 0; i < (2 * k + 2); ++i)
+		vect_of_collocation[i] = massiv[i];
+}

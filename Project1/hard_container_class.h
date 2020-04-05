@@ -18,6 +18,20 @@ public:
 		++counter_of_linked_container_class;
 	}
 
+	hard_container_class(const hard_container_class& right_value) : k(right_value.k), _type_of_cont_class(right_value._type_of_cont_class), filename(right_value.filename) {
+		++counter_of_linked_container_class;
+		give_space(right_value.counter_of_tokenizer, right_value.k);
+		for (auto i = 0; i < counter_of_tokenizer; ++i)
+			for (auto j = 0; j < counter_of_tokenizer; ++j)
+				for (auto l = 0; l < (2 * k + 2); ++l)
+				{
+					vector_of_length[i].get_vector_of_length()[j].get_vect_of_collocation()[l] = right_value.vector_of_length[i].get_vector_of_length()[j].get_vect_of_collocation()[l];
+					vector_of_length[i].get_vector_of_length()[j] = right_value.vector_of_length[i].get_vector_of_length()[j];
+					vector_of_length[i] = right_value.vector_of_length[i];
+				}
+
+	}
+
 	~hard_container_class() {
 	}
 
@@ -49,6 +63,7 @@ public:
 	hard_container_class operator/(my_double _koef);
 	hard_container_class operator/(hard_container_class dividor_class);
 	hard_container_class operator-(my_double _num);
+	hard_container_class operator=(hard_container_class right_class);
 
 	static unsigned short int counter_of_linked_container_class;
 	unsigned short int counter_of_tokenizer;
@@ -58,4 +73,7 @@ private:
 	fs::path filename;
 	type_of_cont_class _type_of_cont_class;
 	int k;
+
+	
+		
 };
