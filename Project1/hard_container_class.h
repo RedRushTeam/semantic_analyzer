@@ -1,8 +1,9 @@
 #pragma once
-#include "container_class_interface.h"
+//#include "container_class_interface.h"
 #include "parser.h"
-//#define OUT_PATH "A:\\text_output\\"
-#define OUT_PATH "C:\\Users\\fortunati\\Desktop\\text_output\\"
+#include "class_of_first_bracket.h"
+#define OUT_PATH "A:\\text_output\\"
+//#define OUT_PATH "C:\\Users\\fortunati\\Desktop\\text_output\\"
 
 class hard_container_class
 {
