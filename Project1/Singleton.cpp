@@ -44,7 +44,9 @@ void Singleton::calculate_sample_mean()
 		this->sample_mean_all += vec_of_hard_container_class[i];
 		this->vec_of_hard_container_class[i].clear();
 	}
-	sample_mean_all = sample_mean_all / this->vec_of_hard_container_class.size();
+	auto tmp = sample_mean_all = sample_mean_all / this->vec_of_hard_container_class.size();
+	sample_mean_all.clear();
+	sample_mean_all = tmp;
 }
 
 void Singleton::calculate_mat_ozidanie()
@@ -57,7 +59,9 @@ void Singleton::calculate_mat_ozidanie()
 		this->vec_of_hard_container_class[i].clear();
 	}
 
-	this->mat_ozidanie = this->mat_ozidanie / this->divider(this->vec_of_hard_container_class.size() * (2 + 2 * GAP));
+	auto tmp = this->mat_ozidanie / this->divider(this->vec_of_hard_container_class.size() * (2 + 2 * GAP));
+	mat_ozidanie.clear();
+	mat_ozidanie = tmp;
 }
 
 void Singleton::calculate_mat_disperse()
@@ -66,13 +70,22 @@ void Singleton::calculate_mat_disperse()
 
 	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
-		this->mat_disperse += vec_of_hard_container_class[i].pow_all(2);
+		auto tmp = vec_of_hard_container_class[i].pow_all(2);
+		this->mat_disperse += tmp;
+		tmp.clear();
 		vec_of_hard_container_class[i].clear();
 	}
+	auto tmp = this->mat_disperse / this->divider(this->vec_of_hard_container_class.size() * (2 + 2 * GAP));
+	mat_disperse.clear();
+	mat_disperse = tmp;
 
-	this->mat_disperse = this->mat_disperse / this->divider(this->vec_of_hard_container_class.size() * (2 + 2 * GAP));
+	auto tmp0 = this->mat_ozidanie.pow_all(2);
 
-	this->mat_disperse = this->mat_disperse - this->mat_ozidanie.pow_all(2);
+	auto tmp1 = this->mat_disperse - tmp;
+	tmp0.clear();
+	this->mat_disperse.clear();
+
+	this->mat_disperse = tmp1;
 }
 
 void Singleton::calculate_sredne_kv_otklonenie()
@@ -85,16 +98,20 @@ void Singleton::calculate_sredne_kv_otklonenie()
 
 void Singleton::calculate_sredne_kv_otklonenie_fixed()
 {
-
 	this->sredne_kv_otklonenie_fixed.give_space(this->max_cont_size, GAP);
 
-	this->sredne_kv_otklonenie_fixed = this->mat_disperse * (this->vec_of_hard_container_class.size() / (this->vec_of_hard_container_class.size() - 1));
+	auto tmp_rez_umn = this->mat_disperse * (this->vec_of_hard_container_class.size() / (this->vec_of_hard_container_class.size() - 1));
 	//////ÎÏÀÑÍÎÅ ÄÅËÅÍÈÅ ÍÀ 0!!!!! ÒÅÊÑÒ ÍÅ ÄÎËÆÅÍ ÁÛÒÜ ÎÄÈÍ!!!
 
-	this->sredne_kv_otklonenie_fixed = this->sredne_kv_otklonenie_fixed.sqrt_all();
+	this->sredne_kv_otklonenie_fixed.clear();
+	this->sredne_kv_otklonenie_fixed = tmp_rez_umn;
+
+	auto tmp_rez_sqrt = this->sredne_kv_otklonenie_fixed.sqrt_all();
+	this->sredne_kv_otklonenie_fixed.clear();
+	sredne_kv_otklonenie_fixed = tmp_rez_sqrt;
 }
 
-void Singleton::calculate_asymmetry_coefficient()						//////todo//////
+void Singleton::calculate_asymmetry_coefficient()						//////todo1//////
 {
 
 	this->asymmetry_coefficient.give_space(this->max_cont_size, GAP);
@@ -109,7 +126,7 @@ void Singleton::calculate_asymmetry_coefficient()						//////todo//////
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
-void Singleton::calculate_excess_ratio()								//////todo//////
+void Singleton::calculate_excess_ratio()								//////todo1//////
 {
 
 	this->excess_ratio.give_space(this->max_cont_size, GAP);
@@ -121,7 +138,6 @@ void Singleton::calculate_excess_ratio()								//////todo//////
 	}
 
 	this->excess_ratio = (this->excess_ratio / this->vec_of_hard_container_class.size()) / this->get_sredne_kv_otklonenie_fixed().pow_all(4) - 3;
-	/////ÍÓÆÍÎ ÍÀÏÈÑÀÒÜ ÎÏÅÐÀÒÎÐ ÄÅËÅÍÈß ÊÎÍÒÅÉÍÅÐÎÃÎ ÊËÀÑÑÀ ÍÀ ÊÎÍÒÅÉÍÅÐÍÛÉ ÊËÀÑÑ, À ÇÀÒÅÌ ÐÀÑÊÎÌÌÅÍÒÈÒÜ ÑÒÐÎÊÓ ÂÛØÅ
 	/////zdes' ispolzovano ispravlennoe otklonenie!!!!!
 }
 
@@ -169,7 +185,7 @@ bool Singleton::remove_hard_container_class(hard_container_class _hard_container
 	return true;
 }
 
-void Singleton::find_fluctuations()	//TODO
+void Singleton::find_fluctuations()			//////todo//////
 {
 
 	auto sum1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
@@ -253,7 +269,7 @@ void Singleton::set_hEngine(HLEM& hEngine)
 }
 
 
-void Singleton::out_for_chart()	//TODO
+void Singleton::out_for_chart()				//////todo//////
 {
 	
 	auto sum1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);

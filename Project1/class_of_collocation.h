@@ -22,8 +22,8 @@ public:
 	my_double get_count_of_concret_collocation(int third_demention);
 	my_double* get_vect_of_collocation() { return vect_of_collocation; };
 	void set_vect_of_collocation(my_double* massiv, int k);
-	class_of_collocation pow_all(int stepen);
-	class_of_collocation sqrt_all();
+	void pow_all(int stepen);
+	void sqrt_all();
 	void clear();
 
 	//operators

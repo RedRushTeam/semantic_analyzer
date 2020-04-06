@@ -18,7 +18,7 @@ void hard_container_class::give_space(unsigned short int counter_of_tokenizer, i
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
 			vector_of_length[i].get_vector_of_length()[j].give_space(this->k);
-
+	this->swap_is_download_dataed();
 }
 
 void hard_container_class::increment(int first_dimension, int second_dimension, int third_dimension)
@@ -33,7 +33,7 @@ hard_container_class hard_container_class::pow_all(int stepen)
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
-			cl_for_return[i][j] = this->vector_of_length[i][j].pow_all(stepen);
+			cl_for_return[i][j].pow_all(stepen);
 
 	return cl_for_return;
 }
@@ -44,7 +44,8 @@ hard_container_class hard_container_class::sqrt_all()
 	cl_for_return.give_space(counter_of_tokenizer, k);
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
-		cl_for_return[i] = this->vector_of_length[i].sqrt_all();
+		for (int j = 0; j < counter_of_tokenizer; ++j)
+			cl_for_return[i][j].sqrt_all();
 
 	return cl_for_return;
 }
@@ -100,14 +101,12 @@ hard_container_class hard_container_class::operator/(my_double _koef)
 	return ret;
 }
 
-hard_container_class hard_container_class::operator+=(hard_container_class summed_class)
+void hard_container_class::operator+=(hard_container_class summed_class)
 {
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				(*this)[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
-
-	return *this;
 }
 
 hard_container_class hard_container_class::operator-=(hard_container_class summed_class)
@@ -178,11 +177,15 @@ void hard_container_class::clear()
 		delete[] vector_of_length;
 		vector_of_length = NULL;
 	}*/
-	for (int i = 0; this->counter_of_tokenizer > i; ++i)
-		this->vector_of_length[i].clear();
+	if (is_download_dataed) {
+		for (int i = 0; this->counter_of_tokenizer > i; ++i)
+			this->vector_of_length[i].clear();
 
-	delete[] vector_of_length;
-	vector_of_length = NULL;
+		delete[] vector_of_length;
+		vector_of_length = NULL;
+
+		this->swap_is_download_dataed();
+	}
 }
 
 my_double hard_container_class::get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension)
@@ -257,8 +260,8 @@ void hard_container_class::set_counter_of_tokenizer(unsigned short int counter_o
 	this->counter_of_tokenizer = counter_of_tokenizer;
 }
 
-hard_container_class hard_container_class::operator=(hard_container_class right_class)
+/*hard_container_class hard_container_class::operator=(hard_container_class right_class)
 {
 	hard_container_class copy(right_class);
 	return copy;
-}
+}*/

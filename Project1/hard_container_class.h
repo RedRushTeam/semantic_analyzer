@@ -18,7 +18,7 @@ public:
 		++counter_of_linked_container_class;
 	}
 
-	hard_container_class(const hard_container_class& right_value) : k(right_value.k), _type_of_cont_class(right_value._type_of_cont_class), filename(right_value.filename) {
+	/*hard_container_class(const hard_container_class& right_value) : k(right_value.k), _type_of_cont_class(right_value._type_of_cont_class), filename(right_value.filename) {
 		++counter_of_linked_container_class;
 		give_space(right_value.counter_of_tokenizer, right_value.k);
 		for (auto i = 0; i < counter_of_tokenizer; ++i)
@@ -30,9 +30,12 @@ public:
 					vector_of_length[i] = right_value.vector_of_length[i];
 				}
 
-	}
+	}*/
 
 	~hard_container_class() {
+		cout << endl << "destr_is_gone" << endl;
+		/*if(is_download_dataed)
+			this->clear();*/
 	}
 
 	// Унаследовано через container_class_interface
@@ -50,20 +53,22 @@ public:
 	int get_k() const;
 	fs::path get_path() const;
 	void set_counter_of_tokenizer(unsigned short int counter_of_tokenizer);
-
+	void swap_is_download_dataed() {
+		this->is_download_dataed = !this->is_download_dataed;
+	}
 
 	//operators
 	class_of_first_bracket& operator[] (long int i) ;
 	hard_container_class operator+(hard_container_class summed_class);
 	hard_container_class operator-(hard_container_class summed_class);
-	hard_container_class operator+=(hard_container_class summed_class);
+	void operator+=(hard_container_class summed_class);
 	hard_container_class operator-=(hard_container_class summed_class);
 	bool operator==(hard_container_class summed_class);
 	hard_container_class operator*(my_double _koef);
 	hard_container_class operator/(my_double _koef);
 	hard_container_class operator/(hard_container_class dividor_class);
 	hard_container_class operator-(my_double _num);
-	hard_container_class operator=(hard_container_class right_class);
+	//hard_container_class operator=(hard_container_class right_class);
 
 	static unsigned short int counter_of_linked_container_class;
 	unsigned short int counter_of_tokenizer;

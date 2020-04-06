@@ -23,7 +23,7 @@ void analyzer::analyze_vec_of_tokens()
 		}
 	}
 
-	//_hard_container_class.counter_of_tokenizer = this->counter_of_tokenizer;
+	//this->_container_class->swap_is_download_dataed();
 
 }
 

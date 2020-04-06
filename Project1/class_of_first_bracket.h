@@ -5,9 +5,6 @@ class class_of_first_bracket
 public:
 	//methods
 	void give_space(int counter_of_tokenizer, int k);
-	//void assign(long int i, class_of_collocation _class_of_collocation);
-	class_of_first_bracket sqrt_all();
-	//void push_back(class_of_collocation coc);
 	void clear();
 
 	//getter
