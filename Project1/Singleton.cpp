@@ -190,12 +190,10 @@ void Singleton::find_fluctuations()			//////todo//////
 
 	auto sum1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 	auto razn1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-	auto shhh1 = this->calculate_parametr_to_one_term(this->mat_ozidanie);
-
 	hard_container_class chart1;
-	chart1.give_space(this->max_cont_size, GAP);
 	auto keks = this->max_cont_size;
-
+	chart1.give_space(keks, GAP);
+	
 	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
 		for (auto q = 0; q < keks; ++q)
@@ -204,8 +202,11 @@ void Singleton::find_fluctuations()			//////todo//////
 					chart1[q][q][p] = chart1[q][q][p] + this->vec_of_hard_container_class[i][q][j][p];
 		vec_of_hard_container_class[i].clear();
 	}
+	
 
-	chart1 = chart1 / vec_of_hard_container_class.size();
+	auto tmp1 = chart1 / vec_of_hard_container_class.size();
+	chart1.clear();
+	chart1 = tmp1;
 	analyzer helper;
 	helper.set_map_of_tokens("dictionary.txt");
 	ofstream ff("fluctuation.txt");
@@ -215,11 +216,11 @@ void Singleton::find_fluctuations()			//////todo//////
 				for (auto q : helper.get_map_of_tokens())
 					if (q.second == i) {
 						ff << q.first << " ";
-						//i++;
 						break;
 					}
 				break;
 			}
+	chart1.clear();
 }
 
 void Singleton::clear(type_of_purpose_of_cont_class _type_of_cont_class)
@@ -274,11 +275,12 @@ void Singleton::out_for_chart()				//////todo//////
 	
 	auto sum1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 	auto razn1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
-	auto shhh1 = this->calculate_parametr_to_one_term(this->mat_ozidanie);
+	auto single_mat_ozhid = this->calculate_parametr_to_one_term(this->mat_ozidanie);
 
 	hard_container_class chart1;
-	chart1.give_space(this->max_cont_size, GAP);
 	auto keks = this->max_cont_size;
+	chart1.give_space(keks, GAP);
+	
 	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
 		for (auto q = 0; q < keks; ++q)
@@ -288,7 +290,9 @@ void Singleton::out_for_chart()				//////todo//////
 		vec_of_hard_container_class[i].clear();
 	}
 
-	chart1 = chart1 / vec_of_hard_container_class.size();
+	auto tmp = chart1 / vec_of_hard_container_class.size();
+	chart1.clear();
+	chart1 = tmp;
 
 	//auto keks = this->vec_of_hard_container_class[this->vec_of_hard_container_class.size() - 1]->get_counter_of_tokenizer();
 
@@ -307,9 +311,9 @@ void Singleton::out_for_chart()				//////todo//////
 
 					for (int l = -GAP - 1; l <= GAP; ++l)
 						if (l == -GAP - 1)
-							to_chart << "mat_ozhidanie: " << shhh1[i][i][l] << " ";
+							to_chart << "mat_ozhidanie: " << single_mat_ozhid[i][i][l] << " ";
 						else 
-							to_chart << shhh1[i][i][l] << " ";
+							to_chart << single_mat_ozhid[i][i][l] << " ";
 
 					to_chart << endl;
 
@@ -328,6 +332,10 @@ void Singleton::out_for_chart()				//////todo//////
 							to_chart << razn1[i][i][l] << " ";	
 		}
 		to_chart.close();
+		sum1.clear();
+		razn1.clear();
+		single_mat_ozhid.clear();
+		chart1.clear();
 }
 
 void Singleton::sinchronize_terms()
