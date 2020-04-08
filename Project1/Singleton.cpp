@@ -376,7 +376,7 @@ void Singleton::prepare_data_in_container_class(int _hard_container_class_number
 {
 	this->_parser->set_filename(this->vec_of_hard_container_class[_hard_container_class_number].get_path());
 
-	cout << endl << "Now in work: " << this->vec_of_hard_container_class[_hard_container_class_number].get_path() << endl;
+	cout << "(" << _hard_container_class_number + 1 << "/" << this->vec_of_hard_container_class.size() << ") ";
 
 	char utf9[512];
 
@@ -403,7 +403,15 @@ void Singleton::prepare_data_in_container_class(int _hard_container_class_number
 
 void Singleton::calculate_max_cont_size()
 {
+	std::cout << std::endl << "Calculating max size:";
+
+	int counter = 0;
+
 	for (auto obj : this->vec_of_hard_container_class) {
+
+		++counter;
+		std::cout << "(" << counter << "/" << this->vec_of_hard_container_class.size() << ") ";
+
 		this->_parser->set_filename(obj.get_path());
 		char utf9[512];
 
@@ -429,5 +437,5 @@ void Singleton::calculate_max_cont_size()
 			this->max_cont_size = obj.counter_of_tokenizer;
 	}
 
-	cout << endl << "Max cont. size: " << this->max_cont_size << endl;
+	cout << endl << endl << "Max cont. size: " << this->max_cont_size << endl;
 }

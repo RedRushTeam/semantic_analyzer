@@ -33,7 +33,6 @@ public:
 	}*/
 
 	~hard_container_class() {
-		cout << endl << "destr_is_gone" << endl;
 		/*if(is_download_dataed)
 			this->clear();*/
 	}

@@ -88,19 +88,25 @@ int main(int argc, char* argv[])
 
 	Singleton::initialization().calculate_max_cont_size();
 
-	Singleton::initialization().calculate_sample_mean();
+	//cout << std::endl << "Calculating max size:";
+	//Singleton::initialization().calculate_sample_mean();
 
+	cout << endl << "(1/4) Calculating mat ozid...";
 	Singleton::initialization().calculate_mat_ozidanie();
 
+	cout << endl << "(2/4) Calculating mat disp...";
 	Singleton::initialization().calculate_mat_disperse();
 
+	cout << endl << "(3/4) Calculating sredne kv otklonenie fixed...";
 	Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
 
+	cout << endl << "(4/4) Finding fluctuations...";
 	Singleton::initialization().clear(mat_otkl_);
 	Singleton::initialization().find_fluctuations();
 	Singleton::initialization().clear(mat_disperse_);
 
-	Singleton::initialization().out_for_chart();
+	/*cout << endl << "(5/5) Out chart...";
+	Singleton::initialization().out_for_chart();*/
 
 	auto finish = clock();
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
