@@ -28,13 +28,14 @@ list<string> parser::delete_trash()
 	int helper = 1;
 	int size = 0;
 	int tmp;
+
 	regex no_letters("[^А-Яа-я -]");
-	regex spaces(" {2,}");
-	regex defis("\ -[а-яА-Я]");
-	regex post_defis("\[[а-яА-Я]-");
-	regex un_defis("\- |\ -");
+    regex post_defis("\-");
+	regex spaces(" {1,}");
+
 	string replacement = " ";
 	string nothing = "";
+
 	std::string untext;
 	if (_input.is_open()) {
 		while (!_input.eof()) {
@@ -47,12 +48,7 @@ list<string> parser::delete_trash()
 		cout << "it doesn't work";
 
 	string temp = regex_replace(untext, no_letters, nothing);
-	string temp3 = regex_replace(temp, defis, nothing);
-	if (TRASH_DELETE_OPTION) {
-		string temp2 = regex_replace(temp3, post_defis, nothing);
-		temp3 = regex_replace(temp2, un_defis, nothing);
-		temp2.clear();
-	}
+	string temp3 = regex_replace(temp, post_defis, nothing);
 	string text = regex_replace(temp3, spaces, replacement);
 	
 
@@ -90,6 +86,7 @@ list<string> parser::delete_trash()
 		}
 		temp.clear();
 		temp3.clear();
+		text.clear();
 
 		return terms;
 }
