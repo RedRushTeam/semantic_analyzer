@@ -7,15 +7,16 @@ public:
 	analyzer() {}
 	analyzer(std::list<std::string> list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text) { 
 		_container_class = new hard_container_class;
+		//_container_class->give_space()
 	}
 
-	analyzer(hard_container_class* _hard_container_class, std::list<std::string> list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text), _container_class(_hard_container_class)	{}
+	analyzer(super_container_class* _hard_container_class, std::list<std::string> list_of_all_parsed_text) : list_of_all_parsed_text(list_of_all_parsed_text), _container_class(_hard_container_class)	{}
 
 	bool is_index_valid(int ind) const;
 
 	void analyze_vec_of_tokens();
 
-	hard_container_class* get_container_class();
+	super_container_class* get_container_class();
 
 	void shape_vec_of_tokens();
 
@@ -29,7 +30,7 @@ public:
 
 	void set_k(char _k);
 
-	void set_container_class(hard_container_class* _container_class);
+	void set_container_class(super_container_class* _container_class);
 
 	void give_space(int maxsize);
 
@@ -50,11 +51,14 @@ public:
 		//delete list_of_all_parsed_text;
 	}
 
+	int size_for_give_space;
+
 private:
 	vector<int> vec_of_tokens;
-	hard_container_class* _container_class;
+	super_container_class* _container_class;
 	char k;
 	int counter_of_tokenizer;
 	std::list<std::string> list_of_all_parsed_text;
 	std::map<std::string, int> map_of_tokens;
+	
 };

@@ -27,7 +27,7 @@ void analyzer::analyze_vec_of_tokens()
 
 }
 
-hard_container_class* analyzer::get_container_class()
+super_container_class* analyzer::get_container_class()
 {
 	return _container_class;
 }
@@ -55,7 +55,10 @@ void analyzer::shape_vec_of_tokens()
 
 	this->counter_of_tokenizer = i;
 	this->_container_class->set_counter_of_tokenizer(i);
+	this->size_for_give_space = i;
 }
+
+
 
 void analyzer::shape_vec_tokens_of_text()
 {
@@ -89,7 +92,7 @@ void analyzer::set_k(char _k) {
 	k = _k;
 }
 
-void analyzer::set_container_class(hard_container_class* _container_class)
+void analyzer::set_container_class(super_container_class* _container_class)
 {
 	this->_container_class = _container_class;
 }
