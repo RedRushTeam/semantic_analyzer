@@ -157,6 +157,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="super_container_class.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="analyzer.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="list_of_types.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="super_container_class.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
