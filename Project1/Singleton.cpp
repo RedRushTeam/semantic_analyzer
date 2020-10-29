@@ -211,7 +211,7 @@ void Singleton::find_fluctuations()			//////todo//////
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					chart1[q][q][p] = chart1[q][q][p] + this->vec_of_hard_container_class[i][q][j][p];
+					(*chart1)[q][q][p] = (*chart1)[q][q][p] + (*this->vec_of_hard_container_class[i])[q][j][p];
 		vec_of_hard_container_class[i]->clear();
 	}
 	
@@ -374,7 +374,7 @@ super_container_class* Singleton::calculate_parametr_to_one_term(super_container
 	for (auto q = 0; q < _parametr->get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < _parametr->get_counter_of_tokenizer(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				_parametr[q][q][p] += _parametr[q][j][p];
+				(*_parametr)[q][q][p] += (*_parametr)[q][j][p];
 	return _parametr;
 }
 

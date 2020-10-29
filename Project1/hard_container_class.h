@@ -75,8 +75,8 @@ public:
 	super_container_class* operator-(my_double _num);
 	//hard_container_class operator=(hard_container_class right_class);
 
-	static unsigned short int counter_of_linked_container_class;
-	unsigned short int counter_of_tokenizer;
+	//static unsigned short int counter_of_linked_container_class;
+	//unsigned short int counter_of_tokenizer;
 private:
 	class_of_first_bracket* vector_of_length;		
 };

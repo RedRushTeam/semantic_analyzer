@@ -62,7 +62,7 @@ super_container_class* hard_container_class::operator+(super_container_class* su
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					ret[i][j][p] = (*this)[i][j][p] + (*summed_class)[i][j][p];
+					(*ret)[i][j][p] = (*this)[i][j][p] + (*summed_class)[i][j][p];
 	return ret;
 }
 
@@ -73,7 +73,7 @@ super_container_class* hard_container_class::operator-(super_container_class* _c
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				ret[i][j][p] = (*this)[i][j][p] - (*_class)[i][j][p];
+				(*ret)[i][j][p] = (*this)[i][j][p] - (*_class)[i][j][p];
 	return ret;
 }
 
@@ -84,7 +84,7 @@ super_container_class* hard_container_class::operator*(my_double _koef)
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				ret[i][j][p] = (*this)[i][j][p] * _koef;
+				(*ret)[i][j][p] = (*this)[i][j][p] * _koef;
 
 	return ret;
 }
@@ -96,7 +96,7 @@ super_container_class* hard_container_class::operator/(my_double _koef)
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				ret[i][j][p] = (*this)[i][j][p] / _koef;
+				(*ret)[i][j][p] = (*this)[i][j][p] / _koef;
 
 	return ret;
 }
@@ -139,7 +139,7 @@ super_container_class* hard_container_class::operator/(super_container_class* di
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				ret[i][j][p] = (*this)[i][j][p] / (*dividor_class)[i][j][p];
+				(*ret)[i][j][p] = (*this)[i][j][p] / (*dividor_class)[i][j][p];
 
 	return ret;
 }
@@ -156,7 +156,7 @@ super_container_class* hard_container_class::operator-(my_double _num)
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				ret[i][j][p] = (*this)[i][j][p] - _num;
+				(*ret)[i][j][p] = (*this)[i][j][p] - _num;
 
 	return ret;
 }
