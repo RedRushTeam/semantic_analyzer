@@ -63,6 +63,7 @@ super_container_class* hard_container_class::operator+(super_container_class* su
 		for (int j = 0; j < counter_of_tokenizer; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
 					(*ret)[i][j][p] = (*this)[i][j][p] + (*summed_class)[i][j][p];
+
 	return ret;
 }
 
@@ -73,6 +74,7 @@ super_container_class* hard_container_class::operator-(super_container_class* _c
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
+
 				(*ret)[i][j][p] = (*this)[i][j][p] - (*_class)[i][j][p];
 	return ret;
 }
@@ -85,7 +87,6 @@ super_container_class* hard_container_class::operator*(my_double _koef)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
 				(*ret)[i][j][p] = (*this)[i][j][p] * _koef;
-
 	return ret;
 }
 
@@ -199,7 +200,7 @@ void hard_container_class::download_data()
 	if (!this->is_download_dataed) {
 		this->give_space(this->counter_of_tokenizer, this->get_k());
 
-		ifstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//çàìåíèòü ýòî íà std::filesystem
+		ifstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//Ã§Ã Ã¬Ã¥Ã­Ã¨Ã²Ã¼ Ã½Ã²Ã® Ã­Ã  std::filesystem
 
 		while (!matrix.eof()) {
 			string line;
@@ -222,7 +223,7 @@ void hard_container_class::upload_data()
 		ofstream m(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt", ios::trunc);
 		m.close();
 
-		ofstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//çàìåíèòü ýòî íà std::filesystem
+		ofstream matrix(OUT_PATH + to_string(this->counter_of_linked_container_class) + ".txt");	//Ã§Ã Ã¬Ã¥Ã­Ã¨Ã²Ã¼ Ã½Ã²Ã® Ã­Ã  std::filesystem
 
 		for (int i = 0; i < this->counter_of_tokenizer; ++i)
 			for (int j = 0; j < this->counter_of_tokenizer; ++j) {

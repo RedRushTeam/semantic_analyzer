@@ -112,7 +112,7 @@ void Singleton::calculate_sredne_kv_otklonenie_fixed()
 	this->sredne_kv_otklonenie_fixed->give_space(this->max_cont_size, GAP);
 
 	auto tmp_rez_umn = (*mat_disperse) * (this->vec_of_hard_container_class.size() / (this->vec_of_hard_container_class.size() - 1));
-	//////ÎÏÀÑÍÎÅ ÄÅËÅÍÈÅ ÍÀ 0!!!!! ÒÅÊÑÒ ÍÅ ÄÎËÆÅÍ ÁÛÒÜ ÎÄÈÍ!!!
+	//////ÃŽÃÃ€Ã‘ÃÃŽÃ… Ã„Ã…Ã‹Ã…ÃÃˆÃ… ÃÃ€ 0!!!!! Ã’Ã…ÃŠÃ‘Ã’ ÃÃ… Ã„ÃŽÃ‹Ã†Ã…Ã ÃÃ›Ã’Ãœ ÃŽÃ„ÃˆÃ!!!
 
 	this->sredne_kv_otklonenie_fixed->clear();
 	(sredne_kv_otklonenie_fixed) = tmp_rez_umn;
@@ -211,7 +211,7 @@ void Singleton::find_fluctuations()			//////todo//////
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					(*chart1)[q][q][p] = (*chart1)[q][q][p] + (*this->vec_of_hard_container_class[i])[q][j][p];
+					(*chart1)[q][q][p] = (*chart1)[q][q][p] + (*vec_of_hard_container_class[i])[q][j][p];
 		vec_of_hard_container_class[i]->clear();
 	}
 	
