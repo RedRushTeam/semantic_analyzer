@@ -407,7 +407,7 @@ void Singleton::prepare_data_in_container_class(int _hard_container_class_number
 	this->_analyzer->shape_vec_of_tokens();
 	this->_analyzer->give_space(_analyzer->size_for_give_space);
 	this->_analyzer->shape_vec_tokens_of_text();
-	this->_analyzer->give_space(this->max_cont_size);
+	//this->_analyzer->give_space(this->max_cont_size);
 	this->_analyzer->analyze_vec_of_tokens();
 	this->_analyzer->update_dictionary();
 	this->_analyzer->clear();
