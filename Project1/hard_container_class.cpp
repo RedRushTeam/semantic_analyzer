@@ -62,7 +62,11 @@ hard_container_class hard_container_class::operator+(hard_container_class summed
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
+<<<<<<< Updated upstream
 					ret[i][j][p] = (*this)[i][j][p] + summed_class[i][j][p];
+=======
+					(*ret)[i][j][p] = (*this)[i][j][p] + (*summed_class)[i][j][p];
+>>>>>>> Stashed changes
 	return ret;
 }
 
@@ -73,7 +77,11 @@ hard_container_class hard_container_class::operator-(hard_container_class _class
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
+<<<<<<< Updated upstream
 				ret[i][j][p] = (*this)[i][j][p] - _class[i][j][p];
+=======
+				(*ret)[i][j][p] = (*this)[i][j][p] - (*_class)[i][j][p];
+>>>>>>> Stashed changes
 	return ret;
 }
 
@@ -84,8 +92,8 @@ hard_container_class hard_container_class::operator*(my_double _koef)
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				ret[i][j][p] = (*this)[i][j][p] * _koef;
-
+				(*ret)[i][j][p] = (*this)[i][j][p] * _koef;
+	
 	return ret;
 }
 
@@ -96,7 +104,7 @@ hard_container_class hard_container_class::operator/(my_double _koef)
 	for (auto i = 0; i < counter_of_tokenizer; ++i)
 		for (auto j = 0; j < counter_of_tokenizer; ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				ret[i][j][p] = (*this)[i][j][p] / _koef;
+				(*ret)[i][j][p] = (*this)[i][j][p] / _koef;
 
 	return ret;
 }
