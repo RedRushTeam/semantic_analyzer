@@ -25,10 +25,10 @@ public:
 	virtual void clear() = 0;
 	virtual void download_data() = 0;
 	virtual void upload_data() = 0;
-	virtual unsigned short int get_counter_of_tokenizer() const = 0;
-	virtual int get_k() const = 0;
-	virtual fs::path get_path() const = 0;
-	virtual void set_counter_of_tokenizer(unsigned short int counter_of_tokenizer) = 0;
+	virtual unsigned short int get_counter_of_tokenizer() const;
+	virtual int get_k() const;
+	virtual fs::path get_path() const;
+	virtual void set_counter_of_tokenizer(unsigned short int counter_of_tokenizer);
 	virtual void swap_is_download_dataed() = 0;
 
 	//operators

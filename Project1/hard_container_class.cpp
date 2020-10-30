@@ -241,26 +241,6 @@ void hard_container_class::upload_data()
 	}
 }
 
-unsigned short int hard_container_class::get_counter_of_tokenizer() const
-{
-	return this->counter_of_tokenizer;
-}
-
-int hard_container_class::get_k() const
-{
-	return this->k;
-}
-
-fs::path hard_container_class::get_path() const
-{
-	return this->filename;
-}
-
-void hard_container_class::set_counter_of_tokenizer(unsigned short int counter_of_tokenizer)
-{
-	this->counter_of_tokenizer = counter_of_tokenizer;
-}
-
 /*hard_container_class hard_container_class::operator=(hard_container_class right_class)
 {
 	hard_container_class copy(right_class);

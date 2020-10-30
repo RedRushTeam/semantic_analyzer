@@ -54,10 +54,6 @@ public:
 	void clear() ;
 	void download_data() ;
 	void upload_data() ;
-	unsigned short int get_counter_of_tokenizer() const;
-	int get_k() const;
-	fs::path get_path() const;
-	void set_counter_of_tokenizer(unsigned short int counter_of_tokenizer);
 	void swap_is_download_dataed() {
 		this->is_download_dataed = !this->is_download_dataed;
 	}
