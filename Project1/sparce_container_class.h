@@ -5,6 +5,7 @@ class sparce_container_class :
     public super_container_class
 {
     // Унаследовано через super_container_class
+    //methods
     virtual void give_space(unsigned short int counter_of_tokenizer, int k) override;
     virtual void increment(int first_dimension, int second_dimension, int third_dimension) override;
     virtual my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) override;
@@ -15,6 +16,8 @@ class sparce_container_class :
     virtual void download_data() override;
     virtual void upload_data() override;
     virtual void swap_is_download_dataed() override;
+
+    //operators
     virtual class_of_first_bracket& operator[](long int i) override;
     virtual super_container_class* operator+(super_container_class* summed_class) override;
     virtual super_container_class* operator-(super_container_class* summed_class) override;
@@ -25,5 +28,8 @@ class sparce_container_class :
     virtual super_container_class* operator/(my_double _koef) override;
     virtual super_container_class* operator/(super_container_class* dividor_class) override;
     virtual super_container_class* operator-(my_double _num) override;
+
+private:
+    class_of_first_bracket_for_sparce_container_class* _class_of_first_bracket_for_sparce_container_class;
 };
 
