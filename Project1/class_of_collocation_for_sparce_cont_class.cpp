@@ -52,6 +52,26 @@ void class_of_collocation_for_sparce_cont_class::clear()
         this->_scary_map.erase(make_pair(this->_first_bracket, make_pair(this->_second_bracket, i + (GAP + 1))));
 }
 
+void class_of_collocation_for_sparce_cont_class::set_first_bracket(int _first_bracket)
+{
+    this->_first_bracket = _first_bracket;
+}
+
+void class_of_collocation_for_sparce_cont_class::set_second_bracket(int _second_bracket)
+{
+    this->_second_bracket = _second_bracket;
+}
+
+int class_of_collocation_for_sparce_cont_class::get_second_bracket() const
+{
+    return this->_second_bracket;
+}
+
+int class_of_collocation_for_sparce_cont_class::get_first_bracket() const
+{
+    return this->_first_bracket;
+}
+
 my_double& class_of_collocation_for_sparce_cont_class::operator[](long int i)
 {
     if (this->_scary_map.find(make_pair(this->_first_bracket, make_pair(this->_second_bracket, i + (GAP + 1)))) != this->_scary_map.end())

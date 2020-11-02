@@ -13,6 +13,10 @@ public:
 	void pow_all(int stepen);
 	void sqrt_all();
 	void clear();
+	void set_first_bracket(int _first_bracket);
+	void set_second_bracket(int _second_bracket);
+	int get_second_bracket() const;
+	int get_first_bracket() const;
 
 	//operators
 	my_double& operator[](long int i);
@@ -22,6 +26,7 @@ public:
 	class_of_collocation operator +=(class_of_collocation summed_class);
 	class_of_collocation operator *(my_double _number);
 	class_of_collocation operator /(my_double _number);
+
 
 private:
 	map<pair<int, pair<int, int>>, my_double> _scary_map;
