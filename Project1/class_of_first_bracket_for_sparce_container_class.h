@@ -1,7 +1,7 @@
 #pragma once
 #include "class_of_collocation_for_sparce_cont_class.h"
 
-class class_of_first_bracket_for_sparce_container_class
+class class_of_first_bracket_for_sparce_container_class : public super_class_of_first_bracket
 {
 public:
 	//constr
@@ -10,15 +10,13 @@ public:
 	}
 
 	//methods
-	void give_space(int counter_of_tokenizer, int k);
-	void clear();
-	void set_first_bracket_counter(int i);
+	void give_space(int counter_of_tokenizer, int k) override;
+	void clear() override;
+	void set_first_bracket_counter(int i) override;
 
 	//operators
-	class_of_collocation_for_sparce_cont_class& operator[](long int i);
+	class_of_collocation_for_sparce_cont_class& operator[](long int i) override;	//new children there
 
-
-	int counter_of_tokenizer;
 private:
 	class_of_collocation_for_sparce_cont_class* vector_of_length;
 };

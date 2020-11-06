@@ -47,6 +47,12 @@
     <ClCompile Include="class_of_collocation_for_sparce_cont_class.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="super_class_of_first_bracket.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="super_class_of_collocation.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="analyzer.h">
@@ -80,6 +86,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="class_of_collocation_for_sparce_cont_class.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="super_class_of_first_bracket.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="super_class_of_collocation.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
