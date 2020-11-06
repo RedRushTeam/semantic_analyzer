@@ -1,6 +1,7 @@
 #pragma once
 #include "parser.h"
 #include "class_of_first_bracket.h"
+#include "super_class_of_first_bracket.h"
 #define OUT_PATH "A:\\text_output\\"
 
 class super_container_class
@@ -32,7 +33,7 @@ public:
 	virtual void swap_is_download_dataed() = 0;
 
 	//operators
-	virtual class_of_first_bracket& operator[] (long int i) = 0;
+	virtual super_class_of_first_bracket& operator[] (long int i) = 0;
 	virtual super_container_class* operator+(super_container_class* summed_class) = 0;
 	virtual super_container_class* operator-(super_container_class* summed_class) = 0;
 	virtual void operator+=(super_container_class* summed_class) = 0;

@@ -2,7 +2,7 @@
 
 void class_of_first_bracket_for_sparce_container_class::give_space(int counter_of_tokenizer, int k)
 {
-	//kostil
+	//kostil 
 }
 
 void class_of_first_bracket_for_sparce_container_class::clear()
