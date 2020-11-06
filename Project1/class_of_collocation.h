@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include "list_of_types.h"
+#include "super_class_of_collocation.h"
 //using namespace boost::numeric::ublas;
-class class_of_collocation
+class class_of_collocation : public super_class_of_collocation
 {
 public:
 	//constr

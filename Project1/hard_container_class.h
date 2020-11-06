@@ -59,7 +59,7 @@ public:
 	}
 
 	//operators
-	class_of_first_bracket& operator[] (long int i) ;
+	super_class_of_first_bracket& operator[] (long int i) ;
 	super_container_class* operator+(super_container_class* summed_class);
 	super_container_class* operator-(super_container_class* summed_class);
 	void operator+=(super_container_class* summed_class);

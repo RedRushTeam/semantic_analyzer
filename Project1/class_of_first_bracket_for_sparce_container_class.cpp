@@ -16,7 +16,7 @@ void class_of_first_bracket_for_sparce_container_class::set_first_bracket_counte
 	this->vector_of_length->set_first_bracket(i);
 }
 
-class_of_collocation_for_sparce_cont_class& class_of_first_bracket_for_sparce_container_class::operator[](long int i)
+super_class_of_collocation& class_of_first_bracket_for_sparce_container_class::operator[](long int i)
 {
 	this->vector_of_length->set_second_bracket(i);
 	return *(this->vector_of_length);

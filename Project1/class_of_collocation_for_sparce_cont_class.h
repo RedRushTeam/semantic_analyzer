@@ -1,7 +1,7 @@
 #pragma once
 #include "super_container_class.h"
 
-class class_of_collocation_for_sparce_cont_class
+class class_of_collocation_for_sparce_cont_class : public super_class_of_collocation
 {
 public:
 	//methods
