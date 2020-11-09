@@ -2,7 +2,7 @@
 
 
 
-unsigned short int hard_container_class::counter_of_linked_container_class = 0;
+//unsigned short int hard_container_class::counter_of_linked_container_class = 0;
 
 void hard_container_class::give_space(unsigned short int counter_of_tokenizer, int k)
 {
@@ -12,12 +12,14 @@ void hard_container_class::give_space(unsigned short int counter_of_tokenizer, i
 
 	this->k = k;
 
-	for (int i = 0; i < counter_of_tokenizer; ++i)
-		vector_of_length[i].give_space(counter_of_tokenizer, k);
+	for (int i = 0; i < counter_of_tokenizer; ++i) {
+		super_class_of_first_bracket* lil = &(this->vector_of_length[i]);
+		this->vector_of_length[i].give_space(counter_of_tokenizer, k);
+	}
 
 	for (int i = 0; i < counter_of_tokenizer; ++i)
 		for (int j = 0; j < counter_of_tokenizer; ++j)
-			vector_of_length[i].get_vector_of_length()[j].give_space(this->k);
+			vector_of_length[i][j].give_space(this->k);
 	this->swap_is_download_dataed();
 }
 
@@ -50,9 +52,9 @@ super_container_class* hard_container_class::sqrt_all()
 	return cl_for_return;
 }
 
-class_of_first_bracket& hard_container_class::operator[](long int i)
+super_class_of_first_bracket& hard_container_class::operator[](long int i)
 {
-	return this->vector_of_length[i];
+	return vector_of_length[i];
 }
 
 super_container_class* hard_container_class::operator+(super_container_class* summed_class)
@@ -145,7 +147,7 @@ super_container_class* hard_container_class::operator/(super_container_class* di
 	return ret;
 }
 
-class_of_first_bracket* hard_container_class::get_vector_of_length()
+super_class_of_first_bracket* hard_container_class::get_vector_of_length()
 {
 	return this->vector_of_length;
 }

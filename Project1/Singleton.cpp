@@ -298,7 +298,7 @@ void Singleton::out_for_chart()				//////todo//////
 		for (auto q = 0; q < keks; ++q)
 			for (auto j = 0; j < keks; ++j)
 				for (auto p = -GAP - 1; p <= GAP; ++p)
-					chart1[q][q][p] = chart1[q][q][p] + this->vec_of_hard_container_class[i][q][j][p];
+					(*chart1)[q][q][p] = (*chart1)[q][q][p] + (*this->vec_of_hard_container_class[i])[q][j][p];
 		vec_of_hard_container_class[i]->clear();
 	}
 
@@ -365,7 +365,7 @@ void Singleton::sinchronize_terms(super_container_class& _container_class)
 	for (auto q = 0; q < _container_class.get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < _container_class.get_counter_of_tokenizer(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				new_cont_class[q][j][p] = _container_class[q][j][p];
+				(*new_cont_class)[q][j][p] = _container_class[q][j][p];
 	_container_class.get_k();
 }
 

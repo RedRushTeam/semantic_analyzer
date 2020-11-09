@@ -1,9 +1,6 @@
 #pragma once
-//#include "container_class_interface.h"
-#include "super_container_class.h"
-#include "class_of_first_bracket.h"
+#include "class_of_first_bracket_for_sparce_container_class.h"
 #define OUT_PATH "A:\\text_output\\"
-//#define OUT_PATH "C:\\Users\\fortunati\\Desktop\\text_output\\"
 
 class hard_container_class : public super_container_class
 {
@@ -50,7 +47,7 @@ public:
 	my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) ;
 	super_container_class* pow_all(int stepen) ;
 	super_container_class* sqrt_all() ;
-	class_of_first_bracket* get_vector_of_length() ;
+	super_class_of_first_bracket* get_vector_of_length() ;
 	void clear() ;
 	void download_data() ;
 	void upload_data() ;
@@ -75,8 +72,8 @@ public:
 	super_container_class* operator-(my_double _num);
 	//hard_container_class operator=(hard_container_class right_class);
 
-	//static unsigned short int counter_of_linked_container_class;
+
 	//unsigned short int counter_of_tokenizer;
 private:
-	class_of_first_bracket* vector_of_length;		
+	super_class_of_first_bracket* vector_of_length;		
 };
