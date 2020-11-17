@@ -22,7 +22,7 @@ public:
 	virtual my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) = 0;
 	virtual super_container_class* pow_all(int stepen) = 0;
 	virtual super_container_class* sqrt_all() = 0;
-	virtual class_of_first_bracket* get_vector_of_length() = 0;	//govno
+	virtual class_of_first_bracket* get_vector_of_length() = 0;
 	virtual void clear() = 0;
 	virtual void download_data() = 0;
 	virtual void upload_data() = 0;

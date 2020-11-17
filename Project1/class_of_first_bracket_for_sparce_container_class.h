@@ -15,9 +15,9 @@ public:
 	void set_first_bracket_counter(int i) override;
 
 	//operators
-	super_class_of_collocation& operator[](long int i) override;	//new children there
+	class_of_collocation_for_sparce_cont_class& operator[](long int i) override;	//new children there
 
 private:
-	super_class_of_collocation* vector_of_length;
+	class_of_collocation_for_sparce_cont_class* vector_of_length;
 };
 
