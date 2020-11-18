@@ -1,13 +1,9 @@
 ﻿#pragma once
-<<<<<<< Updated upstream
 #include "list_of_types.h"
 //using namespace boost::numeric::ublas;
-class class_of_collocation
-=======
 #include "super_container_class.h"
  
 class class_of_collocation : public super_class_of_collocation
->>>>>>> Stashed changes
 {
 public:
 	//constr

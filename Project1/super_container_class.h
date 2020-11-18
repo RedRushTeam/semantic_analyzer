@@ -1,11 +1,6 @@
 #pragma once
-<<<<<<< Updated upstream
 #include "parser.h"
 #include "class_of_first_bracket.h"
-=======
-//#include "parser.h"
-#include "super_class_of_first_bracket.h"
->>>>>>> Stashed changes
 #define OUT_PATH "A:\\text_output\\"
 
 class super_container_class
@@ -26,11 +21,7 @@ public:
 	virtual my_double get_count_of_concret_collocation(int first_dimension, int second_dimension, int third_dimension) = 0;
 	virtual super_container_class* pow_all(int stepen) = 0;
 	virtual super_container_class* sqrt_all() = 0;
-<<<<<<< Updated upstream
 	virtual class_of_first_bracket* get_vector_of_length() = 0;
-=======
-	virtual super_class_of_first_bracket* get_vector_of_length() = 0;	//govno
->>>>>>> Stashed changes
 	virtual void clear() = 0;
 	virtual void download_data() = 0;
 	virtual void upload_data() = 0;

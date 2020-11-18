@@ -1,6 +1,4 @@
 #include "super_container_class.h"
-<<<<<<< Updated upstream
-=======
 
 unsigned short int super_container_class::counter_of_linked_container_class = 0;
 
@@ -23,4 +21,3 @@ void super_container_class::set_counter_of_tokenizer(unsigned short int counter_
 {
 	this->counter_of_tokenizer = counter_of_tokenizer;
 }
->>>>>>> Stashed changes
