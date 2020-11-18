@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include "Singleton.h"
 
+#include <Eigen>
+
+using Eigen::MatrixXd;
+
 vector<fs::path> get_input_texts() {
 	auto input_path = TEXTS_PATH/*fs::current_path()/"inputfiles"*/;
 	fs::recursive_directory_iterator begin(input_path);
@@ -45,6 +49,8 @@ int main(int argc, char* argv[])
 
 	auto start = clock();
 	setlocale(LC_ALL, "Russian");
+
+	MatrixXd m(2, 2);
 
 	/*MEMORYSTATUSEX statex;
 

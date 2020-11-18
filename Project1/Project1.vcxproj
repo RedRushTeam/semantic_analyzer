@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\RGD\SVD MATH\eigen-3.3.8\Eigen\src;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix\pro;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\RGD\SVD MATH\eigen-3.3.8\Eigen;C:\RGD\SVD MATH\eigen-3.3.8\Eigen\src;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix\pro;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
