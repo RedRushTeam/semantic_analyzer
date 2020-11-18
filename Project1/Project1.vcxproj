@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\RGD\RussianGrammaticalDictionary\include\lem\solarix\pro;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\RGD\SVD MATH\eigen-3.3.8\Eigen\src;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix\pro;C:\RGD\RussianGrammaticalDictionary\include\lem\solarix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
@@ -152,32 +152,23 @@
   <ItemGroup>
     <ClCompile Include="analyzer.cpp" />
     <ClCompile Include="class_of_collocation.cpp" />
-    <ClCompile Include="class_of_collocation_for_sparce_cont_class.cpp" />
     <ClCompile Include="class_of_first_bracket.cpp" />
-    <ClCompile Include="class_of_first_bracket_for_sparce_container_class.cpp" />
     <ClCompile Include="hard_container_class.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="Singleton.cpp" />
-    <ClCompile Include="sparce_container_class.cpp" />
-    <ClCompile Include="super_class_of_collocation.cpp" />
-    <ClCompile Include="super_class_of_first_bracket.cpp" />
-    <ClCompile Include="super_container_class.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="analyzer.h" />
     <ClInclude Include="class_of_collocation.h" />
-    <ClInclude Include="class_of_collocation_for_sparce_cont_class.h" />
     <ClInclude Include="class_of_first_bracket.h" />
-    <ClInclude Include="class_of_first_bracket_for_sparce_container_class.h" />
     <ClInclude Include="hard_container_class.h" />
     <ClInclude Include="list_of_types.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="sparce_container_class.h" />
-    <ClInclude Include="super_class_of_collocation.h" />
-    <ClInclude Include="super_class_of_first_bracket.h" />
-    <ClInclude Include="super_container_class.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

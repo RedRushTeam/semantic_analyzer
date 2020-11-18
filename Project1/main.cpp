@@ -17,13 +17,13 @@ void out_matrix() {
 
 	for (auto some_scary_thing : Singleton::initialization().get_vec_of_hard_container_class()) {
 
-		for (int i = 0; i < some_scary_thing->get_counter_of_tokenizer(); ++i)
-			for (int j = 0; j < some_scary_thing->get_counter_of_tokenizer(); ++j)
+		for (int i = 0; i < some_scary_thing.get_counter_of_tokenizer(); ++i)
+			for (int j = 0; j < some_scary_thing.get_counter_of_tokenizer(); ++j)
 			{
 				if (i != 0 && j != 0 && i <= j) {
 					matrix << endl << endl << i << " " << j << endl;
 					for (int l = -GAP - 1; l <= GAP; ++l)
-						matrix << (*some_scary_thing)[i][j][l] << " ";
+						matrix << some_scary_thing[i][j][l] << " ";
 				}
 			}
 	}
@@ -77,16 +77,14 @@ int main(int argc, char* argv[])
 
 	cout << endl << "Найдено текстов: " << vector_of_texts.size() << endl;
 
-	Singleton::initialization().create_attributes(vector_of_texts.size());
 	Singleton::initialization().set_parser(new parser);
 	Singleton::initialization().set_hEngine(hEngine);
 	Singleton::initialization().set_analyzer(new analyzer);
 
 	int counter_of_text = 1;
 
-	for (auto i : vector_of_texts) {
+	for (auto i : vector_of_texts)
 		Singleton::initialization().prepare_data_with_link_for_text(i);
-	}
 
 	Singleton::initialization().calculate_max_cont_size();
 
