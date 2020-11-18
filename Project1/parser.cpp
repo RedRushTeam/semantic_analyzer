@@ -56,7 +56,7 @@ list<string> parser::delete_trash()
 	string text = regex_replace(temp3, spaces, replacement);
 	
 
-	transform(text.begin(), text.end(), text.begin(), tolower);;
+	transform(text.begin(), text.end(), text.begin(), ::tolower);
 
 	while (helper) {
 
