@@ -12,7 +12,7 @@ public:
 	vector<hard_container_class> get_vec_of_hard_container_class() const;
 	//SVD methods
 	void calculate_SVD_matrix();
-	void calculate_Singular_Value();
+	VectorXf calculate_Singular_Value();
 	//
 
 
