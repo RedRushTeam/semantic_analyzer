@@ -58,7 +58,7 @@ void Singleton::calculate_SVD_matrix()
 		this->_analyzer->set_k(GAP);
 		this->_analyzer->shape_vec_of_tokens();
 		this->_analyzer->shape_vec_tokens_of_text();
-		this->_analyzer->give_space(this->max_cont_size);
+		//this->_analyzer->give_space(this->max_cont_size);
 		//this->_analyzer->analyze_vec_of_tokens();
 		this->_analyzer->update_dictionary();
 
