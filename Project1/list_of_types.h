@@ -26,11 +26,12 @@
 #include <thread>
 #include <filesystem>
 #include <regex>
-//#include <boost/numeric/ublas/matrix_sparse.hpp>
-//#include <boost/numeric/ublas/io.hpp>
-/*
-#include "H5Cpp.h"
-using namespace H5;*/
+
+//Eigen lib include
+#include <Eigen>
+
+//(SVD namespace)
+using namespace Eigen;
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -42,7 +43,7 @@ using my_double = float;
 
 #define TRASH_DELETE_OPTION 0 //0 - base  1 - extended
 #define LEMADR "C:\\RGD\\RussianGrammaticalDictionary\\bin-windows64\\lemmatizer.db"
-#define TEXTS_PATH "A:\\rasp_puhl1"
+#define TEXTS_PATH "C:\\txts"
 //#define TEXTS_PATH "C:\\Users\\fortunati\\Desktop\\Новая папка (3)"
 
 

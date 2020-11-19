@@ -50,8 +50,9 @@ public:
 		//delete list_of_all_parsed_text;
 	}
 
-private:
 	vector<int> vec_of_tokens;
+
+private:
 	hard_container_class* _container_class;
 	char k;
 	int counter_of_tokenizer;
