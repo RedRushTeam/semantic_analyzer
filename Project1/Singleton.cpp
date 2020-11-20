@@ -16,6 +16,83 @@ vector<hard_container_class> Singleton::get_vec_of_hard_container_class() const
 	return this->vec_of_hard_container_class;
 }
 
+void Singleton::calculate_SVD_matrix()
+{
+	/*	
+	MatrixXf m = MatrixXf::Random(3, 2);
+	cout << "Here is the matrix m:" << endl << m(0, 0) << endl;
+	cout << "Here is the matrix m:" << endl << m << endl;
+	JacobiSVD<MatrixXf> svd(m, ComputeThinU | ComputeThinV);
+	cout << "Its singular values are:" << endl << svd.singularValues() << endl;
+	*/
+
+	/*	
+	JacobiSVD<MatrixXf>* Jacobi_svd = nullptr;	//SVD for small matrix
+	BDCSVD<MatrixXf>* BDCSVD_svd = nullptr;		//SVD for big matrix
+	*/
+
+	this->m = new MatrixXf(this->max_cont_size, this->vec_of_hard_container_class.size());	//TODO «јѕќЋЌ»“№ Ё“” ћј“–»÷” Ќ”Ћяћ»
+	this->m->fill(0);
+	auto sheet = (*m)(1, 1);
+
+	//соберем данные по текстам в матрицу
+
+	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
+		this->_parser->set_filename(this->vec_of_hard_container_class[i].get_path());
+
+		cout << "(" << i + 1 << "/" << this->vec_of_hard_container_class.size() << ") ";
+
+		char utf9[512];
+
+		list<string> list_of_lemmatized_words;
+		auto parsed_text = this->_parser->parse();
+
+
+		for (string obj : parsed_text) {
+			auto is_lemmas_if_good = sol_GetLemmaA(hEngine, obj.c_str(), utf9, sizeof(utf9));
+			list_of_lemmatized_words.push_back(utf9);
+		}
+
+		this->_analyzer->set_list_of_all_parsed_text(list_of_lemmatized_words);
+		this->_analyzer->set_container_class(&(this->vec_of_hard_container_class[i]));
+		this->_analyzer->set_k(GAP);
+		this->_analyzer->shape_vec_of_tokens();
+		this->_analyzer->shape_vec_tokens_of_text();
+		//this->_analyzer->give_space(this->max_cont_size);
+		//this->_analyzer->analyze_vec_of_tokens();
+		this->_analyzer->update_dictionary();
+
+		auto counter_of_tokenizer = this->_analyzer->get_counter_of_tokenizer();
+		auto map_of_tokens = this->_analyzer->get_map_of_tokens();
+		auto vec_of_tokens = this->_analyzer->vec_of_tokens;	//текущий вектор токенов дл€ этого текста
+		
+		for (auto obj : vec_of_tokens)
+			(*m)(obj, i) = (*m)(obj, i) + 1;
+
+		this->vec_of_hard_container_class[i].clear();
+		this->_analyzer->clear();
+		list_of_lemmatized_words.clear();
+	}
+
+	bool is_will_be_used_Jacobi = false;
+
+	if (this->_analyzer->get_counter_of_tokenizer() * this->vec_of_hard_container_class.size() < 1000)
+		is_will_be_used_Jacobi = !is_will_be_used_Jacobi;
+
+	if (is_will_be_used_Jacobi)
+		this->Jacobi_svd = new JacobiSVD<MatrixXf>(*(this->m), ComputeThinU | ComputeThinV);
+	else
+		this->BDCSVD_svd = new BDCSVD<MatrixXf>(*(this->m), ComputeThinU | ComputeThinV);
+}
+
+VectorXf Singleton::calculate_Singular_Value()
+{
+	if (this->BDCSVD_svd == nullptr)
+		return this->Jacobi_svd->singularValues();
+	else
+		return this->BDCSVD_svd->singularValues();
+}
+
 int Singleton::get_length_of_all_hard_container_class() const
 {
 	int counter_of_all_elems = 0;

@@ -10,6 +10,13 @@ public:
 	//public methods
 	void push_container(hard_container_class _hard_container_class);
 	vector<hard_container_class> get_vec_of_hard_container_class() const;
+	//SVD methods
+	void calculate_SVD_matrix();
+	VectorXf calculate_Singular_Value();
+	//
+
+
+
 	void calculate_max_cont_size();
 	void calculate_sample_mean();
 	void calculate_mat_ozidanie();
@@ -45,6 +52,11 @@ public:
 private:
 	//private methods
 	my_double divider(int size);
+
+	//private elems for SVD
+	MatrixXf* m;
+	JacobiSVD<MatrixXf>* Jacobi_svd = nullptr;	//SVD for small matrix
+	BDCSVD<MatrixXf>* BDCSVD_svd = nullptr;		//SVD for big matrix
 
 	//private elems
 	hard_container_class sample_mean_all;

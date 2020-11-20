@@ -88,6 +88,12 @@ int main(int argc, char* argv[])
 
 	Singleton::initialization().calculate_max_cont_size();
 
+	cout << endl << "Calculating SVD matrix...";
+	Singleton::initialization().calculate_SVD_matrix();
+
+	cout << endl << "Calculating Singular Value...";
+	cout << endl << "SVALUES:" << endl << Singleton::initialization().calculate_Singular_Value();
+
 	//cout << std::endl << "Calculating max size:";
 	//Singleton::initialization().calculate_sample_mean();
 
