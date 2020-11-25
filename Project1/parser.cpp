@@ -30,12 +30,11 @@ list<string> parser::delete_trash()
 	int tmp;
 
 	regex no_letters("[^А-Яа-я -]");
-    regex post_defis("\-");
-	regex spaces(" {1,}");
+	regex spaces("( {2,})");
+	regex defis("(\ -[а-яА-Я])");
 
 	string replacement = " ";
 	string nothing = "";
-
 	std::string untext;
 	if (_input.is_open()) {
 		while (!_input.eof()) {
@@ -47,14 +46,15 @@ list<string> parser::delete_trash()
 	else
 		cout << "it doesn't work";
 
-	string temp = regex_replace(untext, no_letters, nothing);
-	string temp3 = regex_replace(temp, post_defis, nothing);
+	string temp = regex_replace(untext, no_letters, replacement);
+	string temp3 = regex_replace(temp, defis, nothing);
 	string text = regex_replace(temp3, spaces, replacement);
 	
+	//string text = regex_replace(untext, (no_letters, defis, spaces), replacement);
 
 	transform(text.begin(), text.end(), text.begin(), ::tolower);
 
-	while (helper) {
+	/*while (helper) {
 
 		for (int i = 0; i < text.size(); i++) {
 			helper = 0;
@@ -68,7 +68,7 @@ list<string> parser::delete_trash()
 			}
 			
 		}
-	}
+	}*/
 		if (text[0] == ' ')
 			text.erase(0, 1);
 		text.pop_back();
@@ -84,9 +84,8 @@ list<string> parser::delete_trash()
 			text = text.substr(text.find(' ') + 1, text.size());
 			terms.push_back(substring_word);
 		}
-		temp.clear();
-		temp3.clear();
-		text.clear();
+		//temp.clear();
+		//temp3.clear();
 
 		return terms;
 }
