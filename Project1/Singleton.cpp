@@ -92,6 +92,16 @@ VectorXf Singleton::calculate_Singular_Value()
 		return this->BDCSVD_svd->singularValues();
 }
 
+MatrixXf Singleton::get_singular_V_matrix()
+{
+	return this->BDCSVD_svd->matrixV();
+}
+
+MatrixXf Singleton::get_singular_U_matrix()
+{
+	return this->BDCSVD_svd->matrixU();
+}
+
 int Singleton::get_length_of_all_hard_container_class() const
 {
 	int counter_of_all_elems = 0;

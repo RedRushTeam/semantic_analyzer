@@ -38,7 +38,7 @@ using namespace std;
 
 using my_double = float;
 
-#define GAP 2
+#define GAP 3
 #define STOP_WORD 0 
 
 #define TRASH_DELETE_OPTION 0 //0 - base  1 - extended

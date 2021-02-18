@@ -13,9 +13,9 @@ public:
 	//SVD methods
 	void calculate_SVD_matrix();
 	VectorXf calculate_Singular_Value();
+	MatrixXf get_singular_V_matrix();
+	MatrixXf get_singular_U_matrix();
 	//
-
-
 
 	void calculate_max_cont_size();
 	void calculate_sample_mean();

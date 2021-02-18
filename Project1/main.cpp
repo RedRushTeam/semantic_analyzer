@@ -92,7 +92,17 @@ int main(int argc, char* argv[])
 	Singleton::initialization().calculate_SVD_matrix();
 
 	cout << endl << "Calculating Singular Value...";
-	cout << endl << "SVALUES:" << endl << Singleton::initialization().calculate_Singular_Value();
+	auto svalues_as_vectorXF = Singleton::initialization().calculate_Singular_Value();
+	MatrixXf* svalues_as_MatrixXf = new MatrixXf();
+	svalues_as_MatrixXf->resize(svalues_as_vectorXF.size(), svalues_as_vectorXF.size());
+	svalues_as_MatrixXf->fill(0.);
+
+	for(int i = 0; i < svalues_as_vectorXF.size(); ++i)
+		svalues_as_MatrixXf->operator()(i, i) = svalues_as_vectorXF[i];
+
+	cout << endl << "SVALUES:" << endl << svalues_as_vectorXF;
+
+	cout << endl << endl << "SVALUES MatrixXf:" << endl << *svalues_as_MatrixXf;
 
 	//cout << std::endl << "Calculating max size:";
 	//Singleton::initialization().calculate_sample_mean();
