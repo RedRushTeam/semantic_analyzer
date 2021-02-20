@@ -78,4 +78,3 @@ private:
 	Singleton operator = (const Singleton& orig) { return *this; }
 	virtual ~Singleton() {}
 };
-

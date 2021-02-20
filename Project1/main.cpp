@@ -97,12 +97,66 @@ int main(int argc, char* argv[])
 	svalues_as_MatrixXf->resize(svalues_as_vectorXF.size(), svalues_as_vectorXF.size());
 	svalues_as_MatrixXf->fill(0.);
 
-	for(int i = 0; i < svalues_as_vectorXF.size(); ++i)
+	for (int i = 0; i < svalues_as_vectorXF.size(); ++i)
 		svalues_as_MatrixXf->operator()(i, i) = svalues_as_vectorXF[i];
 
-	cout << endl << "SVALUES:" << endl << svalues_as_vectorXF;
-
 	cout << endl << endl << "SVALUES MatrixXf:" << endl << *svalues_as_MatrixXf;
+
+	svalues_as_MatrixXf->conservativeResize(GAP, GAP);
+
+	cout << endl << endl << "Resized SVALUES MatrixXf:" << endl << *svalues_as_MatrixXf;
+
+	MatrixXf U_matrix_as_matrixXF = Singleton::initialization().get_singular_U_matrix();
+
+	MatrixXf V_matrix_as_matrixXF = Singleton::initialization().get_singular_V_matrix();
+
+	MatrixXf* resized_V_matrix_as_matrixXF = new MatrixXf();
+	resized_V_matrix_as_matrixXF->resize(GAP, V_matrix_as_matrixXF.cols());
+
+	MatrixXf* resized_U_matrix_as_matrixXF = new MatrixXf();
+	resized_U_matrix_as_matrixXF->resize(U_matrix_as_matrixXF.rows(), GAP);
+
+
+	for (int i = 0; i < GAP; ++i)
+		for (int j = 0; j < V_matrix_as_matrixXF.cols(); ++j)
+			resized_V_matrix_as_matrixXF->operator()(i, j) = V_matrix_as_matrixXF(i, j);
+
+	for (int i = 0; i < U_matrix_as_matrixXF.rows(); ++i)
+		for (int j = 0; j < GAP; ++j)
+			resized_U_matrix_as_matrixXF->operator()(i, j) = U_matrix_as_matrixXF(i, j);
+
+	auto result_matrix = *resized_U_matrix_as_matrixXF * *svalues_as_MatrixXf;
+	auto final_matrix = result_matrix * *resized_V_matrix_as_matrixXF;
+
+	cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
+
+	vector<float> lens;
+	lens.resize(final_matrix.rows(), 0);
+	
+
+	for (auto i = 0; i < final_matrix.rows(); ++i) {
+		for (auto j = 0; j < final_matrix.cols(); ++j) {
+			lens[i] += pow(final_matrix.operator()(i, j), 2);
+		}
+		lens[i] = sqrt(lens[i]);
+	}
+
+	for (auto &x : lens)
+		cout << endl << x;
+
+	cout << endl << final_matrix.operator()(0, 0)<<final_matrix.operator()(1, 0) <<final_matrix.operator()(0, 1)<< final_matrix.operator()(1, 1) <<final_matrix.operator()(0, 2)<< final_matrix.operator()(1, 2);
+	float scalar_proizv = final_matrix.operator()(0, 0) * final_matrix.operator()(1,0)  + final_matrix.operator()(0, 1) * final_matrix.operator()(1, 1) + final_matrix.operator()(0, 2) * final_matrix.operator()(1, 2)
+		+ final_matrix.operator()(0, 3) * final_matrix.operator()(1, 3) + final_matrix.operator()(0, 4) * final_matrix.operator()(1, 4) + final_matrix.operator()(0, 5) * final_matrix.operator()(1, 5)
+		+ final_matrix.operator()(0, 6) * final_matrix.operator()(1, 6) + final_matrix.operator()(0, 7) * final_matrix.operator()(1, 7);
+
+	auto cos12 = scalar_proizv / lens[0] / lens[1];
+	auto ugol = acos(cos12);
+
+
+
+
+
+	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
 
 	//cout << std::endl << "Calculating max size:";
 	//Singleton::initialization().calculate_sample_mean();
@@ -123,6 +177,7 @@ int main(int argc, char* argv[])
 
 	/*cout << endl << "(5/5) Out chart...";
 	Singleton::initialization().out_for_chart();*/
+
 
 	auto finish = clock();
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
