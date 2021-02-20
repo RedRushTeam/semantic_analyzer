@@ -100,9 +100,37 @@ int main(int argc, char* argv[])
 	for(int i = 0; i < svalues_as_vectorXF.size(); ++i)
 		svalues_as_MatrixXf->operator()(i, i) = svalues_as_vectorXF[i];
 
-	cout << endl << "SVALUES:" << endl << svalues_as_vectorXF;
-
 	cout << endl << endl << "SVALUES MatrixXf:" << endl << *svalues_as_MatrixXf;
+
+	svalues_as_MatrixXf->conservativeResize(GAP, GAP);
+
+	cout << endl << endl << "Resized SVALUES MatrixXf:" << endl << *svalues_as_MatrixXf;
+
+	MatrixXf U_matrix_as_matrixXF = Singleton::initialization().get_singular_U_matrix();
+
+	MatrixXf V_matrix_as_matrixXF = Singleton::initialization().get_singular_V_matrix();
+
+	MatrixXf* resized_V_matrix_as_matrixXF = new MatrixXf();
+	resized_V_matrix_as_matrixXF->resize(GAP, V_matrix_as_matrixXF.cols());
+
+	MatrixXf* resized_U_matrix_as_matrixXF = new MatrixXf();
+	resized_U_matrix_as_matrixXF->resize(U_matrix_as_matrixXF.rows(), GAP);
+
+
+	for (int i = 0; i < GAP; ++i)
+		for (int j = 0; j < V_matrix_as_matrixXF.cols(); ++j)
+			resized_V_matrix_as_matrixXF->operator()(i, j) = V_matrix_as_matrixXF(i, j);
+
+	for (int i = 0; i < U_matrix_as_matrixXF.rows(); ++i)
+		for (int j = 0; j < GAP; ++j)
+			resized_U_matrix_as_matrixXF->operator()(i, j) = U_matrix_as_matrixXF(i, j);
+
+	auto result_matrix = *resized_U_matrix_as_matrixXF * *svalues_as_MatrixXf;
+	auto final_matrix = result_matrix * *resized_V_matrix_as_matrixXF;
+
+	cout << endl << endl << "RESULT MatrixXf:" << endl << result_matrix;
+
+	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
 
 	//cout << std::endl << "Calculating max size:";
 	//Singleton::initialization().calculate_sample_mean();

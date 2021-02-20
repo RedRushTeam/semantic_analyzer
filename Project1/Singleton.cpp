@@ -81,7 +81,7 @@ void Singleton::calculate_SVD_matrix()
 	if (is_will_be_used_Jacobi)*/
 		/*this->Jacobi_svd = new JacobiSVD<MatrixXf>(*(this->m), ComputeEigenvectors);
 	else*/
-		this->BDCSVD_svd = new BDCSVD<MatrixXf>(*(this->m));
+		this->BDCSVD_svd = new BDCSVD<MatrixXf>(*(this->m), ComputeThinV | ComputeThinU);
 }
 
 VectorXf Singleton::calculate_Singular_Value()
