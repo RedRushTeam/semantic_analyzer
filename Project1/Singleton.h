@@ -33,6 +33,7 @@ public:
 	void prepare_data_with_link_for_text(fs::path filename);
 	void set_parser(parser* _parser);
 	void set_analyzer(analyzer* _analyzer);
+	analyzer* get_analyzer() const;
 	void set_hEngine(HLEM& hEngine);
 	void prepare_data_in_container_class(int _hard_container_class_number);
 

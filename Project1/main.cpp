@@ -41,21 +41,15 @@ void withdraw_list_of_string(list<string>& _list, string& _label) {
 
 int main(int argc, char* argv[])
 {
-	Eigen::setNbThreads(4);
-
 	fs::remove("dictionary.txt");
 
 	auto start = clock();
 	setlocale(LC_ALL, "Russian");
 
 	/*MEMORYSTATUSEX statex;
-
 	statex.dwLength = sizeof(statex);
-
 	GlobalMemoryStatusEx(&statex);
-
 	cout << "There are " << statex.ullTotalPhys / 1024 << " total KB of physical memory." << endl << endl;
-
 	cout << "There are " << statex.ullTotalPageFile / 1024 << " total KB of paging file." << endl << endl;*/
 
 	const char* dict_path = NULL;
@@ -134,7 +128,7 @@ int main(int argc, char* argv[])
 
 	vector<float> lenghts_words_vector;
 	lenghts_words_vector.resize(U_matrix_as_matrixXF.rows(), 0);
-	
+
 
 	for (auto i = 0; i < U_matrix_as_matrixXF.rows(); ++i) {
 		for (auto j = 0; j < U_matrix_as_matrixXF.cols(); ++j) {
@@ -158,7 +152,7 @@ int main(int argc, char* argv[])
 		cout << endl << x;*/
 
 
-	//list<float> scalar_proizvs;
+		//list<float> scalar_proizvs;
 	map<pair<int, int>, float> scalar_proizv; // текст, документ, скалярное произведение
 
 	for (auto k = 0; k < V_matrix_as_matrixXF.rows(); ++k)
@@ -174,8 +168,8 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < lenghts_words_vector.size(); ++i)
 		for (int j = 0; j < lenghts_texts_vector.size(); ++j)
 			cosinuses[make_pair(i, j)] = scalar_proizv[make_pair(i, j)] / lenghts_words_vector[i] / lenghts_texts_vector[j];
-		
-			
+
+
 	int c = count_if(cosinuses.begin(), cosinuses.end(), [](pair<pair<int, int>, float> i) {
 		if (i.second > 1 || (i.second < -1))
 			return true;
@@ -197,26 +191,16 @@ int main(int argc, char* argv[])
 		cosinuses.erase(obj);
 	}
 
-	int c = count_if(cosinuses.begin(), cosinuses.end(), [](pair<pair<int, int>, float> i) {
-		if (i.second > 1 || (i.second < -1))
-			return true;
-		else
-			return false;
-	});
+	ofstream matrix("matrix_test.txt");
 
-	float delete_threshold = 0.;	//число, ниже которого синусы удаляются
+	auto map_shit = Singleton::initialization().get_analyzer()->get_map_of_tokens();
 
-	list<pair<int, int>> list_of_terms_will_be_deleted;
+	for (auto& obj : cosinuses)
+		for (auto it = map_shit.begin(); it != map_shit.end(); ++it)
+			if (it->second == obj.first.first)
+				matrix << it->first << " ";
 
-	for (auto& obj : cosinuses) {
-		if (obj.second < 0.)
-			if(cosinuses.find(obj.first) != cosinuses.end())
-				list_of_terms_will_be_deleted.push_back(obj.first);
-	}
-
-	for (auto& obj : list_of_terms_will_be_deleted)
-		cosinuses.erase(obj);
-
+	int blyadovka1 = 0;
 	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
 
 	//cout << std::endl << "Calculating max size:";

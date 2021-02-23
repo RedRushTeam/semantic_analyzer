@@ -350,6 +350,11 @@ void Singleton::set_analyzer(analyzer* _analyzer)
 	this->_analyzer = _analyzer;
 }
 
+analyzer* Singleton::get_analyzer() const
+{
+	return this->_analyzer;
+}
+
 void Singleton::set_hEngine(HLEM& hEngine)
 {
 	this->hEngine = hEngine;
