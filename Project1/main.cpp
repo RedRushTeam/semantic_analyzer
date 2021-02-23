@@ -41,6 +41,8 @@ void withdraw_list_of_string(list<string>& _list, string& _label) {
 
 int main(int argc, char* argv[])
 {
+	Eigen::setNbThreads(4);
+
 	fs::remove("dictionary.txt");
 
 	auto start = clock();
@@ -128,7 +130,7 @@ int main(int argc, char* argv[])
 	auto result_matrix = *resized_U_matrix_as_matrixXF * *svalues_as_MatrixXf;
 	auto final_matrix = result_matrix * *resized_V_matrix_as_matrixXF;
 
-	cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
+	//cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
 
 	vector<float> lens;
 	lens.resize(final_matrix.rows(), 0);
@@ -136,15 +138,15 @@ int main(int argc, char* argv[])
 
 	for (auto i = 0; i < final_matrix.rows(); ++i) {
 		for (auto j = 0; j < final_matrix.cols(); ++j) {
-			lens[i] += pow(final_matrix.operator()(i, j), 2);
+			lens[i] = lens[i] + pow(final_matrix.operator()(i, j), 2);
 		}
 		lens[i] = sqrt(lens[i]);
 	}
 
-	for (auto &x : lens)
-		cout << endl << x;
+	/*for (auto &x : lens)
+		cout << endl << x;*/
 
-	cout << endl << final_matrix.operator()(0, 0)<<final_matrix.operator()(1, 0) <<final_matrix.operator()(0, 1)<< final_matrix.operator()(1, 1) <<final_matrix.operator()(0, 2)<< final_matrix.operator()(1, 2);
+	//cout << endl << final_matrix.operator()(0, 0)<<final_matrix.operator()(1, 0) <<final_matrix.operator()(0, 1)<< final_matrix.operator()(1, 1) <<final_matrix.operator()(0, 2)<< final_matrix.operator()(1, 2);
 	float scalar_proizv = final_matrix.operator()(0, 0) * final_matrix.operator()(1,0)  + final_matrix.operator()(0, 1) * final_matrix.operator()(1, 1) + final_matrix.operator()(0, 2) * final_matrix.operator()(1, 2)
 		+ final_matrix.operator()(0, 3) * final_matrix.operator()(1, 3) + final_matrix.operator()(0, 4) * final_matrix.operator()(1, 4) + final_matrix.operator()(0, 5) * final_matrix.operator()(1, 5)
 		+ final_matrix.operator()(0, 6) * final_matrix.operator()(1, 6) + final_matrix.operator()(0, 7) * final_matrix.operator()(1, 7);
