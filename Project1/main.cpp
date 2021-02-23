@@ -128,7 +128,7 @@ int main(int argc, char* argv[])
 	auto result_matrix = *resized_U_matrix_as_matrixXF * *svalues_as_MatrixXf;
 	auto final_matrix = result_matrix * *resized_V_matrix_as_matrixXF;
 
-	cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
+	//cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
 
 	vector<float> lenghts_words_vector;
 	lenghts_words_vector.resize(U_matrix_as_matrixXF.rows(), 0);
@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
 		for (auto j = 0; j < V_matrix_as_matrixXF.cols(); ++j) {
 			lenghts_texts_vector[i] += pow(V_matrix_as_matrixXF.operator()(i, j), 2); // возможно нужно транспонирование
 		}
-		lenghts_texts_vector[i] = sqrt(lenghts_words_vector[i]);
+		lenghts_texts_vector[i] = sqrt(lenghts_texts_vector[i]);
 	}
 
 	/*for (auto &x : lenghts_texts_vector)
@@ -157,16 +157,43 @@ int main(int argc, char* argv[])
 
 
 	//list<float> scalar_proizvs;
-	map<pair<int, int>, float> cosinuses; // текст, документ, скалярное произведение
+	map<pair<int, int>, float> scalar_proizv; // текст, документ, скалярное произведение
 
 	for (auto k = 0; k < V_matrix_as_matrixXF.rows(); ++k)
-		for (auto i = 0; i < U_matrix_as_matrixXF.rows(); ++i)
+		for (auto i = 0; i < U_matrix_as_matrixXF.rows(); ++i) {
+			//scalar_proizv.insert(make_pair(make_pair(i, k), 0));
 			for (auto j = 0; j < U_matrix_as_matrixXF.cols(); ++j) {
-				cosinuses.insert(make_pair(make_pair(i, k), U_matrix_as_matrixXF(i, j) * V_matrix_as_matrixXF(k, j)));
-				cosinuses[make_pair(i, k)] /= (lenghts_words_vector[i] * lenghts_texts_vector[k]);
-			}
-		
 
+				scalar_proizv[make_pair(i, k)] = scalar_proizv[make_pair(i, k)] + (U_matrix_as_matrixXF(i, j) * V_matrix_as_matrixXF(k, j));
+			}
+		}
+	map<pair<int, int>, float> cosinuses; // текст, документ, скалярное произведение
+
+	for (int i = 0; i < lenghts_words_vector.size(); ++i)
+		for (int j = 0; j < lenghts_texts_vector.size(); ++j)
+			cosinuses[make_pair(i, j)] = scalar_proizv[make_pair(i, j)] / lenghts_words_vector[i] / lenghts_texts_vector[j];
+		
+			
+	int c = count_if(cosinuses.begin(), cosinuses.end(), [](pair<pair<int, int>, float> i) {
+		if (i.second > 1 || (i.second < -1))
+			return true;
+		else
+			return false;
+		});
+
+	float delete_threshold = 0.;    //число, ниже которого синусы удаляются
+
+	list<pair<int, int>> list_of_terms_will_be_deleted;
+
+	for (auto& obj : cosinuses) {
+		if (obj.second < delete_threshold)
+			if (cosinuses.find(obj.first) != cosinuses.end())
+				list_of_terms_will_be_deleted.push_back(obj.first);
+	}
+
+	for (auto& obj : list_of_terms_will_be_deleted) {
+		cosinuses.erase(obj);
+	}
 
 
 	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
