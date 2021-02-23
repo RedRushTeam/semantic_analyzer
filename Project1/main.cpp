@@ -132,29 +132,42 @@ int main(int argc, char* argv[])
 
 	//cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
 
-	vector<float> lens;
-	lens.resize(final_matrix.rows(), 0);
+	vector<float> lenghts_words_vector;
+	lenghts_words_vector.resize(U_matrix_as_matrixXF.rows(), 0);
 	
 
-	for (auto i = 0; i < final_matrix.rows(); ++i) {
-		for (auto j = 0; j < final_matrix.cols(); ++j) {
-			lens[i] = lens[i] + pow(final_matrix.operator()(i, j), 2);
+	for (auto i = 0; i < U_matrix_as_matrixXF.rows(); ++i) {
+		for (auto j = 0; j < U_matrix_as_matrixXF.cols(); ++j) {
+			lenghts_words_vector[i] += pow(U_matrix_as_matrixXF.operator()(i, j), 2);
 		}
-		lens[i] = sqrt(lens[i]);
+		lenghts_words_vector[i] = sqrt(lenghts_words_vector[i]);
 	}
 
-	/*for (auto &x : lens)
+	vector<float> lenghts_texts_vector;
+	lenghts_texts_vector.resize(V_matrix_as_matrixXF.rows(), 0); // возможно нужно транспонирование
+
+
+	for (auto i = 0; i < V_matrix_as_matrixXF.rows(); ++i) {
+		for (auto j = 0; j < V_matrix_as_matrixXF.cols(); ++j) {
+			lenghts_texts_vector[i] += pow(V_matrix_as_matrixXF.operator()(i, j), 2); // возможно нужно транспонирование
+		}
+		lenghts_texts_vector[i] = sqrt(lenghts_words_vector[i]);
+	}
+
+	/*for (auto &x : lenghts_texts_vector)
 		cout << endl << x;*/
 
-	//cout << endl << final_matrix.operator()(0, 0)<<final_matrix.operator()(1, 0) <<final_matrix.operator()(0, 1)<< final_matrix.operator()(1, 1) <<final_matrix.operator()(0, 2)<< final_matrix.operator()(1, 2);
-	float scalar_proizv = final_matrix.operator()(0, 0) * final_matrix.operator()(1,0)  + final_matrix.operator()(0, 1) * final_matrix.operator()(1, 1) + final_matrix.operator()(0, 2) * final_matrix.operator()(1, 2)
-		+ final_matrix.operator()(0, 3) * final_matrix.operator()(1, 3) + final_matrix.operator()(0, 4) * final_matrix.operator()(1, 4) + final_matrix.operator()(0, 5) * final_matrix.operator()(1, 5)
-		+ final_matrix.operator()(0, 6) * final_matrix.operator()(1, 6) + final_matrix.operator()(0, 7) * final_matrix.operator()(1, 7);
 
-	auto cos12 = scalar_proizv / lens[0] / lens[1];
-	auto ugol = acos(cos12);
+	//list<float> scalar_proizvs;
+	map<pair<int, int>, float> cosinuses; // текст, документ, скалярное произведение
 
-
+	for (auto k = 0; k < V_matrix_as_matrixXF.rows(); ++k)
+		for (auto i = 0; i < U_matrix_as_matrixXF.rows(); ++i)
+			for (auto j = 0; j < U_matrix_as_matrixXF.cols(); ++j) {
+				cosinuses.insert(make_pair(make_pair(i, k), U_matrix_as_matrixXF(i, j) * V_matrix_as_matrixXF(k, j)));
+				cosinuses[make_pair(i, k)] /= (lenghts_words_vector[i] * lenghts_texts_vector[k]);
+			}
+		
 
 
 
