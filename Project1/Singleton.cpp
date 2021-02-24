@@ -33,7 +33,6 @@ void Singleton::calculate_SVD_matrix()
 
 	this->m = new MatrixXf(this->max_cont_size, this->vec_of_hard_container_class.size());	//TODO ÇÀÏÎËÍÈÒÜ ÝÒÓ ÌÀÒÐÈÖÓ ÍÓËßÌÈ
 	this->m->fill(0);
-	auto sheet = (*m)(1, 1);
 
 	//ñîáåðåì äàííûå ïî òåêñòàì â ìàòðèöó
 
@@ -74,23 +73,33 @@ void Singleton::calculate_SVD_matrix()
 		list_of_lemmatized_words.clear();
 	}
 
-	bool is_will_be_used_Jacobi = false;
+	/*bool is_will_be_used_Jacobi = false;
 
 	if (this->_analyzer->get_counter_of_tokenizer() * this->vec_of_hard_container_class.size() < 1000)
 		is_will_be_used_Jacobi = !is_will_be_used_Jacobi;
-
-	if (is_will_be_used_Jacobi)
-		this->Jacobi_svd = new JacobiSVD<MatrixXf>(*(this->m), ComputeThinU | ComputeThinV);
-	else
-		this->BDCSVD_svd = new BDCSVD<MatrixXf>(*(this->m), ComputeThinU | ComputeThinV);
+		
+	if (is_will_be_used_Jacobi)*/
+		/*this->Jacobi_svd = new JacobiSVD<MatrixXf>(*(this->m), ComputeEigenvectors);
+	else*/
+	this->BDCSVD_svd = new BDCSVD<MatrixXf>(*(this->m), ComputeThinV | ComputeThinU);
 }
 
 VectorXf Singleton::calculate_Singular_Value()
 {
-	if (this->BDCSVD_svd == nullptr)
+	/*if (this->BDCSVD_svd == nullptr)
 		return this->Jacobi_svd->singularValues();
-	else
+	else*/
 		return this->BDCSVD_svd->singularValues();
+}
+
+MatrixXf Singleton::get_singular_V_matrix()
+{
+	return this->BDCSVD_svd->matrixV();
+}
+
+MatrixXf Singleton::get_singular_U_matrix()
+{
+	return this->BDCSVD_svd->matrixU();
 }
 
 int Singleton::get_length_of_all_hard_container_class() const
@@ -339,6 +348,11 @@ void Singleton::set_parser(parser* _parser)
 void Singleton::set_analyzer(analyzer* _analyzer)
 {
 	this->_analyzer = _analyzer;
+}
+
+analyzer* Singleton::get_analyzer() const
+{
+	return this->_analyzer;
 }
 
 void Singleton::set_hEngine(HLEM& hEngine)

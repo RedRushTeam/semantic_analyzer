@@ -47,13 +47,9 @@ int main(int argc, char* argv[])
 	setlocale(LC_ALL, "Russian");
 
 	/*MEMORYSTATUSEX statex;
-
 	statex.dwLength = sizeof(statex);
-
 	GlobalMemoryStatusEx(&statex);
-
 	cout << "There are " << statex.ullTotalPhys / 1024 << " total KB of physical memory." << endl << endl;
-
 	cout << "There are " << statex.ullTotalPageFile / 1024 << " total KB of paging file." << endl << endl;*/
 
 	const char* dict_path = NULL;
@@ -92,27 +88,141 @@ int main(int argc, char* argv[])
 	Singleton::initialization().calculate_SVD_matrix();
 
 	cout << endl << "Calculating Singular Value...";
-	cout << endl << "SVALUES:" << endl << Singleton::initialization().calculate_Singular_Value();
+	auto svalues_as_vectorXF = Singleton::initialization().calculate_Singular_Value();
+	MatrixXf* svalues_as_MatrixXf = new MatrixXf();
+	svalues_as_MatrixXf->resize(svalues_as_vectorXF.size(), svalues_as_vectorXF.size());
+	svalues_as_MatrixXf->fill(0.);
+
+	for (int i = 0; i < svalues_as_vectorXF.size(); ++i)
+		svalues_as_MatrixXf->operator()(i, i) = svalues_as_vectorXF[i];
+
+	cout << endl << endl << "SVALUES MatrixXf:" << endl << *svalues_as_MatrixXf;
+
+	svalues_as_MatrixXf->conservativeResize(GAP, GAP);
+
+	cout << endl << endl << "Resized SVALUES MatrixXf:" << endl << *svalues_as_MatrixXf;
+
+	MatrixXf U_matrix_as_matrixXF = Singleton::initialization().get_singular_U_matrix();
+
+	MatrixXf V_matrix_as_matrixXF = Singleton::initialization().get_singular_V_matrix();
+
+	MatrixXf* resized_V_matrix_as_matrixXF = new MatrixXf();
+	resized_V_matrix_as_matrixXF->resize(GAP, V_matrix_as_matrixXF.cols());
+
+	MatrixXf* resized_U_matrix_as_matrixXF = new MatrixXf();
+	resized_U_matrix_as_matrixXF->resize(U_matrix_as_matrixXF.rows(), GAP);
+
+
+	for (int i = 0; i < GAP; ++i)
+		for (int j = 0; j < V_matrix_as_matrixXF.cols(); ++j)
+			resized_V_matrix_as_matrixXF->operator()(i, j) = V_matrix_as_matrixXF(i, j);
+
+	for (int i = 0; i < U_matrix_as_matrixXF.rows(); ++i)
+		for (int j = 0; j < GAP; ++j)
+			resized_U_matrix_as_matrixXF->operator()(i, j) = U_matrix_as_matrixXF(i, j);
+
+	auto result_matrix = *resized_U_matrix_as_matrixXF * *svalues_as_MatrixXf;
+	auto final_matrix = result_matrix * *resized_V_matrix_as_matrixXF;
+
+	//cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
+
+	vector<float> lenghts_words_vector;
+	lenghts_words_vector.resize(U_matrix_as_matrixXF.rows(), 0);
+
+
+	for (auto i = 0; i < U_matrix_as_matrixXF.rows(); ++i) {
+		for (auto j = 0; j < U_matrix_as_matrixXF.cols(); ++j) {
+			lenghts_words_vector[i] += pow(U_matrix_as_matrixXF.operator()(i, j), 2);
+		}
+		lenghts_words_vector[i] = sqrt(lenghts_words_vector[i]);
+	}
+
+	vector<float> lenghts_texts_vector;
+	lenghts_texts_vector.resize(V_matrix_as_matrixXF.rows(), 0); // возможно нужно транспонирование
+
+
+	for (auto i = 0; i < V_matrix_as_matrixXF.rows(); ++i) {
+		for (auto j = 0; j < V_matrix_as_matrixXF.cols(); ++j) {
+			lenghts_texts_vector[i] += pow(V_matrix_as_matrixXF.operator()(i, j), 2); // возможно нужно транспонирование
+		}
+		lenghts_texts_vector[i] = sqrt(lenghts_texts_vector[i]);
+	}
+
+	/*for (auto &x : lenghts_texts_vector)
+		cout << endl << x;*/
+
+
+		//list<float> scalar_proizvs;
+	map<pair<int, int>, float> scalar_proizv; // текст, документ, скалярное произведение
+
+	for (auto k = 0; k < V_matrix_as_matrixXF.rows(); ++k)
+		for (auto i = 0; i < U_matrix_as_matrixXF.rows(); ++i) {
+			//scalar_proizv.insert(make_pair(make_pair(i, k), 0));
+			for (auto j = 0; j < U_matrix_as_matrixXF.cols(); ++j) {
+
+				scalar_proizv[make_pair(i, k)] = scalar_proizv[make_pair(i, k)] + (U_matrix_as_matrixXF(i, j) * V_matrix_as_matrixXF(k, j));
+			}
+		}
+	map<pair<int, int>, float> cosinuses; // текст, документ, скалярное произведение
+
+	for (int i = 0; i < lenghts_words_vector.size(); ++i)
+		for (int j = 0; j < lenghts_texts_vector.size(); ++j)
+			cosinuses[make_pair(i, j)] = scalar_proizv[make_pair(i, j)] / lenghts_words_vector[i] / lenghts_texts_vector[j];
+
+
+	int c = count_if(cosinuses.begin(), cosinuses.end(), [](pair<pair<int, int>, float> i) {
+		if (i.second > 1 || (i.second < -1))
+			return true;
+		else
+			return false;
+		});
+
+	float delete_threshold = 0.;    //число, ниже которого синусы удаляются
+
+	list<pair<int, int>> list_of_terms_will_be_deleted;
+
+	for (auto& obj : cosinuses) {
+		if (obj.second < delete_threshold)
+			if (cosinuses.find(obj.first) != cosinuses.end())
+				list_of_terms_will_be_deleted.push_back(obj.first);
+	}
+
+	for (auto& obj : list_of_terms_will_be_deleted) {
+		cosinuses.erase(obj);
+	}
+
+	ofstream matrix("matrix_test.txt");
+
+	auto map_shit = Singleton::initialization().get_analyzer()->get_map_of_tokens();
+
+	for (auto& obj : cosinuses)
+		for (auto it = map_shit.begin(); it != map_shit.end(); ++it)
+			if (it->second == obj.first.first)
+				matrix << it->first << " ";
+
+	int blyadovka1 = 0;
+	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
 
 	//cout << std::endl << "Calculating max size:";
 	//Singleton::initialization().calculate_sample_mean();
 
-	cout << endl << "(1/4) Calculating mat ozid...";
-	Singleton::initialization().calculate_mat_ozidanie();
+	//cout << endl << "(1/4) Calculating mat ozid...";
+	//Singleton::initialization().calculate_mat_ozidanie();
 
-	cout << endl << "(2/4) Calculating mat disp...";
-	Singleton::initialization().calculate_mat_disperse();
+	//cout << endl << "(2/4) Calculating mat disp...";
+	//Singleton::initialization().calculate_mat_disperse();
 
-	cout << endl << "(3/4) Calculating sredne kv otklonenie fixed...";
-	Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
+	//cout << endl << "(3/4) Calculating sredne kv otklonenie fixed...";
+	//Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
 
-	cout << endl << "(4/4) Finding fluctuations...";
-	Singleton::initialization().clear(mat_otkl_);
-	Singleton::initialization().find_fluctuations();
-	Singleton::initialization().clear(mat_disperse_);
+	//cout << endl << "(4/4) Finding fluctuations...";
+	//Singleton::initialization().clear(mat_otkl_);
+	//Singleton::initialization().find_fluctuations();
+	//Singleton::initialization().clear(mat_disperse_);
 
 	/*cout << endl << "(5/5) Out chart...";
 	Singleton::initialization().out_for_chart();*/
+
 
 	auto finish = clock();
 	cout << endl << endl << ">>> " << finish - start << " <<<" << endl;
