@@ -13,9 +13,9 @@ public:
 	//SVD methods
 	void calculate_SVD_matrix();
 	VectorXf calculate_Singular_Value();
+	MatrixXf get_singular_V_matrix();
+	MatrixXf get_singular_U_matrix();
 	//
-
-
 
 	void calculate_max_cont_size();
 	void calculate_sample_mean();
@@ -33,6 +33,7 @@ public:
 	void prepare_data_with_link_for_text(fs::path filename);
 	void set_parser(parser* _parser);
 	void set_analyzer(analyzer* _analyzer);
+	analyzer* get_analyzer() const;
 	void set_hEngine(HLEM& hEngine);
 	void prepare_data_in_container_class(int _hard_container_class_number);
 
@@ -78,4 +79,3 @@ private:
 	Singleton operator = (const Singleton& orig) { return *this; }
 	virtual ~Singleton() {}
 };
-
