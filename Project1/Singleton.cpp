@@ -18,19 +18,6 @@ vector<hard_container_class> Singleton::get_vec_of_hard_container_class() const
 
 void Singleton::calculate_SVD_matrix()
 {
-	/*	
-	MatrixXf m = MatrixXf::Random(3, 2);
-	cout << "Here is the matrix m:" << endl << m(0, 0) << endl;
-	cout << "Here is the matrix m:" << endl << m << endl;
-	JacobiSVD<MatrixXf> svd(m, ComputeThinU | ComputeThinV);
-	cout << "Its singular values are:" << endl << svd.singularValues() << endl;
-	*/
-
-	/*	
-	JacobiSVD<MatrixXf>* Jacobi_svd = nullptr;	//SVD for small matrix
-	BDCSVD<MatrixXf>* BDCSVD_svd = nullptr;		//SVD for big matrix
-	*/
-
 	this->m = new MatrixXf(this->max_cont_size, this->vec_of_hard_container_class.size());
 	this->m->fill(0);
 
@@ -57,8 +44,6 @@ void Singleton::calculate_SVD_matrix()
 		this->_analyzer->set_k(GAP);
 		this->_analyzer->shape_vec_of_tokens();
 		this->_analyzer->shape_vec_tokens_of_text();
-		//this->_analyzer->give_space(this->max_cont_size);
-		//this->_analyzer->analyze_vec_of_tokens();
 		this->_analyzer->update_dictionary();
 
 		auto counter_of_tokenizer = this->_analyzer->get_counter_of_tokenizer();
@@ -73,14 +58,6 @@ void Singleton::calculate_SVD_matrix()
 		list_of_lemmatized_words.clear();
 	}
 
-	/*bool is_will_be_used_Jacobi = false;
-
-	if (this->_analyzer->get_counter_of_tokenizer() * this->vec_of_hard_container_class.size() < 1000)
-		is_will_be_used_Jacobi = !is_will_be_used_Jacobi;
-		
-	if (is_will_be_used_Jacobi)*/
-		/*this->Jacobi_svd = new JacobiSVD<MatrixXf>(*(this->m), ComputeEigenvectors);
-	else*/
 	this->BDCSVD_svd = new BDCSVD<MatrixXf>(*(this->m), ComputeThinV | ComputeThinU);
 }
 
@@ -541,3 +518,43 @@ void Singleton::calculate_max_cont_size()
 	cout << endl << endl << "Max cont. size: " << this->max_cont_size << endl;
 }
 
+void Singleton::calculate_colloc_SVD()
+{
+	this->m_colloc_matrix = new MatrixXf(this->max_cont_size * this->max_cont_size / 2, this->vec_of_hard_container_class.size() + 2);	//2th 0 and 1 cols is number of colloc
+	this->m_colloc_matrix->fill(0);
+
+	for (int i = 0; i < this->max_cont_size; ++i)
+		for (int j = i; j < this->max_cont_size; ++j) {
+			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 1) = i + 1;
+			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 0) = j + 1;
+		}
+
+	for (int i = 0; i < this->vec_of_hard_container_class.size(); ++i) {
+
+		Singleton::initialization().prepare_data_in_container_class(i);	//сбор данных в контейнер
+
+		for(int j = 0; j < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++j)
+			for (int k = j; k < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++k)
+				for (int l = -GAP - 1; l <= GAP; ++l)
+					this->m_colloc_matrix->operator()((j - 1) * (k - 1), i + 2) += this->vec_of_hard_container_class[i][j][k][l];
+
+		Singleton::initialization().clear_concret_cont_class(i);
+	}
+
+	this->BDCSVD_svd_colloc = new BDCSVD<MatrixXf>(*(this->m_colloc_matrix), ComputeThinV | ComputeThinU);
+}
+
+VectorXf Singleton::calculate_colloc_Singular_Value()
+{
+	return this->BDCSVD_svd_colloc->singularValues();
+}
+
+MatrixXf Singleton::get_colloc_singular_V_matrix()
+{
+	return this->BDCSVD_svd_colloc->matrixV();
+}
+
+MatrixXf Singleton::get_colloc_singular_U_matrix()
+{
+	return this->BDCSVD_svd_colloc->matrixU();
+}

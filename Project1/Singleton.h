@@ -15,6 +15,10 @@ public:
 	VectorXf calculate_Singular_Value();
 	MatrixXf get_singular_V_matrix();
 	MatrixXf get_singular_U_matrix();
+	void calculate_colloc_SVD();
+	VectorXf calculate_colloc_Singular_Value();
+	MatrixXf get_colloc_singular_V_matrix();
+	MatrixXf get_colloc_singular_U_matrix();
 	//
 
 	void calculate_max_cont_size();
@@ -58,8 +62,11 @@ private:
 
 	//private elems for SVD
 	MatrixXf* m;
-	JacobiSVD<MatrixXf>* Jacobi_svd = nullptr;	//SVD for small matrix
 	BDCSVD<MatrixXf>* BDCSVD_svd = nullptr;		//SVD for big matrix
+
+	//for colloc
+	MatrixXf* m_colloc_matrix;
+	BDCSVD<MatrixXf>* BDCSVD_svd_colloc = nullptr;		//SVD for big matrix
 
 	//private elems
 	hard_container_class sample_mean_all;
