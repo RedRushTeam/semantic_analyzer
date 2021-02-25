@@ -84,17 +84,6 @@ int main(int argc, char* argv[])
 
 	Singleton::initialization().calculate_max_cont_size();
 
-	//рассчет общих коллокаций
-	for (int i = 0; i < vector_of_texts.size(); ++i)
-		if(i == 0)
-			Singleton::initialization().prepare_data_in_container_class(i);
-		else {
-			Singleton::initialization().prepare_data_in_container_class(i);
-			Singleton::initialization().pluse_concret_cont_class_into_zero_cont_class(i);
-			Singleton::initialization().clear_concret_cont_class(i);
-		}
-	//////////////////////////////////////////////////////////////////////////////////////
-
 	cout << endl << "Calculating SVD matrix...";
 	Singleton::initialization().calculate_SVD_matrix();
 
@@ -216,6 +205,12 @@ int main(int argc, char* argv[])
 					matrix << it->first << " ";
 				}
 			}
+
+	//рассчет
+
+	Singleton::initialization().calculate_colloc_SVD();
+
+	//////////////////////////////////////////////////////////////////////////////////////
 
 
 	int blyadovka1 = 0;
