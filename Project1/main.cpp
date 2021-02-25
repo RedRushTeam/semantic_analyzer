@@ -206,10 +206,16 @@ int main(int argc, char* argv[])
 
 	auto map_shit = Singleton::initialization().get_analyzer()->get_map_of_tokens();
 
+	string prev_word = "";
+
 	for (auto& obj : cosinuses)
 		for (auto it = map_shit.begin(); it != map_shit.end(); ++it)
-			if (it->second == obj.first.first)
-				matrix << it->first << " ";
+			if (it->second == obj.first.first) {
+				if (!(prev_word == it->first)) {
+					prev_word = it->first;
+					matrix << it->first << " ";
+				}
+			}
 
 	int blyadovka1 = 0;
 	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
