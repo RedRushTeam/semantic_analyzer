@@ -35,6 +35,8 @@ public:
 	void set_analyzer(analyzer* _analyzer);
 	analyzer* get_analyzer() const;
 	void set_hEngine(HLEM& hEngine);
+	void pluse_concret_cont_class_into_zero_cont_class(int _hard_container_class_number);
+	void clear_concret_cont_class(int _hard_container_class_number);
 	void prepare_data_in_container_class(int _hard_container_class_number);
 
 	//getters

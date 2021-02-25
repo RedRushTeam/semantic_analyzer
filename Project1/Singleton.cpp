@@ -31,7 +31,7 @@ void Singleton::calculate_SVD_matrix()
 	BDCSVD<MatrixXf>* BDCSVD_svd = nullptr;		//SVD for big matrix
 	*/
 
-	this->m = new MatrixXf(this->max_cont_size, this->vec_of_hard_container_class.size());	//TODO ÇÀÏÎËÍÈÒÜ ÝÒÓ ÌÀÒÐÈÖÓ ÍÓËßÌÈ
+	this->m = new MatrixXf(this->max_cont_size, this->vec_of_hard_container_class.size());
 	this->m->fill(0);
 
 	//ñîáåðåì äàííûå ïî òåêñòàì â ìàòðèöó
@@ -358,6 +358,16 @@ analyzer* Singleton::get_analyzer() const
 void Singleton::set_hEngine(HLEM& hEngine)
 {
 	this->hEngine = hEngine;
+}
+
+void Singleton::pluse_concret_cont_class_into_zero_cont_class(int _hard_container_class_number)
+{
+	this->vec_of_hard_container_class[0] += this->vec_of_hard_container_class[_hard_container_class_number];
+}
+
+void Singleton::clear_concret_cont_class(int _hard_container_class_number)
+{
+	this->vec_of_hard_container_class[_hard_container_class_number].clear();
 }
 
 
