@@ -523,11 +523,19 @@ void Singleton::calculate_colloc_SVD()
 	this->m_colloc_matrix = new MatrixXf(this->max_cont_size * this->max_cont_size / 2, this->vec_of_hard_container_class.size() + 2);	//2th 0 and 1 cols is number of colloc
 	this->m_colloc_matrix->fill(0);
 
-	for (int i = 0; i < this->max_cont_size; ++i)
+	/*for (int i = 0; i < this->max_cont_size; ++i)
 		for (int j = i; j < this->max_cont_size; ++j) {
 			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 1) = i + 1;
 			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 0) = j + 1;
-		}
+		}*/
+	/*for (int j = 1; j < this->max_cont_size; ++j)
+		for (int i = (this->max_cont_size * this->max_cont_size / 2); i > 0; --i)
+			for (int k = 0; k < i; k++) {
+				this->m_colloc_matrix->operator()(i + k, 0) = j;
+				this->m_colloc_matrix->operator()(i + k, 0) = k + 1;
+			}*/
+	
+			
 
 	for (int i = 0; i < this->vec_of_hard_container_class.size(); ++i) {
 

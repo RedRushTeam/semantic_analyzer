@@ -211,8 +211,124 @@ int main(int argc, char* argv[])
 	Singleton::initialization().calculate_colloc_SVD();
 
 	//////////////////////////////////////////////////////////////////////////////////////
+	auto colloc_svalues_as_vectorXF = Singleton::initialization().calculate_colloc_Singular_Value();
+	MatrixXf* colloc_svalues_as_MatrixXf = new MatrixXf();
+	colloc_svalues_as_MatrixXf->resize(colloc_svalues_as_vectorXF.size(), colloc_svalues_as_vectorXF.size());
+	colloc_svalues_as_MatrixXf->fill(0.);
+
+	for (int i = 0; i < colloc_svalues_as_vectorXF.size(); ++i)
+		colloc_svalues_as_MatrixXf->operator()(i, i) = colloc_svalues_as_vectorXF[i];
+
+	cout << endl << endl << "SVALUES MatrixXf:" << endl << *colloc_svalues_as_MatrixXf;
+
+	colloc_svalues_as_MatrixXf->conservativeResize(GAP, GAP);
+
+	cout << endl << endl << "Resized SVALUES MatrixXf:" << endl << *colloc_svalues_as_MatrixXf;
+
+	MatrixXf U_colloc_matrix_as_matrixXF = Singleton::initialization().get_colloc_singular_U_matrix();
+
+	MatrixXf V_colloc_matrix_as_matrixXF = Singleton::initialization().get_colloc_singular_V_matrix();
+
+	MatrixXf* resized_V_colloc_matrix_as_matrixXF = new MatrixXf();
+	resized_V_colloc_matrix_as_matrixXF->resize(GAP, V_colloc_matrix_as_matrixXF.cols());
+
+	MatrixXf* resized_U_colloc_matrix_as_matrixXF = new MatrixXf();
+	resized_U_colloc_matrix_as_matrixXF->resize(U_colloc_matrix_as_matrixXF.rows(), GAP);
 
 
+	for (int i = 0; i < GAP; ++i)
+		for (int j = 0; j < V_colloc_matrix_as_matrixXF.cols(); ++j)
+			resized_V_matrix_as_matrixXF->operator()(i, j) = V_colloc_matrix_as_matrixXF(i, j);
+
+	for (int i = 0; i < U_colloc_matrix_as_matrixXF.rows(); ++i)
+		for (int j = 0; j < GAP; ++j)
+			resized_U_colloc_matrix_as_matrixXF->operator()(i, j) = U_colloc_matrix_as_matrixXF(i, j);
+
+	auto colloc_result_matrix = *resized_U_colloc_matrix_as_matrixXF * *colloc_svalues_as_MatrixXf;
+	auto colloc_final_matrix = colloc_result_matrix * *resized_V_colloc_matrix_as_matrixXF;
+
+	//cout << endl << endl << "RESULT MatrixXf:" << endl << final_matrix;
+
+	vector<float> colloc_lenghts_words_vector;
+	colloc_lenghts_words_vector.resize(U_colloc_matrix_as_matrixXF.rows(), 0);
+
+
+	for (auto i = 0; i < U_colloc_matrix_as_matrixXF.rows(); ++i) {
+		for (auto j = 0; j < U_colloc_matrix_as_matrixXF.cols(); ++j) {
+			colloc_lenghts_words_vector[i] += pow(U_colloc_matrix_as_matrixXF.operator()(i, j), 2);
+		}
+		colloc_lenghts_words_vector[i] = sqrt(colloc_lenghts_words_vector[i]);
+	}
+
+	vector<float> colloc_lenghts_texts_vector;
+	colloc_lenghts_texts_vector.resize(V_colloc_matrix_as_matrixXF.rows(), 0); // возможно нужно транспонирование
+
+
+	for (auto i = 0; i < V_colloc_matrix_as_matrixXF.rows(); ++i) {
+		for (auto j = 0; j < V_colloc_matrix_as_matrixXF.cols(); ++j) {
+			colloc_lenghts_texts_vector[i] += pow(V_colloc_matrix_as_matrixXF.operator()(i, j), 2); // возможно нужно транспонирование
+		}
+		colloc_lenghts_texts_vector[i] = sqrt(colloc_lenghts_texts_vector[i]);
+	}
+
+	/*for (auto &x : lenghts_texts_vector)
+		cout << endl << x;*/
+
+
+		//list<float> scalar_proizvs;
+	map<pair<int, int>, float> colloc_scalar_proizv; // текст, документ, скалярное произведение
+
+	for (auto k = 0; k < V_colloc_matrix_as_matrixXF.rows(); ++k)
+		for (auto i = 0; i < U_colloc_matrix_as_matrixXF.rows(); ++i) {
+			//scalar_proizv.insert(make_pair(make_pair(i, k), 0));
+			for (auto j = 0; j < U_colloc_matrix_as_matrixXF.cols(); ++j) {
+
+				colloc_scalar_proizv[make_pair(i, k)] = colloc_scalar_proizv[make_pair(i, k)] + (U_colloc_matrix_as_matrixXF(i, j) * V_colloc_matrix_as_matrixXF(k, j));
+			}
+		}
+	map<pair<int, int>, float> colloc_cosinuses; // текст, документ, скалярное произведение
+
+	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)
+		for (int j = 0; j < colloc_lenghts_texts_vector.size(); ++j)
+			colloc_cosinuses[make_pair(i, j)] = colloc_scalar_proizv[make_pair(i, j)] / colloc_lenghts_words_vector[i] / colloc_lenghts_texts_vector[j];
+
+
+	int c = count_if(colloc_cosinuses.begin(), colloc_cosinuses.end(), [](pair<pair<int, int>, float> i) {
+		if (i.second > 1 || (i.second < -1))
+			return true;
+		else
+			return false;
+		});
+
+	float colloc_delete_threshold = 0.;    //число, ниже которого синусы удаляются
+
+	list<pair<int, int>> colloc_list_of_terms_will_be_deleted;
+
+	for (auto& obj : colloc_cosinuses) {
+		if (obj.second < colloc_delete_threshold)
+			if (colloc_cosinuses.find(obj.first) != colloc_cosinuses.end())
+				colloc_list_of_terms_will_be_deleted.push_back(obj.first);
+	}
+
+	for (auto& obj : colloc_list_of_terms_will_be_deleted) {
+		cosinuses.erase(obj);
+	}
+
+	ofstream colloc_matrix("colloc_matrix_test.txt");
+
+	/*auto map_shit = Singleton::initialization().get_analyzer()->get_map_of_tokens();
+
+	string prev_word = "";
+
+	for (auto& obj : cosinuses)
+		for (auto it = map_shit.begin(); it != map_shit.end(); ++it)
+			if (it->second == obj.first.first) {
+				if (!(prev_word == it->first)) {
+					prev_word = it->first;
+					matrix << it->first << " ";
+				}
+			}*/
+	//////////////////////////////////////////////////////////////////////////////////////
 	int blyadovka1 = 0;
 	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
 
