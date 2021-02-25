@@ -540,3 +540,4 @@ void Singleton::calculate_max_cont_size()
 
 	cout << endl << endl << "Max cont. size: " << this->max_cont_size << endl;
 }
+
