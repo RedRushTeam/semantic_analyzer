@@ -293,7 +293,7 @@ int main(int argc, char* argv[])
 			colloc_cosinuses[make_pair(i, j)] = colloc_scalar_proizv[make_pair(i, j)] / colloc_lenghts_words_vector[i] / colloc_lenghts_texts_vector[j];
 
 
-	int c = count_if(colloc_cosinuses.begin(), colloc_cosinuses.end(), [](pair<pair<int, int>, float> i) {
+	int c_for_colloc = count_if(colloc_cosinuses.begin(), colloc_cosinuses.end(), [](pair<pair<int, int>, float> i) {
 		if (i.second > 1 || (i.second < -1))
 			return true;
 		else

@@ -520,8 +520,20 @@ void Singleton::calculate_max_cont_size()
 
 void Singleton::calculate_colloc_SVD()
 {
-	this->m_colloc_matrix = new MatrixXf(this->max_cont_size * this->max_cont_size / 2, this->vec_of_hard_container_class.size() + 2);	//2th 0 and 1 cols is number of colloc
+	this->m_colloc_matrix = new MatrixXf(this->max_cont_size * this->max_cont_size, this->vec_of_hard_container_class.size());	//2th 0 and 1 cols is number of colloc
 	this->m_colloc_matrix->fill(0);
+
+	this->helper_vector = new vector<vector<int>>();
+	this->helper_vector->resize(this->max_cont_size * this->max_cont_size);
+	for (auto& obj : *this->helper_vector)
+		obj.resize(2);
+
+	for (int i = 0; i < this->max_cont_size * this->max_cont_size; ++i) {
+		(*this->helper_vector)[i][0] = (int)trunc(float((float)i / (float)this->max_cont_size)) + 1;
+		(*this->helper_vector)[i][1] = (int)(i % this->max_cont_size) + 1;
+	}
+
+
 
 	/*for (int i = 0; i < this->max_cont_size; ++i)
 		for (int j = i; j < this->max_cont_size; ++j) {
@@ -542,9 +554,9 @@ void Singleton::calculate_colloc_SVD()
 		Singleton::initialization().prepare_data_in_container_class(i);	//сбор данных в контейнер
 
 		for(int j = 0; j < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++j)
-			for (int k = j; k < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++k)
+			for (int k = 0; k < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++k)
 				for (int l = -GAP - 1; l <= GAP; ++l)
-					this->m_colloc_matrix->operator()((j - 1) * (k - 1), i + 2) += this->vec_of_hard_container_class[i][j][k][l];
+					this->m_colloc_matrix->operator()(j * this->vec_of_hard_container_class[i].get_counter_of_tokenizer() + k, i) += this->vec_of_hard_container_class[i][j][k][l];
 
 		Singleton::initialization().clear_concret_cont_class(i);
 	}
