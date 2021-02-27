@@ -558,33 +558,8 @@ void Singleton::calculate_colloc_SVD()
 				for (int l = -GAP - 1; l <= GAP; ++l)
 					this->m_colloc_matrix->operator()(j * this->vec_of_hard_container_class[i].get_counter_of_tokenizer() + k, i) += this->vec_of_hard_container_class[i][j][k][l];
 
-
-
 		Singleton::initialization().clear_concret_cont_class(i);
 	}
-
-	//обойти матрицу и сложить элементы i, j в элементы j,i
-	for (int j = 0; j < this->max_cont_size; ++j)
-		for (int k = 0; k < this->max_cont_size; ++k)
-			for (int l = 0; l < vec_of_hard_container_class.size(); ++l)
-				this->m_colloc_matrix->operator()(j * this->max_cont_size + k, l) += this->m_colloc_matrix->operator()(k * this->max_cont_size + j, l);
-
-
-	this->small_m_colloc_matrix = new MatrixXf(((this->max_cont_size * (this->max_cont_size - 1)) / 2) + this->max_cont_size, this->vec_of_hard_container_class.size());	//2th 0 and 1 cols is number of colloc
-	this->small_m_colloc_matrix->fill(0);
-
-	int i = 0;
-	//for (int i = 0; i < small_m_colloc_matrix->rows(); ++i)
-	for (int j = 0; j < this->max_cont_size; ++j) {
-		if(j) 
-			i = i - (j - 1) + max_cont_size - 2;
-		for (int k = 0; k < this->max_cont_size; ++k)
-			if (j <= k)
-				for (int l = 0; l < vec_of_hard_container_class.size(); ++l)
-					this->small_m_colloc_matrix->operator()((j + k + i), l) = m_colloc_matrix->operator()(j * this->max_cont_size + k, l);
-		
-	}
-				
 
 	this->BDCSVD_svd_colloc = new BDCSVD<MatrixXf>(*(this->m_colloc_matrix), ComputeThinV | ComputeThinU);
 }
