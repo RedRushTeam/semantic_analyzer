@@ -66,6 +66,7 @@ private:
 
 	//for colloc
 	MatrixXf* m_colloc_matrix;
+	MatrixXf* small_m_colloc_matrix;
 	BDCSVD<MatrixXf>* BDCSVD_svd_colloc = nullptr;		//SVD for big matrix
 	vector<vector<int>>* helper_vector;
 
