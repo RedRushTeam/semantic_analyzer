@@ -520,26 +520,32 @@ void Singleton::calculate_max_cont_size()
 
 void Singleton::calculate_colloc_SVD()
 {
-	this->m_colloc_matrix = new MatrixXf(this->max_cont_size * this->max_cont_size / 2, this->vec_of_hard_container_class.size() + 2);	//2th 0 and 1 cols is number of colloc
+	this->m_colloc_matrix = new MatrixXf(this->max_cont_size * this->max_cont_size, this->vec_of_hard_container_class.size() + 2);	//2th 0 and 1 cols is number of colloc
 	this->m_colloc_matrix->fill(0);
 
 	for (int i = 0; i < this->max_cont_size; ++i)
-		for (int j = i; j < this->max_cont_size; ++j) {
-			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 1) = i + 1;
-			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 0) = j + 1;
+		for (int j = 0; j < this->max_cont_size; ++j) {
+			this->m_colloc_matrix->operator()(i * this->max_cont_size + j, 1) = i + 1;
+			this->m_colloc_matrix->operator()(i * this->max_cont_size + j, 0) = j + 1;
 		}
+
+	/*for (int i = 0; i < this->max_cont_size; ++i)
+		for (int j = 0; j < this->max_cont_size; ++j)
+			cout << this->m_colloc_matrix->operator()(i * this->max_cont_size + j, 0) << " " << this->m_colloc_matrix->operator()(i * this->max_cont_size + j, 1) << endl;*/
 
 	for (int i = 0; i < this->vec_of_hard_container_class.size(); ++i) {
 
 		Singleton::initialization().prepare_data_in_container_class(i);	//сбор данных в контейнер
 
 		for(int j = 0; j < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++j)
-			for (int k = j; k < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++k)
+			for (int k = 0; k < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++k)
 				for (int l = -GAP - 1; l <= GAP; ++l)
-					this->m_colloc_matrix->operator()((j - 1) * (k - 1), i + 2) += this->vec_of_hard_container_class[i][j][k][l];
+					this->m_colloc_matrix->operator()(j * this->max_cont_size + k, i + 2) += this->vec_of_hard_container_class[i][j][k][l];
 
 		Singleton::initialization().clear_concret_cont_class(i);
 	}
+
+
 
 	this->BDCSVD_svd_colloc = new BDCSVD<MatrixXf>(*(this->m_colloc_matrix), ComputeThinV | ComputeThinU);
 }
