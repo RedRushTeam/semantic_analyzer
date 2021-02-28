@@ -4,7 +4,7 @@
 
 list<string> parser::parse() {
 	auto terms = this->delete_trash();
-	for (auto word : terms)
+	for (auto &word : terms)
 		if (stop_words.find(word) != stop_words.end())
 			word="a";
 	return terms;

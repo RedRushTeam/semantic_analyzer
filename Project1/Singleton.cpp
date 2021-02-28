@@ -523,48 +523,58 @@ void Singleton::calculate_colloc_SVD()
 	this->m_colloc_matrix = new MatrixXf(this->max_cont_size * this->max_cont_size, this->vec_of_hard_container_class.size());	//2th 0 and 1 cols is number of colloc
 	this->m_colloc_matrix->fill(0);
 
-	this->helper_vector = new vector<vector<int>>();
-	this->helper_vector->resize(this->max_cont_size * this->max_cont_size);
-	for (auto& obj : *this->helper_vector)
-		obj.resize(2);
+	this->helper_multiset = new multiset<pair<int, int>>();
 
-	for (int i = 0; i < this->max_cont_size * this->max_cont_size; ++i) {
-		(*this->helper_vector)[i][0] = (int)trunc(float((float)i / (float)this->max_cont_size)) + 1;
-		(*this->helper_vector)[i][1] = (int)(i % this->max_cont_size) + 1;
-	}
-
-
-
-	/*for (int i = 0; i < this->max_cont_size; ++i)
-		for (int j = i; j < this->max_cont_size; ++j) {
-			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 1) = i + 1;
-			this->m_colloc_matrix->operator()(i * this->max_cont_size + j - i, 0) = j + 1;
-		}*/
-	/*for (int j = 1; j < this->max_cont_size; ++j)
-		for (int i = (this->max_cont_size * this->max_cont_size / 2); i > 0; --i)
-			for (int k = 0; k < i; k++) {
-				this->m_colloc_matrix->operator()(i + k, 0) = j;
-				this->m_colloc_matrix->operator()(i + k, 0) = k + 1;
-			}*/
-	
-			
-
-	/*for (int i = 0; i < this->max_cont_size; ++i)
-		for (int j = 0; j < this->max_cont_size; ++j)
-			cout << this->m_colloc_matrix->operator()(i * this->max_cont_size + j, 0) << " " << this->m_colloc_matrix->operator()(i * this->max_cont_size + j, 1) << endl;*/
+	for (int i = 0; i < this->max_cont_size * this->max_cont_size; ++i)
+		this->helper_multiset->insert(make_pair((int)trunc(float((float)i / (float)this->max_cont_size)) + 1, (int)(i % this->max_cont_size) + 1));
 
 	for (int i = 0; i < this->vec_of_hard_container_class.size(); ++i) {
 
-		Singleton::initialization().prepare_data_in_container_class(i);	//���� ������ � ���������
+		Singleton::initialization().prepare_data_in_container_class(i);	//сбор данных в контейнер
 
-		for(int j = 0; j < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++j)
+		for (int j = 0; j < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++j)
 			for (int k = 0; k < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++k)
 				for (int l = -GAP - 1; l <= GAP; ++l)
 					this->m_colloc_matrix->operator()(j * this->vec_of_hard_container_class[i].get_counter_of_tokenizer() + k, i) += this->vec_of_hard_container_class[i][j][k][l];
 
+
+
 		Singleton::initialization().clear_concret_cont_class(i);
 	}
 
+	//обойти матрицу и сложить элементы i, j в элементы j,i
+	for (int j = 0; j < this->max_cont_size; ++j)
+		for (int k = 0; k < this->max_cont_size; ++k)
+			for (int l = 0; l < vec_of_hard_container_class.size(); ++l)
+				this->m_colloc_matrix->operator()(j * this->max_cont_size + k, l) += this->m_colloc_matrix->operator()(k * this->max_cont_size + j, l);
+
+
+	this->small_m_colloc_matrix = new MatrixXf(((this->max_cont_size * (this->max_cont_size - 1)) / 2) + this->max_cont_size, this->vec_of_hard_container_class.size());	//2th 0 and 1 cols is number of colloc
+	this->small_m_colloc_matrix->fill(0);
+
+	list<pair<int, int>>* shrinked_helper_vector = new list<pair<int, int>>();
+	//shrinked_helper_vector->reserve(((this->max_cont_size * (this->max_cont_size - 1)) / 2) + this->max_cont_size);
+
+	int i = 0;
+	//for (int i = 0; i < small_m_colloc_matrix->rows(); ++i)
+	for (int j = 0; j < this->max_cont_size; ++j) {
+		if (j)
+			i = i - (j - 1) + max_cont_size - 2;
+		for (int k = 0; k < this->max_cont_size; ++k)
+			if (j <= k)
+				for (int l = 0; l < vec_of_hard_container_class.size(); ++l) {
+					if(this->helper_multiset->find(make_pair(j, k)) != this->helper_multiset->end())
+						shrinked_helper_vector->push_back(*this->helper_multiset->find(make_pair(j, k)));
+					this->small_m_colloc_matrix->operator()((j + k + i), l) = m_colloc_matrix->operator()(j * this->max_cont_size + k, l);
+				}
+
+	}
+
+	this->helper_multiset->clear();
+
+	for (auto it = shrinked_helper_vector->begin(); it != shrinked_helper_vector->end(); ++it) {
+		this->helper_multiset->insert(*it);
+	}
 
 
 	this->BDCSVD_svd_colloc = new BDCSVD<MatrixXf>(*(this->m_colloc_matrix), ComputeThinV | ComputeThinU);
@@ -583,4 +593,9 @@ MatrixXf Singleton::get_colloc_singular_V_matrix()
 MatrixXf Singleton::get_colloc_singular_U_matrix()
 {
 	return this->BDCSVD_svd_colloc->matrixU();
+}
+
+multiset<pair<int, int>>* Singleton::get_helper_multiset()
+{
+	return this->helper_multiset;
 }
