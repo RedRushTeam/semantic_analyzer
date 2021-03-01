@@ -19,6 +19,7 @@ public:
 	VectorXf calculate_colloc_Singular_Value();
 	MatrixXf get_colloc_singular_V_matrix();
 	MatrixXf get_colloc_singular_U_matrix();
+	multiset<pair<int, int>>* get_helper_multiset();
 	//
 
 	void calculate_max_cont_size();
@@ -68,7 +69,7 @@ private:
 	MatrixXf* m_colloc_matrix;
 	MatrixXf* small_m_colloc_matrix;
 	BDCSVD<MatrixXf>* BDCSVD_svd_colloc = nullptr;		//SVD for big matrix
-	vector<vector<int>>* helper_vector;
+	multiset<pair<int, int>>* helper_multiset;
 
 	//private elems
 	hard_container_class sample_mean_all;

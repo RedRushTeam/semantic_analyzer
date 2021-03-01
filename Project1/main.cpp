@@ -206,7 +206,9 @@ int main(int argc, char* argv[])
 				}
 			}
 
-	//рассчет
+	cout << endl << endl << endl;
+
+	//рассчет свд с коллокациями
 
 	Singleton::initialization().calculate_colloc_SVD();
 
@@ -219,11 +221,11 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < colloc_svalues_as_vectorXF.size(); ++i)
 		colloc_svalues_as_MatrixXf->operator()(i, i) = colloc_svalues_as_vectorXF[i];
 
-	cout << endl << endl << "SVALUES MatrixXf:" << endl << *colloc_svalues_as_MatrixXf;
+	cout << endl << endl << "Colloc SVALUES MatrixXf:" << endl << *colloc_svalues_as_MatrixXf;
 
 	colloc_svalues_as_MatrixXf->conservativeResize(GAP, GAP);
 
-	cout << endl << endl << "Resized SVALUES MatrixXf:" << endl << *colloc_svalues_as_MatrixXf;
+	cout << endl << endl << "Colloc resized SVALUES MatrixXf:" << endl << *colloc_svalues_as_MatrixXf;
 
 	MatrixXf U_colloc_matrix_as_matrixXF = Singleton::initialization().get_colloc_singular_U_matrix();
 
@@ -271,22 +273,16 @@ int main(int argc, char* argv[])
 		colloc_lenghts_texts_vector[i] = sqrt(colloc_lenghts_texts_vector[i]);
 	}
 
-	/*for (auto &x : lenghts_texts_vector)
-		cout << endl << x;*/
-
-
-		//list<float> scalar_proizvs;
-	map<pair<int, int>, float> colloc_scalar_proizv; // текст, документ, скалярное произведение
+	map<pair<int, int>, float> colloc_scalar_proizv; // терм, документ, скалярное произведение
 
 	for (auto k = 0; k < V_colloc_matrix_as_matrixXF.rows(); ++k)
 		for (auto i = 0; i < U_colloc_matrix_as_matrixXF.rows(); ++i) {
-			//scalar_proizv.insert(make_pair(make_pair(i, k), 0));
 			for (auto j = 0; j < U_colloc_matrix_as_matrixXF.cols(); ++j) {
 
 				colloc_scalar_proizv[make_pair(i, k)] = colloc_scalar_proizv[make_pair(i, k)] + (U_colloc_matrix_as_matrixXF(i, j) * V_colloc_matrix_as_matrixXF(k, j));
 			}
 		}
-	map<pair<int, int>, float> colloc_cosinuses; // текст, документ, скалярное произведение
+	map<pair<int, int>, float> colloc_cosinuses; // терм, документ, скалярное произведение
 
 	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)
 		for (int j = 0; j < colloc_lenghts_texts_vector.size(); ++j)
@@ -298,7 +294,9 @@ int main(int argc, char* argv[])
 			return true;
 		else
 			return false;
-		});
+	});
+
+	auto* helper_vector = Singleton::initialization().get_helper_multiset();	//одновременно нужно удалять строки еще и отсюда
 
 	float colloc_delete_threshold = 0.;    //число, ниже которого синусы удаляются
 
@@ -311,23 +309,41 @@ int main(int argc, char* argv[])
 	}
 
 	for (auto& obj : colloc_list_of_terms_will_be_deleted) {
-		cosinuses.erase(obj);
+		colloc_cosinuses.erase(obj);
+	}
+
+	multiset<int> colloc_list_of_only_terms_will_be_deleted;
+
+	for (auto obj : colloc_list_of_terms_will_be_deleted)
+		colloc_list_of_only_terms_will_be_deleted.insert(obj.first);
+
+	list<pair<int, int>> helper_list;	//одновременно нужно удалять строки еще и отсюда
+	
+	int kostil = 0;
+	for (auto obj : *helper_vector) {
+		if (!((colloc_list_of_only_terms_will_be_deleted.find(kostil)) != colloc_list_of_only_terms_will_be_deleted.end()))
+			helper_list.push_back(obj);
+		++kostil;
 	}
 
 	ofstream colloc_matrix("colloc_matrix_test.txt");
 
-	/*auto map_shit = Singleton::initialization().get_analyzer()->get_map_of_tokens();
+	auto map_shit_for_colloc = Singleton::initialization().get_analyzer()->get_map_of_tokens();
 
-	string prev_word = "";
+	string prev_word_colloc = "";
 
-	for (auto& obj : cosinuses)
-		for (auto it = map_shit.begin(); it != map_shit.end(); ++it)
-			if (it->second == obj.first.first) {
-				if (!(prev_word == it->first)) {
-					prev_word = it->first;
-					matrix << it->first << " ";
-				}
-			}*/
+
+	//int kostil1 = 0;
+	for(auto it = helper_list.begin(); it != helper_list.end(); ++it)
+		for (auto it2 = map_shit.begin(); it2 != map_shit.end(); ++it2) {
+			if (it2->second == it->second) {
+				matrix << it2->first << " ";
+			}
+			if (it2->second == it->first) {
+				matrix << it2->first << " ";
+			}
+		}
+
 	//////////////////////////////////////////////////////////////////////////////////////
 	int blyadovka1 = 0;
 	//cout << endl << endl << "V MatrixXf:" << endl << V_matrix_as_matrixXF;
