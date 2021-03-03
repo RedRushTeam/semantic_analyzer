@@ -534,10 +534,12 @@ void Singleton::calculate_colloc_SVD()
 
 		for (int j = 0; j < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++j)
 			for (int k = 0; k < this->vec_of_hard_container_class[i].get_counter_of_tokenizer(); ++k)
-				for (int l = -GAP - 1; l <= GAP; ++l)
-					this->m_colloc_matrix->operator()(j * this->vec_of_hard_container_class[i].get_counter_of_tokenizer() + k, i) += this->vec_of_hard_container_class[i][j][k][l];
-
-
+				for (int l = -GAP - 1; l <= GAP; ++l) {
+					if (l >= 0)
+						this->m_colloc_matrix->operator()(j * this->vec_of_hard_container_class[i].get_counter_of_tokenizer() + k, i) += (this->vec_of_hard_container_class[i][j][k][l] * (1 - 0.2 * l)); // (1 - 0.2*l) is variable
+					else
+						this->m_colloc_matrix->operator()(j * this->vec_of_hard_container_class[i].get_counter_of_tokenizer() + k, i) += (this->vec_of_hard_container_class[i][j][k][l] * (0.9 + 0.2 * l)); //  (0.9 + 0.2 * l) is variable
+				}
 
 		Singleton::initialization().clear_concret_cont_class(i);
 	}

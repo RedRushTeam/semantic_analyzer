@@ -298,7 +298,7 @@ int main(int argc, char* argv[])
 
 	auto* helper_vector = Singleton::initialization().get_helper_multiset();	//одновременно нужно удалять строки еще и отсюда
 
-	float colloc_delete_threshold = 0.;    //число, ниже которого синусы удаляются
+	float colloc_delete_threshold = 0.99;    //число, ниже которого синусы удаляются
 
 	list<pair<int, int>> colloc_list_of_terms_will_be_deleted;
 
@@ -321,7 +321,7 @@ int main(int argc, char* argv[])
 	
 	int kostil = 0;
 	for (auto obj : *helper_vector) {
-		if (!((colloc_list_of_only_terms_will_be_deleted.find(kostil)) != colloc_list_of_only_terms_will_be_deleted.end()))
+		if ((colloc_list_of_only_terms_will_be_deleted.find(kostil)) == colloc_list_of_only_terms_will_be_deleted.end())
 			helper_list.push_back(obj);
 		++kostil;
 	}
@@ -335,7 +335,7 @@ int main(int argc, char* argv[])
 
 	//int kostil1 = 0;
 	for(auto it = helper_list.begin(); it != helper_list.end(); ++it)
-		for (auto it2 = map_shit.begin(); it2 != map_shit.end(); ++it2) {
+		for (auto it2 = map_shit_for_colloc.begin(); it2 != map_shit_for_colloc.end(); ++it2) {
 			if (it2->second == it->second) {
 				matrix << it2->first << " ";
 			}
