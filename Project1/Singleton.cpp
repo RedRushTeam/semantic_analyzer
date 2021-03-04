@@ -525,8 +525,12 @@ void Singleton::calculate_colloc_SVD()
 
 	this->helper_multiset = new multiset<pair<int, int>>();
 
-	for (int i = 0; i < this->max_cont_size * this->max_cont_size; ++i)
-		this->helper_multiset->insert(make_pair((int)trunc(float((float)i / (float)this->max_cont_size)) + 1, (int)(i % this->max_cont_size) + 1));
+	for (int i = 0; i < this->max_cont_size; ++i)
+		for (int j = 0; j < this->max_cont_size; ++j)
+			this->helper_multiset->insert(make_pair(i, j));
+
+	/*for (int i = 0; i < this->max_cont_size * this->max_cont_size; ++i)
+		this->helper_multiset->insert(make_pair((int)trunc(float((float)i / (float)this->max_cont_size)) + 1, (int)(i % this->max_cont_size) + 1));*/
 
 	for (int i = 0; i < this->vec_of_hard_container_class.size(); ++i) {
 
@@ -563,13 +567,13 @@ void Singleton::calculate_colloc_SVD()
 		if (j)
 			i = i - (j - 1) + max_cont_size - 2;
 		for (int k = 0; k < this->max_cont_size; ++k)
-			if (j <= k)
-				for (int l = 0; l < vec_of_hard_container_class.size(); ++l) {
-					if(this->helper_multiset->find(make_pair(j, k)) != this->helper_multiset->end())
-						shrinked_helper_vector->push_back(*this->helper_multiset->find(make_pair(j, k)));
-					this->small_m_colloc_matrix->operator()((j + k + i), l) = m_colloc_matrix->operator()(j * this->max_cont_size + k, l);
-				}
+			if (j <= k) {
+				if (this->helper_multiset->find(make_pair(j, k)) != this->helper_multiset->end())
+					shrinked_helper_vector->push_back(*this->helper_multiset->find(make_pair(j, k)));	//считаю что ошибка тут
 
+				for (int l = 0; l < vec_of_hard_container_class.size(); ++l)
+					this->small_m_colloc_matrix->operator()((j + k + i), l) = m_colloc_matrix->operator()(j * this->max_cont_size + k, l);
+			}
 	}
 
 	this->helper_multiset->clear();
@@ -578,8 +582,8 @@ void Singleton::calculate_colloc_SVD()
 		this->helper_multiset->insert(*it);
 	}
 
-
-	this->BDCSVD_svd_colloc = new BDCSVD<MatrixXf>(*(this->m_colloc_matrix), ComputeThinV | ComputeThinU);
+	//this->m_colloc_matrix->conservativeResize(0, 0);
+	this->BDCSVD_svd_colloc = new BDCSVD<MatrixXf>(*(this->small_m_colloc_matrix), ComputeThinV | ComputeThinU);
 }
 
 VectorXf Singleton::calculate_colloc_Singular_Value()

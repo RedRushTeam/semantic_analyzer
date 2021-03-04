@@ -205,6 +205,12 @@ int main(int argc, char* argv[])
 					matrix << it->first << " ";
 				}
 			}
+	scalar_proizv.clear();
+	cosinuses.clear();
+	list_of_terms_will_be_deleted.clear();
+	map_shit.clear();
+	lenghts_texts_vector.clear();
+	lenghts_words_vector.clear();
 
 	cout << endl << endl << endl;
 
@@ -284,7 +290,7 @@ int main(int argc, char* argv[])
 		}
 	map<pair<int, int>, float> colloc_cosinuses; // терм, документ, скалярное произведение
 
-	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)
+	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)	//??
 		for (int j = 0; j < colloc_lenghts_texts_vector.size(); ++j)
 			colloc_cosinuses[make_pair(i, j)] = colloc_scalar_proizv[make_pair(i, j)] / colloc_lenghts_words_vector[i] / colloc_lenghts_texts_vector[j];
 
@@ -298,7 +304,7 @@ int main(int argc, char* argv[])
 
 	auto* helper_vector = Singleton::initialization().get_helper_multiset();	//одновременно нужно удалять строки еще и отсюда
 
-	float colloc_delete_threshold = 0.99;    //число, ниже которого синусы удаляются
+	float colloc_delete_threshold = 0.0;    //число, ниже которого синусы удаляются
 
 	list<pair<int, int>> colloc_list_of_terms_will_be_deleted;
 
