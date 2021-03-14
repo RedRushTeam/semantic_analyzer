@@ -205,6 +205,12 @@ int main(int argc, char* argv[])
 					matrix << it->first << " ";
 				}
 			}
+	scalar_proizv.clear();
+	cosinuses.clear();
+	list_of_terms_will_be_deleted.clear();
+	map_shit.clear();
+	lenghts_texts_vector.clear();
+	lenghts_words_vector.clear();
 
 	cout << endl << endl << endl;
 
@@ -284,7 +290,7 @@ int main(int argc, char* argv[])
 		}
 	map<pair<int, int>, float> colloc_cosinuses; // терм, документ, скалярное произведение
 
-	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)
+	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)	//??
 		for (int j = 0; j < colloc_lenghts_texts_vector.size(); ++j)
 			colloc_cosinuses[make_pair(i, j)] = colloc_scalar_proizv[make_pair(i, j)] / colloc_lenghts_words_vector[i] / colloc_lenghts_texts_vector[j];
 
@@ -294,11 +300,11 @@ int main(int argc, char* argv[])
 			return true;
 		else
 			return false;
-		});
+	});
 
 	auto* helper_vector = Singleton::initialization().get_helper_multiset();	//одновременно нужно удалять строки еще и отсюда
 
-	float colloc_delete_threshold = 0.;    //число, ниже которого синусы удаляются
+	float colloc_delete_threshold = 0.0;    //число, ниже которого синусы удаляются
 
 	list<pair<int, int>> colloc_list_of_terms_will_be_deleted;
 
@@ -318,10 +324,10 @@ int main(int argc, char* argv[])
 		colloc_list_of_only_terms_will_be_deleted.insert(obj.first);
 
 	list<pair<int, int>> helper_list;	//одновременно нужно удалять строки еще и отсюда
-
+	
 	int kostil = 0;
 	for (auto obj : *helper_vector) {
-		if (!((colloc_list_of_only_terms_will_be_deleted.find(kostil)) != colloc_list_of_only_terms_will_be_deleted.end()))
+		if ((colloc_list_of_only_terms_will_be_deleted.find(kostil)) == colloc_list_of_only_terms_will_be_deleted.end())
 			helper_list.push_back(obj);
 		++kostil;
 	}
@@ -334,13 +340,13 @@ int main(int argc, char* argv[])
 
 
 	//int kostil1 = 0;
-	for (auto it = helper_list.begin(); it != helper_list.end(); ++it)
-		for (auto it2 = map_shit.begin(); it2 != map_shit.end(); ++it2) {
+	for(auto it = helper_list.begin(); it != helper_list.end(); ++it)
+		for (auto it2 = map_shit_for_colloc.begin(); it2 != map_shit_for_colloc.end(); ++it2) {
 			if (it2->second == it->second) {
-				colloc_matrix << it2->first << " ";
+				matrix << it2->first << " ";
 			}
 			if (it2->second == it->first) {
-				colloc_matrix << it2->first << " ";
+				matrix << it2->first << " ";
 			}
 		}
 

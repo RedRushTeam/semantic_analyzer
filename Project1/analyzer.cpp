@@ -2,28 +2,18 @@
 
 void analyzer::analyze_vec_of_tokens()
 {
-
-	for (int j = 0; j < this->vec_of_tokens.size(); ++j) {
-
+	for (int j = 0; j < this->vec_of_tokens.size(); ++j)
 		if (this->vec_of_tokens[j] != STOP_WORD) {
-
-			for (int i = j - 1; i >= j - this->k; --i) {
-
-				if (this->is_index_valid(i)
-					&& this->vec_of_tokens[i] != STOP_WORD) {
+			for (int i = j - 1; i >= j - this->k; --i)
+				if (this->is_index_valid(i) && this->vec_of_tokens[i] != STOP_WORD) 
 					this->_container_class->increment(vec_of_tokens[j], vec_of_tokens[i], this->k - (j - i));
-				}
-			}
 
-			for (int l = j + 1; l <= j + k && l < this->vec_of_tokens.size(); ++l) {
-
+			for (int l = j + 1; l <= j + k && l < this->vec_of_tokens.size(); ++l)
 				if (this->is_index_valid(l) && this->vec_of_tokens[l] != STOP_WORD)
 					this->_container_class->increment(vec_of_tokens[j], vec_of_tokens[l], (this->k + 1) - (j - l));
-			}
 		}
-	}
 
-	//this->_container_class->swap_is_download_dataed();
+	*this->_container_class / this->vec_of_tokens.size();
 
 }
 
