@@ -294,7 +294,7 @@ int main(int argc, char* argv[])
 			return true;
 		else
 			return false;
-	});
+		});
 
 	auto* helper_vector = Singleton::initialization().get_helper_multiset();	//одновременно нужно удалять строки еще и отсюда
 
@@ -318,7 +318,7 @@ int main(int argc, char* argv[])
 		colloc_list_of_only_terms_will_be_deleted.insert(obj.first);
 
 	list<pair<int, int>> helper_list;	//одновременно нужно удалять строки еще и отсюда
-	
+
 	int kostil = 0;
 	for (auto obj : *helper_vector) {
 		if (!((colloc_list_of_only_terms_will_be_deleted.find(kostil)) != colloc_list_of_only_terms_will_be_deleted.end()))
@@ -334,13 +334,13 @@ int main(int argc, char* argv[])
 
 
 	//int kostil1 = 0;
-	for(auto it = helper_list.begin(); it != helper_list.end(); ++it)
+	for (auto it = helper_list.begin(); it != helper_list.end(); ++it)
 		for (auto it2 = map_shit.begin(); it2 != map_shit.end(); ++it2) {
 			if (it2->second == it->second) {
-				matrix << it2->first << " ";
+				colloc_matrix << it2->first << " ";
 			}
 			if (it2->second == it->first) {
-				matrix << it2->first << " ";
+				colloc_matrix << it2->first << " ";
 			}
 		}
 

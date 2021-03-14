@@ -563,7 +563,7 @@ void Singleton::calculate_colloc_SVD()
 		for (int k = 0; k < this->max_cont_size; ++k)
 			if (j <= k)
 				for (int l = 0; l < vec_of_hard_container_class.size(); ++l) {
-					if(this->helper_multiset->find(make_pair(j, k)) != this->helper_multiset->end())
+					if (this->helper_multiset->find(make_pair(j, k)) != this->helper_multiset->end())
 						shrinked_helper_vector->push_back(*this->helper_multiset->find(make_pair(j, k)));
 					this->small_m_colloc_matrix->operator()((j + k + i), l) = m_colloc_matrix->operator()(j * this->max_cont_size + k, l);
 				}
