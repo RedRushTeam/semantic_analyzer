@@ -10,6 +10,7 @@ public:
 	//public methods
 	void push_container(hard_container_class _hard_container_class);
 	vector<hard_container_class> get_vec_of_hard_container_class() const;
+
 	//SVD methods
 	void calculate_SVD_matrix();
 	VectorXf calculate_Singular_Value();
@@ -19,8 +20,7 @@ public:
 	VectorXf calculate_colloc_Singular_Value();
 	MatrixXf get_colloc_singular_V_matrix();
 	MatrixXf get_colloc_singular_U_matrix();
-	multiset<pair<int, int>>* get_helper_multiset();
-	//
+	vector<pair<int, int>>* get_helper_vec();
 
 	void calculate_max_cont_size();
 	void calculate_sample_mean();
@@ -34,6 +34,7 @@ public:
 	void sinchronize_terms();
 	void sinchronize_terms(hard_container_class _container_class);
 	void find_fluctuations();
+	void find_colloc_fluctuations();
 	void clear(type_of_purpose_of_cont_class _type_of_cont_class);
 	void prepare_data_with_link_for_text(fs::path filename);
 	void set_parser(parser* _parser);
@@ -54,6 +55,7 @@ public:
 	hard_container_class get_sample_mean_all() const;
 	int get_length_of_all_hard_container_class() const;
 	hard_container_class calculate_parametr_to_one_term(hard_container_class _parametr);
+	hard_container_class calculate_parametr_to_one_colloc(hard_container_class _parametr);
 
 	bool remove_hard_container_class(hard_container_class _hard_container_class);	//fix this!
 
@@ -67,9 +69,9 @@ private:
 
 	//for colloc
 	MatrixXf* m_colloc_matrix;
-	MatrixXf* small_m_colloc_matrix;
 	BDCSVD<MatrixXf>* BDCSVD_svd_colloc = nullptr;		//SVD for big matrix
-	multiset<pair<int, int>>* helper_multiset;
+	vector<pair<int, int>>* helper_vec;
+	multiset<pair<int, int>>* possible_collocs;
 
 	//private elems
 	hard_container_class sample_mean_all;

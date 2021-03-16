@@ -214,6 +214,26 @@ int main(int argc, char* argv[])
 
 	cout << endl << endl << endl;
 
+	cout << std::endl << "Calculating max size:";
+	Singleton::initialization().calculate_sample_mean();
+
+	cout << endl << "Calculating mat ozid...";
+	Singleton::initialization().calculate_mat_ozidanie();
+
+	cout << endl << "Calculating mat disp...";
+	Singleton::initialization().calculate_mat_disperse();
+
+	cout << endl << "Calculating sredne kv otklonenie fixed...";
+	Singleton::initialization().calculate_sredne_kv_otklonenie_fixed();
+
+	cout << endl << "Finding fluctuations...";
+	Singleton::initialization().clear(mat_otkl_);
+	Singleton::initialization().find_colloc_fluctuations();
+	Singleton::initialization().clear(mat_disperse_);
+	Singleton::initialization().clear(mat_ozid_);
+	//Singleton::initialization().clear(sample_mean_all_);
+	Singleton::initialization().clear(mat_otkl_fixed_);
+
 	//рассчет свд с коллокациями
 
 	Singleton::initialization().calculate_colloc_SVD();
@@ -278,74 +298,48 @@ int main(int argc, char* argv[])
 		}
 		colloc_lenghts_texts_vector[i] = sqrt(colloc_lenghts_texts_vector[i]);
 	}
-
-	map<pair<int, int>, float> colloc_scalar_proizv; // терм, документ, скалярное произведение		//тут грязь
+	map<pair<pair<int, int>, int>, float> colloc_scalar_proizv; //терм, терм, документ, скалярное произведение		//тут большая грязь
 
 	for (auto k = 0; k < V_colloc_matrix_as_matrixXF.rows(); ++k)
-		for (auto i = 0; i < U_colloc_matrix_as_matrixXF.rows(); ++i) {
-			for (auto j = 0; j < U_colloc_matrix_as_matrixXF.cols(); ++j) {
+		for (auto i = 0; i < U_colloc_matrix_as_matrixXF.rows(); ++i) 
+			for (auto j = 0; j < U_colloc_matrix_as_matrixXF.cols(); ++j)
+					//это все одна строка
+					colloc_scalar_proizv[make_pair(make_pair((*Singleton::initialization().get_helper_vec())[i].first, (*Singleton::initialization().get_helper_vec())[i].second), k)] = 
+						colloc_scalar_proizv[make_pair(make_pair((*Singleton::initialization().get_helper_vec())[i].first, (*Singleton::initialization().get_helper_vec())[i].second), k)] + 
+							(U_colloc_matrix_as_matrixXF(i, j) * V_colloc_matrix_as_matrixXF(k, j));	//прям жо сюда
 
-				colloc_scalar_proizv[make_pair(i, k)] = colloc_scalar_proizv[make_pair(i, k)] + (U_colloc_matrix_as_matrixXF(i, j) * V_colloc_matrix_as_matrixXF(k, j));
-			}
-		}
-	map<pair<int, int>, float> colloc_cosinuses; // терм, документ, скалярное произведение
+	map<pair<pair<int, int>, int>, float> colloc_cosinuses; // терм, документ, скалярное произведение
 
-	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)	//??
+	for (int i = 0; i < colloc_lenghts_words_vector.size(); ++i)
 		for (int j = 0; j < colloc_lenghts_texts_vector.size(); ++j)
-			colloc_cosinuses[make_pair(i, j)] = colloc_scalar_proizv[make_pair(i, j)] / colloc_lenghts_words_vector[i] / colloc_lenghts_texts_vector[j];
+			//это все одна строка
+			colloc_cosinuses[make_pair(make_pair((*Singleton::initialization().get_helper_vec())[i].first, (*Singleton::initialization().get_helper_vec())[i].second), j)] = 
+				colloc_scalar_proizv[make_pair(make_pair((*Singleton::initialization().get_helper_vec())[i].first, (*Singleton::initialization().get_helper_vec())[i].second), j)] / 
+					colloc_lenghts_words_vector[i] / colloc_lenghts_texts_vector[j];	//прям жо сюда
 
-
-	int c_for_colloc = count_if(colloc_cosinuses.begin(), colloc_cosinuses.end(), [](pair<pair<int, int>, float> i) {
-		if (i.second > 1 || (i.second < -1))
-			return true;
-		else
-			return false;
-	});
-
-	auto* helper_vector = Singleton::initialization().get_helper_multiset();	//одновременно нужно удалять строки еще и отсюда
+	list<pair<pair<int, int>, int>>colloc_list_of_terms_will_be_deleted;
 
 	float colloc_delete_threshold = 0.0;    //число, ниже которого синусы удаляются
 
-	list<pair<int, int>> colloc_list_of_terms_will_be_deleted;
-
-	for (auto& obj : colloc_cosinuses) {
+	for (auto& obj : colloc_cosinuses)
 		if (obj.second < colloc_delete_threshold)
-			if (colloc_cosinuses.find(obj.first) != colloc_cosinuses.end())
-				colloc_list_of_terms_will_be_deleted.push_back(obj.first);
-	}
+			colloc_list_of_terms_will_be_deleted.push_back(obj.first);
 
-	for (auto& obj : colloc_list_of_terms_will_be_deleted) {
+	for (auto& obj : colloc_list_of_terms_will_be_deleted)
 		colloc_cosinuses.erase(obj);
-	}
-
-	multiset<int> colloc_list_of_only_terms_will_be_deleted;
-
-	for (auto obj : colloc_list_of_terms_will_be_deleted)
-		colloc_list_of_only_terms_will_be_deleted.insert(obj.first);
-
-	list<pair<int, int>> helper_list;	//одновременно нужно удалять строки еще и отсюда
-	
-	int kostil = 0;
-	for (auto obj : *helper_vector) {
-		if ((colloc_list_of_only_terms_will_be_deleted.find(kostil)) == colloc_list_of_only_terms_will_be_deleted.end())
-			helper_list.push_back(obj);
-		++kostil;
-	}
 
 	ofstream colloc_matrix("colloc_matrix_test.txt");
 
 	auto map_shit_for_colloc = Singleton::initialization().get_analyzer()->get_map_of_tokens();
 
-	string prev_word_colloc = "";
+	//string prev_word_colloc = "";
 
-
-	//int kostil1 = 0;
-	for(auto it = helper_list.begin(); it != helper_list.end(); ++it)
+	for(auto it = colloc_cosinuses.begin(); it != colloc_cosinuses.end(); ++it)
 		for (auto it2 = map_shit_for_colloc.begin(); it2 != map_shit_for_colloc.end(); ++it2) {
-			if (it2->second == it->second) {
+			if (it2->second == it->first.first.first) {
 				colloc_matrix << it2->first << " ";
 			}
-			if (it2->second == it->first) {
+			if (it2->second == it->first.first.second) {
 				colloc_matrix << it2->first << " ";
 			}
 		}
