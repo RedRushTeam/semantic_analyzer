@@ -49,7 +49,7 @@ void Singleton::calculate_SVD_matrix()
 		auto counter_of_tokenizer = this->_analyzer->get_counter_of_tokenizer();
 		auto map_of_tokens = this->_analyzer->get_map_of_tokens();
 		auto vec_of_tokens = this->_analyzer->vec_of_tokens;	//������� ������ ������� ��� ����� ������
-		
+
 		for (auto obj : vec_of_tokens)
 			(*m)(obj, i) = (*m)(obj, i) + 1;
 
@@ -66,7 +66,7 @@ VectorXf Singleton::calculate_Singular_Value()
 	/*if (this->BDCSVD_svd == nullptr)
 		return this->Jacobi_svd->singularValues();
 	else*/
-		return this->BDCSVD_svd->singularValues();
+	return this->BDCSVD_svd->singularValues();
 }
 
 MatrixXf Singleton::get_singular_V_matrix()
@@ -153,7 +153,7 @@ void Singleton::calculate_mat_disperse()
 
 void Singleton::calculate_sredne_kv_otklonenie()
 {
-	
+
 	this->sredne_kv_otklonenie.give_space(this->max_cont_size, GAP);
 
 	this->sredne_kv_otklonenie = this->mat_disperse.pow_all(2);
@@ -256,7 +256,7 @@ void Singleton::find_fluctuations()			//////todo//////
 	hard_container_class chart1;
 	auto keks = this->max_cont_size;
 	chart1.give_space(keks, GAP);
-	
+
 	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
 		for (auto q = 0; q < keks; ++q)
@@ -265,7 +265,7 @@ void Singleton::find_fluctuations()			//////todo//////
 					chart1[q][q][p] = chart1[q][q][p] + this->vec_of_hard_container_class[i][q][j][p];
 		vec_of_hard_container_class[i].clear();
 	}
-	
+
 
 	auto tmp1 = chart1 / vec_of_hard_container_class.size();
 	chart1.clear();
@@ -283,6 +283,53 @@ void Singleton::find_fluctuations()			//////todo//////
 					}
 				break;
 			}
+	chart1.clear();
+}
+
+void Singleton::find_colloc_fluctuations()
+{
+	auto sum1 = this->calculate_parametr_to_one_colloc(this->mat_ozidanie) + this->calculate_parametr_to_one_colloc(this->sredne_kv_otklonenie_fixed);
+	auto razn1 = this->calculate_parametr_to_one_colloc(this->mat_ozidanie) - this->calculate_parametr_to_one_colloc(this->sredne_kv_otklonenie_fixed);
+	hard_container_class chart1;
+	auto keks = this->max_cont_size;
+	chart1.give_space(keks, GAP);
+
+	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
+		this->prepare_data_in_container_class(i);
+		for (auto q = 0; q < keks; ++q)
+			for (auto j = 0; j < keks; ++j)
+				for (auto p = -GAP - 1; p <= GAP; ++p)
+					chart1[q][j][p] = chart1[q][j][p] + this->vec_of_hard_container_class[i][q][j][p];
+		vec_of_hard_container_class[i].clear();
+	}
+
+	chart1 = this->calculate_parametr_to_one_colloc(chart1);
+
+
+	auto tmp1 = chart1 / vec_of_hard_container_class.size();
+	chart1.clear();
+	chart1 = tmp1;
+	analyzer helper;
+	helper.set_map_of_tokens("dictionary.txt");
+	ofstream ff("fluctuation.txt");
+
+	/*for (int i = 1; i < chart1.get_counter_of_tokenizer(); i++)
+		for (int l = -GAP - 1; l <= GAP; ++l)
+			if ((chart1[i][i][l] > sum1[i][i][l]) || (chart1[i][i][l] < razn1[i][i][l])) {
+				for (auto q : helper.get_map_of_tokens())
+					if (q.second == i) {
+						ff << q.first << " ";
+						break;
+					}
+				break;
+			}*/
+	this->possible_collocs = new multiset<pair<int, int>>();
+	for (int i = 1; i < chart1.get_counter_of_tokenizer(); i++)
+		for (int j = 1; j < chart1.get_counter_of_tokenizer(); j++)
+			if ((chart1[i][j][0] > sum1[i][j][0]) || (chart1[i][j][0] < razn1[i][j][0]))
+				possible_collocs->insert(make_pair(i, j));
+			
+
 	chart1.clear();
 }
 
@@ -350,7 +397,7 @@ void Singleton::clear_concret_cont_class(int _hard_container_class_number)
 
 void Singleton::out_for_chart()				//////todo//////
 {
-	
+
 	auto sum1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) + this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 	auto razn1 = this->calculate_parametr_to_one_term(this->mat_ozidanie) - this->calculate_parametr_to_one_term(this->sredne_kv_otklonenie_fixed);
 	auto single_mat_ozhid = this->calculate_parametr_to_one_term(this->mat_ozidanie);
@@ -358,7 +405,7 @@ void Singleton::out_for_chart()				//////todo//////
 	hard_container_class chart1;
 	auto keks = this->max_cont_size;
 	chart1.give_space(keks, GAP);
-	
+
 	for (int i = 0; this->vec_of_hard_container_class.size() > i; ++i) {
 		this->prepare_data_in_container_class(i);
 		for (auto q = 0; q < keks; ++q)
@@ -376,44 +423,44 @@ void Singleton::out_for_chart()				//////todo//////
 
 	ofstream to_chart("chart.txt");
 
-		for (int i = 1; i < chart1.get_counter_of_tokenizer(); ++i)
-			{
-					to_chart << endl << endl << "term " << i << endl;
-					for (int l = -GAP - 1; l <= GAP; ++l) 
-						if(l==-GAP-1)
-							to_chart << "really: " << chart1[i][i][l] << " ";
-						else 
-							to_chart << chart1[i][i][l] << " ";
+	for (int i = 1; i < chart1.get_counter_of_tokenizer(); ++i)
+	{
+		to_chart << endl << endl << "term " << i << endl;
+		for (int l = -GAP - 1; l <= GAP; ++l)
+			if (l == -GAP - 1)
+				to_chart << "really: " << chart1[i][i][l] << " ";
+			else
+				to_chart << chart1[i][i][l] << " ";
 
-					to_chart << endl;
+		to_chart << endl;
 
-					for (int l = -GAP - 1; l <= GAP; ++l)
-						if (l == -GAP - 1)
-							to_chart << "mat_ozhidanie: " << single_mat_ozhid[i][i][l] << " ";
-						else 
-							to_chart << single_mat_ozhid[i][i][l] << " ";
+		for (int l = -GAP - 1; l <= GAP; ++l)
+			if (l == -GAP - 1)
+				to_chart << "mat_ozhidanie: " << single_mat_ozhid[i][i][l] << " ";
+			else
+				to_chart << single_mat_ozhid[i][i][l] << " ";
 
-					to_chart << endl;
+		to_chart << endl;
 
-					for (int l = -GAP - 1; l <= GAP; ++l)
-						if (l == -GAP - 1)
-							to_chart << "mat_ozhidanie+otkl: " << sum1[i][i][l] << " ";
-						else 
-							to_chart << sum1[i][i][l] << " ";
+		for (int l = -GAP - 1; l <= GAP; ++l)
+			if (l == -GAP - 1)
+				to_chart << "mat_ozhidanie+otkl: " << sum1[i][i][l] << " ";
+			else
+				to_chart << sum1[i][i][l] << " ";
 
-					to_chart << endl;
+		to_chart << endl;
 
-					for (int l = -GAP - 1; l <= GAP; ++l)
-						if (l == -GAP - 1)
-							to_chart << "mat_ozhidanie-otkl: " << razn1[i][i][l] << " ";
-						else 
-							to_chart << razn1[i][i][l] << " ";	
-		}
-		to_chart.close();
-		sum1.clear();
-		razn1.clear();
-		single_mat_ozhid.clear();
-		chart1.clear();
+		for (int l = -GAP - 1; l <= GAP; ++l)
+			if (l == -GAP - 1)
+				to_chart << "mat_ozhidanie-otkl: " << razn1[i][i][l] << " ";
+			else
+				to_chart << razn1[i][i][l] << " ";
+	}
+	to_chart.close();
+	sum1.clear();
+	razn1.clear();
+	single_mat_ozhid.clear();
+	chart1.clear();
 }
 
 void Singleton::sinchronize_terms()
@@ -440,7 +487,19 @@ hard_container_class Singleton::calculate_parametr_to_one_term(hard_container_cl
 	for (auto q = 0; q < _parametr.get_counter_of_tokenizer(); ++q)
 		for (auto j = 0; j < _parametr.get_counter_of_tokenizer(); ++j)
 			for (auto p = -GAP - 1; p <= GAP; ++p)
-				_parametr[q][q][p] += _parametr[q][j][p];
+					_parametr[q][q][p] += _parametr[q][j][p];
+	return _parametr;
+}
+
+hard_container_class Singleton::calculate_parametr_to_one_colloc(hard_container_class _parametr)
+{
+	for (auto q = 0; q < _parametr.get_counter_of_tokenizer(); ++q)
+		for (auto j = 0; j < _parametr.get_counter_of_tokenizer(); ++j)
+			for (auto p = -GAP - 1; p <= GAP; ++p)
+				if (p < 0)
+					_parametr[q][j][0] += _parametr[q][j][p] * (1 - 0.2 * p); // kostyl here
+				else
+					_parametr[q][j][0] += _parametr[q][j][p] * (0.9 + 0.2 * (p + 1));
 	return _parametr;
 }
 

@@ -20,6 +20,7 @@ public:
 	MatrixXf get_colloc_singular_V_matrix();
 	MatrixXf get_colloc_singular_U_matrix();
 	multiset<pair<int, int>>* get_helper_multiset();
+	multiset<pair<int, int>>* possible_collocs;
 	//
 
 	void calculate_max_cont_size();
@@ -34,6 +35,7 @@ public:
 	void sinchronize_terms();
 	void sinchronize_terms(hard_container_class _container_class);
 	void find_fluctuations();
+	void find_colloc_fluctuations();
 	void clear(type_of_purpose_of_cont_class _type_of_cont_class);
 	void prepare_data_with_link_for_text(fs::path filename);
 	void set_parser(parser* _parser);
@@ -54,6 +56,7 @@ public:
 	hard_container_class get_sample_mean_all() const;
 	int get_length_of_all_hard_container_class() const;
 	hard_container_class calculate_parametr_to_one_term(hard_container_class _parametr);
+	hard_container_class calculate_parametr_to_one_colloc(hard_container_class _parametr);
 
 	bool remove_hard_container_class(hard_container_class _hard_container_class);	//fix this!
 
