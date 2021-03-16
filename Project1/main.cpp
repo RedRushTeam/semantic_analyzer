@@ -279,7 +279,7 @@ int main(int argc, char* argv[])
 		colloc_lenghts_texts_vector[i] = sqrt(colloc_lenghts_texts_vector[i]);
 	}
 
-	map<pair<int, int>, float> colloc_scalar_proizv; // терм, документ, скалярное произведение
+	map<pair<int, int>, float> colloc_scalar_proizv; // терм, документ, скалярное произведение		//тут грязь
 
 	for (auto k = 0; k < V_colloc_matrix_as_matrixXF.rows(); ++k)
 		for (auto i = 0; i < U_colloc_matrix_as_matrixXF.rows(); ++i) {
@@ -343,12 +343,14 @@ int main(int argc, char* argv[])
 	for(auto it = helper_list.begin(); it != helper_list.end(); ++it)
 		for (auto it2 = map_shit_for_colloc.begin(); it2 != map_shit_for_colloc.end(); ++it2) {
 			if (it2->second == it->second) {
-				matrix << it2->first << " ";
+				colloc_matrix << it2->first << " ";
 			}
 			if (it2->second == it->first) {
-				matrix << it2->first << " ";
+				colloc_matrix << it2->first << " ";
 			}
 		}
+
+	colloc_matrix.close();
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	int blyadovka1 = 0;
