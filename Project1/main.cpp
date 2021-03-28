@@ -196,14 +196,16 @@ int main(int argc, char* argv[])
 	auto map_shit = Singleton::initialization().get_analyzer()->get_map_of_tokens();
 
 	string prev_word = "";
+	map<int, string> swaped_map;
+
+	for (auto& obj : map_shit)
+		swaped_map.insert(make_pair(obj.second, obj.first));
 
 	for (auto& obj : cosinuses)
-		for (auto it = map_shit.begin(); it != map_shit.end(); ++it)
-			if (it->second == obj.first.first) {
-				if (!(prev_word == it->first)) {
-					prev_word = it->first;
-					matrix << it->first << " ";
-				}
+		if (swaped_map.find(obj.first.first) != swaped_map.end())
+			if (!(prev_word == (*(swaped_map.find(obj.first.first))).second)) {
+				prev_word = (*(swaped_map.find(obj.first.first))).second;
+				matrix << (*(swaped_map.find(obj.first.first))).second << " ";
 			}
 	scalar_proizv.clear();
 	cosinuses.clear();
@@ -211,8 +213,11 @@ int main(int argc, char* argv[])
 	map_shit.clear();
 	lenghts_texts_vector.clear();
 	lenghts_words_vector.clear();
+	swaped_map.clear();
 
 	cout << endl << endl << endl;
+
+	matrix.close();
 
 	cout << std::endl << "Calculating max size:";
 	Singleton::initialization().calculate_sample_mean();
@@ -332,17 +337,19 @@ int main(int argc, char* argv[])
 
 	auto map_shit_for_colloc = Singleton::initialization().get_analyzer()->get_map_of_tokens();
 
-	//string prev_word_colloc = "";
+	map<int, string> swaped_map_for_colloc;
 
-	for(auto it = colloc_cosinuses.begin(); it != colloc_cosinuses.end(); ++it)
-		for (auto it2 = map_shit_for_colloc.begin(); it2 != map_shit_for_colloc.end(); ++it2) {
-			if (it2->second == it->first.first.first) {
-				colloc_matrix << it2->first << " ";
-			}
-			if (it2->second == it->first.first.second) {
-				colloc_matrix << it2->first << " ";
-			}
-		}
+	for (auto& obj : map_shit_for_colloc)
+		swaped_map_for_colloc.insert(make_pair(obj.second, obj.first));
+
+	map_shit_for_colloc.clear();
+
+	for(auto it = colloc_cosinuses.begin(); it != colloc_cosinuses.end(); ++it){
+		if (swaped_map_for_colloc.find(it->first.first.first) != swaped_map_for_colloc.end())
+			colloc_matrix << (*swaped_map_for_colloc.find(it->first.first.first)).second << " ";
+		if (swaped_map_for_colloc.find(it->first.first.second) != swaped_map_for_colloc.end())
+			colloc_matrix << (*swaped_map_for_colloc.find(it->first.first.second)).second << " ";
+	}
 
 	colloc_matrix.close();
 
